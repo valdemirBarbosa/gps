@@ -3,24 +3,24 @@
 namespace app\models;
 use app\core\Model;
 
-class Denunciado_Model  extends Model{
-
+class Servidor_Model  extends Model{
     public function __construct() {
         parent::__construct();
     }
 
 
     public function lista(){
-        $sql = "SELECT * FROM denunciado as d INNER JOIN servidor as s ON s.id_servidor = d.id_servidor";
+        $sql = "SELECT * FROM Servidor";
         $qry = $this->db->query($sql);
         
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
-    public function  getDenunciado($id_denunciado){
+    public function  getServidor($id_servidor){
         $ret = array();
-        $sql = "SELECT * FROM denunciado as d INNER JOIN servidor as s ON d.id_servidor = s.id_servidor";
+        $sql = "SELECT * FROM servidor WHERE id_servidor = :id";
         $sql = $this->db->prepare($sql);
+        $sql->bindValue(":id", $id_servidor);
         $sql->execute();
 
         if($sql->rowCount() > 0){
@@ -29,12 +29,12 @@ class Denunciado_Model  extends Model{
         return $ret;
     }
 
-    public function Inserir($nome, $cpf, $matricula, $vinculo, $secretaria, $unidade){
-        $sql = "INSERT INTO denunciado SET nome = :Nome, cpf = :Cpf, matricula = :Matricula, vinculo = :Vinculo, secretaria = :Secretaria, unidade = :Unidade";
+    public function Inserir($nome_servidor, $cpf, $matricula, $vinculo, $secretaria, $unidade){
+        $sql = "INSERT INTO servidor SET nome_servidor = :Nome, cpf = :Cpf, matricula = :Matricula, vinculo = :Vinculo, secretaria = :Secretaria, unidade = :Unidade";
     
         if($this->existeCpf($cpf) == false){
             $sql = $this->db->prepare($sql);
-            $sql->bindValue(":Nome", $nome);
+            $sql->bindValue(":nome_servidor", $nome_servidor);
             $sql->bindValue(":Cpf", $cpf);
             $sql->bindValue(":Matricula", $matricula);
             $sql->bindValue(":Vinculo", $vinculo);
@@ -61,13 +61,13 @@ class Denunciado_Model  extends Model{
             $sql->execute();
         }
 
-    public function Deletar($id_denunciado){
-        $tabela = "denunciado";
-        $sql = "DELETE FROM ". $tabela ." WHERE id_denunciado = :id";
+    public function Deletar($id_servidor){
+        $tabela = "servidor";
+        $sql = "DELETE FROM ". $tabela ." WHERE id_servidor = :id";
     
-        if($this->existeId($id_denunciado, $tabela)){
+        if($this->existeId($id_servidor, $tabela)){
             $sql = $this->db->prepare($sql);
-            $sql->bindValue(":id", $id_denunciado);
+            $sql->bindValue(":id", $id_servidor);
             $sql->execute();
             return true;
         }else{
@@ -95,7 +95,7 @@ class Denunciado_Model  extends Model{
 
     private function ExisteId($id, $tabela){
 
-        $sql = "SELECT * FROM ". $tabela ." WHERE id_denunciado = :id";
+        $sql = "SELECT * FROM ". $tabela ." WHERE id_servidor = :id";
         $sql = $this->db->prepare($sql);
         $sql->bindValue(':id', $id);
         $sql->execute();

@@ -12,8 +12,15 @@ class DenunciaController extends Controller{
         $denuncias = new Denuncia_Model();
         $dados["denuncia"] = $denuncias->lista();
         $dados["view"] = "denuncia/Index";
+        //$this->load("template", $dados);
+   
+        //View no modo formulário da denuncia
+        $dados["denuncia"] = $denuncias->lista();
+        $dados["view"] = "denuncia/frmDenuncia";
         $this->load("template", $dados);
-   } 
+ 
+     } 
+
  
    public function listaDenunciados(){
         $denunciados = new Denunciado_Model();

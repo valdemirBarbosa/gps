@@ -3,9 +3,9 @@
       <div class="base-formulario">	
 	<form action="<?php echo URL_BASE ."denunciado/Salvar" ?>" method="POST">
 		<label>id</label>
-			<input name="txt_id" value="<?php echo $denunciado->id_denunciado ?>" readonly>
+			<input name="txt_id" value="<?php echo $denunciado->id_servidor ?>" readonly>
 		<label>nome</label>
-			<input name="txt_nome" value="<?php echo $denunciado->nome ?>" type="text" autofocus>
+			<input name="txt_nome" value="<?php echo $denunciado->nome_servidor ?>" type="text" autofocus>
 		<label>cpf</label>
 			<input name="txt_cpf" value="<?php echo $denunciado->cpf ?>" type="text"> 
 		<div class="col">

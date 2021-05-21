@@ -46,6 +46,7 @@ class DenuncianteController extends Controller{
           
      if($id_denunciante){
           $dnc->Editar($id_denunciante, $nome_denunciante, $observacao);
+          header("Location:" . URL_BASE . "denunciante/lista");
      }else if($dnc->Inserir($nome_denunciante, $observacao) == true){
           header("Location:" . URL_BASE . "denunciante/lista");
      }else{
