@@ -12,9 +12,12 @@ class DenunciaController extends Controller{
         $denuncias = new Denuncia_Model();
         $dados["denuncia"] = $denuncias->lista();
         $dados["view"] = "denuncia/Index";
-        //$this->load("template", $dados);
-   
+        $this->load("template", $dados);
+   }
+        
+   public function form(){
         //View no modo formulário da denuncia
+        $denuncias = new Denuncia_Model();
         $dados["denuncia"] = $denuncias->lista();
         $dados["view"] = "denuncia/frmDenuncia";
         $this->load("template", $dados);
@@ -43,7 +46,7 @@ class DenunciaController extends Controller{
        $this->load("template", $dados);
    }
  
-   public function Edit($id_denuncia){
+   public function Editar($id_denuncia){
         $denuncias = new Denuncia_Model();
         $denunciantes = new Denunciante_Model();
         
@@ -71,18 +74,16 @@ class DenunciaController extends Controller{
 
      $tipo_documento = isset($_POST['txt_tipo_documento']) ? strip_tags(filter_input(INPUT_POST, "txt_tipo_documento")) : NULL;
 
-     $numero_documento = isset($_POST['txt_numero_documento']) ? strip_tags(filter_input(INPUT_POST, "txt_numero_documento")) : NULL;
+     $numero_documento = isset($_POST['txt_numero_documento']) ? strip_tags(filter_input(INPUT_POST, "txt_numero_documento")) : 0;
 
      $data_entrada = isset($_POST['txt_data_entrada']);
-
-     $id_denunciado = isset($_POST['txt_id_denunciado']) ? strip_tags(filter_input(INPUT_POST, "txt_id_denunciado")) : NULL;
-
+     
      $observacao = isset($_POST['txt_observacao']) ? strip_tags(filter_input(INPUT_POST, "txt_observacao")) : NULL;
           
      if($id_denuncia){
-          $sql = $d->Editar($id_denuncia, $denuncia, $id_denunciante, $tipo_documento, $numero_documento, $data_entrada, $id_denunciado, $observacao);
+          $sql = $d->Editar($id_denuncia, $denuncia, $id_denunciante, $tipo_documento, $numero_documento, $data_entrada, $observacao);
         
-    }else if($d->Inserir($denuncia,  $id_denunciante, $tipo_documento, $numero_documento, $data_entrada, $id_denunciado, $observacao)){
+    }else if($d->Inserir($denuncia,  $id_denunciante, $tipo_documento, $numero_documento, $data_entrada, $observacao)){
      }else{
                 echo "<script> Document.alert('Denúncia  já existe, não pode mais cadastrar'); </script> ";
      }

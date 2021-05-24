@@ -8,13 +8,13 @@
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
 		  <thead>
 			   <tr>
-				<th width="5%" align="left">id</th>
-				<th width="22%" align="left">nome denunciante</th>
+				<th width="10%" align="left">id</th>
+				<th width="25%" align="left">nome denunciante</th>
 				<th width="10%" align="left">tipo documento</th>
-				<th width="8%" align="center">número</th>
+				<th width="10%" align="center">número</th>
 				<th width="10%" align="left">data de entrada</th>
 				<th width="15%" align="left">observação</th>
-				<th width="10%" colspan="2" align="center">Ação</th>
+				<th width="20%" colspan="2" align="center">Ação</th>
 			  </tr>
 		  </thead>
 		  <tbody>

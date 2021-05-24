@@ -64,8 +64,8 @@ class Denuncia_Model extends Model{
         return $ret;
     }
 
-    public function Inserir($denuncia, $id_denunciante, $tipo_documento, $numero_documento, $data_entrada, $id_denunciado, $observacao){
-        $sql = "INSERT INTO denuncia SET denuncia_fato = :denuncia, id_denunciante = :id_denunciante, tipo_documento = :tipo_documento, numero_documento = :numero_documento, data_entrada = :data_entrada, id_denunciado = :id_denunciado, observacao = :observacao";
+    public function Inserir($denuncia,  $id_denunciante, $tipo_documento, $numero_documento, $data_entrada, $observacao){
+        $sql = "INSERT INTO denuncia SET denuncia_fato = :denuncia, id_denunciante = :id_denunciante, tipo_documento = :tipo_documento, numero_documento = :numero_documento, data_entrada = :data_entrada, observacao = :observacao";
     
         if($this->ExisteDenuncia($id_denunciante, $numero_documento) == false){
             $sql = $this->db->prepare($sql);
@@ -74,7 +74,6 @@ class Denuncia_Model extends Model{
             $sql->bindValue(":tipo_documento", $tipo_documento);
             $sql->bindValue(":numero_documento", $numero_documento);
             $sql->bindValue(":data_entrada", $data_entrada);
-            $sql->bindValue(":id_denunciado", $id_denunciado);
             $sql->bindValue(":observacao", $observacao);
             $sql->execute();
             echo "<pre>";
@@ -87,8 +86,8 @@ class Denuncia_Model extends Model{
          }
     }
 
-    public function Editar($id_denuncia, $denuncia, $id_denunciante, $tipo_documento, $numero_documento, $data_entrada, $id_denunciado, $observacao){
-        $sql = "UPDATE denuncia SET denuncia_fato = :denuncia, id_denunciante = :id_denunciante, tipo_documento = :tipo_documento, numero_documento = :numero_documento, data_entrada = :data_entrada, id_denunciado = :id_denunciado, observacao = :observacao WHERE id_denuncia = :id_denuncia";
+    public function Editar($id_denuncia, $denuncia, $id_denunciante, $tipo_documento, $numero_documento, $data_entrada, $observacao){
+        $sql = "UPDATE denuncia SET denuncia_fato = :denuncia, id_denunciante = :id_denunciante, tipo_documento = :tipo_documento, numero_documento = :numero_documento, data_entrada = :data_entrada, observacao = :observacao WHERE id_denuncia = :id_denuncia";
 
             $sql = $this->db->prepare($sql);
             $sql->bindValue(":denuncia", $denuncia);
@@ -96,7 +95,6 @@ class Denuncia_Model extends Model{
             $sql->bindValue(":tipo_documento", $tipo_documento);
             $sql->bindValue(":numero_documento", $numero_documento);
             $sql->bindValue(":data_entrada", $data_entrada);
-            $sql->bindValue(":id_denunciado", $id_denunciado);
             $sql->bindValue(":observacao", $observacao);
             $sql->bindValue(":id_denuncia", $id_denuncia);
             $sql->execute();
