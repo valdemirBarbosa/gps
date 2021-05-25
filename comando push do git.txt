@@ -1,0 +1,27 @@
+//vários branchs criados no git na tentativa de fazer um push para o github
+github.com/valdemirBarbosa/casa github.com/valdemirBarbosa/gps (fetch)
+github.com/valdemirBarbosa/casa github.com/valdemirBarbosa/gps (push)
+novo    git@github.com:valdemirBarbosa/gps.git (fetch)
+novo    git@github.com:valdemirBarbosa/gps.git (push)
+origin  git@github.com:valdemirBarbosa/gps (fetch)
+origin  git@github.com:valdemirBarbosa/gps (push)
+principal       git@github.com:valdemirBarbosa/gps.git (fetch)
+principal       git@github.com:valdemirBarbosa/gps.git (push)
+
+
+
+//linha de comando que consegui fazer o push para o github em 24/05/2021 e confirmado no repositório github
+git push -u https://github.com/valdemirBarbosa/gps.git -f
+
+/comando/ - opção / url completa     + / o nome da conta / e o nome do repositório
+o próprio git ligou o branch local "principal" para o branch remoto "principal"
+git push   -u     / https://github.com/valdemirBarbosa/gps.git -f
+
+
+
+//parte final do histórico. Então entendi agora:
+
+remote: Resolving deltas: 100% (31/31), done.
+To https://github.com/valdemirBarbosa/gps.git
+ * [new branch]      principal -> principal
+Branch 'principal' set up to track remote branch 'principal' from 'https://github.com/valdemirBarbosa/gps.git'.
