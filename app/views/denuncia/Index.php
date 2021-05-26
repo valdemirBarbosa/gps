@@ -5,11 +5,12 @@
 	<div class="btn-inc"><a href="<?php echo URL_BASE . "denuncia/novo" ?>" >INCLUIR </a></div>
 
 	<div class="tabela">	
-		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<table width="100%" border="1" cellspacing="0" cellpadding="0">
 		  <thead>
 			   <tr>
-				<th width="10%" align="left">id</th>
-				<th width="25%" align="left">nome denunciante</th>
+				<th width="5%" align="left">id</th>
+				<th width="15%" align="left">fato da denúncia</th>
+				<th width="15%" align="left">nome denunciante</th>
 				<th width="10%" align="left">tipo documento</th>
 				<th width="10%" align="center">número</th>
 				<th width="10%" align="left">data de entrada</th>
@@ -21,8 +22,9 @@
 		  	<?php foreach($denuncia as $d){   ?>
 				<tr class="cor1">
 				<td align="center"><?php echo $d->id_denuncia  ?></td>
-				<td> <?php echo  $d->nome_denunciante; ?> </td>
-				<td><?php echo $d->tipo_documento  ?></td>
+				<td><?php echo $d->denuncia_fato  ?></td>
+				<td> <?php echo $d->nome_denunciante ?> </td>
+				<td align="center"><?php echo $d->tipo_documento  ?></td>
 				<td align="center"><?php echo $d->numero_documento  ?></td>
 				<td><?php echo date('d/m/Y', strtotime($d->data_entrada))  ?></td>
 				<td><?php echo $d->observacao  ?></td>

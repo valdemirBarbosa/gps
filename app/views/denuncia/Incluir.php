@@ -13,17 +13,20 @@
 
 				<div class="col">
 					<label>tipo de documento</label>
-					<input name="txt_tipo_documento" value="" type="number" placeholder="Insira o tipo de documento anexado">
+					<input name="txt_tipo_documento" value="" type="text" placeholder="Insira o tipo de documento anexado">
 				</div>	
 				
 				<div class="col">
 					<label>número do documento</label>
-					<input name="txt_número_documento" value="" type="text" placeholder="número do documento">
+					<input name="txt_numero_documento" value="" type="number" placeholder="número do documento">
 				</div>
 
 				<div class="col">
 					<label>data de entrada</label>
-					<input name="txt_data_entrada" value="" type="text" placeholder="Data de entrada na coordenadoria">
+					<input name="txt_data_entrada" value="" type="date" placeholder="Data de entrada na coordenadoria">
+
+					<label>observação</label>
+					<input name="txt_observacao" value="" type="text" placeholder="Insira observações">
 				</div>	
 				
 				
