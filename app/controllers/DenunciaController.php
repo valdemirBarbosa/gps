@@ -1,4 +1,10 @@
 <?php
+/*
+echo "<pre>";
+echo "data entrada ".$data_entrada;
+echo "</pre>";
+exit;
+*/
 namespace app\controllers;
 
 use app\core\Controller;
@@ -74,26 +80,17 @@ class DenunciaController extends Controller{
 
      $tipo_documento = isset($_POST['txt_tipo_documento']) ? strip_tags(filter_input(INPUT_POST, "txt_tipo_documento")) : NULL;
 
-     $numero_documento = isset($_POST['txt_numero_documento']);
+     $numero_documento = $_POST['txt_numero_documento'];
 
-     $data_entrada = isset($_POST['txt_data_entrada']);
+     $data_entrada = $_POST['txt_data_entrada'];
      
      $observacao = isset($_POST['txt_observacao']) ? strip_tags(filter_input(INPUT_POST, "txt_observacao")) : NULL;
           
      if($id_denuncia){
-          $sql = $d->Editar($id_denuncia, $denuncia, $id_denunciante, $tipo_documento, $numero_documento, $data_entrada, $observacao);
+          $d->Editar($id_denuncia, $denuncia, $id_denunciante, $tipo_documento, $numero_documento, $data_entrada, $observacao);
         
-    }else if($id_denunciante > 0 ){
-          $den['dados'] = Array($denuncia, $tipo_documento, $numero_documento, $data_entrada, $observacao);
-
-     echo "<pre>";
-
-               print_r($den);
-          echo "<pre>";
-          exit;
-
-}else{
-
+    }else{
+          $d->Incluir($denuncia, $id_denunciante, $tipo_documento, $numero_documento, $data_entrada, $observacao);
           echo "<script> Document.alert('Denúncia  já existe, não pode mais cadastrar'); </script> ";
      }
           header("Location:" . URL_BASE . "denuncia/lista");

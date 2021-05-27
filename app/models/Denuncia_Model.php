@@ -9,22 +9,22 @@ class Denuncia_Model extends Model{
     }
 
     public function lista(){
-        $sql = "SELECT * FROM denuncia as d INNER JOIN denunciante as den ON d.id_denunciante = den.id_denunciante"; 
+        $sql = "SELECT * FROM denuncia as d INNER JOIN denunciante as den ON d.id_denunciante = den.id_denunciante order by id_denuncia"; 
 
     $qry = $this->db->query($sql);
        return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
-    public function adicionar($id_denunciado){
-        $sql = "UPDATE denuncia SET id_denunciado WHERE id_denunciado = :id"; 
+    public function incluir($denuncia, $id_denunciante, $tipo_documento, $numero_documento, $data_entrada, $observacao){
+        $sql = "INSERT INTO denuncia SET denuncia_fato = :denuncia, id_denunciante = :id_denunciante, tipo_documento = :tipo, numero_documento = :numero, data_entrada = :data_entrada, observacao = :observacao"; 
         $sql = $this->db->prepare($sql);
-        $sql = $this->db->bindvalue(":id", $id_denunciado);
+        $sql->bindValue(":denuncia", $denuncia);
+        $sql->bindValue(":id_denunciante", $id_denunciante);
+        $sql->bindValue(":tipo", $tipo_documento);
+        $sql->bindValue(":numero", $numero_documento);
+        $sql->bindValue(":data_entrada", $data_entrada);
+        $sql->bindValue(":observacao", $observacao);
         $sql->execute();
-    /*    if($sql->rowCount() > 0){
-            $ret = $sql->fetch(\PDO::FETCH_OBJ);
-        }
-        return $ret;
-    */
     }
 
     public function  listDenunciados(){

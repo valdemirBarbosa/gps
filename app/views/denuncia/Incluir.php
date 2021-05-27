@@ -23,7 +23,7 @@
 
 				<div class="col">
 					<label>data de entrada</label>
-					<input name="txt_data_entrada" value="" type="date" placeholder="Data de entrada na coordenadoria">
+					<input name="txt_data_entrada" value="" type="date" placeholder="00/00/0000">
 
 					<label>observação</label>
 					<input name="txt_observacao" value="" type="text" placeholder="Insira observações">
