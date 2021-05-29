@@ -47,17 +47,18 @@ class Denunciado_Model  extends Model{
          }
     }
 
-    public function Editar($id_denunciado, $nome, $cpf, $matricula, $vinculo, $secretaria, $unidade){
-        $sql = "UPDATE denunciado SET nome = :Nome, cpf = :Cpf, matricula = :Matricula, vinculo = :Vinculo, secretaria = :Secretaria, unidade = :Unidade WHERE id_denunciado = :id";
+    public function Editar($id_denunciado, $id_denuncia, $id_servidor, $matricula, $nome_provisorio, $vinculo, $secretaria, $unidade, $observacao){
+        $sql = "UPDATE denunciado SET id_denunciado = :id, id_denuncia = :id_denuncia, id_servidor = :id_servidor, matricula = :Matricula, vinculo_d = :Vinculo, secretaria_d = :Secretaria, unidade_d = :Unidade WHERE id_denunciado = :id";
    
             $sql = $this->db->prepare($sql);
             $sql->bindValue(":id", $id_denunciado);
-            $sql->bindValue(":Nome", $nome);
-            $sql->bindValue(":Cpf", $cpf);
+            $sql->bindValue(":id_denuncia", $id_denuncia);
+            $sql->bindValue(":id_servidor", $id_servidor);
             $sql->bindValue(":Matricula", $matricula);
             $sql->bindValue(":Vinculo", $vinculo);
             $sql->bindValue(":Secretaria", $secretaria);
             $sql->bindValue(":Unidade", $unidade);
+            $sql->bindValue(":observacao", $observacao);
             $sql->execute();
         }
 

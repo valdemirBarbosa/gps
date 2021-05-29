@@ -11,6 +11,9 @@
 		<div class="col">
 			<label>matricula</label>
 			<input name="txt_matricula" value="<?php echo $denunciado->matricula ?>" type="number">
+	
+			<label>nome provisório</label>
+			<input name="txt_nome_provisorio" value="<?php echo $denunciado->nome_provisorio ?>" type="text">
 		</div>	
 		
 		<div class="col">
@@ -26,6 +29,8 @@
 			<label>unidade</label>
 			<input name="txt_unidade" value="<?php echo $denunciado->unidade ?>" type="text" >
 		</div>
+			<label>observacao</label>
+			<input name="txt_observacao" value="<?php echo $denunciado->observacao ?>" type="txt_observacao" >
 		
 		<input type="hidden" name="acao" value="Editar">
 		<input type="hidden" name="id_denunciado" value="<?php echo $denunciado->id_denunciado ?>">

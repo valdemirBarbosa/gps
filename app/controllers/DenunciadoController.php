@@ -39,19 +39,31 @@ class DenunciadoController extends Controller{
      $d = new Denunciado_Model();
           
      $id_denunciado = isset($_POST['id_denunciado']) ? strip_tags(filter_input(INPUT_POST, "id_denunciado")) : NULL;
-     $nome = isset($_POST['txt_nome']) ? strip_tags(filter_input(INPUT_POST, "txt_nome")) : NULL;
+     
+     $id_denuncia = isset($_POST['id_denuncia']) ? strip_tags(filter_input(INPUT_POST, "id_denuncia")) : NULL;
+          
+     $id_servidor = isset($_POST['txt_id_servidor']) ? strip_tags(filter_input(INPUT_POST, "txt_id_servidor")) : NULL;
+     
      $cpf = isset($_POST['txt_cpf']) ? strip_tags(filter_input(INPUT_POST, "txt_cpf")) : NULL;
+    
      $matricula = isset($_POST['txt_matricula']) ? strip_tags(filter_input(INPUT_POST, "txt_matricula")) : NULL;
+
+     $nome_provisorio = isset($_POST['txt_nome_provisorio']) ? strip_tags(filter_input(INPUT_POST, "txt_nome_provisorio")) : NULL;
+         
      $vinculo = isset($_POST['txt_vinculo']) ? strip_tags(filter_input(INPUT_POST, "txt_vinculo")) : NULL;
+
      $secretaria = isset($_POST['txt_secretaria']) ? strip_tags(filter_input(INPUT_POST, "txt_secretaria")) : NULL;
+     
      $unidade = isset($_POST['txt_unidade']) ? strip_tags(filter_input(INPUT_POST, "txt_unidade")) : NULL;
+
+     $observacao = $_POST['txt_observacao'];
      
      if($id_denunciado){
-          $d->Editar($id_denunciado, $nome, $cpf, $matricula, $vinculo, $secretaria, $unidade);
+          $d->Editar($id_denunciado, $id_denuncia, $id_servidor, $matricula, $nome_provisorio, $vinculo, $secretaria, $unidade, $observacao);
      }else{
-          $d->Inserir($nome, $cpf, $matricula, $vinculo, $secretaria, $unidade);
+          $d->Inserir($id_denuncia, $id_servidor, $matricula, $nome_provisorio, $vinculo, $vinculo, $secretaria, $unidade, $observacao);
      }
-          header("Location:" . URL_BASE . "cliente");
+          header("Location:" . URL_BASE . "denunciado");
       
    }
    
@@ -62,6 +74,4 @@ class DenunciadoController extends Controller{
    }
    
   
-   
-   
 }

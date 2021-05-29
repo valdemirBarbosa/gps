@@ -29,8 +29,8 @@ class Servidor_Model  extends Model{
         return $ret;
     }
 
-    public function Inserir($nome_servidor, $cpf, $matricula, $vinculo, $secretaria, $unidade){
-        $sql = "INSERT INTO servidor SET nome_servidor = :Nome, cpf = :Cpf, matricula = :Matricula, vinculo = :Vinculo, secretaria = :Secretaria, unidade = :Unidade";
+    public function Inserir($nome_servidor, $cpf, $matricula, $vinculo, $secretaria, $unidade, $observacao){
+        $sql = "INSERT INTO servidor SET nome_servidor = :Nome, cpf = :Cpf, matricula = :Matricula, vinculo = :Vinculo, secretaria = :Secretaria, unidade = :Unidade, observacao = :observacao";
     
         if($this->existeCpf($cpf) == false){
             $sql = $this->db->prepare($sql);
@@ -40,6 +40,7 @@ class Servidor_Model  extends Model{
             $sql->bindValue(":Vinculo", $vinculo);
             $sql->bindValue(":Secretaria", $secretaria);
             $sql->bindValue(":Unidade", $unidade);
+            $sql->bindValue(":observacao", $observacao);
             $sql->execute();
             return true;
          }else{
@@ -47,17 +48,18 @@ class Servidor_Model  extends Model{
          }
     }
 
-    public function Editar($id_denunciado, $nome, $cpf, $matricula, $vinculo, $secretaria, $unidade){
-        $sql = "UPDATE denunciado SET nome = :Nome, cpf = :Cpf, matricula = :Matricula, vinculo = :Vinculo, secretaria = :Secretaria, unidade = :Unidade WHERE id_denunciado = :id";
+    public function Editar($id_servidor, $nome_servidor, $cpf, $matricula, $vinculo, $secretaria, $unidade, $observacao){
+        $sql = "UPDATE servidor SET nome_servidor = :Nome, cpf = :Cpf, matricula = :Matricula, vinculo = :Vinculo, secretaria = :Secretaria, unidade = :Unidade, observacao = :Observacao WHERE id_servidor = :id";
    
             $sql = $this->db->prepare($sql);
-            $sql->bindValue(":id", $id_denunciado);
-            $sql->bindValue(":Nome", $nome);
+            $sql->bindValue(":id", $id_servidor);
+            $sql->bindValue(":Nome", $nome_servidor);
             $sql->bindValue(":Cpf", $cpf);
             $sql->bindValue(":Matricula", $matricula);
             $sql->bindValue(":Vinculo", $vinculo);
             $sql->bindValue(":Secretaria", $secretaria);
             $sql->bindValue(":Unidade", $unidade);
+            $sql->bindValue(":Observacao", $observacao);
             $sql->execute();
         }
 

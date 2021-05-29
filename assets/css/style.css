@@ -401,3 +401,20 @@ ul ,li{list-style:none;}
 	position:relative;
 	top:2px;
 }
+.minhaTabela{
+	width: 100%;
+	padding:4px;
+	text-transform:uppercase;
+	color:#20202F;
+	background:#ACACBD;
+	font-size: 10px;
+	text-align: center;
+}
+.minhaTabela th{
+	padding:4px;
+	text-transform:capitalize;
+	color:black;
+	background: yellow;
+	font-size: 12px;
+	text-align: center;
+}

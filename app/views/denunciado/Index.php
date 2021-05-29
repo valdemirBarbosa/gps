@@ -15,6 +15,7 @@
 				<th width="10%" align="left">Vinculo</th>
 				<th width="15%" align="left">Secretaria</th>
 				<th width="15%" align="left">Unidade</th>
+				<th width="15%" align="left">Observacao</th>
 				<th width="10%" colspan="2" align="center">Ação</th>
 			  </tr>
 		  </thead>
@@ -28,6 +29,7 @@
 				<td><?php echo $denunciado->vinculo  ?></td>
 				<td><?php echo $denunciado->secretaria  ?></td>
 				<td><?php echo $denunciado->unidade  ?></td>	
+				<td><?php echo $denunciado->observacao  ?></td>	
 				<td align="center">
 					<a href="<?php echo URL_BASE ."denunciado/Editar/".$denunciado->id_denunciado ?>" class="btn">Editar</a>
 				</td>

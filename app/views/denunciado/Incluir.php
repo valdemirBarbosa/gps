@@ -2,9 +2,16 @@
 			<h1 class="titulo"><span class="cor">Novo</span> cadastro</h1>
 		<div class="base-formulario">	
 			<form action="<?php echo URL_BASE ."denunciado/Salvar" ?>" method="POST">
-				<label>id</label>
+			<div class="col">
+				<label>id_denunciado</label>
 					<input name="txt_id" disabled type="number" >
-
+			</div>
+			<div class="col">
+				<label>id_denuncia</label>
+					<input name="txt_id_denuncia" type="number" 
+					value="<?php echo "$denuncia->id_denuncia" ?>">
+			</div>
+			
 				<label>nome</label>
 					<input name="txt_nome" required autofocus  type="text" placeholder="Insira o nome do denunciado">
 

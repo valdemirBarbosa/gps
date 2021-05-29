@@ -33,6 +33,9 @@
 					<a href="<?php echo URL_BASE ."denuncia/Edit/".$d->id_denuncia ?>" class="btn">Editar</a>
 				</td>
 				<td align="center">
+					<a href="<?php echo URL_BASE ."denunciado/novo/".$d->id_denuncia ?>" class="btn">Vincular Denunciado</a>
+				</td>
+				<td align="center">
 					<a href="<?php echo URL_BASE ."denuncia/Excluir/".$d->id_denuncia ?>" class="btn excluir">excluir</a>
 				</td>
 			 </tr>	
