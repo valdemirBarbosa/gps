@@ -9,7 +9,6 @@ class Denunciado_Model  extends Model{
         parent::__construct();
     }
 
-
     public function lista(){
         $sql = "SELECT * FROM denunciado as d INNER JOIN servidor as s ON s.id_servidor = d.id_servidor";
         $qry = $this->db->query($sql);

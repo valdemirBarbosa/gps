@@ -29,7 +29,6 @@ class DenunciaController extends Controller{
         $this->load("template", $dados);
  
      } 
-
  
    public function listaDenunciados(){
         $denunciados = new Denunciado_Model();
@@ -45,13 +44,13 @@ class DenunciaController extends Controller{
         //$this->load("template", $dados);
    } 
 
-   public function novo(){
-       $denunciados = new Denunciado_Model();
-       $dados["denunciado"] = $denunciados->lista();
-       $dados["view"] = "denuncia/Incluir";
+   public function vincularDenunciadoDenuncia($id_denuncia){
+       $denuncias = new Denuncia_Model();
+       $dados["denuncia"] = $denuncias->getDenuncia($id_denuncia);
+       $dados["view"] = "denunciado/Incluir";
        $this->load("template", $dados);
    }
- 
+
    public function Editar($id_denuncia){
         $denuncias = new Denuncia_Model();
         $denunciantes = new Denunciante_Model();

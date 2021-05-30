@@ -51,7 +51,7 @@ class Denuncia_Model extends Model{
         return $ret;
     }
 
-    public function  getDenuncia($id_denuncia){
+    public function getDenuncia($id_denuncia){
         $ret = array();
         $sql = "SELECT * FROM denuncia WHERE id_denuncia = :id";
         $sql = $this->db->prepare($sql);
