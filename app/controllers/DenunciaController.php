@@ -19,7 +19,7 @@ class DenunciaController extends Controller{
         $dados["denuncia"] = $denuncias->lista();
         $dados["view"] = "denuncia/Index";
         $this->load("template", $dados);
-   }
+    }
         
    public function form(){
         //View no modo formulário da denuncia
