@@ -10,7 +10,7 @@ class Servidor_Model  extends Model{
 
 
     public function lista(){
-        $sql = "SELECT * FROM Servidor";
+        $sql = "SELECT * FROM Servidor_func";
         $qry = $this->db->query($sql);
         
         return $qry->fetchAll(\PDO::FETCH_OBJ);
@@ -18,7 +18,7 @@ class Servidor_Model  extends Model{
 
     public function  getServidor($id_servidor){
         $ret = array();
-        $sql = "SELECT * FROM servidor WHERE id_servidor = :id";
+        $sql = "SELECT * FROM servidor_func WHERE id_servidor = :id";
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":id", $id_servidor);
         $sql->execute();
@@ -30,7 +30,7 @@ class Servidor_Model  extends Model{
     }
 
     public function Inserir($nome_servidor, $cpf, $matricula, $vinculo, $secretaria, $unidade, $observacao){
-        $sql = "INSERT INTO servidor SET nome_servidor = :Nome, cpf = :Cpf, matricula = :Matricula, vinculo = :Vinculo, secretaria = :Secretaria, unidade = :Unidade, observacao = :observacao";
+        $sql = "INSERT INTO servidor_func SET nome_servidor = :Nome, cpf = :Cpf, matricula = :Matricula, vinculo = :Vinculo, secretaria = :Secretaria, unidade = :Unidade, observacao = :observacao";
     
         if($this->existeCpf($cpf) == false){
             $sql = $this->db->prepare($sql);
@@ -49,7 +49,7 @@ class Servidor_Model  extends Model{
     }
 
     public function Editar($id_servidor, $nome_servidor, $cpf, $matricula, $vinculo, $secretaria, $unidade, $observacao){
-        $sql = "UPDATE servidor SET nome_servidor = :Nome, cpf = :Cpf, matricula = :Matricula, vinculo = :Vinculo, secretaria = :Secretaria, unidade = :Unidade, observacao = :Observacao WHERE id_servidor = :id";
+        $sql = "UPDATE servidor_func SET nome_servidor = :Nome, cpf = :Cpf, matricula = :Matricula, vinculo = :Vinculo, secretaria = :Secretaria, unidade = :Unidade, observacao = :Observacao WHERE id_servidor = :id";
    
             $sql = $this->db->prepare($sql);
             $sql->bindValue(":id", $id_servidor);
@@ -64,7 +64,7 @@ class Servidor_Model  extends Model{
         }
 
     public function Deletar($id_servidor){
-        $tabela = "servidor";
+        $tabela = "servidor_func";
         $sql = "DELETE FROM ". $tabela ." WHERE id_servidor = :id";
     
         if($this->existeId($id_servidor, $tabela)){

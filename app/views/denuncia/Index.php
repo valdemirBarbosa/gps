@@ -59,7 +59,7 @@
 
 
 
-		  	<?php foreach($denunciado as $den){   ?>
+		  	<?php foreach($denuncia as $den){   ?>
 				<tr class="cor1">
 				<td align="center"><input id="id_denunciado" value="<?php echo $den->id_denunciado  ?>"></td>
 				<td align="center"><?php echo $den->id_denuncia  ?></td>

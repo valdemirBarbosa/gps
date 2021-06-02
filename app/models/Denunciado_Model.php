@@ -10,7 +10,7 @@ class Denunciado_Model  extends Model{
     }
 
     public function lista(){
-        $sql = "SELECT * FROM denunciado as d INNER JOIN servidor as s ON s.id_servidor = d.id_servidor";
+        $sql = "SELECT * FROM denunciado as d INNER JOIN servidor_func as s ON s.id_servidor = d.id_servidor";
         $qry = $this->db->query($sql);
         
         return $qry->fetchAll(\PDO::FETCH_OBJ);
@@ -18,7 +18,7 @@ class Denunciado_Model  extends Model{
 
     public function  getDenunciado($id_denunciado){
         $ret = array();
-        $sql = "SELECT * FROM denunciado as d INNER JOIN servidor as s ON d.id_servidor = s.id_servidor";
+        $sql = "SELECT * FROM denunciado as d INNER JOIN servidor_func as s ON d.id_servidor = s.id_servidor";
         $sql = $this->db->prepare($sql);
         $sql->execute();
 
