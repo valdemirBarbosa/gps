@@ -11,8 +11,8 @@ class Denuncia_Model extends Model{
     public function lista(){
         $sql = "SELECT * FROM denuncia as d INNER JOIN denunciante as den ON d.id_denunciante = den.id_denunciante order by id_denuncia"; 
 
-    $qry = $this->db->query($sql);
-       return $qry->fetchAll(\PDO::FETCH_OBJ);
+        $qry = $this->db->query($sql);
+        return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
     public function incluir($denuncia, $id_denunciante, $tipo_documento, $numero_documento, $data_entrada, $observacao){
@@ -27,17 +27,29 @@ class Denuncia_Model extends Model{
         $sql->execute();
     }
 
-    public function  listDenunciados(){
-        $ret = array();
-        $sql = "SELECT * FROM denuncia as d, denunciados as den WHERE d.id_denunciado = d.id_denunciado"; 
-        $sql = $this->db->prepare($sql);
-        $sql->execute();
+    public function listDenunciados($id_denuncia){
+          $ret = array();
+          $sql = "SELECT d.id_denuncia as denuncia, dnc.id_denuncia, dnc.id_denunciado, 
+          dnc.id_servidor, dnc.observacao, dnc.nome_provisorio as denunciado, s.matricula, s.nome_servidor
+          FROM denuncia as d
+          LEFT JOIN denunciado as dnc ON d.id_denuncia = dnc.id_denuncia LEFT JOIN  servidor_func as s ON dnc.id_servidor = s.id_servidor WHERE d.id_denuncia = :id"; 
+          $sql = $this->db->prepare($sql);
+          $sql->bindValue(":id", $id_denuncia);
+          $sql->execute();
 
-        if($sql->rowCount() > 0){
-            $ret = $sql->fetch(\PDO::FETCH_OBJ);
-        }
-        return $ret;
-    }
+          //$qry = $this->db->query($sql);
+          return $sql->fetchAll(\PDO::FETCH_OBJ);
+}
+    public function DenunciadosTodos(){
+          $ret = array();
+          $sql = "SELECT d.id_denuncia as denuncia, dnc.id_denuncia, dnc.id_denunciado, 
+          dnc.id_servidor, dnc.observacao, dnc.nome_provisorio as denunciado, s.matricula, s.nome_servidor
+          FROM denuncia as d
+          INNER JOIN denunciado as dnc ON d.id_denuncia = dnc.id_denuncia INNER JOIN  servidor_func as s ON dnc.id_servidor = s.id_servidor"; 
+
+          $qry = $this->db->query($sql);
+          return $qry->fetchAll(\PDO::FETCH_OBJ);
+}
 
     public function  getEditar($id_denuncia){
         $ret = array();
