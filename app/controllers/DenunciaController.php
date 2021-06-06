@@ -18,18 +18,19 @@ class DenunciaController extends Controller{
         $denuncias = new Denuncia_Model();
         $denunciados = new Denuncia_Model();
 
-        $dados["denuncia"] = $denuncias->DenunciadosTodos();
-        $dados["view"] = "denuncia/Indexs";
+        $dados["denuncia"] = $denuncias->lista();
+        $dados["denunciado"] = $denunciados->DenunciadosTodos();
+        $dados["view"] = "denuncia/Index";
         $this->load("template", $dados);
     }
-   public function pesquisa(){
+   public function Pesquisar(){
      $id_denuncia = $_POST["id_denuncia"];
      $denuncias = new Denuncia_Model();
      $denunciados = new Denuncia_Model();
      
         $dados["denuncia"] = $denuncias->Denuncias($id_denuncia);
         $dados["denunciado"] = $denunciados->Denunciados($id_denuncia);
-        $dados["view"] = "denuncia/Indexs";
+        $dados["view"] = "denuncia/Index";
         $this->load("template", $dados);
     }
         
@@ -41,13 +42,13 @@ class DenunciaController extends Controller{
         $this->load("template", $dados);
      } 
  
-     public function denunciado($id_denuncia){
+    /*  public function denunciado($id_denuncia){
           $denuncias = new Denuncia_Model();
           $dados["denunciado"] = $denuncias->listDenunciados($id_denuncia);
           $dados["view"] = "denuncia/Indexs";
           $this->load("template", $dados);
      }
-         
+    */      
     public function adicionarDenunciado(){
         $denuncia = new Denuncia_Model();
         $dados["denunciado"] = $denuncia->adicionar($id_denunciado);

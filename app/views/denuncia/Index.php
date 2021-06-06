@@ -18,7 +18,7 @@
 	<div class="tabela">	
 
 <!-- Incluindo um formulário de pesquisa de denuncia !-->
-		<form method="post" action="<?php echo URL_BASE ."denuncia/pesquisa/"?>">
+		<form method="post" action="<?php echo URL_BASE ."denuncia/Pesquisar/"?>">
 		<label>Pesquisar número</label>
 			<input name="id_denuncia" type="number">
 			<input type="submit" value="Pesquisar">

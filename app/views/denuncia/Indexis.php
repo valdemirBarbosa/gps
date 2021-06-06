@@ -2,7 +2,7 @@
 	<h1 class="titulo"><span class="cor">Lista de</span> denuncia indexis</h1>
 <div class="base-lista">
 	<script type="text/javascript" src="<?php echo URL_BASE.'assets\js\script.js' ?>"> </script> 
-	<span class="qtde">Há <b><?php echo count($denunciado) ?></b> denunciado(s) cadastrada(s) com denuncias</span>
+	<span class="qtde">Há <b><?php echo count($denuncia) ?></b> denunciado(s) cadastrada(s) com denuncias</span>
 	<div class="btn-inc"><a href="<?php echo URL_BASE . "denuncia/novo" ?>" >INCLUIR </a></div>
 
 	<!-- TABELA FILHA	          !-->
