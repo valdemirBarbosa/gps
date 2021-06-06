@@ -17,10 +17,19 @@ class DenunciaController extends Controller{
    public function index(){
         $denuncias = new Denuncia_Model();
         $denunciados = new Denuncia_Model();
-        $dados["denunciado"] = $denunciados->DenunciadosTodos();
 
-       $dados["denuncia"] = $denuncias->lista();
-        $dados["view"] = "denuncia/Index";
+        $dados["denuncia"] = $denuncias->DenunciadosTodos();
+        $dados["view"] = "denuncia/Indexs";
+        $this->load("template", $dados);
+    }
+   public function pesquisa(){
+     $id_denuncia = $_POST["id_denuncia"];
+     $denuncias = new Denuncia_Model();
+     $denunciados = new Denuncia_Model();
+     
+        $dados["denuncia"] = $denuncias->Denuncias($id_denuncia);
+        $dados["denunciado"] = $denunciados->Denunciados($id_denuncia);
+        $dados["view"] = "denuncia/Indexs";
         $this->load("template", $dados);
     }
         

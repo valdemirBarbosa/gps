@@ -213,6 +213,11 @@ ul ,li{list-style:none;}
 	color:#BBBBBB;
 }
 
+.ini{
+	height: 60px;
+	width: 100%;
+	background-color:seagreen;
+}
 
 /*base-formulario*/
 .base-home .base-formulario{
@@ -226,10 +231,10 @@ ul ,li{list-style:none;}
 	padding-bottom:5px;
 	font-size:.8em;
 	text-transform:uppercase;
-	color:#666666;
+	color:red;
 }
 .base-home .base-formulario .col{
-	width:48%;
+	width:30%;
 	float:left;
 	margin-bottom:15px;
 }

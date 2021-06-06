@@ -9,8 +9,9 @@ class Denuncia_Model extends Model{
     }
 
     public function lista(){
-        $sql = "SELECT * FROM denuncia as d INNER JOIN denunciante as den ON d.id_denunciante = den.id_denunciante order by id_denuncia"; 
-
+        $sql = "SELECT * FROM denuncia as d INNER JOIN denunciante as den ON d.id_denunciante = den.id_denunciante WHERE d.id_denuncia = 1";//.$id_denuncia; 
+        //$sql = $this->db->prepare($sql);
+        //$sql->bindValue(":id", )
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
@@ -27,31 +28,37 @@ class Denuncia_Model extends Model{
         $sql->execute();
     }
 
-    public function listDenunciados($id_denuncia){
-          $ret = array();
-          $sql = "SELECT d.id_denuncia as denuncia, dnc.id_denuncia, dnc.id_denunciado, 
-          dnc.id_servidor, dnc.observacao, dnc.nome_provisorio as denunciado, s.matricula, s.nome_servidor
-          FROM denuncia as d
-          LEFT JOIN denunciado as dnc ON d.id_denuncia = dnc.id_denuncia LEFT JOIN  servidor_func as s ON dnc.id_servidor = s.id_servidor WHERE d.id_denuncia = :id"; 
-          $sql = $this->db->prepare($sql);
-          $sql->bindValue(":id", $id_denuncia);
-          $sql->execute();
+    public function Denuncias($id_denuncia){
+        $ret = array();
+            $sql = "SELECT * FROM denuncia WHERE id_denuncia = ".$id_denuncia;
+            $qry = $this->db->query($sql);
+            return $qry->fetchAll(\PDO::FETCH_OBJ);
+//          $sql->bindValue(':id', $id_denuncia);
+//          $sql->execute();
+    }      
 
-          //$qry = $this->db->query($sql);
-          return $sql->fetchAll(\PDO::FETCH_OBJ);
-}
-    public function DenunciadosTodos(){
-          $ret = array();
-          $sql = "SELECT d.id_denuncia as denuncia, dnc.id_denuncia, dnc.id_denunciado, 
-          dnc.id_servidor, dnc.observacao, dnc.nome_provisorio as denunciado, s.matricula, s.nome_servidor
-          FROM denuncia as d
-          INNER JOIN denunciado as dnc ON d.id_denuncia = dnc.id_denuncia INNER JOIN  servidor_func as s ON dnc.id_servidor = s.id_servidor"; 
 
+    public function Denunciados($id_denuncia){
+          //$ret = array();
+          $sql = "SELECT d.id_denuncia, d.denuncia_fato, d.id_denunciante, d.tipo_documento, d.numero_documento, d.data_entrada, d.observacao, d.data_digitacao, dnc.id_denunciado, dnc.id_denuncia, dnc.id_servidor, dnc.nome_provisorio, dnc.observacao, dnc.anexo, dnc.data_digitacao, s.id_servidor, s.nome_servidor, s.cpf, s.matricula, s.vinculo, s.secretaria, s.unidade, s.observacao, s.anexo, dc.id_denunciante, dc.nome_denunciante, dc.observacao 
+          FROM denuncia as d
+          LEFT JOIN denunciado as dnc ON d.id_denuncia = dnc.id_denuncia LEFT JOIN denunciante as dc ON d.id_denunciante = dc.id_denunciante LEFT JOIN servidor_func as s ON dnc.id_servidor = s.id_servidor where d.id_denuncia = ".$id_denuncia;
           $qry = $this->db->query($sql);
           return $qry->fetchAll(\PDO::FETCH_OBJ);
-}
 
-    public function  getEditar($id_denuncia){
+          print_r($id_denuncia);
+          exit;
+          
+
+          /*
+        Não consegui incluir a variável no prepare
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(':id', $id_denuncia);
+        $sql->execute();
+*/
+    }
+
+       public function  getEditar($id_denuncia){
         $ret = array();
         $sql = "SELECT * FROM denuncia as d INNER JOIN denunciante as dc ON d.id_denunciante = dc.id_denunciante INNER JOIN denunciado as de ON de.id_denunciado = d.id_denunciado"; 
         $sql = $this->db->prepare($sql);
