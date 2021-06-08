@@ -13,7 +13,7 @@ body{font-size:1em; font-family: 'rregular';}
 h1, h2, h3, h4, h5{margin:0; padding:0; text-transform:uppercase; font-weight:inherit;}
 p{line-height:1.2em; font-size:1em; letter-spacing:0; color:#263238;}
 a {text-decoration:none; color:#444;}
-input ,textarea, select {width:100%; max-width:100%; padding:10px; background:#EEEEEE; border:0}
+input,textarea, select {width:100%; max-width:100%; padding:8px; padding-bottom:3px; background:#EEEEEE; border:0; text-transform: uppercase}
 input[type=image]{border:0;}
 input[type=date], select{padding:8px}
 ul ,li{list-style:none;}
@@ -213,34 +213,31 @@ ul ,li{list-style:none;}
 	color:#BBBBBB;
 }
 
-.ini{
-	height: 60px;
-	width: 100%;
-	background-color:seagreen;
-}
 
 /*base-formulario*/
 .base-home .base-formulario{
 	width:100%;
 	float:left;
-	padding:10px 60px;
+	padding:10px 40px;
 }
 .base-home .base-formulario label{
 	display:block;
-	padding-top:15px;
-	padding-bottom:5px;
-	font-size:.8em;
-	text-transform:uppercase;
-	color:red;
+	font: size 0.6em;em;
+	text-transform:uppercase; 
+	color:cadetblue;
+	font-weight:bold;
+
 }
 .base-home .base-formulario .col{
-	width:30%;
+	width:50%;
 	float:left;
-	margin-bottom:15px;
+	margin-bottom:0 px;
+	margin-left: 5px;
 }
-.base-home .base-formulario .col:nth-of-type(2n+0){
-	float:right;
+.base-home .base-formulario .col:nth-of-type(2n+1){
+	float:left;
 }
+
 .base-home .base-formulario .btn{
 	display:inline-block;
 	width:auto;
