@@ -222,6 +222,7 @@ ul ,li{list-style:none;}
 }
 .base-home .base-formulario label{
 	display:block;
+
 	font: size 0.6em;em;
 	text-transform:uppercase; 
 	color:cadetblue;

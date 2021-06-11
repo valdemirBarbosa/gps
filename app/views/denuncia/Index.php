@@ -12,54 +12,82 @@
 		  //$id_denuncia_pesquisa = $_GET['id_denuncia'];
 	?>
 		
-	<br/><br/>
+	
 
 <!-- Incluindo um formulário de pesquisa de denuncia !-->
 	<form method="post" action="<?php echo URL_BASE ."denuncia/Pesquisar/"?>">
+	   <table>
+		<tr>
+		   <td width="20%">
 			<label>Pesquisar número</label>
-			<input name="id_denuncia" type="number"> <br/>
-			<input type="submit" value="Pesquisar" class="btn-inc">
-	</form>
+			<input name="id_denuncia" type="number">
+               </td>
+		   <td> 
+		  	<input type="submit" value="Pesquisar" class="btn-inc">
+		   </td>
+		</tr>
+        </table>
+      </form>
 
 	
-	<div class="base-formulario">	
+	<div>	
 <!-- Formulário que recebe os dados pesquisados  !-->
-		<form>
-		<?php foreach($denunciado as $dnc){ ?>
-			<div class="col">
-				<label for="id"> id</label><br/>
-				<input name="id" value="<?php echo $den->id_denuncia  ?>">
+	<form class="base-formulario">
+         <?php foreach($denunciado as $dnc){ ?>
 
-				<label>nome denunciante</label><br/>
-				<input value="<?php echo $dnc->nome_denunciante ?>"> 
-		</div>
+		<table>
+			<tr>
+				<td width="10%">
+					<label for="id"> id</label>
+					<input name="id" value="<?php echo $den->id_denuncia  ?>">
+				</td>
+				
+				<td>
+					<label>nome denunciante</label>
+					<input value="<?php echo $dnc->nome_denunciante ?>">
+				</td>
+			</tr>
 
-				<label>tipo documento</label><br/>
-				<input value="<?php echo $den->tipo_documento  ?>"> 
+			<tr>
+				<td>
+					<label>tipo documento</label>
+					<input value="<?php echo $den->tipo_documento  ?>"> 
+				</td>
 
-				<label for="fato">fato da denúncia</label><br/>
-				<input name="fato" value="<?php echo $den->denuncia_fato  ?>">
-		</div>
+				<td width="10%">
+					<label>número</label>
+					<input value="<?php echo $den->numero_documento  ?>">
+				</td>
+	
+				<td width="20%">
+					<label>data de entrada</label>
+					<input value="<?php echo date('d/m/Y', strtotime($den->data_entrada))  ?>"> 
+				</td>
+			</tr>
+		
+			<tr>
+				<td>
+					<label for="fato">fato da denúncia</label>
+					<input name="fato" value="<?php echo $den->denuncia_fato  ?>">
+				</td>
+			</tr>
+	
+			<tr>
+				<td>
+					<label>observação</label>
+					<input value="<?php echo $den->observacao  ?>">
+				</td> 
+			</tr>
 
-		</div>
-
-			<div class="col">
-				<label>número</label><br/>
-				<input value="<?php echo $den->numero_documento  ?>">
-
-				<label>data de entrada</label><br/>
-				<input value="<?php echo date('d/m/Y', strtotime($den->data_entrada))  ?>"> 
-			</div>
-				<label>observação</label><br/>
-				<input value="<?php echo $den->observacao  ?>"> 
-		</form>
+		</table>
+	</form>
 	</div>				
 		<p>...</P>
 		<?php } ?>
 
 
 	<!-- TABELA FILHA	          !-->
-		<table width="100%" border="3" cellspacing="0" cellpadding="0">
+		<table class="table-bordered"  width="100%" border="3" cellspacing="0" cellpadding="0">
 		<?php URL_BASE."denuncia/denunciado"; ?>
 
 		<p>Tabela filha</p>
