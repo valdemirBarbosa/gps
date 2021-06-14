@@ -19,6 +19,16 @@ class DenunciaController extends Controller{
         $denunciados = new Denuncia_Model();
 
         $dados["denuncia"] = $denuncias->lista();
+        //$dados["denunciado"] = $denunciados->DenunciadosTodos();
+        $dados["view"] = "denuncia/Index";
+        $this->load("template", $dados);
+    }
+
+    public function Denuncia(){
+        $denuncias = new Denuncia_Model();
+        $denunciados = new Denuncia_Model();
+
+        $dados["denuncia"] = $denuncias->getDenuncia($id_denuncia);
         $dados["denunciado"] = $denunciados->DenunciadosTodos();
         $dados["view"] = "denuncia/Index";
         $this->load("template", $dados);
@@ -42,7 +52,12 @@ class DenunciaController extends Controller{
         $dados["view"] = "denuncia/frmDenuncia";
         $this->load("template", $dados);
      } 
- 
+
+     public function Novo(){
+          $dados["view"] = "denuncia/Incluir";
+          $this->load("template", $dados);
+     }
+    
    public function denunciados(){
           $denuncias = new Denuncia_Model();
           $dados["denunciado"] = $denuncias->DenunciadosTodos();
@@ -64,10 +79,8 @@ class DenunciaController extends Controller{
        $this->load("template", $dados);
    }
 
-   public function Editar($id_denuncia){
+   public function Edit($id_denuncia){
         $denuncias = new Denuncia_Model();
-        $denunciantes = new Denunciante_Model();
-        
         $dados["denuncia"] = $denuncias->getEditar($id_denuncia);
         $dados["view"] = "denuncia/Editar";
         $this->load("template", $dados);
@@ -83,21 +96,34 @@ class DenunciaController extends Controller{
  
    public function Salvar(){
      $d = new Denuncia_Model();
-          
+    /*
+          echo "<pre>";
+          echo "<br/>".$_POST['txt_id'];
+          echo "<br/>".$_POST['txt_denuncia'];
+          echo "<br/>".$_POST['txt_id_denunciante'];
+          echo "<br/>".$_POST['txt_tipo_documento'];
+          echo "<br/>".$_POST['txt_data_entrada'];
+          echo "<br/>".isset($_POST['txt_observacao']);
+          echo "<pre>";
+     */
      $id_denuncia = isset($_POST['txt_id']) ? strip_tags(filter_input(INPUT_POST, "txt_id")) : NULL;
 
-     $denuncia = isset($_POST['txt_denuncia']) ? strip_tags(filter_input(INPUT_POST, "txt_denuncia")) : NULL;
+     $denuncia = isset($_POST['txt_denuncia']) ? strip_tags(filter_input(INPUT_POST, "txt_denuncia")) : FALSE;
 
-     $id_denunciante = isset($_POST['txt_id_denunciante']) ? strip_tags(filter_input(INPUT_POST, "txt_id_denunciante")) : NULL;
+     $id_denunciante = isset($_POST['txt_id_denunciante']) ? strip_tags(filter_input(INPUT_POST, "txt_id_denunciante")) : 20;
 
-     $tipo_documento = isset($_POST['txt_tipo_documento']) ? strip_tags(filter_input(INPUT_POST, "txt_tipo_documento")) : NULL;
+     $tipo_documento = isset($_POST['txt_tipo_documento']);
 
-     $numero_documento = $_POST['txt_numero_documento'];
+     $numero_documento = addslashes($_POST['txt_numero_documento']);
 
-     $data_entrada = $_POST['txt_data_entrada'];
+     $data_entrada = isset($_POST['txt_data_entrada']);
      
-     $observacao = isset($_POST['txt_observacao']) ? strip_tags(filter_input(INPUT_POST, "txt_observacao")) : NULL;
+     $observacao = $_POST['txt_observacao'];
           
+   /*  echo "Observação------=>: ".$observacao."<br/>";
+     echo "Numero do documento ------=>: ".$numero_documento;
+     exit;          
+  */
      if($id_denuncia){
           $d->Editar($id_denuncia, $denuncia, $id_denunciante, $tipo_documento, $numero_documento, $data_entrada, $observacao);
         
@@ -107,6 +133,5 @@ class DenunciaController extends Controller{
      }
           header("Location:" . URL_BASE . "denuncia/lista");
      }
-
- 
 }
+

@@ -4,7 +4,7 @@
 			<form action="<?php echo URL_BASE ."denuncia/Salvar" ?>" method="POST">
 				<label>id_denuncia</label>
 					<input name="txt_id" class="txt-id" type="number" 
-					value="<?php echo $denunciados->id_denuncia; ?>" >
+					value="">
 
 				<label>denúncia</label>
 					<input name="txt_denuncia" required autofocus  type="text" placeholder="Insira aqui a naração dos fatos da denúncia">

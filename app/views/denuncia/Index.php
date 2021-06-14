@@ -5,117 +5,75 @@
 	<script type="text/javascript" src="<?php //echo URL_BASE.'assets\js\script.js' ?>"> </script> 
 !-->
 	<span class="qtde">Há <b><?php echo count($denuncia) ?></b> denuncia(s) cadastrada(s)</span>
-	<div class="btn-inc"><a href="<?php echo URL_BASE . "denuncia/novo" ?>" >INCLUIR </a></div>
-	<?php 
-		foreach($denuncia as $den){
-		  //$den = $den;
-		  //$id_denuncia_pesquisa = $_GET['id_denuncia'];
-	?>
-		
-	
+	<div class="btn-inc"><a href="<?php echo URL_BASE . "denuncia/Novo" ?>" >INCLUIR </a></div>
 
 <!-- Incluindo um formulário de pesquisa de denuncia !-->
-	<form method="post" action="<?php echo URL_BASE ."denuncia/Pesquisar/"?>">
+	<form class="form-pesquisa" method="post" action="<?php echo URL_BASE ."denuncia/Pesquisar/"?>">
 	   <table>
 		<tr>
-		   <td width="20%">
-			<label>Pesquisar número</label>
+		   <td width="10%">
+			<label>Pesquisar por ID</label>
 			<input name="id_denuncia" type="number">
                </td>
-		   <td> 
-		  	<input type="submit" value="Pesquisar" class="btn-inc">
-		   </td>
-		</tr>
+		 
+		   <td width="20%">
+			<label>Pesquisar por numero do processo</label>
+			<input name="numero_processo" type="text">
+               </td>
+
+		   <td width="20%">
+			<label>Pesquisar por denunciante</label>
+			<input name="nome_denunciante" type="text">
+               </td>
+	     </tr>
+
+		  <tr><td colspan="5"> 
+		  		<input type="submit" value="Pesquisar" class="btn-dark">
+			</td>
+		  </tr>
         </table>
       </form>
 
 	
 	<div>	
-<!-- Formulário que recebe os dados pesquisados  !-->
-	<form class="base-formulario">
-         <?php foreach($denunciado as $dnc){ ?>
 
-		<table>
+		<table class="table-responsive-lg">
 			<tr>
-				<td width="10%">
-					<label for="id"> id</label>
-					<input name="id" value="<?php echo $den->id_denuncia  ?>">
-				</td>
-				
-				<td>
-					<label>nome denunciante</label>
-					<input value="<?php echo $dnc->nome_denunciante ?>">
-				</td>
+				<th width="5%"> id</th>
+				<th width="30%">fato da denúncia</th>
+				<th width="15%">tipo documento</th>
+				<th width="15%">número</td>
+				<th width="10%">data de entrada</th>
+				<th width="25%">observação</th>
+				<th align="center" colspan="2">Ação</th>
 			</tr>
+	<?php 
+	  foreach($denuncia as $den){
+	?>
+			<tr>
+				<td><?php echo $den->id_denuncia  ?> </td>
+				<td><?php echo $den->denuncia_fato  ?> </td>
+				<td><?php echo $den->tipo_documento  ?> </td>
+				<td><?php echo $den->numero_documento  ?> </td>
+				<td><?php echo date('d/m/Y', strtotime($den->data_entrada))  ?> </td> 
+				<td><?php echo $den->observacao  ?> </td>
+			
+				<td> 
+					<a href="<?php echo URL_BASE ."denuncia/Edit/".$den->id_denuncia ?>" class="btn">Editar</a>
 
-			<tr>
-				<td>
-					<label>tipo documento</label>
-					<input value="<?php echo $den->tipo_documento  ?>"> 
 				</td>
+			
+				<td> 
+					<a href="<?php echo URL_BASE ."denuncia/Excluir/".$den->id_denuncia ?>" class="btn">Excluir</a>
 
-				<td width="10%">
-					<label>número</label>
-					<input value="<?php echo $den->numero_documento  ?>">
 				</td>
-	
-				<td width="20%">
-					<label>data de entrada</label>
-					<input value="<?php echo date('d/m/Y', strtotime($den->data_entrada))  ?>"> 
-				</td>
-			</tr>
-		
-			<tr>
-				<td>
-					<label for="fato">fato da denúncia</label>
-					<input name="fato" value="<?php echo $den->denuncia_fato  ?>">
-				</td>
-			</tr>
-	
-			<tr>
-				<td>
-					<label>observação</label>
-					<input value="<?php echo $den->observacao  ?>">
-				</td> 
-			</tr>
+			</tr> 
+	<?php } ?>
 
+			<hr/><hr/>
 		</table>
-	</form>
 	</div>				
 		<p>...</P>
-		<?php } ?>
-
-
-	<!-- TABELA FILHA	          !-->
-		<table class="table-bordered"  width="100%" border="3" cellspacing="0" cellpadding="0">
-		<?php URL_BASE."denuncia/denunciado"; ?>
-
-		<p>Tabela filha</p>
-			 <tr>
-				<th width="5%" align="left">id denuncia</th>
-				<th width="15%" align="left">id_denunciado</th>
-				<th width="15%" align="left">nome denunciado</th>
-				<th width="10%" align="left">matricula</th>
-				<th width="15%" align="left">observação</th>
-				<th width="20%" colspan="2" align="center">Ação</th>
-			  </tr>
-
-		  	<?php foreach($denunciado as $dnc){   ?>
-				<tr class="cor1">
-				<td align="center"><?php echo $dnc->id_denuncia ?></td>
-				<td align="center"><?php echo $dnc->id_denunciado  ?></td>
-				<td align="center"><?php echo $dnc->id_denuncia  ?></td>
-				<td align="center"><?php echo $dnc->id_servidor  ?></td>
-				<td><?php echo $dnc->observacao  ?></td>
-
-			 </tr>	
-			 <?php } ?>		
-						  
-			 <?php } ?>		
-						  
-
-		  </tbody>
-		</table>
 </div>					
 </div>
 </div>

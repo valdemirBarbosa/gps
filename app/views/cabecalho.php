@@ -14,7 +14,7 @@
 		<li><a href="<?php echo URL_BASE . "denunciante" ?>" >Lista de denunciantes</a></li>
 		<li><a href="<?php echo URL_BASE . "denunciado" ?>" >Lista de denunciados</a></li>
 		<li><a href="<?php echo URL_BASE . "servidor" ?>" >Lista de servidores</a></li>
-		<li><a href="<?php echo URL_BASE . "denuncia/" ?>" >Lista de denuncias</a></li>
+		<li><a href="<?php echo URL_BASE . "denuncia" ?>" >Lista de denuncias</a></li>
 		<li><a href="<?php echo URL_BASE . "denuncia/denunciados" ?>" >Lista de denunciados c/den</a></li>
 
 	</ul>
