@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 14-Jun-2021 às 17:29
+-- Tempo de geração: 15-Jun-2021 às 14:05
 -- Versão do servidor: 10.4.17-MariaDB
 -- versão do PHP: 8.0.2
 
@@ -43,7 +43,7 @@ CREATE TABLE `denuncia` (
 -- Extraindo dados da tabela `denuncia`
 --
 
-INSERT INTO `denuncia` VALUES
+INSERT INTO `denuncia` (`id_denuncia`, `denuncia_fato`, `id_denunciante`, `tipo_documento`, `numero_documento`, `data_entrada`, `anexo`, `observacao`, `data_digitacao`, `user`) VALUES
 (1, '', 0, '', '', '0000-00-00', NULL, '', '2021-06-01 20:43:13', NULL),
 (2, '', 0, '', '', '0000-00-00', NULL, '', '2021-06-01 20:43:18', NULL),
 (3, '', 0, '', '', '0000-00-00', NULL, '', '2021-06-03 13:56:29', 1),
@@ -71,7 +71,7 @@ CREATE TABLE `denunciado` (
 -- Extraindo dados da tabela `denunciado`
 --
 
-INSERT INTO `denunciado` VALUES
+INSERT INTO `denunciado` (`id_denunciado`, `id_pad`, `id_servidor`, `observacao`, `anexo`, `data_digitacao`, `user`) VALUES
 (1, 2, 1, 'teste', 1, '2021-06-13 12:01:56', 1);
 
 -- --------------------------------------------------------
@@ -90,11 +90,37 @@ CREATE TABLE `denunciante` (
 -- Extraindo dados da tabela `denunciante`
 --
 
-INSERT INTO `denunciante` VALUES
+INSERT INTO `denunciante` (`id_denunciante`, `nome_denunciante`, `observacao`) VALUES
 (1, 'ADM', 'SEM OBS'),
 (3, 'TCE/MT - TRIBUNAL DE CONTAS DO ESTADO DE MATO GROSSO', 'SEM OBSERVAÇÃO'),
 (19, 'CONTROLADORIA MUNICIPAL', 'CONTROLE INTERNO					'),
 (20, 'INDEFINIDO', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `ocorrencia`
+--
+
+CREATE TABLE `ocorrencia` (
+  `id` int(11) NOT NULL,
+  `id_tab_origem` int(11) NOT NULL,
+  `num_doc_proces` varchar(25) NOT NULL,
+  `data_ocorrencia` date NOT NULL DEFAULT current_timestamp(),
+  `ocorrencia` varchar(120) NOT NULL,
+  `observacao` varchar(200) DEFAULT NULL,
+  `anexo` int(11) DEFAULT NULL,
+  `user` int(11) NOT NULL,
+  `data_digitacao` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `ocorrencia`
+--
+
+INSERT INTO `ocorrencia` (`id`, `id_tab_origem`, `num_doc_proces`, `data_ocorrencia`, `ocorrencia`, `observacao`, `anexo`, `user`, `data_digitacao`) VALUES
+(1, 1, '2', '2021-02-24', 'AGRESSÃO MÚTUA ENTRE SERVIDORES', 'LIVRE PARA OBSERVAÇÃO', 0, 0, '2021-06-15 07:57:00'),
+(2, 1, '1', '2021-02-12', 'AGRESSÃO MÚTUA ENTRE SERVIDORES', 'LIVRE PARA OBSERVAÇÃO', 0, 0, '2021-06-15 07:57:00');
 
 -- --------------------------------------------------------
 
@@ -118,7 +144,7 @@ CREATE TABLE `pad` (
 -- Extraindo dados da tabela `pad`
 --
 
-INSERT INTO `pad` VALUES
+INSERT INTO `pad` (`id_pad`, `id_denuncia`, `id_pp_sindicancia`, `numero_processo`, `data_instrucao`, `ocorrencia`, `observacao`, `anexo`, `user`) VALUES
 (2, 1, NULL, '51/2020', '2021-06-13', 'Intimação dos investigados', 'Primeira tentativa', 1, 1);
 
 -- --------------------------------------------------------
@@ -157,12 +183,21 @@ CREATE TABLE `pp_sindicancia` (
   `id_denuncia` int(11) NOT NULL,
   `fase` int(25) NOT NULL,
   `numero_processo` int(11) NOT NULL,
-  `data_instrucao` date NOT NULL DEFAULT current_timestamp(),
-  `ocorrencia` varchar(120) NOT NULL,
+  `data_instauracao` date NOT NULL DEFAULT current_timestamp(),
   `observacao` varchar(200) NOT NULL,
   `anexo` int(11) NOT NULL,
   `user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `pp_sindicancia`
+--
+
+INSERT INTO `pp_sindicancia` (`id`, `id_denuncia`, `fase`, `numero_processo`, `data_instauracao`, `observacao`, `anexo`, `user`) VALUES
+(1, 1, 0, 5555, '2021-06-14', 'LIVRE PARA OBSERVAÇÃO', 0, 0),
+(2, 1, 0, 5555, '2021-06-14', 'LIVRE PARA OBSERVAÇÃO', 0, 0),
+(4, 3, 2, 0, '2000-01-01', 'DFDSFASD', 0, 0),
+(5, 1, 2, 99999, '2021-01-01', 'TESTE', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -187,7 +222,7 @@ CREATE TABLE `servidor_func` (
 -- Extraindo dados da tabela `servidor_func`
 --
 
-INSERT INTO `servidor_func` VALUES
+INSERT INTO `servidor_func` (`id_servidor`, `nome_servidor`, `cpf`, `matricula`, `vinculo`, `secretaria`, `unidade`, `observacao`, `anexo`, `user`) VALUES
 (1, 'IVO ABRAO', '015.214.491', 127, 'CONCURSADO', 'FINANÇAS', 'COORDENADORIA ADMINISTRATIVA', 'incluido via banco', 0, 1);
 
 -- --------------------------------------------------------
@@ -207,7 +242,7 @@ CREATE TABLE `usuario` (
 -- Extraindo dados da tabela `usuario`
 --
 
-INSERT INTO `usuario` VALUES
+INSERT INTO `usuario` (`id_usuario`, `email`, `senha`, `data_criacao`) VALUES
 (1, 'val@gmail.com', '123', '2021-02-26 21:55:12'),
 (2, 'leyd@gmail.com', '#15', '2021-03-14 02:55:17');
 
@@ -232,6 +267,13 @@ ALTER TABLE `denunciado`
 --
 ALTER TABLE `denunciante`
   ADD PRIMARY KEY (`id_denunciante`);
+
+--
+-- Índices para tabela `ocorrencia`
+--
+ALTER TABLE `ocorrencia`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_id_denuncia` (`id_tab_origem`);
 
 --
 -- Índices para tabela `pad`
@@ -289,6 +331,12 @@ ALTER TABLE `denunciante`
   MODIFY `id_denunciante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
+-- AUTO_INCREMENT de tabela `ocorrencia`
+--
+ALTER TABLE `ocorrencia`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de tabela `pad`
 --
 ALTER TABLE `pad`
@@ -304,7 +352,7 @@ ALTER TABLE `portaria`
 -- AUTO_INCREMENT de tabela `pp_sindicancia`
 --
 ALTER TABLE `pp_sindicancia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `servidor_func`

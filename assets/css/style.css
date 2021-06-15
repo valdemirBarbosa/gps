@@ -135,7 +135,7 @@ ul ,li{list-style:none;}
 	text-align:center;
 }
 .menu li{
-	display:inline;
+	display:block;
 	font-size:.8em;
 	text-transform:uppercase;
 	border-right:solid 1px #ddd;
