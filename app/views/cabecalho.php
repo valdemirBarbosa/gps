@@ -15,7 +15,10 @@
 		<li><a href="<?php echo URL_BASE . "denunciado" ?>" >Lista de denunciados</a></li>
 		<li><a href="<?php echo URL_BASE . "servidor" ?>" >Lista de servidores</a></li>
 		<li><a href="<?php echo URL_BASE . "denuncia" ?>" >Lista de denuncias</a></li>
-		<li><a href="<?php echo URL_BASE . "ppSindicancia/" ?>" >Proc Preliminar / Sindicância</a></li>
+		<li><a href="<?php echo URL_BASE . "ppSindicancia/" ?>" >Sindicância</a></li>
+		<li><a href="<?php echo URL_BASE . "pad/" ?>" >PAD</a></li>
+
+		<li><a href="<?php echo URL_BASE . "denuncia/pendencias" ?>" ><h6>pendencias</h6></a></li>
 
 	</ul>
 </nav>	

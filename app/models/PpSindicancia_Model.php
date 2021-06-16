@@ -9,17 +9,18 @@ class PpSindicancia_Model extends Model{
     }
 
     public function lista(){
-        $sql = "SELECT * FROM pp_sindicancia"; 
+        $sql = "SELECT * FROM pp_sindicancia as s LEFT JOIN fase as f ON s.fase = f.id_fase"; 
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
 // Pegar os dados da tabela pp_sindicancia e disponibilizar para os Métodos Editar e Excluir
     public function getId($id){
-        $qry = array();
-        $sql = "SELECT * FROM pp_sindicancia WHERE id = ".$id;
-        $qry = $this->db->query($sql);
-        return $qry->fetchAll(\PDO::FETCH_OBJ);
+        $sql = "SELECT * FROM pp_sindicancia as s LEFT JOIN fase as f ON s.fase = f.id_fase WHERE id = :id";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":id", $id);
+        $sql->execute();
+        return $sql->fetchAll(\PDO::FETCH_OBJ);
     }
  
 //Inserir dados na tabela de sindicância

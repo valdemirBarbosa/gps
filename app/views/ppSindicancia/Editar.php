@@ -16,7 +16,7 @@
 				<label for="fase">FASE</label>
 					<select name="txt_fase" id="txt_fase">
 						<option value=""><?php echo $ps->fase ?></option>
-						<option value="1">PROCEDIMENTO PRELIMINAR</option>
+						<option value="1">Procedimento Preliminar</option>
 						<option value="2">SINDICÂNCIA</option>
 					</select> 
 
@@ -30,10 +30,6 @@
 					<input name="txt_observacao" type="text" value="<?php echo $ps->observacao ?>">
 	<?php } ?>
 
-<!--			
-				<input type="hidden" name="acao" value="Cadastrar">
-				<input type="hidden" name="id" value="">
-!-->
 				<input type="submit" value="Salvar Alterações" class="btn">
 				<input type="reset" name="Reset" id="button" value="Voltar" class="btn limpar">
 			</form>

@@ -4,11 +4,11 @@
 <!-- 
 	<script type="text/javascript" src="<?php //echo URL_BASE.'assets\js\script.js' ?>"> </script> 
 !-->
-	<span class="qtde">Há <b><?php echo count($ppSind) ?></b> processo preliminares e sindicâncias</span>
-	<div class="btn-inc"><a href="<?php echo URL_BASE . "PpSindicancia/Novo" ?>" >INCLUIR </a></div>
+	<span class="qtde">Há <b><?php echo count($pad) ?></b> processo preliminares e sindicâncias</span>
+	<div class="btn-inc"><a href="<?php echo URL_BASE . "Pad/Novo" ?>" >INCLUIR </a></div>
 
 <!-- Incluindo um formulário de pesquisa de denuncia !-->
-	<form class="form-pesquisa" method="post" action="<?php echo URL_BASE ."denuncia/Pesquisar/"?>">
+	<form class="form-pesquisa" method="post" action="<?php echo URL_BASE ."Pad/Pesquisar/"?>">
 	   <table>
 		<tr>
 		   <td width="10%">
@@ -39,9 +39,9 @@
 
 		<table class="table-responsive-lg">
 			<tr>
-				<th  width="7%">Id Sindicância</th>
-				<th  width="7%">Id Denuncia</th>
-				<th width="20%">Fase</th>
+				<th width="5%">Id_pad</th>
+				<th width="30%">Id_denuncia</th>
+				<th width="30%">id_pp_sindicancia</th>
 				<th width="15%">Numero do Processo</td>
 				<th width="10%">Data Instauração </th>
 				<th width="25%">Observação</th>
@@ -49,24 +49,24 @@
 				<th align="center" colspan="2">Ação</th>
 			</tr>
 	<?php 
-	  foreach($ppSind as $ps){
+	  foreach($pad as $pd){
 	?>
 			<tr>
-				<td align="center" ><?php echo $ps->id ?> </td>
-				<td align="center" ><?php echo $ps->id_denuncia ?> </td>
-				<td><?php echo $ps->fase  ?> </td>
-				<td><?php echo $ps->numero_processo ?> </td>
-				<td><?php echo date('d/m/Y', strtotime($ps->data_instauracao)) ?> </td> 
-				<td><?php echo $ps->observacao  ?> </td>
-				<td><?php echo $ps->anexo ?> </td>
+				<td><?php echo $pd->id_pad ?> </td>
+				<td><?php echo $pd->id_denuncia ?> </td>
+				<td><?php echo $pd->id_pp_sindicancia  ?> </td>
+				<td><?php echo $pd->numero_processo ?> </td>
+				<td><?php echo date('d/m/Y', strtotime($pd->data_instauracao)) ?> </td> 
+				<td><?php echo $pd->observacao  ?> </td>
+				<td><?php echo $pd->anexo ?> </td>
 			
 				<td> 
-					<a href="<?php echo URL_BASE ."PpSindicancia/Edit/".$ps->id ?>" class="btn">Editar</a>
+					<a href="<?php echo URL_BASE ."Pad/Edit/".$pd->id_pad ?>" class="btn">Editar</a>
 
 				</td>
 			
 				<td> 
-					<a href="<?php echo URL_BASE ."PpSindicancia/Excluir/".$ps->id ?>" class="btn">Excluir</a>
+					<a href="<?php echo URL_BASE ."Pad/Excluir/".$pd->id_pad ?>" class="btn">Excluir</a>
 
 				</td>
 			</tr> 

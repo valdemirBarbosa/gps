@@ -125,8 +125,8 @@ ul ,li{list-style:none;}
 /*menu*/
 .menu{
 	width:100%;
-    float: left;
-    padding:10px 0;
+    	float: left;
+    	padding:10px 0;
 	background:#323232;
 	border-bottom:solid 5px #E0E0E0;
 }
@@ -199,8 +199,8 @@ ul ,li{list-style:none;}
 	position:relative;
 	top:-2px;
 }
-.base-home .base-colunas .col:nth-of-type(2n+0){
-	float:right;
+.base-home .base-colunas .col:nth-of-type(3n+1){
+	float:left;
 }
 .base-home .base-colunas .icone{
 	width:100%;
@@ -441,4 +441,12 @@ ul ,li{list-style:none;}
 	background: yellow;
 	font-size: 12px;
 	text-align: center;
+}
+#id{
+	padding:4px;
+	text-transform:capitalize;
+	color:black;
+	background: red;
+	font-size: 12px;
+	width: 10px;
 }

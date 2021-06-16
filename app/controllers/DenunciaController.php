@@ -112,13 +112,13 @@ class DenunciaController extends Controller{
 
      $id_denunciante = isset($_POST['txt_id_denunciante']) ? strip_tags(filter_input(INPUT_POST, "txt_id_denunciante")) : 20;
 
-     $tipo_documento = isset($_POST['txt_tipo_documento']);
+     $tipo_documento = isset($_POST['txt_tipo_documento']) ? strip_tags(filter_input(INPUT_POST, "txt_tipo_documento")) : "Não Especificado";
 
      $numero_documento = addslashes($_POST['txt_numero_documento']);
 
-     $data_entrada = isset($_POST['txt_data_entrada']);
-     
-     $observacao = $_POST['txt_observacao'];
+     $data_entrada = isset($_POST['txt_data_entrada']) ? strip_tags(filter_input(INPUT_POST, "txt_data_entrada")) : NULL;
+
+     $observacao = isset($_POST['txt_observacao']) ? strip_tags(filter_input(INPUT_POST, "txt_observacao")) : NULL;
           
    /*  echo "Observação------=>: ".$observacao."<br/>";
      echo "Numero do documento ------=>: ".$numero_documento;
@@ -133,5 +133,13 @@ class DenunciaController extends Controller{
      }
           header("Location:" . URL_BASE . "denuncia/lista");
      }
+
+     public function pendencias(){
+          $denuncia = $arrayName = array('id' =>0 , 'nome'=>'pendencias');
+          $dados["denuncia"] = $denuncia;
+          $dados["view"] = "pendencias";
+          $this->load("template", $dados);
+      }
+  
 }
 

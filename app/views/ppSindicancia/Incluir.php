@@ -19,7 +19,7 @@
 					<input name="txt_numero_processo" type="text" placeholder="Insira o número do processo">
 				
 				<label>Data de Instauração</label>
-					<input name="txt_data_instauracao" type="date" placeholder="Infome a data de instauração do processo">
+					<input name="txt_data_instauracao" type="date" >
 
 				<label>Data de Ocorrência</label>
 					<input name="txt_data_ocorrencia" type="date" placeholder="Infome a data de ocorrência de movimentação do processo">
@@ -30,10 +30,6 @@
 				<label>Observação</label>
 					<input name="txt_observacao" type="text" placeholder="Livre para observações">
 
-<!--			
-				<input type="hidden" name="acao" value="Cadastrar">
-				<input type="hidden" name="id" value="">
-!-->
 				<input type="submit" value="Cadastrar" class="btn">
 				<input type="reset" name="Reset" id="button" value="Limpar" class="btn limpar">
 			</form>

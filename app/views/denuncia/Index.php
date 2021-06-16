@@ -55,8 +55,13 @@
 				<td><?php echo $den->denuncia_fato  ?> </td>
 				<td><?php echo $den->tipo_documento  ?> </td>
 				<td><?php echo $den->numero_documento  ?> </td>
-				<td><?php echo date('d/m/Y', strtotime($den->data_entrada))  ?> </td> 
-				<td><?php echo $den->observacao  ?> </td>
+				<?php $dt_entrada = explode("-",$den->data_entrada);
+					$dia = $dt_entrada[2];
+					$mes = $dt_entrada[1];
+					$ano = $dt_entrada[0];
+				?>
+				<td><?php echo $dia."/".$mes."/".$ano  ?> </td> 
+				<td><?php echo $den->observacao ?> </td>
 			
 				<td> 
 					<a href="<?php echo URL_BASE ."denuncia/Edit/".$den->id_denuncia ?>" class="btn">Editar</a>
