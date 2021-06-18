@@ -7,6 +7,7 @@
 		<form action="<?php echo URL_BASE ."Pad/Salvar" ?>" method="POST">
 
 		<?php foreach($pad as $pd){ ?>
+		<fieldset><legend><h4>Códigos</h4></legend>	
 				<label>Id do PAD</label>
 					<input name="txt_id_pad" enable="false" value="<?php echo $pd->id_pad ?>" >
 
@@ -15,6 +16,7 @@
 
 				<label>id_pp_sindicancia</label>
 				<input type="number" name="txt_id_pp_sindicancia" value="<?php echo $pd->id_pp_sindicancia ?>" >
+		</fieldset>		
 
 				<label>Número do Processo</label>
 					<input name="txt_numero_processo" type="text" placeholder="Insira o número do processo" value="<?php echo $pd->numero_processo ?>">
@@ -25,17 +27,29 @@
 				<label>Observação</label>
 					<input name="txt_observacao" type="text" value="<?php echo $pd->observacao ?>">
 
-				<label>Anexo
-					<input type="file" name="image[]" multiple="multiple" ></label>
 		<?php } ?>
 
-<!--			
-				<input type="hidden" name="acao" value="Cadastrar">
 				<input type="hidden" name="id" value="">
-!-->
 				<input type="submit" value="Salvar Alterações" class="btn">
 				<input type="reset" name="Reset" id="button" value="Voltar" class="btn limpar">
-			</form>
+
+		</form>
+
+<!-- Formulário para anexar arquivos   		
+		<form action="<?php echo URL_BASE .'Pad/Anexar' ?>" method="POST" multiple="multiple">
+			<?php //$id_pad = $pd->id_pad; ?>
+		<table>
+		  <tr>
+		    <td>
+		        <input type="hidden" name="id_pad" value="<?php //id_pad = $pd->id_pad; ?>">
+		 	  <input type="file" name="arquivo"></label>
+		    <td>
+		    <td>
+		  	 <input type="submit" value="Anexar arquivo">
+		    </td>
+		  </tr>
+		</table>
+		</form>	!-->
 		</div>	
 </div>	
 	

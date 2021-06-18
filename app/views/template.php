@@ -12,13 +12,14 @@
 <div class="container">	
 	<div class="base-central">	
 	<?php 
-		include ('cabecalho.php');
-		
+		echo '<div class="">';
+			include ('cabecalho.php');
+		echo "</div>";
+				
 		$this->load($view, $viewData, $viewData2);
 
 		include ('rodape.php');
 
-	
 	?>
 		
 </div>	

@@ -60,7 +60,16 @@ ul ,li{list-style:none;}
 	-o-border-radius:5px;
 	-ms-border-radius:5px;
 	box-shadow:0 0px 7px 0 rgb(128, 127, 127);	
-}	
+}
+
+.menu_laretal{
+	float: left;
+	margin:0;
+	background-color: royalblue;
+	width: 200px;
+	height: 100px;
+}
+
 .base-topo{
 	width:100%;
 	float:left;
@@ -84,6 +93,12 @@ ul ,li{list-style:none;}
 	margin-top:10px;
 	position:relative;
 }
+
+fieldset{
+	border-style: solid;
+	border-color: red;
+}
+
 .base-topo .base-busca input{
 	background:#323232;
 	box-shadow:inset 0 0 7px 0 #000;
