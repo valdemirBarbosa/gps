@@ -1,5 +1,7 @@
-<div="base-home">
-	<h1 class="titulo"><span class="cor">Lista de</span> servidores</h1>
+<div class="base-home">
+	<h1 class="tema"><span class="cor">Lista de</span> servidores</h1>
+</div>
+
 <div class="base-lista">
 	<span class="qtde">Há <b><?php echo count($servidores) ?></b> servidor(es) cadastrado(s)</span>
 	<div class="btn-inc"><a href="<?php echo URL_BASE . "servidor/novo" ?>" >INCLUIR </a></div>

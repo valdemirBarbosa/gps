@@ -1,15 +1,18 @@
-<div="base-home">
-	<h1 class="titulo"><span class="cor">Lista de</span> denuncia</h1>
 <div class="base-home">
+	<h1 class="tema"><span class="cor">Lista de</span> denuncia</h1>
+</div>
 <!-- 
 	<script type="text/javascript" src="<?php //echo URL_BASE.'assets\js\script.js' ?>"> </script> 
 !-->
+
+<div class="base-lista">
+
 	<span class="qtde">Há <b><?php echo count($denuncia) ?></b> denuncia(s) cadastrada(s)</span>
 	<div class="btn-inc"><a href="<?php echo URL_BASE . "denuncia/Novo" ?>" >INCLUIR </a></div>
-
-<!-- Incluindo um formulário de pesquisa de denuncia !-->
+<!--
 	<form class="form-pesquisa" method="post" action="<?php echo URL_BASE ."denuncia/Pesquisar/"?>">
-	   <table>
+!-->
+	   <table class="minhaTabela">
 		<tr>
 		   <td width="10%">
 			<label>Pesquisar por ID</label>

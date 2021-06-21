@@ -1,25 +1,18 @@
 <div class="base-topo">
-			<a href="index.php?link=1" class="logo"></a>
-			<div class="base-busca">
-				<form action="">
-		<!--			<input type="text" placeholder="Pesquisa">
-					<input type="submit" value="" class="but">
-			!-->	</form>				
-			</div>
-		</div>
-		
-		<nav class="menu">
+<h3 class="span">GPS - Gerenciador de Processo de Sindicância</h3>
+</div>
+<nav class="menu">
 	<ul>
+		<p>
 		<li><a href="<?php echo URL_BASE ?>" >Home</a></li>
-		<li><a href="<?php echo URL_BASE . "denunciante" ?>" >Lista de denunciantes</a></li>
-		<li><a href="<?php echo URL_BASE . "denunciado" ?>" >Lista de denunciados</a></li>
-		<li><a href="<?php echo URL_BASE . "servidor" ?>" >Lista de servidores</a></li>
-		<li><a href="<?php echo URL_BASE . "denuncia" ?>" >Lista de denuncias</a></li>
-		<li><a href="<?php echo URL_BASE . "ppSindicancia/" ?>" >Sindicância</a></li>
+		<li><a href="<?php echo URL_BASE . "denunciante" ?>" >Denunciantes</a></li>
+		<li><a href="<?php echo URL_BASE . "denunciado" ?>" >Denunciados</a></li>
+		<li><a href="<?php echo URL_BASE . "servidor" ?>" >Servidores</a></li>
+		<li><a href="<?php echo URL_BASE . "denuncia" ?>" >Denuncias</a></li>
+		<li><a href="<?php echo URL_BASE . "ppSindicancia/" ?>">Sindicância</a></li>
 		<li><a href="<?php echo URL_BASE . "pad/" ?>" >PAD</a></li>
-		<li><a href="<?php echo URL_BASE . "ocorrencia/" ?>" >Ocorrencia/Andamento</a></li>
-
-		<li><a href="<?php echo URL_BASE . "denuncia/pendencias" ?>" ><h6>pendencias</h6></a></li>
-
+		<li><a href="<?php echo URL_BASE . "ocorrencia/" ?>" >Ocorrencia</a></li>
+		<li><a href="<?php echo URL_BASE . "denuncia/pendencias" ?>" ><h6>Pendencias</h6></a></li>
+		</p>
 	</ul>
 </nav>	

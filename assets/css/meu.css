@@ -1,0 +1,194 @@
+.base-topo{
+      background-color:darkslategray;
+      float: left;
+      width: 100%;
+      height: 10%;
+
+}
+
+.container{
+      background-color:silver;
+      float: left;
+      width: 100%;
+      height: 100%;
+
+}
+
+.base-home{
+      position: absolute;
+      z-index: 5;
+      background-color:royalblue;
+      width: 80%;
+      height: 5%;
+      margin-top: 120px;
+      margin-left: 2%;
+      left: 15%;
+}
+
+.menu{
+      background-color:darkslategray;
+      color: white;
+      width: 15%;
+      height: 80%;
+      padding-top: 10%;
+      text-transform:uppercase;
+      position: absolute;
+
+}
+
+li{
+      list-style: none;
+      line-height: 30px;
+      text-align: right;
+
+}
+
+.menu li a:hover{
+      background-color:blanchedalmond;
+      font-size: 20px;
+}
+
+
+
+a:link{
+      text-decoration: none;
+}
+
+form{
+      background-color:royalblue;
+      width: 80%;
+      margin-left: 2%;
+      position: absolute;
+      top:20%;
+      left: 15%;
+}
+
+label, input{
+      border-radius: 10px;
+      float: left;
+      background-color:lightcyan;
+      padding: 5px;
+      margin-top: 5px;
+      margin-left: 5px;
+      margin-bottom: 3px;
+      border:none;      
+      font-weight: bold;
+      font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      text-transform: capitalize;
+      color: blue;
+}
+
+.base-lista{
+      width: 80%;
+      margin-top: 15%;
+      margin-left: 16%;
+      background-color:gainsboro;
+  
+}
+
+input{
+      height: 25px;
+      color: black;
+}
+
+input[type="text"]{
+      width: 550px;
+}
+
+fieldset{
+      border-color:mediumseagreen;
+      margin: 5px;
+      width: 90%;
+}
+
+legend{
+      color:darkslategray;
+}
+
+.cpf{
+      background-color: blueviolet;
+      display:inline-block;
+}
+
+.cpfi{
+      width: 10px;
+      display:flexbox;
+
+}
+
+#vinculo{
+      width: 260px;
+}
+
+#secretaria{
+      width: 360px;
+      float: left;
+      margin-right: 100px;
+} 
+
+.unidade{
+      width: 100px;
+      float: left;
+      margin-left: -10px;
+}
+#unidade{
+      width: 270px;
+      float: left;
+
+}
+
+.obs{
+      float: auto;
+      background-color:darkgreen;
+      width: 200px;
+      margin-top: 15px;
+}
+
+.span{
+      font-size: 22px;
+      font-weight: bolder;
+      color:gainsboro;
+      text-align: center;
+}
+
+.tema{
+      font-weight: bolder;
+      color:whitesmoke;
+      text-align: center;
+}
+
+.titulo{
+	display:block;
+	padding:0px 0;
+	color:#323232;
+	font-weight:inherit;
+	font-size:1.4em;
+	text-transform:uppercase;
+}
+
+.titulo .cor{
+	color:floralwhite;
+	position:relative;
+	top:-3px;
+      font-weight:inherit;
+	font-size:1.4em;
+	text-transform:uppercase;
+
+}
+
+.rodape{
+      position: absolute;
+      margin-top: 57%;
+      width: 100%;
+      background-color:darkslategray;
+}
+
+.minhaTabela{
+	width: 100%;
+	padding:4px;
+	text-transform:uppercase;
+	color:#20202F;
+	background:slategray;
+	font-size: 10px;
+	text-align: center;
+}

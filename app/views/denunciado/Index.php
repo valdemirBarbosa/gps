@@ -1,5 +1,6 @@
-<div="base-home">
-	<h1 class="titulo"><span class="cor">Lista de</span> denunciados</h1>
+<div class="base-home">
+	<h1 class="tema"><span class="cor">Lista de</span> denunciados</h1>
+</div>
 <div class="base-lista">
 	<span class="qtde">Há <b><?php echo count($denunciados) ?></b> denunciado(s) cadastrado(s)</span>
 	<div class="btn-inc"><a href="<?php echo URL_BASE . "denunciado/novo" ?>" >INCLUIR </a></div>
@@ -9,7 +10,6 @@
 		  <thead>
 			   <tr>
 				<th width="5%" align="center">Id_denunciado</th>
-				<th width="5%" align="center">Id da denuncia</th>
 				<th width="5%" align="center">Id do servidor</th>
 				<th width="25%" align="left">Nome do servidor</th>
 				<th width="10%" align="left">Vinculo</th>
@@ -23,7 +23,6 @@
 		  	<?php foreach($denunciados as $denunciado){   ?>
 				<tr class="cor1">
 				<td align="center"><?php echo $denunciado->id_denunciado  ?></td>
-				<td align="center"><?php echo $denunciado->id_denuncia  ?></td>
 				<td align="center"><?php echo $denunciado->id_servidor  ?></td>
 				<td><?php echo $denunciado->nome_servidor  ?></td>
 				<td><?php echo $denunciado->vinculo  ?></td>
