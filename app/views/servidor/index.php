@@ -1,12 +1,12 @@
 <div class="base-home">
-	<h1 class="tema"><span class="cor">Lista de</span> servidores</h1>
+	<h1 class="titulo-pagina">Lista de servidores</h1>
 </div>
 
 <div class="base-lista">
 	<span class="qtde">Há <b><?php echo count($servidores) ?></b> servidor(es) cadastrado(s)</span>
 	<div class="btn-inc"><a href="<?php echo URL_BASE . "servidor/novo" ?>" >INCLUIR </a></div>
 
-	<div class="minhaTabela">	
+	<div class="tabela">	
 		<table width="100%" border="1" cellspacing="0" cellpadding="0">
 		  <thead>
 			   <tr>
@@ -33,19 +33,20 @@
 				<td><?php echo $servidor->unidade  ?></td>	
 				<td><?php echo $servidor->observacao  ?></td>	
 				<td align="center">
-					<a href="<?php echo URL_BASE ."servidor/Editar/".$servidor->id_servidor ?>" class="btn">Editar</a>
+					<div class="btn-editar">
+						<a href="<?php echo URL_BASE ."servidor/Editar/".$servidor->id_servidor ?>" class="btn">Editar</a>
+					</div>
 				</td>
 				<td align="center">
-					<a href="<?php echo URL_BASE ."servidor/Excluir/".$servidor->id_servidor ?>" class="btn excluir">excluir</a>
+					<div class="btn-excluir">
+						<a href="<?php echo URL_BASE ."servidor/Excluir/".$servidor->id_servidor ?>" class="btn excluir">excluir</a>
+					</div>
 				</td>
 			 </tr>	
 			 <?php } ?>									  
 
 		  </tbody>
 		</table>
-</div>					
 </div>
-</div>
-
 </body>
 </html>

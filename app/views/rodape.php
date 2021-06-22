@@ -1,3 +1,3 @@
 <div class="rodape">
-		<p>DIREITOS RESERVADOS VALBS.COM.BR</p>
+		<p>Direitos reservados a valbs.com.br</p>
 	</div>

@@ -1,5 +1,5 @@
 <div class="base-home">
-	<h1 class="tema"><span class="cor">Lista de</span> denunciados</h1>
+	<h1 class="titulo-pagina">Lista de denunciados</h1>
 </div>
 <div class="base-lista">
 	<span class="qtde">Há <b><?php echo count($denunciados) ?></b> denunciado(s) cadastrado(s)</span>
@@ -30,10 +30,14 @@
 				<td><?php echo $denunciado->unidade  ?></td>	
 				<td><?php echo $denunciado->observacao  ?></td>	
 				<td align="center">
+					<div class="btn-editar"
 					<a href="<?php echo URL_BASE ."denunciado/Editar/".$denunciado->id_denunciado ?>" class="btn">Editar</a>
+			  	</div>
 				</td>
 				<td align="center">
+					<div class="btn-excluir">
 					<a href="<?php echo URL_BASE ."denunciado/Excluir/".$denunciado->id_denunciado ?>" class="btn excluir">excluir</a>
+			  	</dvi>	
 				</td>
 			 </tr>	
 			 <?php } ?>									  

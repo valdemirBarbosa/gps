@@ -1,9 +1,33 @@
+/* GRADIENTE
+.grad{
+      background: red; /* For browsers that do not support gradients 
+      background: -webkit-linear-gradient(left,red,red, green, green, white, yellow);
+      background: -o-linear-gradient(left,red,red, green,white, green,yellow);
+      background: -moz-linear-gradient(left,left,red, red,green,green, white,yellow);
+      background: linear-gradient(to right,left,red, red,green,white, green, yellow);
+ 
+      float: left;
+      width: 100%;
+      height: 10%;
+}*/ 
+*{
+	margin:0;
+	padding:0;
+	box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-o-box-sizing:border-box;
+	-ms-box-sizing:border-box;
+	vertical-align:middle;
+}
+
+
 .base-topo{
       background-color:darkslategray;
       float: left;
       width: 100%;
       height: 10%;
-
+      padding: 2%;
 }
 
 .container{
@@ -18,36 +42,43 @@
       position: absolute;
       z-index: 5;
       background-color:royalblue;
-      width: 80%;
+      width: 85%;
       height: 5%;
-      margin-top: 120px;
-      margin-left: 2%;
+      margin-top: 80px;
+      margin-left: 0%;
       left: 15%;
 }
 
 .menu{
       background-color:darkslategray;
-      color: white;
+      color:greenyellow;
       width: 15%;
-      height: 80%;
+      height: 100%;
       padding-top: 10%;
+      padding-left: 2%;
       text-transform:uppercase;
       position: absolute;
-
 }
 
 li{
       list-style: none;
       line-height: 30px;
-      text-align: right;
+      text-align:left;
+      color: white;
 
 }
+
+.menu li a{
+	padding-left: 0px;
+	color:#ddd;
+
+}
+
 
 .menu li a:hover{
-      background-color:blanchedalmond;
-      font-size: 20px;
+      background-color:royalblue;
+      font-size: 22px;
 }
-
 
 
 a:link{
@@ -83,6 +114,7 @@ label, input{
       margin-top: 15%;
       margin-left: 16%;
       background-color:gainsboro;
+      text-align: center;
   
 }
 
@@ -148,13 +180,17 @@ legend{
       font-size: 22px;
       font-weight: bolder;
       color:gainsboro;
+      padding-left: 200px;
       text-align: center;
 }
 
-.tema{
+.titulo-pagina{
       font-weight: bolder;
+      font-size: 25px;
       color:whitesmoke;
+      width: 100%;
       text-align: center;
+      margin-left: 0px; 
 }
 
 .titulo{
@@ -166,7 +202,7 @@ legend{
 	text-transform:uppercase;
 }
 
-.titulo .cor{
+.tema .cor{
 	color:floralwhite;
 	position:relative;
 	top:-3px;
@@ -178,8 +214,11 @@ legend{
 
 .rodape{
       position: absolute;
-      margin-top: 57%;
+      margin-top: 62%;
       width: 100%;
+      height: 22px;
+      padding-left: 500px;
+      color:goldenrod;
       background-color:darkslategray;
 }
 
@@ -192,3 +231,111 @@ legend{
 	font-size: 10px;
 	text-align: center;
 }
+
+.btn-inc{
+      width: 120px;
+      height: 40px;
+      background-color: blue;
+      color: white;
+      border-radius: 10px;
+      border-color:royalblue;
+      border-style: solid;
+      padding-top: 8px;
+      text-align: center;
+      text-transform: uppercase;
+}
+
+.btn-inc a{
+      color: white;
+}
+
+.btn-inc:hover{
+      width: 130px;
+      height: 45px;
+      background-color:royalblue;
+      border-color:blue;
+      font-size: 25px;
+}
+
+.btn-excluir{
+      width: 80px;
+      height: 40px;
+      background-color:#DBE06C;
+      color:crimson;
+      border-radius: 5px;
+      border-style: solid;
+      padding-top: 2px;
+      text-align: center;
+      text-transform: uppercase;
+}
+
+.btn-excluir a{
+      color: red;
+}
+
+.btn-excluir:hover{
+      width: 100px;
+      height: 50px;
+      background-color:greenyellow;
+      border-color: yellow;
+      color:white;
+      font-size: 20px;
+}
+
+.btn-editar{
+      width: 80px;
+      height: 40px;
+      background-color:darkcyan;
+      color:black;
+      border-radius: 3px;
+      border-style: solid;
+      padding-top: 2px;
+      text-align: center;
+      text-transform: uppercase;
+}
+
+.btn-editar a{
+      color:yellow;
+}
+
+.btn-editar:hover{
+      width: 85px;
+      height: 55px;
+      background-color:darkblue;
+      border-color:darkgreen;
+      color:white;
+      font-size: 20px;
+}
+
+.tabela {
+      --bs-table-bg: transparent;
+      --bs-table-accent-bg: transparent;
+      --bs-table-striped-color: #212529;
+      --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
+      --bs-table-active-color: #212529;
+      --bs-table-active-bg: rgba(0, 0, 0, 0.1);
+      --bs-table-hover-color: #212529;
+      --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+      width: 100%;
+      margin-bottom: 1rem;
+      color:indianred;
+      vertical-align: top;
+      border-color: #dee2e6;
+    }
+    .tabela > :not(caption) > * > * {
+      padding: 0.5rem 0.5rem;
+      background-color: var(--bs-table-bg);
+      border-bottom-width: 1px;
+      box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+    }
+    .tabela > tbody {
+      vertical-align: inherit;
+      ;
+    }
+    .tabela > thead {
+      vertical-align: bottom;
+    }
+    .tabela > :not(:last-child) > :last-child > * {
+      border-bottom-color: currentColor;
+    }
+    

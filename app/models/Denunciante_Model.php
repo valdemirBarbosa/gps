@@ -46,13 +46,11 @@ class Denunciante_Model  extends Model{
     public function Editar($id_denunciante, $nome_denunciante, $observacao){
         $sql = "UPDATE denunciante SET id_denunciante =:id_denunciante, nome_denunciante = :nome_denunciante, observacao =:observacao WHERE id_denunciante =:id_denunciante";
     
-        if($this->ExisteDenunciante($nome_denunciante) == true){
             $sql = $this->db->prepare($sql);
             $sql->bindValue(":id_denunciante", $id_denunciante);
             $sql->bindValue(":nome_denunciante", $nome_denunciante);
             $sql->bindValue(":observacao", $observacao);
             $sql->execute();
-    }
 }
 
     public function Deletar($id_denunciante){
