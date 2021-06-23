@@ -30,13 +30,13 @@
 				<td><?php echo $denunciado->unidade  ?></td>	
 				<td><?php echo $denunciado->observacao  ?></td>	
 				<td align="center">
-					<div class="btn-editar"
-					<a href="<?php echo URL_BASE ."denunciado/Editar/".$denunciado->id_denunciado ?>" class="btn">Editar</a>
+					<div class="btn-editar">
+					<a href="<?php echo URL_BASE ."denunciado/Editar/".$denunciado->id_denunciado ?>" >Editar</a>
 			  	</div>
 				</td>
 				<td align="center">
 					<div class="btn-excluir">
-					<a href="<?php echo URL_BASE ."denunciado/Excluir/".$denunciado->id_denunciado ?>" class="btn excluir">excluir</a>
+					<a href="<?php echo URL_BASE ."denunciado/Excluir/".$denunciado->id_denunciado ?>" >excluir</a>
 			  	</dvi>	
 				</td>
 			 </tr>	

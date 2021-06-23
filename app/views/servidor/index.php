@@ -34,12 +34,12 @@
 				<td><?php echo $servidor->observacao  ?></td>	
 				<td align="center">
 					<div class="btn-editar">
-						<a href="<?php echo URL_BASE ."servidor/Editar/".$servidor->id_servidor ?>" class="btn">Editar</a>
+						<a href="<?php echo URL_BASE ."servidor/Editar/".$servidor->id_servidor ?>" >Editar</a>
 					</div>
 				</td>
 				<td align="center">
 					<div class="btn-excluir">
-						<a href="<?php echo URL_BASE ."servidor/Excluir/".$servidor->id_servidor ?>" class="btn excluir">excluir</a>
+						<a href="<?php echo URL_BASE ."servidor/Excluir/".$servidor->id_servidor ?>" >excluir</a>
 					</div>
 				</td>
 			 </tr>	

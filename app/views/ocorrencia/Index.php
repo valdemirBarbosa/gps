@@ -1,5 +1,5 @@
 <div class="base-home">
-	<h1 class="titulo">Lista de ocorrencias/andamentos</h1>
+	<h1 class="titulo-pagina">Lista de ocorrências/andamentos</h1>
 </div>
 
 <div class="base-lista">
@@ -33,12 +33,12 @@
 			
 				<td>
 					<div class="btn-editar"> 
-						<a href="<?php echo URL_BASE ."Ocorrencia/Edit/".$oco->id ?>" class="btn">Editar</a>
+						<a href="<?php echo URL_BASE ."Ocorrencia/Edit/".$oco->id ?>" ">Editar</a>
 	  				</div>
 				</td>
 				<td>
 					<div class="btn-excluir"> 
-						<a href="<?php echo URL_BASE ."Ocorrencia/Excluir/".$oco->id ?>" class="btn">Excluir</a>
+						<a href="<?php echo URL_BASE ."Ocorrencia/Excluir/".$oco->id ?>" >Excluir</a>
 					  </div>
 				</td>
 			</tr> 

@@ -1,5 +1,5 @@
 <div class="base-home">
-		<h1 class="titulo"><span class="cor">Editar</span> Processo Administrativo Disciplinar - PAD </h1>
+		<h1 class="titulo-pagina"><span class="cor">Editar</span> Processo Administrativo Disciplinar - PAD </h1>
 		<div class="base-formulario">	
 
 		<span class="qtde">Há <b><?php  echo count($pad)?></b> processo preliminares e sindicâncias</span>

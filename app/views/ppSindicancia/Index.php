@@ -63,12 +63,12 @@
 				<td><?php echo $ps->anexo ?> </td>
 				<td>
 					<div class="btn-editar">
-						<a href="<?php echo URL_BASE ."PpSindicancia/Edit/".$ps->id ?>" class="btn">Editar</a>
+						<a href="<?php echo URL_BASE ."PpSindicancia/Edit/".$ps->id ?>" >Editar</a>
 	  				</div>			
 				</td>
 				<td>
 					<div class="btn-excluir">	 
-						<a href="<?php echo URL_BASE ."PpSindicancia/Excluir/".$ps->id ?>" class="btn">Excluir</a>
+						<a href="<?php echo URL_BASE ."PpSindicancia/Excluir/".$ps->id ?>" >Excluir</a>
 					</div>	
 				</td>
 			</tr> 

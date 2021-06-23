@@ -1,5 +1,5 @@
 <div class="base-home">
-	<h1 class="titulo-pagina">Lista de denuncia</h1>
+	<h1 class="titulo-pagina">Lista de denúncias</h1>
 </div>
 	
 <div class="base-lista">
@@ -35,12 +35,12 @@
 		   <td><?php echo $den->observacao ?> </td>
 		   <td>
 			<div class="btn-editar"> 
-				<a href="<?php echo URL_BASE ."denuncia/Edit/".$den->id_denuncia ?>" class="btn">Editar</a>
+				<a href="<?php echo URL_BASE ."denuncia/Edit/".$den->id_denuncia ?>" >Editar</a>
 	  	      </div>	
                </td>
 		   <td>
 			<div class="btn-excluir"> 
-				<a href="<?php echo URL_BASE ."denuncia/Excluir/".$den->id_denuncia ?>" class="btn">Excluir</a>
+				<a href="<?php echo URL_BASE ."denuncia/Excluir/".$den->id_denuncia ?>" >Excluir</a>
 				</div>
 			</td>
 		   </tr> 

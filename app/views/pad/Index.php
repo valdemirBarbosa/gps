@@ -1,5 +1,5 @@
 <div class="base-home">
-	<h1 class="titulo"><span class="cor">Lista de</span> PAD</h1>
+	<h1 class="titulo-pagina">Lista de PAD</h1>
 </div>
 
 <div class="base-lista">
@@ -8,7 +8,7 @@
 
 	<div class="tabela">	
 		<table width="100%" border="1" cellspacing="0" cellpadding="0">
-		  <thead>
+		  <thead class="thead">
 				<th width="10%">Id_pad</th>
 				<th width="10%">Id_denuncia</th>
 				<th width="10%">id_pp_sindicancia</th>
@@ -33,13 +33,13 @@
 			
 				<td>
 				<div class="btn-editar"> 
-					<a href="<?php echo URL_BASE ."Pad/Edit/".$pd->id_pad ?>" class="btn">Editar</a>
+					<a href="<?php echo URL_BASE ."Pad/Edit/".$pd->id_pad ?>" >Editar</a>
 	  			</div>
 				</td>
 			
 				<td> 
 				<div class="btn-excluir">
-					<a href="<?php echo URL_BASE ."Pad/Excluir/".$pd->id_pad ?>" class="btn">Excluir</a>
+					<a href="<?php echo URL_BASE ."Pad/Excluir/".$pd->id_pad ?>" >Excluir</a>
 	  			</div>
 
 				</td>

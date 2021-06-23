@@ -22,9 +22,11 @@
 				<td><?php echo $dnc->nome_denunciante  ?></td>
 				<td><?php echo $dnc->observacao  ?></td>
 
-				<td align="center"><div class="btn-editar">
-				<a href="<?php echo URL_BASE ."denunciante/Editar/".$dnc->id_denunciante ?>" >Editar</a>
-			  </div></td>
+				<td align="center">
+					<div class="btn-editar">
+						<a href="<?php echo URL_BASE ."denunciante/Editar/".$dnc->id_denunciante ?>" >Editar</a>
+					</div>
+				</td>
 				<td align="center"><div class="btn-excluir">
 					<a href="<?php echo URL_BASE."denunciante/Excluir/".$dnc->id_denunciante ?>" >Excluir</a>
 					</div></td>

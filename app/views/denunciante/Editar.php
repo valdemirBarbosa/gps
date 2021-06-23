@@ -1,17 +1,21 @@
 <div class="base-home">
-	<h1 class="tema"><span class="cor">Alterar</span> cadastro</h1>
-</div>	
-	<form action="<?php echo URL_BASE ."denunciante/Salvar" ?>" method="POST">
-		<label>id</label>
-			<input name="txt_id" value="<?php echo $denunciante->id_denunciante ?>" readonly>
-		<label>nome</label>
+	<h1 class="titulo-pagina">Alterar cadastro de denunciante</h1>
+</div>
 
+  <form action="<?php echo URL_BASE ."denunciante/Salvar" ?>" method="POST">
+	<fieldset>
+	   <legend><h4>denunciante</h4></legend>
+	<div class="centraliza">
+	   <label>código</label>
+		<input id="txt_id" name="txt_id" value="<?php echo $denunciante->id_denunciante ?>" readonly>
+
+		<label>nome</label>
 			<input name="txt_nome" value="<?php echo $denunciante->nome_denunciante ?>" type="text" autofocus>
-		
-		<div class="col">
+		<div class="obs">	
 			<label>observação</label>
 			<textarea  name="txt_observacao" rows="5" cols="100" value="<?php echo $denunciante->observacao ?>">
 			</textarea>
+		</div>
 		</div>
 		
 		<input type="hidden" name="acao" value="Editar">
