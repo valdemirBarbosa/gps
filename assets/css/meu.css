@@ -19,6 +19,7 @@
 
 textarea{
       padding: 10px;
+      
 }
 
 .container{
@@ -122,6 +123,10 @@ input{
 
 input[type="text"]{
       width: 500px;
+}
+
+input[type="date"]{
+      width: 150px;
 }
 
 #cpf{
@@ -350,6 +355,7 @@ span{
 
 .txt-obs{
 	display:block;
+      float: left;
 	padding:10px;
 	border-radius:09px;
 	-webkit-border-radius:9px;
@@ -364,4 +370,20 @@ span{
 .img{
       margin-left: 150px;
       margin-top: 50px;
+}
+
+.denuncia{
+      margin-left: 192px;
+}
+
+
+.observacao{
+      margin-left: 188px;
+}
+
+select{
+      height: 30px;
+      width: 200px;
+      margin-top: 5px;
+      background-color:wheat;
 }

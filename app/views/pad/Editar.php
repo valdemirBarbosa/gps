@@ -1,36 +1,41 @@
 <div class="base-home">
-		<h1 class="titulo-pagina"><span class="cor">Editar</span> Processo Administrativo Disciplinar - PAD </h1>
-		<div class="base-formulario">	
+	<h1 class="titulo-pagina">Alterar dados do processo</h1>
+</div>
 
-		<span class="qtde">Há <b><?php  echo count($pad)?></b> processo preliminares e sindicâncias</span>
-
-		<form action="<?php echo URL_BASE ."Pad/Salvar" ?>" method="POST">
-
+<form action="<?php echo URL_BASE ."Pad/Salvar" ?>" method="POST">
+	<legend><h4>ids</h4></legend>
 		<?php foreach($pad as $pd){ ?>
-		<fieldset><legend><h4>Códigos</h4></legend>	
+		<fieldset>
+			<legend><h4>Códigos</h4></legend>	
 				<label>Id do PAD</label>
-					<input name="txt_id_pad" enable="false" value="<?php echo $pd->id_pad ?>" >
+					<input id="txt_id" readonly name="txt_id_pad" enable="false" value="<?php echo $pd->id_pad ?>" >
 
 				<label>Id da denuncia</label>
-					<input name="txt_id_denuncia"  enable="false" value="<?php echo $pd->id_denuncia ?>" >
+					<input id="txt_id" readonly name="txt_id_denuncia"  enable="false" value="<?php echo $pd->id_denuncia ?>" >
 
-				<label>id_pp_sindicancia</label>
-				<input type="number" name="txt_id_pp_sindicancia" value="<?php echo $pd->id_pp_sindicancia ?>" >
+				<label>id do processo</label>
+				<input id="txt_id" type="number" readonly name="txt_id_pp_sindicancia" value="<?php echo $pd->id_pp_sindicancia ?>" >
 		</fieldset>		
-
+		<fieldset>
+			<legend>informações do processo</legend>
 				<label>Número do Processo</label>
-					<input name="txt_numero_processo" type="text" placeholder="Insira o número do processo" value="<?php echo $pd->numero_processo ?>">
+					<input name="txt_numero_processo" type="number" placeholder="Insira o número do processo" value="<?php echo $pd->numero_processo ?>">
 				
 				<label>Data de Instauração</label>
 					<input name="txt_data_instauracao" type="date" value="<?php echo $pd->data_instauracao ?>">
 
-				<label>Observação</label>
-					<input name="txt_observacao" type="text" value="<?php echo $pd->observacao ?>">
 
+				<div class="obs">
+					<label id="obs">observação</label> 
+				</div>
+				<textarea rows="4" cols="100" name="txt_observacao" 
+					<?php echo $pd->observacao ?> >
+				</textarea>		
+		</fieldset>
 		<?php } ?>
 
 				<input type="hidden" name="id" value="">
-				<input type="submit" value="Salvar Alterações" class="btn">
+				<input type="submit" value="Salvar" class="btn">
 				<input type="reset" name="Reset" id="button" value="Voltar" class="btn limpar">
 
 		</form>
