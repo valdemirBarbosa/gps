@@ -23,22 +23,22 @@
 	  foreach($ocorrencia as $oco){
 	?>
 			<tr>
-				<td align="center"><?php echo $oco->id ?> </td>
+				<td align="center"><?php echo $oco->id_ocorrencia ?> </td>
 				<td align="center"><?php echo $oco->fase ?> </td>
 				<td align="center"><?php echo $oco->numero_processo ?> </td>
 				<td><?php echo date('d/m/Y', strtotime($oco->data_ocorrencia)) ?> </td> 
-				<td><?php echo $oco->ocorrencia ?> </td>
+				<td><?php echo $oco->ocorrencias ?> </td>
 				<td><?php echo $oco->observacao  ?> </td>
 				<td align="center"><?php echo $oco->anexo ?> </td>
 			
 				<td>
 					<div class="btn-editar"> 
-						<a href="<?php echo URL_BASE ."Ocorrencia/Edit/".$oco->id ?>" ">Editar</a>
+						<a href="<?php echo URL_BASE ."Ocorrencia/Edit/".$oco->id_ocorrencia ?>">Editar</a>
 	  				</div>
 				</td>
 				<td>
 					<div class="btn-excluir"> 
-						<a href="<?php echo URL_BASE ."Ocorrencia/Excluir/".$oco->id ?>" >Excluir</a>
+						<a href="<?php echo URL_BASE ."Ocorrencia/Excluir/".$oco->id_ocorrencia ?>" >Excluir</a>
 					  </div>
 				</td>
 			</tr> 

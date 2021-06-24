@@ -1,50 +1,45 @@
 <div class="base-home">
-		<h1 class="titulo"><span class="cor">Editar</span> Ocorrencia/Andamento - PAD </h1>
-		<div class="base-formulario">	
+	<h1 class="titulo-pagina">Alterar dados da ocorrência</h1>
+</div>
 
-		<span class="qtde">Há <b><?php  echo count($ocorrencia)?></b> processo preliminares e sindicâncias</span>
+<form action="<?php echo URL_BASE ."Ocorrencia/Salvar" ?>" method="POST">
+<fieldset>
+<legend><h4>id - identificadores </h4></legend>
+	<?php foreach($ocorrencia as $ocor){ ?>
+		<label>Id da ocorrência</label>
+			<input id="txt_id" name="txt_id_ocorrencia" value="<?php echo $ocor->id_ocorrencia ?>" >
 
-		<form action="<?php echo URL_BASE ."Ocorrencia/Salvar" ?>" method="POST">
+			<label>Id fase</label>
+			<input id="txt_id"  name="txt_id_fase"  enable="false" value="<?php echo $ocor->id_fase ?>" >
 
-		<?php foreach($ocorrencia as $ocor){ ?>
-				<label>Id do PAD</label>
-					<input name="txt_id_ocorrencia" enable="false" value="<?php echo $ocor->id ?>" >
+			<label>Número do processo anterior</label>
+			<input name="txt_numero_processo" type="number" placeholder="Insira o número do processo" value="<?php echo $ocor->numero_processo ?>">
+</fieldset>
 
-				<label>Id fase</label>
-					<input name="txt_id_fase"  enable="false" value="<?php echo $ocor->id_fase ?>" >
+	<fieldset>
+		<legend>Ocorrências</legend>
+			<label>Data da ocorrencia</label>
+			<input name="txt_data_ocorrencia" type="date" value="<?php echo $ocor->data_ocorrencia ?>">
 
-				<label>Número do Processo</label>
-					<input name="txt_numero_processo" type="text" placeholder="Insira o número do processo" value="<?php echo $ocor->numero_processo ?>">
-				
-				<label>Data da ocorrencia</label>
-					<input name="txt_data_ocorrencia" type="date" value="<?php echo $ocor->data_ocorrencia ?>">
+			<div class="ocorrencia">		
+				<label>Ocorrência</label>
+				<textarea rows="2" cols="55" name="txt_ocorrencia">
+					<?php echo $ocor->ocorrencias ?>
+				</textarea>
+			</div>
 
-				<label>Ocorrencia</label>
-					<input name="txt_ocorrencia" type="text" value="<?php echo $ocor->ocorrencia ?>">
-
-				<label>Observação</label>
-					<input name="txt_observacao" type="text" value="<?php echo $ocor->observacao ?>">
-
-		<?php } ?>
-		</form>
-
-<!-- Formulário para anexar arquivos  !--> 		
-		<form action="<?php echo URL_BASE .'Pad/Anexar' ?>" method="POST" multiple="multiple">
-			<?php $id = $ocor->id; ?>
-		<table>
-		  <tr>
-		    <td>
-		        <input type="hidden" name="id" value="<?php $id = $ocor->id; ?>">
-		 	  <input type="file" name="arquivo"></label>
-		    <td>
-		    <td>
-		  	 <input type="submit" value="Anexar arquivo">
-		    </td>
-		  </tr>
-		</table>
-		</form>	
-				<input type="submit" value="Salvar Alterações" class="btn">
-				<input type="reset" name="Reset" id="button" value="Voltar" class="btn limpar">
-		</div>	
-</div>	
+			<div class="obs">
+				<label id="obs">observação</label> 
+			</div>
+				<textarea rows="4" cols="100" name="txt_observacao">
+						<?php echo $ocor->observacao ?>		
+				</textarea>
+	</fieldset>
 	
+		<?php } ?>
+				
+		<input type="hidden" name="id_ocorrencia" value="<?php echo $ocor->id_ocorrencia ?>">
+		<input type="submit" value="Editar" class="btn">
+		<input type="reset" name="Reset" id="button" value="Limpar" class="btn limpar">
+
+		</form>

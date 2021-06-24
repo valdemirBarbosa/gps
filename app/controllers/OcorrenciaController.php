@@ -27,22 +27,20 @@ class OcorrenciaController extends Controller{
 
 //Função para salvar e direcionar ou para Editar ou para Incluir 
     public function Salvar(){
-          $ocorrencia = new Ocorrencia_Model();
-
+          $ocorre = new Ocorrencia_Model();
           $id_ocorrencia = addslashes($_POST['txt_id_ocorrencia']);
           $id_fase = addslashes($_POST['txt_id_fase']);
           $numero_processo = addslashes($_POST['txt_numero_processo']);
           $data_ocorrencia = addslashes($_POST['txt_data_ocorrencia']);
+          $ocorrencia = addslashes($_POST['txt_ocorrencia']);
           $observacao = addslashes($_POST['txt_observacao']);
+          $anexo = "sem anexo";
           $user = 1;
-          $anexo = "";
-
 //Verifica se será postado o "id" se sim será Edição, senão inclusão
      if($id_ocorrencia){
-          $ocorrencia->Editar($id_ocorrencia, $id_fase, $numero_processo, $data_ocorrencia, $observacao, $anexo, $user);
-        
+       $ocorre->Editar($id_ocorrencia, $id_fase, $numero_processo, $data_ocorrencia, $ocorrencia, $observacao, $anexo, $user);
      }else{
-          $ocorrencia->Incluir($id_ocorrencia, $id_fase, $numero_processo, $data_ocorrencia, $observacao, $anexo, $user);
+          $ocorre->Incluir($id_fase, $numero_processo, $data_ocorrencia, $observacao, $anexo, $user);
 
           echo "<script> Document.alert('Denúncia  já existe, não pode mais cadastrar'); </script> ";
      }
@@ -78,17 +76,17 @@ class OcorrenciaController extends Controller{
           $this->load("template", $dados);
      }
 
-     public function Edit($id){
+     public function Edit($id_ocorrencia){
           $ocorrencia = new Ocorrencia_Model();
-          $dados["ocorrencia"] = $ocorrencia->getId($id);
+          $dados["ocorrencia"] = $ocorrencia->getId($id_ocorrencia);
           $dados["view"] = "ocorrencia/Editar";
           $this->load("template", $dados);
      }
      
-     public function Excluir($id){
+     public function Excluir($id_ocorrencia){
           $ocorrencia = new Ocorrencia_Model();
-          $dados["ocorrencia"] = $ocorrencia->getId($id);
-          $ocorrencia->Deletar($id);
+          $dados["ocorrencia"] = $ocorrencia->getId($id_ocorrencia);
+          $ocorrencia->Deletar($id_ocorrencia);
           header("Location:" . URL_BASE . "ocorrencia");
   }
 }

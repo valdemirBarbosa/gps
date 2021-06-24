@@ -3,13 +3,12 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 18-Jun-2021 às 14:18
+-- Tempo de geração: 24-Jun-2021 às 13:46
 -- Versão do servidor: 10.4.17-MariaDB
 -- versão do PHP: 8.0.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -44,12 +43,11 @@ CREATE TABLE `denuncia` (
 -- Extraindo dados da tabela `denuncia`
 --
 
-INSERT INTO `denuncia` (`id_denuncia`, `denuncia_fato`, `id_denunciante`, `tipo_documento`, `numero_documento`, `data_entrada`, `anexo`, `observacao`, `data_digitacao`, `user`) VALUES
-(1, '', 0, '', '', '0000-00-00', NULL, '', '2021-06-01 20:43:13', NULL),
-(2, '', 0, '', '', '0000-00-00', NULL, '', '2021-06-01 20:43:18', NULL),
-(3, '', 0, '', '', '0000-00-00', NULL, '', '2021-06-03 13:56:29', 1),
-(5, 'ABANDONO DO POSTO DE TRABALHO', 1, 'oficio', '9999', '2021-06-06', NULL, '', '2021-06-13 22:36:23', NULL),
-(6, 'BRIGA GENEREALIZADA ENTRE COLEGAS DE TRABALHO COM QUEBRADEIRA DE PRÓPRIOS ESCOLARES', 3, '1', '9999', '2021-06-15', NULL, '', '2021-06-13 22:36:34', NULL);
+INSERT INTO `denuncia` VALUES(1, '', 0, '', '', '0000-00-00', NULL, '', '2021-06-01 20:43:13', NULL);
+INSERT INTO `denuncia` VALUES(2, '', 0, '', '', '0000-00-00', NULL, '', '2021-06-01 20:43:18', NULL);
+INSERT INTO `denuncia` VALUES(3, '', 0, '', '', '0000-00-00', NULL, '', '2021-06-03 13:56:29', 1);
+INSERT INTO `denuncia` VALUES(5, 'ABANDONO DO POSTO DE TRABALHO', 1, 'oficio', '9999', '2021-06-23', NULL, '					 			 \r\n				', '2021-06-13 22:36:23', NULL);
+INSERT INTO `denuncia` VALUES(6, 'BRIGA GENEREALIZADA ENTRE COLEGAS DE TRABALHO COM QUEBRADEIRA DE PRÓPRIOS ESCOLARES', 3, '1', '9999', '2021-06-15', NULL, '', '2021-06-13 22:36:34', NULL);
 
 -- --------------------------------------------------------
 
@@ -71,8 +69,7 @@ CREATE TABLE `denunciado` (
 -- Extraindo dados da tabela `denunciado`
 --
 
-INSERT INTO `denunciado` (`id_denunciado`, `id_pad`, `id_servidor`, `observacao`, `anexo`, `data_digitacao`, `user`) VALUES
-(1, 2, 1, 'teste', 1, '2021-06-13 12:01:56', 1);
+INSERT INTO `denunciado` VALUES(1, 2, 1, 'teste', 1, '2021-06-13 12:01:56', 1);
 
 -- --------------------------------------------------------
 
@@ -90,11 +87,9 @@ CREATE TABLE `denunciante` (
 -- Extraindo dados da tabela `denunciante`
 --
 
-INSERT INTO `denunciante` (`id_denunciante`, `nome_denunciante`, `observacao`) VALUES
-(1, 'ADM', 'SEM OBS'),
-(3, 'TCE/MT - TRIBUNAL DE CONTAS DO ESTADO DE MATO GROSSO', 'SEM OBSERVAÇÃO'),
-(19, 'CONTROLADORIA MUNICIPAL', 'CONTROLE INTERNO					'),
-(20, 'INDEFINIDO', NULL);
+INSERT INTO `denunciante` VALUES(1, 'ADMINISTRAÇÃO', '			');
+INSERT INTO `denunciante` VALUES(3, 'TCE/MT - TRIBUNAL DE CONTAS DO ESTADO DE MATO GROSSO', 'SEM OBSERVAÇÃO');
+INSERT INTO `denunciante` VALUES(19, 'CONTROLADORIA MUNICIPAL', 'CONTROLE INTERNO					');
 
 -- --------------------------------------------------------
 
@@ -111,10 +106,9 @@ CREATE TABLE `fase` (
 -- Extraindo dados da tabela `fase`
 --
 
-INSERT INTO `fase` (`id_fase`, `fase`) VALUES
-(1, 'Procedimento Preliminar'),
-(2, 'Sindicância'),
-(3, 'PAD');
+INSERT INTO `fase` VALUES(1, 'Procedimento Preliminar');
+INSERT INTO `fase` VALUES(2, 'Sindicância');
+INSERT INTO `fase` VALUES(3, 'PAD');
 
 -- --------------------------------------------------------
 
@@ -123,11 +117,11 @@ INSERT INTO `fase` (`id_fase`, `fase`) VALUES
 --
 
 CREATE TABLE `ocorrencia` (
-  `id` int(11) NOT NULL,
+  `id_ocorrencia` int(11) NOT NULL,
   `id_fase` int(11) NOT NULL,
   `numero_processo` varchar(25) NOT NULL,
   `data_ocorrencia` date NOT NULL DEFAULT current_timestamp(),
-  `ocorrencia` varchar(120) NOT NULL,
+  `ocorrencias` varchar(120) NOT NULL,
   `observacao` varchar(200) DEFAULT NULL,
   `anexo` int(11) DEFAULT NULL,
   `user` int(11) NOT NULL,
@@ -138,11 +132,10 @@ CREATE TABLE `ocorrencia` (
 -- Extraindo dados da tabela `ocorrencia`
 --
 
-INSERT INTO `ocorrencia` (`id`, `id_fase`, `numero_processo`, `data_ocorrencia`, `ocorrencia`, `observacao`, `anexo`, `user`, `data_digitacao`) VALUES
-(1, 1, '2', '2021-02-24', 'AGRESSÃO MÚTUA ENTRE SERVIDORES', 'LIVRE PARA OBSERVAÇÃO', 0, 0, '2021-06-15 07:57:00'),
-(2, 1, '1', '2021-02-12', 'AGRESSÃO MÚTUA ENTRE SERVIDORES', 'LIVRE PARA OBSERVAÇÃO', 0, 0, '2021-06-15 07:57:00'),
-(3, 1, '', '2000-01-15', '33FD1SA', '', 1, 0, '2021-06-17 22:17:23'),
-(4, 1, '', '2021-06-21', 'PAD', '', 1, 0, '2021-06-18 06:51:05');
+INSERT INTO `ocorrencia` VALUES(1, 1, '2', '2021-02-24', 'AGRESSÃO MÚTUA ENTRE SERVIDORES', 'LIVRE PARA OBSERVAÇÃO', 0, 0, '2021-06-15 07:57:00');
+INSERT INTO `ocorrencia` VALUES(2, 1, '1', '2021-02-12', 'AGRESSÃO MÚTUA ENTRE SERVIDORES', 'LIVRE PARA OBSERVAÇÃO', 0, 0, '2021-06-15 07:57:00');
+INSERT INTO `ocorrencia` VALUES(3, 1, '', '2000-01-15', '33FD1SA', '', 1, 0, '2021-06-17 22:17:23');
+INSERT INTO `ocorrencia` VALUES(4, 1, '', '2021-06-21', 'PAD', '', 1, 0, '2021-06-18 06:51:05');
 
 -- --------------------------------------------------------
 
@@ -165,18 +158,12 @@ CREATE TABLE `pad` (
 -- Extraindo dados da tabela `pad`
 --
 
-INSERT INTO `pad` (`id_pad`, `id_denuncia`, `id_pp_sindicancia`, `numero_processo`, `data_instauracao`, `observacao`, `anexo`, `user`) VALUES
-(10, 110, 1, '20520/2021', '2000-05-02', 'incluido anexo 101101', '', 1),
-(11, 1, 1, '205/2020', '2012-12-12', 'alterado', '0', 1),
-(14, 1, 1, '5555/2015', '2000-06-16', 'ver data', '', 1),
-(15, 1, 1, '15151/2021', '2021-01-15', 'teste de sistema', '', 1),
-(16, 1, 1, '20520/2021', '2000-05-02', 'incluido anexo 1011', '', 1),
-(17, 1, 1, '20520/2021', '2000-05-02', 'incluido anexo 1011', '', 1),
-(18, 1, 1, '1011/2021', '2021-06-18', 'incluido anexo', '', 1),
-(19, 1, 1, '20520/2021', '2000-05-02', 'incluido anexo 1011', '', 1),
-(20, 1, 1, '20520/2021', '2000-05-02', 'incluido anexo 1711', '', 1),
-(21, 1, 1, '', '2000-05-02', 'incluido anexo', '', 1),
-(22, 1, 1, '20520/2021', '2000-05-02', '', '', 1);
+INSERT INTO `pad` VALUES(11, 1, 1, '', '2012-12-12', 'VERIFICANDO', '', 1);
+INSERT INTO `pad` VALUES(14, 1, 1, '5555/2015', '2000-06-16', 'ver data', '', 1);
+INSERT INTO `pad` VALUES(15, 1, 1, '15151/2021', '2021-01-15', 'teste de sistema', '', 1);
+INSERT INTO `pad` VALUES(16, 1, 1, '20520/2021', '2000-05-02', 'incluido anexo 1011', '', 1);
+INSERT INTO `pad` VALUES(17, 1, 1, '', '2000-05-02', 'TESTE				', '', 1);
+INSERT INTO `pad` VALUES(18, 1, 1, '1011/2021', '2021-06-18', '', '', 1);
 
 -- --------------------------------------------------------
 
@@ -224,10 +211,9 @@ CREATE TABLE `pp_sindicancia` (
 -- Extraindo dados da tabela `pp_sindicancia`
 --
 
-INSERT INTO `pp_sindicancia` (`id`, `id_denuncia`, `fase`, `numero_processo`, `data_instauracao`, `observacao`, `anexo`, `user`) VALUES
-(1, 1, 1, 5555, '2021-05-01', 'LIVRE PARA OBSERVAÇÃO', 0, 0),
-(2, 1, 1, 5555, '2021-06-14', 'LIVRE PARA OBSERVAÇÃO', 0, 0),
-(4, 3, 1, 0, '2000-01-06', 'DFDSFASD', 0, 0);
+INSERT INTO `pp_sindicancia` VALUES(1, 1, 2, 5555, '2021-05-01', 'LIVRE PARA OBSERVAÇÃO					', 0, 0);
+INSERT INTO `pp_sindicancia` VALUES(2, 1, 1, 5555, '2021-06-14', 'LIVRE PARA OBSERVAÇÃO', 0, 0);
+INSERT INTO `pp_sindicancia` VALUES(4, 3, 1, 0, '2000-01-06', 'DFDSFASD', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -252,8 +238,7 @@ CREATE TABLE `servidor_func` (
 -- Extraindo dados da tabela `servidor_func`
 --
 
-INSERT INTO `servidor_func` (`id_servidor`, `nome_servidor`, `cpf`, `matricula`, `vinculo`, `secretaria`, `unidade`, `observacao`, `anexo`, `user`) VALUES
-(1, 'IVO ABRAO', '015.214.491', 127, 'CONCURSADO', 'FINANÇAS', 'COORDENADORIA ADMINISTRATIVA', 'incluido via banco', 0, 1);
+INSERT INTO `servidor_func` VALUES(1, 'IVO ABRAO', '015.214.491', 127, 'CONCURSADO', 'FINANÇAS', 'COORDENADORIA ADMINISTRATIVA', '		\r\n			\r\n			', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -272,9 +257,8 @@ CREATE TABLE `usuario` (
 -- Extraindo dados da tabela `usuario`
 --
 
-INSERT INTO `usuario` (`id_usuario`, `email`, `senha`, `data_criacao`) VALUES
-(1, 'val@gmail.com', '123', '2021-02-26 21:55:12'),
-(2, 'leyd@gmail.com', '#15', '2021-03-14 02:55:17');
+INSERT INTO `usuario` VALUES(1, 'val@gmail.com', '123', '2021-02-26 21:55:12');
+INSERT INTO `usuario` VALUES(2, 'leyd@gmail.com', '#15', '2021-03-14 02:55:17');
 
 --
 -- Índices para tabelas despejadas
@@ -308,7 +292,7 @@ ALTER TABLE `fase`
 -- Índices para tabela `ocorrencia`
 --
 ALTER TABLE `ocorrencia`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`id_ocorrencia`),
   ADD KEY `fk_id_denuncia` (`id_fase`);
 
 --
@@ -377,13 +361,13 @@ ALTER TABLE `fase`
 -- AUTO_INCREMENT de tabela `ocorrencia`
 --
 ALTER TABLE `ocorrencia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_ocorrencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `pad`
 --
 ALTER TABLE `pad`
-  MODIFY `id_pad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_pad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de tabela `portaria`

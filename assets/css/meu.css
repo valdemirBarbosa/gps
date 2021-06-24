@@ -19,6 +19,8 @@
 
 textarea{
       padding: 10px;
+      text-align: left;
+      text-justify: auto;
       
 }
 
@@ -387,3 +389,4 @@ select{
       margin-top: 5px;
       background-color:wheat;
 }
+
