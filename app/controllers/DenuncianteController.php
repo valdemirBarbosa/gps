@@ -11,6 +11,16 @@ class DenuncianteController extends Controller{
 
         $dados["denunciante"] = $denunciantes->lista();
         $dados["view"] = "denunciante/Index";
+        $dados["view"] = "denuncia/Incluir";
+        $this->load("template", $dados);
+   } 
+
+//serve para o select dos formulários de incluir e alterar denúncia
+   public function Denunciante(){
+        $denunciantes = new Denunciante_Model();
+
+        $dados["denunciante"] = $denunciantes->lista();
+        $dados["view"] = "denuncia/Incluir";
         $this->load("template", $dados);
    } 
 

@@ -9,7 +9,7 @@
 				<label>Id da Denuncia</label>
 					<input autofocus name="txt_id_denuncia" required  type="number" >
 
-				<label for="fase">Escolha uma Fase</label>
+				<label for="txt_fase">Escolha uma Fase</label>
 					<select name="txt_fase" id="txt_fase">
 						<option value="1">PROCEDIMENTO PRELIMINAR</option>
 						<option value="2">SINDICÂNCIA</option>

@@ -1,30 +1,23 @@
 <div class="base-home">
-			<h1 class="titulo"><span class="cor">Novo</span> cadastro</h1>
-		<div class="base-formulario">	
-			<form action="<?php echo URL_BASE ."denunciante/Salvar" ?>" method="POST">
-				
-			<div class="col">
-				
-				<label>Id do denunciante</label>
-					<input name="txt_id" disabled type="number">
+	<h1 class="titulo-pagina"><span class="cor">Incluir </span>Ocorrencias/Denunciante</h1>
+</div>
 
-				<label>Nome/Descrição do denunciante</label>
-					<input name="txt_nome" required autofocus  type="text" placeholder="Insira o nome/descrição do denunciante">
-			</div>
+<form action="<?php echo URL_BASE ."denunciante/Salvar" ?>" method="POST">
+	<fieldset>
+		<label>Nome/Descrição do denunciante</label>
+		<input name="txt_nome" required autofocus  type="text" placeholder="Insira o nome/descrição do denunciante">
 
-			<div>
-				<label>Observações</label>
-					<textarea name="txt_observacao" rows="3" placeholder="Insira observações" class="txt-obs">
-					</textarea>
-			</div>
 
-				<div class="col">
-					<input type="hidden" name="acao" value="Cadastrar">
-					<input type="hidden" name="id" value="">
-					<input type="submit" value="Cadastrar" class="btn">
-					<input type="reset" name="Reset" id="button" value="Limpar" class="btn limpar">
-				</div>
-
+		<div class="obs">	
+			<label>observação</label>
+			<textarea  name="txt_observacao" rows="5" cols="100">
+			</textarea>
+		</div>
+			<input type="hidden" name="acao" value="Cadastrar">
+			<input type="hidden" name="id" value="">
+			<input type="submit" value="Cadastrar" class="btn">
+			<input type="reset" name="Reset" id="button" value="Limpar" class="btn limpar">
+		</div>
 			</form>
 		</div>	
 </div>	
