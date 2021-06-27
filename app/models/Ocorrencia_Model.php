@@ -9,7 +9,7 @@ class Ocorrencia_Model extends Model{
     }
 
     public function lista(){
-        $sql = "SELECT * FROM ocorrencia as oco INNER JOIN fase as f WHERE oco.id_fase = f.id_fase "; 
+        $sql = "SELECT * FROM ocorrencia"; 
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
@@ -25,31 +25,38 @@ class Ocorrencia_Model extends Model{
     }
  
 //Inserir dados na tabela de ocorrência
-    public function Incluir($id_ocorrencia, $id_fase, $numero_processo, $data_ocorrencia,  $ocorrencia, $observacao, $anexo){
-        $sql = "INSERT INTO ocorrencia SET id_fase = :numero_processo = :numero_processo, ocorrencias = :ocorrencia, data_ocorrencia = :data_ocorrencia, observacao = :observacao, anexo = :anexo"; 
-        $sql = $this->db->prepare($sql);
-        $sql->bindValue(":id_fase", $id_fase);
-        $sql->bindValue(":numero_processo", $numero_processo);
-        $sql->bindValue(":data_ocorrencia", $data_ocorrencia);
-        $sql->bindValue(":ocorrencia", $ocorrencia);
-        $sql->bindValue(":observacao", $observacao);
-        $sql->bindValue(":anexo", $anexo);
-        $sql->execute();
-    }
+    public function Incluir($id_denuncia, $id_pp_sindicancia, $id_pad, $numero_processo, $data_ocorrencia, $ocorrencias, $observacao, $anexo, $user, $data_digitacao){
+        $sql = "INSERT INTO ocorrencia SET id_denuncia =:id_denuncia, id_pp_sindicancia =:id_pp_sindicancia, id_pad =:id_pad, numero_processo =:numero_processo, data_ocorrencia =:data_ocorrencia, ocorrencias =:ocorrencias, observacao =:observacao, anexo =:anexo, user =:user, data_digitacao =:data_digitacao"; 
 
-//Editar, alterar dados na tabela de ocorrência
-    public function Editar($id_fase, $numero_processo, $data_ocorrencia, $ocorrencia, $observacao, $anexo, $user, $id_ocorrencia, $data_digitacao){
-        $sql = "UPDATE ocorrencia SET id_fase =:id_fase, numero_processo =:numero_processo, data_ocorrencia =:data_ocorrencia, ocorrencias =:ocorrencia, observacao =:observacao, anexo =:anexo, user =:user, data_digitacao =:data WHERE id_ocorrencia =:id_ocorrencia"; 
         $sql = $this->db->prepare($sql);
-        $sql->bindValue(":id_ocorrencia", $id_ocorrencia);
-        $sql->bindValue(":id_fase", $id_fase);
+        $sql->bindValue(":id_denuncia", $id_denuncia);
+        $sql->bindValue(":id_pp_sindicancia", $id_pp_sindicancia);
+        $sql->bindValue(":id_pad", $id_pad);
         $sql->bindValue(":numero_processo", $numero_processo);
         $sql->bindValue(":data_ocorrencia", $data_ocorrencia);
-        $sql->bindValue(":ocorrencias", $ocorrencia);
+        $sql->bindValue(":ocorrencias", $ocorrencias);
         $sql->bindValue(":observacao", $observacao);
         $sql->bindValue(":anexo", $anexo);
         $sql->bindValue(":user", $user);
-        $sql->bindValue(":data", $data_digitacao);
+        $sql->bindValue(":data_digitacao", $data_digitacao);
+        $sql->execute();
+}
+
+//Editar, alterar dados na tabela de ocorrência
+    public function Editar($id_ocorrencia, $id_denuncia, $id_pp_sindicancia, $id_pad, $numero_processo, $data_ocorrencia, $ocorrencias, $observacao, $anexo, $user, $data_digitacao){
+        $sql = "UPDATE ocorrencia SET id_denuncia =:id_denuncia, id_pp_sindicancia =:id_pp_sindicancia, id_pad =:id_pad, numero_processo =:numero_processo, data_ocorrencia =:data_ocorrencia, ocorrencias =:ocorrencias, observacao =:observacao, anexo =:anexo, user =:user, data_digitacao =:data_digitacao WHERE id_ocorrencia =:id_ocorrencia"; 
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":id_ocorrencia", $id_ocorrencia);
+        $sql->bindValue(":id_denuncia", $id_denuncia);
+        $sql->bindValue(":id_pp_sindicancia", $id_pp_sindicancia);
+        $sql->bindValue(":id_pad", $id_pad);
+        $sql->bindValue(":numero_processo", $numero_processo);
+        $sql->bindValue(":data_ocorrencia", $data_ocorrencia);
+        $sql->bindValue(":ocorrencias", $ocorrencias);
+        $sql->bindValue(":observacao", $observacao);
+        $sql->bindValue(":anexo", $anexo);
+        $sql->bindValue(":user", $user);
+        $sql->bindValue(":data_digitacao", $data_digitacao);
         $sql->execute();
     }
 

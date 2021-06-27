@@ -133,8 +133,6 @@ class Denuncia_Model extends Model{
             $sql->bindValue(":observacao", $observacao);
             $sql->bindValue(":id_denuncia", $id_denuncia);
             $sql->execute();
-
-            return $sql;
     }
 
     public function Deletar($id_denuncia){

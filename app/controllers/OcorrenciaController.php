@@ -29,14 +29,19 @@ class OcorrenciaController extends Controller{
     public function Salvar(){
           $ocorre = new Ocorrencia_Model();
      
-          $id_ocorrencia = addslashes($_POST['txt_id_ocorrencia']);
-          $id_fase = addslashes($_POST['txt_id_fase']);
+          $id_ocorrencia = isset($_POST['txt_id_ocorrencia']) ? strip_tags(filter_input(INPUT_POST, "txt_id_ocorrencia")) : NULL;
+
+          $id_denuncia = isset($_POST['txt_id_denuncia']) ? strip_tags(filter_input(INPUT_POST, "txt_id_denuncia")) : NULL;;
+
+          $id_pp_sindicancia = isset($_POST['txt_id_pp_sindicancia']) ? strip_tags(filter_input(INPUT_POST, "txt_id_pp_sindicancia")) : NULL;
+
+          $id_pad = isset($_POST['txt_id_pad']) ? strip_tags(filter_input(INPUT_POST, "txt_id_pp_sindicancia")) : NULL;
+
           $numero_processo = addslashes($_POST['txt_numero_processo']);
+
           $data_ocorrencia = addslashes($_POST['txt_data_ocorrencia']);
 
-          $observacao = isset($_POST['txt_observacao']) ? strip_tags(filter_input(INPUT_POST, "txt_observacao")) : NULL;
-
-          $ocorrencia = isset($_POST['txt_ocorrencia']) ? strip_tags(filter_input(INPUT_POST, "txt_ocorrencia")) : NULL;
+          $ocorrencias = isset($_POST['txt_ocorrencia']) ? strip_tags(filter_input(INPUT_POST, "txt_ocorrencia")) : NULL;
           
           $observacao = isset($_POST['txt_observacao']) ? strip_tags(filter_input(INPUT_POST, "txt_observacao")) : NULL;
           
@@ -46,15 +51,9 @@ class OcorrenciaController extends Controller{
 
 //Verifica se será postado o "id" se sim será Edição, senão inclusão
      if($id_ocorrencia){
-       $ocorre->Editar($id_ocorrencia, $id_fase, $numero_processo, $data_ocorrencia, $ocorrencia, $observacao, $anexo, $user, $data_digitacao);
-
-       echo "<pre>";
-               print_r($sql);
-          echo "</pre>";
-          exit;
-
+          $ocorre->Editar($id_ocorrencia, $id_denuncia, $id_pp_sindicancia, $id_pad, $numero_processo, $data_ocorrencia, $ocorrencias, $observacao, $anexo, $user, $data_digitacao);
      }else{
-          $ocorre->Incluir($id_fase, $numero_processo, $data_ocorrencia, $observacao, $anexo, $user, $data_digitacao);
+          $ocorre->Incluir($id_denuncia, $id_pp_sindicancia, $id_pad, $numero_processo, $data_ocorrencia, $ocorrencias, $observacao, $anexo, $user, $data_digitacao);
 
           echo "<script> Document.alert('Denúncia  já existe, não pode mais cadastrar'); </script> ";
      }
