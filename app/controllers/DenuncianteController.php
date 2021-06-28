@@ -18,7 +18,6 @@ class DenuncianteController extends Controller{
 //serve para o select dos formulários de incluir e alterar denúncia
    public function Denunciante(){
         $denunciantes = new Denunciante_Model();
-
         $dados["denunciante"] = $denunciantes->lista();
         $dados["view"] = "denuncia/Incluir";
         $this->load("template", $dados);

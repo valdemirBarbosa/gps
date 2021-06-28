@@ -8,7 +8,6 @@ class DenunciadoController extends Controller{
     
    public function index(){
         $denunciados = new Denunciado_Model();
-
         $dados["denunciados"] = $denunciados->lista();
         $dados["view"] = "denunciado/Index";
         $this->load("template", $dados);
@@ -32,7 +31,6 @@ class DenunciadoController extends Controller{
      $denunciados->Deletar($id_denunciado);
      $this->load("template", $dados);
      header("Location:" . URL_BASE . "cliente");
-
 }
  
    public function Salvar(){
@@ -66,12 +64,5 @@ class DenunciadoController extends Controller{
           header("Location:" . URL_BASE . "denunciado");
       
    }
-   
-   public function ver(){
-       $dados["nome"] = "Manoel Jailton";
-       $dados["email"] = "mjailton@gmail.com";
-       $this->load("v_cliente", $dados);
-   }
-   
   
 }

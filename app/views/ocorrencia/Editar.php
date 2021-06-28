@@ -11,7 +11,6 @@
 
 			<label>Id da denuncia</label>
 			<input id="txt_id" name="txt_id_denuncia" value="<?php echo $ocor->id_denuncia ?>" >
-
 			<label>Id da pp/sindicancia</label>
 			<input id="txt_id" name="txt_id_pp_sindicancia" value="<?php echo $ocor->id_pp_sindicancia ?>" >
 

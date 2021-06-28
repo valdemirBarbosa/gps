@@ -11,6 +11,6 @@
 		<li><a href="<?php echo URL_BASE . "ppSindicancia/" ?>">Sindicância</a></li>
 		<li><a href="<?php echo URL_BASE . "pad/" ?>" >PAD</a></li>
 		<li><a href="<?php echo URL_BASE . "ocorrencia/" ?>" >Ocorrencia</a></li>
-		<li><a href="<?php echo URL_BASE . "denuncia/pendencias" ?>" ><h6>Pendencias</h6></a></li>
+		<li><a href="<?php echo URL_BASE . "portaria" ?>" ><h6>Portarias</h6></a></li>
 	</ul>
 </nav>	

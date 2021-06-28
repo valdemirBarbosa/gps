@@ -14,6 +14,12 @@ class Ocorrencia_Model extends Model{
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
+    public function Iddenuncia(){
+        $sql = "SELECT * FROM denuncia"; 
+        $qry = $this->db->query($sql);
+        return $qry->fetchAll(\PDO::FETCH_OBJ);
+    }
+    
 // Pegar os dados da tabela ocorrencia e disponibilizar para os Métodos Editar e Excluir
     public function getId($id_ocorrencia){
         $qry = array();

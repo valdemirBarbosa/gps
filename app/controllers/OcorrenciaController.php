@@ -1,10 +1,4 @@
 <?php
-/*
-echo "<pre>";
-echo "data entrada ".$data_entrada;
-echo "</pre>";
-exit;
-*/
 namespace app\controllers;
 
 use app\core\Controller;
@@ -19,9 +13,16 @@ class OcorrenciaController extends Controller{
     
    public function index(){
         $ocorrencia = new Ocorrencia_Model();
-
         $dados["ocorrencia"] = $ocorrencia->lista();
         $dados["view"] = "ocorrencia/Index";
+        $this->load("template", $dados);
+    }
+
+//Consulta a tabela de denúncia para informar o id da denuncia pro option no Editar denúncia
+    public function IdDenuncia(){
+        $denuncia = new Ocorrencia_Model();
+        $dados["denuncia"] = $denuncia->Iddenuncia();
+        $dados["view"] = "ocorrencia/Editar";
         $this->load("template", $dados);
     }
 
@@ -49,16 +50,35 @@ class OcorrenciaController extends Controller{
           $user = 1;
           $data_digitacao = NULL;
 
-//Verifica se será postado o "id" se sim será Edição, senão inclusão
-     if($id_ocorrencia){
-          $ocorre->Editar($id_ocorrencia, $id_denuncia, $id_pp_sindicancia, $id_pad, $numero_processo, $data_ocorrencia, $ocorrencias, $observacao, $anexo, $user, $data_digitacao);
-     }else{
-          $ocorre->Incluir($id_denuncia, $id_pp_sindicancia, $id_pad, $numero_processo, $data_ocorrencia, $ocorrencias, $observacao, $anexo, $user, $data_digitacao);
+          //Verifica se tem algum dos Id´s informado
+          if($this->VerificaId($id_denuncia, $id_pp_sindicancia, $id_pad) == false){
 
-          echo "<script> Document.alert('Denúncia  já existe, não pode mais cadastrar'); </script> ";
+               //Verifica se será postado o "id" se sim será Edição, senão inclusão
+               if($id_ocorrencia){
+                    $ocorre->Editar($id_ocorrencia, $id_denuncia, $id_pp_sindicancia, $id_pad, $numero_processo, $data_ocorrencia, $ocorrencias, $observacao, $anexo, $user, $data_digitacao);
+               }else{
+                    $ocorre->Incluir($id_denuncia, $id_pp_sindicancia, $id_pad, $numero_processo, $data_ocorrencia, $ocorrencias, $observacao, $anexo, $user, $data_digitacao);
+
+                    echo "<script> Document.alert('Denúncia  já existe, não pode mais cadastrar'); </script> ";
+               }
+               header("Location:" . URL_BASE . "ocorrencia/lista");
      }
-          header("Location:" . URL_BASE . "ocorrencia/lista");
-   }
+}
+
+//Verifica se foi passado o id de alguma das fases - id_denuncia, id_pp_sindicancia ou id_pad
+     public function VerificaId($id_denuncia, $id_pp_sindicancia, $id_pad){
+          if(($id_denuncia == 0) && ($id_pp_sindicancia == 0) && ($id_pad == 0)){
+               $mensagem = "Informe um Id para continuar.<br/>
+               Id da denúncia, ou Id da sindicância ou Id do PAD";
+               $this->inconsistencias($mensagem);
+          }
+     }
+
+     public function inconsistencias($mensagem){
+          $dados["msg"] = $mensagem;
+          $dados["view"] = "inconsistências";
+          $this->load("template", $dados);
+     }
 
 /*
    public function Anexar(){

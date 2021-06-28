@@ -1,25 +1,16 @@
 <?php
-/*
-echo "<pre>";
-echo "data entrada ".$data_entrada;
-echo "</pre>";
-exit;
-*/
 namespace app\controllers;
-
 use app\core\Controller;
 use app\models\Denuncia_Model;
 use app\models\Denunciado_Model;
 use app\models\Denunciante_Model;
 
 class DenunciaController extends Controller{
-    
    public function index(){
         $denuncias = new Denuncia_Model();
         $denunciados = new Denuncia_Model();
 
         $dados["denuncia"] = $denuncias->lista();
-        //$dados["denunciado"] = $denunciados->DenunciadosTodos();
         $dados["view"] = "denuncia/Index";
         $this->load("template", $dados);
     }
@@ -45,15 +36,7 @@ class DenunciaController extends Controller{
      $this->load("template", $dados);
   }
         
-   public function form(){
-        //View no modo formulário da denuncia
-        $denuncias = new Denuncia_Model();
-        $dados["denuncia"] = $denuncias->lista();
-        $dados["view"] = "denuncia/frmDenuncia";
-        $this->load("template", $dados);
-     } 
-
-     public function Novo(){
+   public function Novo(){
           $dados["view"] = "denuncia/Incluir";
           $this->load("template", $dados);
      }

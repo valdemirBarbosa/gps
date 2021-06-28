@@ -9,9 +9,7 @@ class Denuncia_Model extends Model{
     }
 
     public function lista(){
-        $sql = "SELECT * FROM denuncia as d INNER JOIN denunciante as den ON d.id_denunciante = den.id_denunciante";//.$id_denuncia; 
-        //$sql = $this->db->prepare($sql);
-        //$sql->bindValue(":id", )
+        $sql = "SELECT * FROM denuncia as d INNER JOIN denunciante as den ON d.id_denunciante = den.id_denunciante";
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
