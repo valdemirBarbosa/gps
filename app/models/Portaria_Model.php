@@ -14,10 +14,12 @@ class Portaria_Model extends Model{
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
-    public function Incluir($id_fase,$numero_processo,$tipo,$numero,$data_elaboracao,$conteudo,$data_publicacao,$veiculo,$prazo,$data_final,$data_realizada,$prazo_atendido,$observacao,$anexo,$user){
+    public function Incluir($id_fase, $numero_processo, $tipo, $numero, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $data_realizada, $prazo_atendido, $observacao, $anexo, $user){
+        $numeroProcesso = $numero_processo;
+        $tabela = "portaria";
 
-        if($this->ExisteId($portaria, $id) == false){
-            $sql = "INSERT INTO denuncia SET denuncia_fato = :denuncia, id_denunciante = :id_denunciante, tipo_documento = :tipo, numero_documento = :numero, data_entrada = :data_entrada, observacao = :observacao"; 
+        if($this->ExisteProcesso($tabela, $numero) == false){
+            $sql = "INSERT INTO denuncia SET denuncia_fato = :denuncia, id_denunciante = :id_denunciante, tipo_documento = :tipo, numero_documento = :numero, data_entrada = :data_entrada, observacao = :observacao, anexo =: anexo"; 
             $sql = $this->db->prepare($sql);
             $sql->bindValue(":id_portaria", $id_portaria);
             $sql->bindValue(":id_fase", $id_fase);
@@ -36,34 +38,40 @@ class Portaria_Model extends Model{
             $sql->bindValue(":anexo", $anexo);
             $sql->bindValue(":user", $user);
             $sql->execute();
+
+            echo "<pre>";
+                print_r($sql);
+            echo "<pre>";
+            exit;
     }
 }
 
-    public function Consulta($id_portaria){
-        $ret = array();
-            $sql = "SELECT * FROM denuncia WHERE id_denuncia = ".$id_portaria;
+    public function Consultar($id_portaria){
+            $sql = "SELECT * FROM portaria WHERE id_portaria = ".$id_portaria;
             $qry = $this->db->query($sql);
             return $qry->fetchAll(\PDO::FETCH_OBJ);
-//          $sql->bindValue(':id', $id_denuncia);
-//          $sql->execute();
+            $sql->bindValue(':id', $id_portaria);
+            $sql->execute();
     }      
 
-    //terminar de corrigir
-       public function GetId($id_portaria){
-        $ret = array();
-        $sql = "SELECT * FROM portaria WHERE id_portaria = :id";
-        $sql = $this->db->prepare($sql);
-        $sql->bindValue(":id", $id_portaria);
+    //Usado para o formulário de editar e função de excluir da lista
+    public function GetId($id_portaria){
+        $sql = "SELECT * FROM portaria WHERE id_portaria = ".$id_portaria;
+        $qry = $this->db->query($sql);
+        return $qry->fetchAll(\PDO::FETCH_OBJ);
+        $sql->bindValue(':id', $id_portaria);
         $sql->execute();
-
-        if($sql->rowCount() > 0){
-            $ret = $sql->fetch(\PDO::FETCH_OBJ);
-        }
-        return $ret;
     }
 
-    public function Editar($id_fase,$numero_processo,$tipo,$numero,$data_elaboracao,$conteudo,$data_publicacao,$veiculo,$prazo,$data_final,$data_realizada,$prazo_atendido,$observacao,$anexo,$user){
-        $sql = "INSERT INTO denuncia SET denuncia_fato = :denuncia, id_denunciante = :id_denunciante, tipo_documento = :tipo, numero_documento = :numero, data_entrada = :data_entrada, observacao = :observacao"; 
+    public function InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_fase, $numero_processo, $tipo, $numero, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $data_realizada, $prazo_atendido, $observacao, $anexo, $user){
+
+        $sql = $comando." ".$tabela." SET id_portaria=:id_portaria, id_fase=:id_fase, numero_processo=:numero_processo, tipo=:tipo, numero=:numero, data_elaboracao=:data_elaboracao, conteudo=:conteudo, data_publicacao=:data_publicacao, veiculo=:veiculo, prazo=:prazo, data_final=:data_final, data_realizada=:data_realizada, prazo_atendido=:prazo_atendido, observacao=:observacao, anexo=:anexo, user=:user".$filtro;
+/*
+        echo "<pre>";
+            print_r($sql);
+        echo "<pre>";
+        exit;
+*/
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":id_portaria", $id_portaria);
         $sql->bindValue(":id_fase", $id_fase);
@@ -87,14 +95,14 @@ class Portaria_Model extends Model{
     public function Deletar($id_portaria){
         $sql = "DELETE FROM portaria WHERE id_portaria = :id";
             $sql = $this->db->prepare($sql);
-            $sql->bindValue(":id", $id_denuncia);
+            $sql->bindValue(":id", $id_portaria);
             $sql->execute();
     }
 
-        private function ExisteId($id, $tabela){
-        $sql = "SELECT * FROM ". $tabela ." WHERE id_pad = :id";
+    private function ExisteProcesso($tabela, $numero){
+        $sql = "SELECT * FROM ". $tabela ." WHERE numero = :num";
         $sql = $this->db->prepare($sql);
-        $sql->bindValue(':id', $id);
+        $sql->bindValue(':num', $numero);
         $sql->execute();
         
         if($sql->rowCount() > 0){

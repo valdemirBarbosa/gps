@@ -31,11 +31,11 @@
 				<td><?php echo $port->id_fase ?></td>
 				<td><?php echo $port->numero_processo ?></td>
 				<td><?php echo $port->tipo ?></td>
-				<td><?php echo $port->data_elaboracao  ?></td>
-				<td><?php echo $port->data_publicacao  ?></td>
+				<td><input class="data" type="date" readonly value="<?php  echo $port->data_elaboracao  ?>" ></td>
+				<td><input class="data" type="date" readonly value="<?php echo $port->data_publicacao  ?>"> </td>
 				<td><?php echo $port->veiculo ?></td>
 				<td><?php echo $port->prazo ?></td>
-				<td><?php echo $port->data_realizada ?></td>
+				<td><input class="data" type="date" readonly value="<?php echo $port->data_realizada ?>"> </td>
 				<td><?php echo $port->observacao ?></td>
 				<td><?php echo $port->anexo ?></td>
 			<td>

@@ -399,3 +399,8 @@ select{
       font-size: 30px;
       color: red;
 }
+
+.data{
+      background-color:silver;
+      width: 50%;
+} 

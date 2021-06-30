@@ -1,32 +1,78 @@
 <div class="base-home">
-		<h1 class="titulo"><span class="cor">Novo</span> Processo Administrativo Disciplinar - PAD </h1>
-		<div class="base-formulario">	
-			<form action="<?php echo URL_BASE ."Pad/Salvar" ?>" method="POST">
-			
-				<label>Id do PAD</label>
-					<input name="txt_id_pad" enable="false" readonly  >
+	<h1 class="titulo-pagina"><span class="cor">Incluir </span>nova Portaria</h1>
+</div>
+<form action="<?php echo URL_BASE ."portaria/Salvar" ?>" method="POST">
+		<fieldset>
+			<legend><h4>Códigos</h4></legend>	
+				<label>Id Portaria</label>
+					<input id="txt_id" readonly name="txt_id_pad" enable="false" >
 
-					<label>Id da denuncia</label>
-					<input name="txt_id_denuncia" enable="false" readonly >
-
-					<label>Id do pp_sindicancia</label>
-					<input name="txt_id_pp_sindicancia"  enable="false" readonly >
+				<label>Id fase</label>
+					<input id="txt_id_fase" autofocus name="txt_id_fase">
 
 				<label>Número do Processo</label>
-					<input autofocus name="txt_numero_processo" type="text" placeholder="Insira o número do processo">
+				<input id="txt_numero_processo" type="number"  name="txt_numero_processo" >
+		</fieldset>		
+
+		<fieldset>
+			<legend>Informações da Portaria</legend>
+				<label>Tipo</label>
+					<input name="txt_tipo" type="text" placeholder="tipo da portaria">
+
+				<label>Número da Portaria</label>
+					<input name="txt_numero" type="number" placeholder="Insira o  Número da Portaria">
 				
-				<label>Data de Instauração</label>
-					<input name="txt_data_instauracao" type="date" >
+				<label>Data de elaboracao</label>
+					<input name="txt_data_elaboracao" type="date">
 
-				<label>Observação</label>
-					<input name="txt_observacao" type="text" placeholder="Livre para observações">
+				<label>Conteúdo</label>
+					<input name="txt_conteudo" type="text" placeholder="conteúdo da portaria">
 
-					<label>Anexo</label>
-					<input name="txt_anexo" type="file" >
+				
+				<label>Data de publicação</label>
+					<input name="txt_data_publicacao" type="date">
 
-				<input type="submit" value="Cadastrar" class="btn">
-				<input type="reset" name="Reset" id="button" value="Limpar" class="btn limpar">
-			</form>
+				<label>Veículo</label>
+					<input name="txt_veículo" type="text" placeholder="veículo da publicação">
+				
+				<label>Prazo</label>
+					<input name="txt_prazo" type="number" placeholder="Prazo para cumprimento em dias">
+				
+				<label>Data final</label>
+					<input name="txt_data_final" type="date">
+
+				<label>Data realizada</label>
+					<input name="txt_data_realizada" type="date">
+
+				<label>Prazo atendido</label>
+					<input name="txt_prazo_atendido" type="text" placeholder="Prazo para cumprimento em dias">
+				
+				<div class="obs">
+					<label id="obs">observação</label> 
+				</div>
+				<textarea rows="4" cols="100" name="txt_observacao">
+				</textarea>		
+		</fieldset>
+				<input type="submit" value="Salvar" class="btn">
+				<input type="reset" name="Reset" id="button" value="Voltar" class="btn limpar">
+
+		</form>
+
+<!-- Formulário para anexar arquivos   		
+		<form action="<?php echo URL_BASE .'Pad/Anexar' ?>" method="POST" multiple="multiple">
+			<?php //$id_pad = $port->id_pad; ?>
+		<table>
+		  <tr>
+		    <td>
+		        <input type="hidden" name="id_pad" value="<?php //id_pad = $port->id_pad; ?>">
+		 	  <input type="file" name="arquivo"></label>
+		    <td>
+		    <td>
+		  	 <input type="submit" value="Anexar arquivo">
+		    </td>
+		  </tr>
+		</table>
+		</form>	!-->
 		</div>	
 </div>	
 	

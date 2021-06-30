@@ -11,7 +11,6 @@ class DenuncianteController extends Controller{
 
         $dados["denunciante"] = $denunciantes->lista();
         $dados["view"] = "denunciante/Index";
-        $dados["view"] = "denuncia/Incluir";
         $this->load("template", $dados);
    } 
 

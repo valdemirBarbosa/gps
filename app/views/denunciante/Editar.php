@@ -22,6 +22,7 @@
 		<input type="hidden" name="id_denunciante" value="<?php echo $denunciante->id_denunciante ?>">
 		<input type="submit" value="Editar" class="btn">
 		<input type="reset" name="Reset" id="button" value="Limpar" class="btn limpar">
+		<input name="Voltar" onclick="history.back()" type="submit" value="Voltar" class="btn limpar"/>
 	</form>
 </div>	
 </div>	

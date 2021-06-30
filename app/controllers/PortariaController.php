@@ -44,13 +44,13 @@ class PortariaController extends Controller{
 
      $tipo = isset($_POST['txt_tipo']) ? strip_tags(filter_input(INPUT_POST, "txt_tipo")) : NULL;
 
-     $numero = addslashes($_POST['txt_numero']);
+     $numero = addslashes($_POST['txt_numero']) ? strip_tags(filter_input(INPUT_POST, "txt_numero")) : NULL;
 
-     $data_elaboracao = isset($_POST['txt_data_elaboracao']) ? strip_tags(filter_input(INPUT_POST, "txt_data_elaboracao")) : NULL;
+     $data_elaboracao = addslashes($_POST['txt_data_elaboracao']);
 
-     $conteudo = isset($_POST['txt_conteudo']) ? strip_tags(filter_input(INPUT_POST, "txt_conteudo")) : NULL;
+     $conteudo = isset($_POST['txt_conteudo']);
 
-     $data_publicacao = isset($_POST['txt_data_publicacao']) ? strip_tags(filter_input(INPUT_POST, "txt_data_publicacao")) : NULL;
+     $data_publicacao = addslashes($_POST['txt_data_publicacao']);
 
      $veiculo = isset($_POST['txt_veiculo']) ? strip_tags(filter_input(INPUT_POST, "txt_veiculo")) : NULL;
 
@@ -74,16 +74,23 @@ class PortariaController extends Controller{
      exit;          
   */
      if($id_portaria){
-          $d->Editar($id_portaria,$id_fase,$numero_processo,$tipo,$numero,$data_elaboracao,$conteudo,$data_publicacao,$veiculo,$prazo,$data_final,$data_realizada,$prazo_atendido,$observacao,$anexo,$user
-     );
-        
+          $comando = "UPDATE";
+          $tabela = "portaria";
+          $filtro = " WHERE id_portaria =:id_portaria";
+
+          $p->InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_fase, $numero_processo, $tipo, $numero, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
+      
     }else{
-          $d->Incluir($id_fase,$numero_processo,$tipo,$numero,$data_elaboracao,$conteudo,$data_publicacao,$veiculo,$prazo,$data_final,$data_realizada,$prazo_atendido,$observacao,$anexo,$user
-     );
+          $id_portaria = NULL;
+          $comando = "INSERT INTO";
+          $tabela = "portaria";
+          $filtro = "";
+
+          $p->InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_fase, $numero_processo, $tipo, $numero, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
+
           echo "<script> Document.alert('Denúncia  já existe, não pode mais cadastrar'); </script> ";
      }
           header("Location:" . URL_BASE . "portaria/lista");
      }
- 
 }
 

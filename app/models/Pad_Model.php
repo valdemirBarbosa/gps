@@ -15,11 +15,11 @@ class Pad_Model extends Model{
     }
 
 // Pegar os dados da tabela pad e disponibilizar para os Métodos Editar e Excluir
-    public function getId($id){
+    public function getId($id_pad){
         $qry = array();
         $sql = "SELECT * FROM pad WHERE id_pad = :id";
         $sql = $this->db->prepare($sql);
-        $sql->bindValue(":id", $id);
+        $sql->bindValue(":id", $id_pad);
         $sql->execute();
         return $sql->fetchAll(\PDO::FETCH_OBJ);
     }
@@ -58,10 +58,10 @@ class Pad_Model extends Model{
             
     }
 
-    public function Deletar($id){
+    public function Deletar($id_pad){
             $sql = "DELETE FROM pad WHERE id_pad = :id";
             $sql = $this->db->prepare($sql);
-            $sql->bindValue(":id", $id);
+            $sql->bindValue(":id", $id_pad);
             $sql->execute();
     }
 

@@ -79,10 +79,10 @@ class PadController extends Controller{
           $this->load("template", $dados);
      }
      
-     public function Excluir($id){
+     public function Excluir($id_pad){
           $pad = new Pad_Model();
-          $dados["pad"] = $pad->getId($id);
-          $pad->Deletar($id);
+          $dados["pad"] = $pad->getId($id_pad);
+          $pad->Deletar($id_pad);
           header("Location:" . URL_BASE . "pad");
   }
 }
