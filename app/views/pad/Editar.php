@@ -1,5 +1,5 @@
 <div class="base-home">
-	<h1 class="titulo-pagina">Alterar dados do processo</h1>
+	<h1 class="titulo-pagina">Alterar dados do PAD</h1>
 </div>
 
 <form action="<?php echo URL_BASE ."Pad/Salvar" ?>" method="POST">
@@ -24,19 +24,17 @@
 				<label>Data de Instauração</label>
 					<input name="txt_data_instauracao" type="date" value="<?php echo $pd->data_instauracao ?>">
 
-
 				<div class="obs">
 					<label id="obs">observação</label> 
 				</div>
-				<textarea rows="4" cols="100" name="txt_observacao" 
-					<?php echo $pd->observacao ?> >
+				<textarea rows="4" cols="100" name="txt_observacao"> 
+					<?php echo $pd->observacao ?> 
 				</textarea>		
 		</fieldset>
 		<?php } ?>
-
-				<input type="hidden" name="id" value="">
-				<input type="submit" value="Salvar" class="btn">
-				<input type="reset" name="Reset" id="button" value="Voltar" class="btn limpar">
+			<input type="hidden" name="id_pad" value="<?php echo $pd->id_pad ?>">	
+			<input type="submit" value="Salvar" class="btn">
+			<input type="reset" name="Reset" id="button" value="Voltar" class="btn limpar">
 
 		</form>
 

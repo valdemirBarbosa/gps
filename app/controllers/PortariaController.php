@@ -50,7 +50,7 @@ class PortariaController extends Controller{
 
      $conteudo = isset($_POST['txt_conteudo']);
 
-     $data_publicacao = addslashes($_POST['txt_data_publicacao']);
+     $data_publicacao = addslashes($_POST['  ']);
 
      $veiculo = isset($_POST['txt_veiculo']) ? strip_tags(filter_input(INPUT_POST, "txt_veiculo")) : NULL;
 

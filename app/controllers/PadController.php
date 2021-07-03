@@ -72,9 +72,9 @@ class PadController extends Controller{
           $this->load("template", $dados);
      }
 
-     public function Edit($id){
+     public function Edit($id_pad){
           $pad = new Pad_Model();
-          $dados["pad"] = $pad->getId($id);
+          $dados["pad"] = $pad->getId($id_pad);
           $dados["view"] = "pad/Editar";
           $this->load("template", $dados);
      }
@@ -85,5 +85,7 @@ class PadController extends Controller{
           $pad->Deletar($id_pad);
           header("Location:" . URL_BASE . "pad");
   }
+
+
 }
 

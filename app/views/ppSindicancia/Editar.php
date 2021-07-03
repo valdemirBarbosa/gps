@@ -15,7 +15,7 @@
 
 				<label for="fase">FASE</label>
 					<select name="txt_fase" id="txt_fase">
-						<option value=""><?php echo $ps->fase ?></option>
+						<option value="<?php echo $ps->id_fase ?>"> <?php echo $ps->fase ?></option>
 						<option value="1">Procedimento Preliminar</option>
 						<option value="2">SINDICÂNCIA</option>
 					</select>

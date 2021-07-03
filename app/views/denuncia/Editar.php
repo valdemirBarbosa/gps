@@ -33,7 +33,7 @@
 			<td width="50px">
 				<div class="data">
 					<label for="dataMask">data de entrada</label>
-					<input id="dataMask" name="txt_data_entrada" type="date" required>
+					<input id="dataMask" name="txt_data_entrada" value="<?php echo $denuncia->data_entrada?>" type="date" required>
 				</div> 
 			</td>
 		   </tr>

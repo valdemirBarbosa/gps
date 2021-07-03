@@ -16,7 +16,6 @@ class Pad_Model extends Model{
 
 // Pegar os dados da tabela pad e disponibilizar para os Métodos Editar e Excluir
     public function getId($id_pad){
-        $qry = array();
         $sql = "SELECT * FROM pad WHERE id_pad = :id";
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":id", $id_pad);
@@ -52,14 +51,14 @@ class Pad_Model extends Model{
         $sql->bindValue(":user", $user);
         try {
             $sql->execute();
-        } catch (\Throwable $e) {
-            echo "Erro ao salvar as alterações, integridade dos dados: ".$e;
+        } catch (Exception $e) {
+            echo "Erro ao salvar as alterações, integridade dos dados: ".$e->intl_get_error_message(), "\n";
         }
             
     }
 
     public function Deletar($id_pad){
-            $sql = "DELETE FROM pad WHERE id_pad = :id";
+            $sql = "DELETE  FROM pad WHERE id_pad = :id";
             $sql = $this->db->prepare($sql);
             $sql->bindValue(":id", $id_pad);
             $sql->execute();
