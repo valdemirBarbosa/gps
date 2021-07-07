@@ -69,3 +69,19 @@ function formataData()
 		val.value = val.value.substring(0, 10);
 	 	return true;
 }
+
+function CalcularData(){
+//	var prazo = document.getElementById("prazo").value;
+//	var dataFinal = document.getElementById("dataFinal");
+//	var data = new Date(Date.parse(dataFinal));
+
+
+window.prompt("Qual seu nome? ");
+window.alert('Data final: ');
+
+
+
+	
+
+
+}

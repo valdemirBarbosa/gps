@@ -1,6 +1,7 @@
 <div class="base-home">
 	<h1 class="titulo-pagina">Lista de Portarias</h1>
 </div>
+<script type="text/javascript" src="<?php URL_BASE . "/assets/js/funcoes.js" ?>"> </script>
 
 <div class="base-lista">
 	<span class="qtde">Há <b><?php echo count($portaria) ?></b> Portarias</span>
@@ -9,16 +10,16 @@
 	<div class="tabela">	
 		<table width="100%" border="1" cellspacing="0" cellpadding="0">
 		  <thead class="thead">
-				<th width="10%">id_portaria</th>
-				<th width="10%">id_fase</th>
-				<th width="10%">numero processo</th>
-				<th width="15%">tipo</td>
-				<th width="15%">data elaboracao </th>
-				<th width="25%">data publicacao</th>
-				<th width="25%">veiculo</th>
-				<th width="25%">prazo</th>
-				<th width="25%">data realizada</th>
-				<th width="25%">observacao</th>
+				<th width="10%">Id Portaria</th>
+				<th width="10%">Id Fase</th>
+				<th width="10%">Número Processo</th>
+				<th width="10%">Tipo</td>
+				<th width="10%">Data Elaboração </th>
+				<th width="10%">Data Publicação</th>
+				<th width="25%">Veículo</th>
+				<th width="25%">Prazo</th>
+				<th width="10%">Data Vencimento</th>
+				<th width="25%">Dias a vencer</th>
 				<th width="5%">Anexo</th>
 				<th align="center" colspan="2">Ação</th>
 			</tr>
@@ -34,11 +35,11 @@
 				<td><input class="data" type="date" readonly value="<?php  echo $port->data_elaboracao  ?>" ></td>
 				<td><input class="data" type="date" readonly value="<?php echo $port->data_publicacao  ?>"> </td>
 				<td><?php echo $port->veiculo ?></td>
-				<td><?php echo $port->prazo ?></td>
-				<td><input class="data" type="date" readonly value="<?php echo $port->data_realizada ?>"> </td>
-				<td><?php echo $port->observacao ?></td>
-				<td><?php echo $port->anexo ?></td>
-			<td>
+				<td id="prazo"><?php echo $port->prazo ?></td>
+				<td><input id="dataFinal" class="data" type="date" readonly value="<?php echo $port->data_final ?>"> </td>
+				<td><?php echo $port->dias_a_vencer ?></td>
+
+				<td>
 				<div class="btn-editar"> 
 					<a href="<?php echo URL_BASE ."Portaria/Edit/".$port->id_portaria ?>" >Editar</a>
 	  			</div>
@@ -58,6 +59,7 @@
 	</div>				
 		<p>...</P>
 </div>
+
 
 </body>
 </html>

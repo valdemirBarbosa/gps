@@ -1,9 +1,9 @@
 <?php
  namespace app\functions;
 
-class ValidaCpf{
+class CpfValida{
 
-     public function ValidaCpf($cpf){
+     public function ValidaCpf(){
           $string = $cpf;
           $digitoA = 0;
           $digitoB = 0;
@@ -32,7 +32,6 @@ class ValidaCpf{
           }else{
                return false;
           }
-          exit;
      }
  }
 ?>

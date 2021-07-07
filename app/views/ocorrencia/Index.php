@@ -17,7 +17,6 @@
 				<th align="center" width="15%">Numero do Processo</th>
 				<th align="center" width="13%">Data ocorrência </th>
 				<th align="center" width="25%">ocorrência </th>
-				<th width="25%">Observação</th>
 				<th width="5%">Anexo</th>
 				<th align="center" colspan="2">Ação</th>
 			</tr>
@@ -32,7 +31,6 @@
 				<td align="center"><?php echo $oco->numero_processo ?> </td>
 				<td><?php echo date('d/m/Y', strtotime($oco->data_ocorrencia)) ?> </td> 
 				<td><?php echo $oco->ocorrencias ?> </td>
-				<td><?php echo $oco->observacao  ?> </td>
 				<td align="center"><?php echo $oco->anexo ?> </td>
 			
 				<td>

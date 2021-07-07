@@ -32,7 +32,23 @@ class PortariaController extends Controller{
      $this->load("template", $dados);
      header("Location:" . URL_BASE . "portaria");
 }
- 
+
+ //calcula data para encontrar quantidade de dias para o prazo final 
+   public function subtrairData($data_final){
+     $data1 = strtotime($data_final);
+     $data2 = strtotime(date('d/m/Y')); 
+     $calc = ($data1 - $data2);
+     $dias = date('d', $calc);
+     return $dias;
+}
+
+   public function somarData($data_publicacao, $prazo){
+     $data = strtotime($data_publicacao);
+     $calc = strtotime('+ '.$prazo.' day', $data);
+     $data = date('Y/m/d', $calc);
+     return $data;
+}
+
    public function Salvar(){
      $p = new Portaria_Model();
      
@@ -50,14 +66,20 @@ class PortariaController extends Controller{
 
      $conteudo = isset($_POST['txt_conteudo']);
 
-     $data_publicacao = addslashes($_POST['  ']);
+     $data_publicacao = addslashes($_POST['txt_data_publicacao']);
 
-     $veiculo = isset($_POST['txt_veiculo']) ? strip_tags(filter_input(INPUT_POST, "txt_veiculo")) : NULL;
+     $veiculo = addslashes($_POST['txt_veículo']);
 
-     $prazo = isset($_POST['txt_prazo']) ? strip_tags(filter_input(INPUT_POST, "txt_prazo")) : NULL;
-          
-     $data_final = isset($_POST['txt_data_final']) ? strip_tags(filter_input(INPUT_POST, "txt_data_final")) : NULL;
+     $prazo = isset($_POST['txt_prazo']) ? strip_tags(filter_input(INPUT_POST, "txt_prazo")) : NULL;          
 
+     //executa a função de cálculo - soma de datas
+     $dtFinal = $this->somarData($data_publicacao, $prazo);
+     $data_final = $dtFinal;   //addslashes($_POST['txt_data_final']);
+
+     //executa a função de cálculo de diferença entre as datas atual e data final
+     $dias = $this->subtrairData($data_final);
+     $dias_a_vencer = $dias;
+    
      $data_realizada = isset($_POST['txt_data_realizada']) ? strip_tags(filter_input(INPUT_POST, "txt_data_realizada")) : NULL;
 
      $prazo_atendido = isset($_POST['txt_prazo_atendido']) ? strip_tags(filter_input(INPUT_POST, "txt_prazo_atendido")) : NULL;
@@ -67,18 +89,13 @@ class PortariaController extends Controller{
      $anexo = isset($_POST['txt_anexo']) ? strip_tags(filter_input(INPUT_POST, "txt_anexo")) : NULL;
 
      $user = isset($_POST['txt_user']) ? strip_tags(filter_input(INPUT_POST, "txt_user")) : NULL;
-
-     
-   /*  echo "Observação------=>: ".$observacao."<br/>";
-     echo "Numero do documento ------=>: ".$numero_documento;
-     exit;          
-  */
+   
      if($id_portaria){
           $comando = "UPDATE";
           $tabela = "portaria";
           $filtro = " WHERE id_portaria =:id_portaria";
 
-          $p->InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_fase, $numero_processo, $tipo, $numero, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
+          $p->InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_fase, $numero_processo, $tipo, $numero, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
       
     }else{
           $id_portaria = NULL;
@@ -86,7 +103,7 @@ class PortariaController extends Controller{
           $tabela = "portaria";
           $filtro = "";
 
-          $p->InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_fase, $numero_processo, $tipo, $numero, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
+          $p->InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_fase, $numero_processo, $tipo, $numero, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
 
           echo "<script> Document.alert('Denúncia  já existe, não pode mais cadastrar'); </script> ";
      }

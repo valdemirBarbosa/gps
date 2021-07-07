@@ -8,7 +8,7 @@
 		<fieldset>
 			<legend><h4>Códigos</h4></legend>	
 				<label>Id Portaria</label>
-					<input id="txt_id" readonly name="txt_id_pad" enable="false" value="<?php echo $port->id_portaria ?>" >
+					<input id="txt_id" readonly name="txt_id_portaria" enable="false" value="<?php echo $port->id_portaria ?>" >
 
 				<label>Id fase</label>
 					<input id="txt_id_fase" readonly name="txt_id_fase"  enable="false" value="<?php echo $port->id_fase ?>" >
@@ -31,7 +31,7 @@
 					<input name="txt_conteudo" type="text" placeholder="conteúdo da portaria" value="<?php echo $port->conteudo ?>">
 
 				<label>Data Publicação</label>
-					<input name="txt_data_publicacao" type="date" value="<?php echo $port->$data_publicacao ?>">
+					<input name="txt_data_publicacao" type="date" value="<?php echo $port->data_publicacao ?>">
 
 				<label>Veículo</label>
 					<input name="txt_veículo" type="text" placeholder="veículo da publicação" value="<?php echo $port->veiculo ?>">
@@ -40,10 +40,10 @@
 					<input name="txt_prazo" type="number" placeholder="Prazo para cumprimento em dias" value="<?php echo $port->prazo ?>">
 				
 				<label>Data final</label>
-					<input name="txt_data_final" type="date" value="<?php echo $port->$data_final ?>">
+					<input name="txt_data_final" type="date" value="<?php echo $port->data_final ?>">
 
 				<label>Data realizada</label>
-					<input name="txt_data_realizada" type="date" value="<?php echo $port->$data_realizada ?>">
+					<input name="txt_data_realizada" type="date" value="<?php echo $port->data_realizada ?>">
 
 				<label>Prazo atendido</label>
 					<input name="txt_prazo_atendido" type="text" placeholder="Prazo para cumprimento em dias" value="<?php echo $port->prazo ?>">

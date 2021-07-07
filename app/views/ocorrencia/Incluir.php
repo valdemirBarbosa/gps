@@ -11,6 +11,9 @@
 		<label>Id Processo</label>
 		<input id="txt_id_processo" name="txt_id_processo" type="number" placeholder="Informe o número do processo">
 
+		<label>Id Processo</label>
+		<input id="txt_id_processo" name="txt_id_processo" type="number" placeholder="Informe o número do processo">
+
 		<label>Fase</label>
 		<select name="txt_fase" id="txt_fase">
 			<option value="1">PROCEDIMENTO PRELIMINAR</option>

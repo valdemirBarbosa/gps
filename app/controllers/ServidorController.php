@@ -3,9 +3,10 @@ namespace app\controllers;
 
 use app\core\Controller;
 use app\models\Servidor_Model;
+
 class ServidorController extends Controller{
-    
-   public function index(){
+
+  public function index(){
         $servidores = new Servidor_Model();
         $dados["servidores"] = $servidores->lista();
         $dados["view"] = "servidor/Index";
@@ -32,7 +33,6 @@ class ServidorController extends Controller{
      header("Location:" . URL_BASE . "servidor");
 
 }
- //$id_servidor, $nome_servidor, $cpf, $matricula, $vinculo, $secretaria, $unidade, $observacao
 
    public function Salvar(){
      $s = new servidor_Model();
