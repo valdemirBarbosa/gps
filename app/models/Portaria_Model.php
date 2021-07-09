@@ -63,9 +63,9 @@ class Portaria_Model extends Model{
         $sql->execute();
     }
 
-    public function InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_fase, $numero_processo, $tipo, $numero, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user){
+    public function InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_fase, $numero_processo, $tipo, $numero, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $status, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user){
 
-        $sql = $comando." ".$tabela." SET id_portaria=:id_portaria, id_fase=:id_fase, numero_processo=:numero_processo, tipo=:tipo, numero=:numero, data_elaboracao=:data_elaboracao, conteudo=:conteudo, data_publicacao=:data_publicacao, veiculo=:veiculo, prazo=:prazo, data_final=:data_final, dias_a_vencer=:dias_a_vencer, data_realizada=:data_realizada, prazo_atendido=:prazo_atendido, observacao=:observacao, anexo=:anexo, user=:user".$filtro;
+        $sql = $comando." ".$tabela." SET id_portaria=:id_portaria, id_fase=:id_fase, numero_processo=:numero_processo, tipo=:tipo, numero=:numero, data_elaboracao=:data_elaboracao, conteudo=:conteudo, data_publicacao=:data_publicacao, veiculo=:veiculo, prazo=:prazo, data_final=:data_final, status=:status, dias_a_vencer=:dias_a_vencer, data_realizada=:data_realizada, prazo_atendido=:prazo_atendido, observacao=:observacao, anexo=:anexo, user=:user".$filtro;
 /*
         echo "<pre>";
             print_r($sql);
@@ -84,6 +84,7 @@ class Portaria_Model extends Model{
         $sql->bindValue(":veiculo", $veiculo);
         $sql->bindValue(":prazo", $prazo);
         $sql->bindValue(":data_final", $data_final);
+        $sql->bindValue(":status", $status);
         $sql->bindValue(":dias_a_vencer", $dias_a_vencer);
         $sql->bindValue(":data_realizada", $data_realizada);
         $sql->bindValue(":prazo_atendido", $prazo_atendido);

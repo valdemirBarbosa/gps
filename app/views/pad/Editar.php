@@ -3,12 +3,11 @@
 </div>
 
 <form action="<?php echo URL_BASE ."Pad/Salvar" ?>" method="POST">
-	<legend><h4>ids</h4></legend>
 		<?php foreach($pad as $pd){ ?>
 		<fieldset>
 			<legend><h4>Códigos</h4></legend>	
 				<label>Id do PAD</label>
-					<input id="txt_id" readonly name="txt_id_pad" enable="false" value="<?php echo $pd->id_pad ?>" >
+						<input id="txt_id" readonly name="txt_id_pad" enable="false" value="<?php echo $pd->id_pad ?>" >
 
 				<label>Id da denuncia</label>
 					<input id="txt_id" readonly name="txt_id_denuncia"  enable="false" value="<?php echo $pd->id_denuncia ?>" >
@@ -19,7 +18,7 @@
 		<fieldset>
 			<legend>informações do processo</legend>
 				<label>Número do Processo</label>
-					<input name="txt_numero_processo" type="number" placeholder="Insira o número do processo" value="<?php echo $pd->numero_processo ?>">
+					<input class="txt_numero_processo" name="txt_numero_processo" type="text" placeholder="Insira o número do processo" value="<?php echo $pd->numero_processo ?>">
 				
 				<label>Data de Instauração</label>
 					<input name="txt_data_instauracao" type="date" value="<?php echo $pd->data_instauracao ?>">

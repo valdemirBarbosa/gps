@@ -390,7 +390,7 @@ select{
 .msg{
       margin-top: 100px;
       margin-left: 200px;
-      width: 8    0%;
+      width: 80%;
       background-color: yellowgreen;
       position: absolute;
       font-size: 30px;
@@ -401,3 +401,32 @@ select{
       background-color:silver;
       width: 50%;
 } 
+
+.txt_numero_processo{
+      width: 10%;
+}
+
+.id_denuncia{
+      width: 100%;
+}
+
+.id_pp_denuncia{
+      width: 750px;
+}
+
+.id_pp_sind{
+      float: left;
+      margin-left: -124px;
+      width: 400px;
+      margin-bottom: 50px;
+}
+
+.id_pp_sind_select{
+      width: 475px;
+}
+
+.num_processo{
+      margin-left: 2px;
+      position: absolute;
+}
+

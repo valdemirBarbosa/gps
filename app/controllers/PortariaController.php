@@ -35,16 +35,47 @@ class PortariaController extends Controller{
 
  //calcula data para encontrar quantidade de dias para o prazo final 
    public function subtrairData($data_final){
-     $data1 = strtotime($data_final);
-     $data2 = strtotime(date('d/m/Y')); 
-     $calc = ($data1 - $data2);
-     $dias = date('d', $calc);
-     return $dias;
+    $dataAtual = strtotime(date('Y/m/d'));
+    $dataatual = date('d/m/Y', $dataAtual); 
+    $dataFim = strtotime($data_final);
+    $dataFinal = date('d/m/Y', $dataFim);
+    $data = $dataFim - $dataAtual;
+    $data = $data/86400;
+     $dias = $data;
+     return $dias; 
+   }
+
+   public function status($data_final){
+     $dias = $this->subtrairData($data_final);
+     $mensagem = "";
+     if($dias == 0){
+          $mensagem = $dias." vence hoje";
+          if($dias < 0){
+               if($dias < (-1) ){
+                    $mensagem = "vencido há ".$dias*(-1)." dia";
+               }else{
+                    $mensagem = "vencido há ".$dias*(-1)." dias";
+          }
+     }else{
+               if($dias == 1){
+                    $mensagem = "falta ".$dias." para vencer";
+               }else{
+                    $mensagem = "faltam ".$dias." para vencer";
+               }
+               //return $mensagem;
+          }
+     }
+     echo $mensagem;
+     exit;
+
 }
 
+//função para somar dias a uma data, não só no campo dias, mas com reflexo no mês e ano 
+//um dia tem 24 horas, que * 60 tem 1440 minu, que * 60 tem  86400 segundos
    public function somarData($data_publicacao, $prazo){
-     $data = strtotime($data_publicacao);
-     $calc = strtotime('+ '.$prazo.' day', $data);
+     $data1 = strtotime($data_publicacao);
+     $data2 = ($prazo * 86400); //convertendo do prazo que é em dias para segundos
+     $calc = $data1 + $data2; 
      $data = date('Y/m/d', $calc);
      return $data;
 }
@@ -80,6 +111,8 @@ class PortariaController extends Controller{
      $dias = $this->subtrairData($data_final);
      $dias_a_vencer = $dias;
     
+     $status = $this->status($data_final);
+    
      $data_realizada = isset($_POST['txt_data_realizada']) ? strip_tags(filter_input(INPUT_POST, "txt_data_realizada")) : NULL;
 
      $prazo_atendido = isset($_POST['txt_prazo_atendido']) ? strip_tags(filter_input(INPUT_POST, "txt_prazo_atendido")) : NULL;
@@ -95,7 +128,7 @@ class PortariaController extends Controller{
           $tabela = "portaria";
           $filtro = " WHERE id_portaria =:id_portaria";
 
-          $p->InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_fase, $numero_processo, $tipo, $numero, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
+          $p->InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_fase, $numero_processo, $tipo, $numero, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $status, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
       
     }else{
           $id_portaria = NULL;
@@ -103,7 +136,7 @@ class PortariaController extends Controller{
           $tabela = "portaria";
           $filtro = "";
 
-          $p->InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_fase, $numero_processo, $tipo, $numero, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
+          $p->InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_fase, $numero_processo, $tipo, $numero, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $status, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
 
           echo "<script> Document.alert('Denúncia  já existe, não pode mais cadastrar'); </script> ";
      }

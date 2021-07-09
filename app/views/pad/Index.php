@@ -4,14 +4,14 @@
 
 <div class="base-lista">
 	<span class="qtde">Há <b><?php echo count($pad) ?></b> PAD</span>
-	<div class="btn-inc"><a href="<?php echo URL_BASE . "Pad/Novo" ?>" >INCLUIR </a></div>
+	<div class="btn-inc"><a href="<?php echo URL_BASE . "Pad/Novo"; ?>" >INCLUIR </a></div>
 
 	<div class="tabela">	
 		<table width="100%" border="1" cellspacing="0" cellpadding="0">
 		  <thead class="thead">
-				<th width="10%">Id_pad</th>
-				<th width="10%">Id_denuncia</th>
-				<th width="10%">id_pp_sindicancia</th>
+				<th width="10%">Id pad</th>
+				<th width="10%">Id denuncia</th>
+				<th width="10%">id pp_sindicancia</th>
 				<th width="15%">Numero do Processo</td>
 				<th width="15%">Data Instauração </th>
 				<th width="25%">Observação</th>

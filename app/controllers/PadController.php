@@ -8,6 +8,8 @@ use app\models\Denunciado_Model;
 use app\models\Denunciante_Model;
 use app\models\PpSindicancia_Model;
 use app\models\Pad_Model;
+use app\models\Select_ids_Model;
+
 
 class PadController extends Controller{
     
@@ -16,6 +18,23 @@ class PadController extends Controller{
 
         $dados["pad"] = $pad->lista();
         $dados["view"] = "pad/Index";
+        $this->load("template", $dados);
+    }
+
+// Estudando pra colocar pra funcionar no Select_ids_Model
+/*    public function getCodigos(){
+        $denuncia = new Select_ids_Model();
+
+        $dados["denuncia"] = $denuncia->getIdDenuncia();
+        $dados["view"] = "pad/Incluir";
+        $this->load("template", $dados);
+    }
+*/
+    public function getCodigos(){
+        $denuncia = new Pad_Model();
+
+        $dados["denunciaId"] = $denuncia->getIdDenuncia();
+        $dados["view"] = "pad/Incluir";
         $this->load("template", $dados);
     }
 
@@ -69,6 +88,14 @@ class PadController extends Controller{
 //Incluir novo processo de sindicância
      public function Novo(){
           $dados["view"] = "pad/Incluir";
+          $this->load("template", $dados);
+
+          $denuncia = new Pad_Model();
+          $dados["denunciaId"] = $denuncia->getIdDenuncia();
+          $this->load("template", $dados);
+
+          $sindicancia = new Pad_Model();
+          $dados["sindicancia"] = $sindicancia->getIdSindicancia();
           $this->load("template", $dados);
      }
 
