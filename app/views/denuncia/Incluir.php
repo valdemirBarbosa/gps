@@ -8,38 +8,63 @@
 	<input id="txt_id" name="txt_id" class="txt-id" type="number" value="">
 
 	<label for="txt_denuncia">naração dos fatos da denúncia</label>
-	<textarea id="txt_denuncia" name="txt_denuncia" class="denuncia" rows="3" cols="30">
+	<textarea id="txt_denuncia" name="txt_denuncia" class="denuncia" rows="4" cols="60">
 	</textarea>
-	
-	<label>Denunciante</label>
-		<select>
-			<?php foreach($denunciante as $d){?>
-				<option value="<?php echo $d->id_denunciante   ?>">
-					 <?php echo $d->nome_denunciante   ?> </option>
-			<?php }  ?>	
-		</select>
-	
-	<label>tipo de documento</label>
-	<input name="txt_tipo_documento" value="" type="text" placeholder="Insira o tipo de documento anexado">
+</fieldset>
+
+<fieldset>
+<table class="denuncianteTab">
+	<tr>
+	<td>
+		<label for="denuncianteLst" class="denunciante">Denunciante</label>
+			<select name="lst_id_denunciante" id="denuncianteLst" class="denuncianteLst">
+				<option>Selecione o denunciante</option>
+					<?php foreach($denunciante as $d){?>
 				
-	<label>número do documento</label>
-	<input name="txt_numero_documento" value="" type="number" placeholder="número do documento">
+				<option value="<?php echo $d->id_denunciante  ?>" >
+					<?php echo $d->nome_denunciante   ?> 
+				</option>
+				<?php }  ?>	
+			</select>
+	</td>
+	<td>	
+		<label class="tipo_document">tipo de documento</label>
+			<select nome="lst_tipo_documento" class="tipo_documento">
+				<option>Selecione o tipo de documento</option>
+					<?php foreach($documento as $doc){?>
+					<option value="<?php $doc->id_tipo_documento   ?>">
+						<?php echo $doc->tipo_de_documento   ?> </option>
+				<?php }  ?>	
+			</select>
+	</td>
 
-	<label>data de entrada</label>
-	<input name="txt_data_entrada" value="" type="date" placeholder="00/00/0000">
+	<tr>
+		<td>
+			<label>número do documento</label>
+			<input name="txt_numero_documento" value="" type="number" placeholder="número do documento">
+		</td>
+		<td>
 
-	<label>observação</label>
-	<textarea rows="3" cols="85" class="denuncia" name="txt_observacao">
-	</textarea>
-</fieldset>	
+			<label>data de entrada</label>
+			<input name="txt_data_entrada" value="" type="date" placeholder="00/00/0000">
+		</td>
 
-<fieldset>				
+	</tr>
+</table>		
+</fieldset>
+
+	<fieldset>
+		<label>observação</label>
+		<textarea rows="3" cols="108" class="" name="txt_observacao">
+		</textarea>
+	</fieldset>
+
+<fieldset class="btnsDenuncia">				
 	<input type="hidden" name="acao" value="Cadastrar">
 	<input type="hidden" name="id" value="">
-	<input type="submit" value="Cadastrar" class="btn">
-	<input type="reset" name="Reset" id="button" value="Limpar" class="btn limpar">
+	<input type="submit" value="Cadastrar" class="btnDenuncia">
+	<input type="reset" name="Reset" id="button" value="Limpar" class="btn_limpar_denuncia">
 </fieldset>
-	</form>
-</div>	
-</div>	
+
+</form>
 	

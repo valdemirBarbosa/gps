@@ -11,7 +11,7 @@
 		  <thead>
 			<tr>
 				<th width="10%" align="center"> id</th>
-				<th width="30%">fato da denúncia</th>
+				<th width="30%">Narração da denúncia</th>
 				<th width="10%">tipo documento</th>
 				<th width="10%">número</td>
 				<th width="10%">data de entrada</th>
@@ -24,7 +24,7 @@
 		<tr>
 		   <td align="center"><?php echo $den->id_denuncia  ?> </td>
 		   <td><?php echo $den->denuncia_fato  ?> </td>
-		   <td align="center"><?php echo $den->tipo_documento  ?> </td>
+		   <td align="center"><?php echo $den->tipo_de_documento ?> </td>
 		   <td align="center"><?php echo $den->numero_documento  ?></td>
 		   <?php $dt_entrada = explode("-",$den->data_entrada);
 		   $dia = $dt_entrada[2];

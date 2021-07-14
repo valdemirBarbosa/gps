@@ -17,9 +17,6 @@
       padding: 2%;
 }
 
-textarea{
-      
-}
 
 .container{
       background-color:silver;
@@ -173,7 +170,7 @@ legend{
 .obs{
       float: auto;
       width: 200px;
-      margin-top: 15px;
+      margin-top: 60px;
 }
 
 span{
@@ -241,9 +238,22 @@ span{
 .btn{
       width: 120px;
       height: 40px;
-      margin-left: 200px;
+      margin-left: 10px;
+      margin-top: 112px;
       border-radius: 4px;
-      border-color:royalblue;
+      border-color:springgreen;
+      border-style: solid;
+      text-align: center;
+      text-transform: uppercase;
+}
+
+.btn_limpar{
+      width: 120px;
+      height: 40px;
+      margin-left: 10px;
+      margin-top: 112px;
+      border-radius: 4px;
+      border-color:springgreen;
       border-style: solid;
       text-align: center;
       text-transform: uppercase;
@@ -372,7 +382,7 @@ span{
 }
 
 .denuncia{
-      margin-left: 192px;
+      margin-top: 4px;
 }
 
 
@@ -399,7 +409,6 @@ select{
 
 .data{
       background-color:silver;
-      width: 50%;
 } 
 
 .txt_numero_processo{
@@ -428,5 +437,62 @@ select{
 .num_processo{
       margin-left: 2px;
       position: absolute;
+      margin-top: 10px;
 }
 
+.faseLbl{
+      position: absolute;
+}
+
+.faselst{
+      position: relative;
+      margin-left: 47px;
+}
+
+.btnAnexo{
+      margin-top: 112px;
+      width: 360px;
+      height: 30px;
+}
+
+.lblAnexo{
+      margin-top: 112px;
+      width: 60px;
+      height: 30px;
+}
+
+.txtArea{
+      margin-left: 3px;
+      position: absolute;
+}
+
+.denuncianteTab{
+      width: 90%;
+} 
+
+.btnsDenuncia{
+      height: 70px;
+}
+
+.btnDenuncia{
+      width: 120px;
+      height: 40px;
+      margin-left: 10px;
+      border-radius: 4px;
+      border-color:springgreen;
+      border-style: solid;
+      text-align: center;
+      text-transform: uppercase;
+}
+
+.btn_limpar_denuncia{
+      width: 120px;
+      height: 40px;
+      margin-left: 10px;
+      border-radius: 4px;
+      border-color:springgreen;
+      border-style: solid;
+      text-align: center;
+      text-transform: upperca
+}
+ 

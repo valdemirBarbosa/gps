@@ -1,10 +1,11 @@
 <div class="base-home">
-	<h1 class="titulo-pagina">Lista de PAD</h1>
+	<h1 class="titulo-pagina">Lista de Processos</h1>
 </div>
 
 <div class="base-lista">
-	<span class="qtde">Há <b><?php echo count($pad) ?></b> PAD</span>
-	<div class="btn-inc"><a href="<?php echo URL_BASE . "Pad/Novo"; ?>" >INCLUIR </a></div>
+	<span class="qtde">Há <b><?php echo count($processo) ?></b> PAD</span>
+	<div class="btn-inc"><a href="<?php 
+				    echo URL_BASE . "processo/Novo"; ?>" >INCLUIR </a></div>
 
 	<div class="tabela">	
 		<table width="100%" border="1" cellspacing="0" cellpadding="0">
@@ -20,7 +21,7 @@
 			</tr>
 		</thead>
 	<?php 
-	  foreach($pad as $pd){
+	  foreach($processo as $pd){
 	?>
 			<tr>
 				<td align="center"><?php echo $pd->id_pad ?> </td>

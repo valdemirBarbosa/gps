@@ -9,21 +9,35 @@ class Denuncia_Model extends Model{
     }
 
     public function lista(){
-        $sql = "SELECT * FROM denuncia as d INNER JOIN denunciante as den ON d.id_denunciante = den.id_denunciante";
+        $sql = "SELECT * FROM denuncia as d LEFT JOIN denunciante as den ON d.id_denunciante = den.id_denunciante LEFT JOIN tipo_documento as t ON d.tipo_documento = t.id_tipo_documento";
+        $qry = $this->db->query($sql);
+        return $qry->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+    public function Documentos(){
+        $sql = "SELECT * FROM tipo_documento";
+        $qry = $this->db->query($sql);
+        return $qry->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+    public function Denunciante(){
+        $sql = "SELECT * FROM denunciante";
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
     public function incluir($denuncia, $id_denunciante, $tipo_documento, $numero_documento, $data_entrada, $observacao){
-        $sql = "INSERT INTO denuncia SET denuncia_fato = :denuncia, id_denunciante = :id_denunciante, tipo_documento = :tipo, numero_documento = :numero, data_entrada = :data_entrada, observacao = :observacao"; 
-        $sql = $this->db->prepare($sql);
-        $sql->bindValue(":denuncia", $denuncia);
-        $sql->bindValue(":id_denunciante", $id_denunciante);
-        $sql->bindValue(":tipo", $tipo_documento);
-        $sql->bindValue(":numero", $numero_documento);
-        $sql->bindValue(":data_entrada", $data_entrada);
-        $sql->bindValue(":observacao", $observacao);
-        $sql->execute();
+            $sql = "INSERT INTO denuncia SET denuncia_fato = :denuncia, id_denunciante = :id_denunciante, tipo_documento = :tipo, numero_documento = :numero, data_entrada = :data_entrada, observacao = :observacao"; 
+            $sql = $this->db->prepare($sql);
+            $sql->bindValue(":id_denunciante", $id_denunciante);
+            $sql->bindValue(":denuncia", $denuncia);
+            $sql->bindValue(":tipo", $tipo_documento);
+            $sql->bindValue(":numero", $numero_documento);
+            $sql->bindValue(":data_entrada", $data_entrada);
+            $sql->bindValue(":observacao", $observacao);
+            $sql->execute();
+
+           
     }
 
     public function Denuncias($id_denuncia){

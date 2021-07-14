@@ -2,23 +2,35 @@
 namespace app\models;
 use app\core\Model;
 
-class Pad_Model extends Model{
+class Processo_Model extends Model{
 
     public function __construct() {
         parent::__construct();
     }
 
     public function lista(){
-        $sql = "SELECT * FROM pad"; 
+        $sql = "SELECT * FROM processo"; 
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
-// Pegar os dados da tabela pad e disponibilizar para os Métodos Editar e Excluir
-    public function getId($id_pad){
-        $sql = "SELECT * FROM pad WHERE id_pad = :id";
+    public function faseLista(){
+        $sql = "SELECT * FROM fase"; 
+        $qry = $this->db->query($sql);
+        return $qry->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+    public function Fase(){
+        $sql = "SELECT * FROM fase"; 
+        $qry = $this->db->query($sql);
+        return $qry->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+// Pegar os dados da tabela processo e disponibilizar para os Métodos Editar e Excluir
+    public function getId($id_processo){
+        $sql = "SELECT * FROM processo WHERE id_processo = :id";
         $sql = $this->db->prepare($sql);
-        $sql->bindValue(":id", $id_pad);
+        $sql->bindValue(":id", $id_processo);
         $sql->execute();
         return $sql->fetchAll(\PDO::FETCH_OBJ);
     }
@@ -39,7 +51,7 @@ class Pad_Model extends Model{
 
 //Inserir dados na tabela de sindicância
     public function Incluir($id_denuncia, $id_pp_sindicancia, $numero_processo, $data_instauracao, $observacao, $anexo, $user){
-        $sql = "INSERT INTO pad SET id_denuncia = :id_denuncia, id_pp_sindicancia = :id_pp_sindicancia, numero_processo = :numero_processo, data_instauracao = :data_instauracao, observacao = :observacao, anexo = :anexo, user = :user"; 
+        $sql = "INSERT INTO processo SET id_denuncia = :id_denuncia, id_pp_sindicancia = :id_pp_sindicancia, numero_processo = :numero_processo, data_instauracao = :data_instauracao, observacao = :observacao, anexo = :anexo, user = :user"; 
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":id_denuncia", $id_denuncia);
         $sql->bindValue(":id_pp_sindicancia", $id_pp_sindicancia);
@@ -52,10 +64,10 @@ class Pad_Model extends Model{
     }
 
 //Editar, alterar dados na tabela de sindicância
-    public function Editar($id_pad, $id_denuncia, $id_pp_sindicancia, $numero_processo, $data_instauracao, $observacao, $anexo, $user){
-        $sql = "UPDATE pad SET id_denuncia = :id_denuncia, id_pp_sindicancia = :id_pp_sindicancia, numero_processo = :numero_processo, data_instauracao = :data_instauracao, observacao = :observacao, anexo = :anexo, user = :user WHERE id_pad = :id"; 
+    public function Editar($id_processo, $id_denuncia, $id_pp_sindicancia, $numero_processo, $data_instauracao, $observacao, $anexo, $user){
+        $sql = "UPDATE processo SET id_denuncia = :id_denuncia, id_pp_sindicancia = :id_pp_sindicancia, numero_processo = :numero_processo, data_instauracao = :data_instauracao, observacao = :observacao, anexo = :anexo, user = :user WHERE id_processo = :id"; 
         $sql = $this->db->prepare($sql);
-        $sql->bindValue(":id", $id_pad);
+        $sql->bindValue(":id", $id_processo);
         $sql->bindValue(":id_denuncia", $id_denuncia);
         $sql->bindValue(":id_pp_sindicancia", $id_pp_sindicancia);
         $sql->bindValue(":numero_processo", $numero_processo);
@@ -71,17 +83,17 @@ class Pad_Model extends Model{
             
     }
 
-    public function Deletar($id_pad){
-            $sql = "DELETE  FROM pad WHERE id_pad = :id";
+    public function Deletar($id_processo){
+            $sql = "DELETE  FROM processo WHERE id_processo = :id";
             $sql = $this->db->prepare($sql);
-            $sql->bindValue(":id", $id_pad);
+            $sql->bindValue(":id", $id_processo);
             $sql->execute();
     }
 
-    public function Anexar($id_pad, $infArquivo){
-            $sql = "UPDATE pad SET anexo = :anexo WHERE id_pad = :id"; 
+    public function Anexar($id_processo, $infArquivo){
+            $sql = "UPDATE processo SET anexo = :anexo WHERE id_processo = :id"; 
             $sql = $this->db->prepare($sql);
-            $sql->bindValue(":id", $id_pad);
+            $sql->bindValue(":id", $id_processo);
             $sql->bindValue(":anexo", $infArquivo);
             $sql->execute();
     }

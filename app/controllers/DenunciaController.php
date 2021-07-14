@@ -14,8 +14,8 @@ class DenunciaController extends Controller{
         $dados["view"] = "denuncia/Index";
         $this->load("template", $dados);
     }
-
-    public function Denuncia(){
+   
+    public function _Denuncia(){
         $denuncias = new Denuncia_Model();
         $denunciados = new Denuncia_Model();
 
@@ -37,8 +37,13 @@ class DenunciaController extends Controller{
   }
         
    public function Novo(){
-          $dados["view"] = "denuncia/Incluir";
-          $this->load("template", $dados);
+     $denunciante = new Denuncia_Model();
+     $dados["denunciante"] = $denunciante->Denunciante(); 
+
+     $documento = new Denuncia_Model();
+     $dados["documento"] = $documento->Documentos();
+     $dados["view"] = "denuncia/Incluir";
+     $this->load("template", $dados);
      }
     
    public function denunciados(){
@@ -79,23 +84,13 @@ class DenunciaController extends Controller{
  
    public function Salvar(){
      $d = new Denuncia_Model();
-    /*
-          echo "<pre>";
-          echo "<br/>".$_POST['txt_id'];
-          echo "<br/>".$_POST['txt_denuncia'];
-          echo "<br/>".$_POST['txt_id_denunciante'];
-          echo "<br/>".$_POST['txt_tipo_documento'];
-          echo "<br/>".$_POST['txt_data_entrada'];
-          echo "<br/>".isset($_POST['txt_observacao']);
-          echo "<pre>";
-     */
      $id_denuncia = isset($_POST['txt_id']) ? strip_tags(filter_input(INPUT_POST, "txt_id")) : NULL;
 
      $denuncia = isset($_POST['txt_denuncia']) ? strip_tags(filter_input(INPUT_POST, "txt_denuncia")) : FALSE;
 
-     $id_denunciante = isset($_POST['txt_id_denunciante']) ? strip_tags(filter_input(INPUT_POST, "txt_id_denunciante")) : 20;
+     $id_denunciante = isset($_POST['lst_id_denunciante']);
 
-     $tipo_documento = isset($_POST['txt_tipo_documento']) ? strip_tags(filter_input(INPUT_POST, "txt_tipo_documento")) : "Não Especificado";
+     $tipo_documento = isset($_POST['lst_tipo_documento']) ? strip_tags(filter_input(INPUT_POST, "txt_tipo_documento")) : 8;
 
      $numero_documento = addslashes($_POST['txt_numero_documento']);
 
@@ -103,26 +98,22 @@ class DenunciaController extends Controller{
 
      $observacao = isset($_POST['txt_observacao']) ? strip_tags(filter_input(INPUT_POST, "txt_observacao")) : NULL;
           
-   /*  echo "Observação------=>: ".$observacao."<br/>";
-     echo "Numero do documento ------=>: ".$numero_documento;
-     exit;          
-  */
      if($id_denuncia){
           $d->Editar($id_denuncia, $denuncia, $id_denunciante, $tipo_documento, $numero_documento, $data_entrada, $observacao);
         
+          echo "<pre>";
+               print_($d);
+          echo "</pre>";
+          exit;
+
     }else{
+
+
           $d->Incluir($denuncia, $id_denunciante, $tipo_documento, $numero_documento, $data_entrada, $observacao);
+
           echo "<script> Document.alert('Denúncia  já existe, não pode mais cadastrar'); </script> ";
      }
           header("Location:" . URL_BASE . "denuncia/lista");
      }
-
-     public function pendencias(){
-          $denuncia = $arrayName = array('id' =>0 , 'nome'=>'pendencias');
-          $dados["denuncia"] = $denuncia;
-          $dados["view"] = "pendencias";
-          $this->load("template", $dados);
-      }
-  
 }
 
