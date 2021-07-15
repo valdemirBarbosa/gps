@@ -9,7 +9,7 @@ class Processo_Model extends Model{
     }
 
     public function lista(){
-        $sql = "SELECT * FROM processo"; 
+        $sql = "SELECT * FROM processo as p LEFT JOIN fase as f ON p.id_fase = f.id_fase"; 
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
@@ -28,7 +28,7 @@ class Processo_Model extends Model{
 
 // Pegar os dados da tabela processo e disponibilizar para os Métodos Editar e Excluir
     public function getId($id_processo){
-        $sql = "SELECT * FROM processo WHERE id_processo = :id";
+        $sql = "SELECT * FROM processo as p INNER JOIN fase as f ON p.id_fase = f.id_fase WHERE id_processo =:id";
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":id", $id_processo);
         $sql->execute();
@@ -47,32 +47,33 @@ class Processo_Model extends Model{
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
-    
 
 //Inserir dados na tabela de sindicância
-    public function Incluir($id_denuncia, $id_pp_sindicancia, $numero_processo, $data_instauracao, $observacao, $anexo, $user){
-        $sql = "INSERT INTO processo SET id_denuncia = :id_denuncia, id_pp_sindicancia = :id_pp_sindicancia, numero_processo = :numero_processo, data_instauracao = :data_instauracao, observacao = :observacao, anexo = :anexo, user = :user"; 
+    public function Incluir($id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $data_encerramento, $anexo,  $user){
+        $sql = "INSERT INTO processo SET id_denuncia = :id_denuncia, id_fase = :id_fase, numero_processo = :numero_processo, data_instauracao =:data_instauracao, observacao = :observacao, data_encerramento =:data_encerramento, anexo =:anexo, user =:user"; 
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":id_denuncia", $id_denuncia);
-        $sql->bindValue(":id_pp_sindicancia", $id_pp_sindicancia);
+        $sql->bindValue(":id_fase", $id_fase);
         $sql->bindValue(":numero_processo", $numero_processo);
         $sql->bindValue(":data_instauracao", $data_instauracao);
         $sql->bindValue(":observacao", $observacao);
+        $sql->bindValue(":data_encerramento", $data_encerramento);
         $sql->bindValue(":anexo", $anexo);
         $sql->bindValue(":user", $user);
         $sql->execute();
     }
 
 //Editar, alterar dados na tabela de sindicância
-    public function Editar($id_processo, $id_denuncia, $id_pp_sindicancia, $numero_processo, $data_instauracao, $observacao, $anexo, $user){
-        $sql = "UPDATE processo SET id_denuncia = :id_denuncia, id_pp_sindicancia = :id_pp_sindicancia, numero_processo = :numero_processo, data_instauracao = :data_instauracao, observacao = :observacao, anexo = :anexo, user = :user WHERE id_processo = :id"; 
+    public function Editar($id_processo, $id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $data_encerramento, $anexo, $user){
+        $sql = "UPDATE processo SET id_denuncia = :id_denuncia, id_fase = :id_fase, numero_processo = :numero_processo, data_instauracao = :data_instauracao, observacao = :observacao, data_encerramento = :data_encerramento = :anexo, user = :user WHERE id_processo = :id"; 
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":id", $id_processo);
         $sql->bindValue(":id_denuncia", $id_denuncia);
-        $sql->bindValue(":id_pp_sindicancia", $id_pp_sindicancia);
+        $sql->bindValue(":id_fase", $id_fase);
         $sql->bindValue(":numero_processo", $numero_processo);
         $sql->bindValue(":data_instauracao", $data_instauracao);
         $sql->bindValue(":observacao", $observacao);
+        $sql->bindValue(":data_encerramento", $data_encerramento);
         $sql->bindValue(":anexo", $anexo);
         $sql->bindValue(":user", $user);
         try {
@@ -84,7 +85,7 @@ class Processo_Model extends Model{
     }
 
     public function Deletar($id_processo){
-            $sql = "DELETE  FROM processo WHERE id_processo = :id";
+            $sql = "DELETE FROM processo WHERE id_processo = :id";
             $sql = $this->db->prepare($sql);
             $sql->bindValue(":id", $id_processo);
             $sql->execute();

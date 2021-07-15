@@ -29,10 +29,10 @@
 	</td>
 	<td>	
 		<label class="tipo_document">tipo de documento</label>
-			<select nome="lst_tipo_documento" class="tipo_documento">
+			<select name="lst_tipo_documento" class="tipo_documento">
 				<option>Selecione o tipo de documento</option>
 					<?php foreach($documento as $doc){?>
-					<option value="<?php $doc->id_tipo_documento   ?>">
+					<option value="<?php echo $doc->id_tipo_documento   ?>">
 						<?php echo $doc->tipo_de_documento   ?> </option>
 				<?php }  ?>	
 			</select>
@@ -41,12 +41,12 @@
 	<tr>
 		<td>
 			<label>número do documento</label>
-			<input name="txt_numero_documento" value="" type="number" placeholder="número do documento">
+			<input name="txt_numero_documento" type="number" placeholder="número do documento">
 		</td>
 		<td>
 
 			<label>data de entrada</label>
-			<input name="txt_data_entrada" value="" type="date" placeholder="00/00/0000">
+			<input name="txt_data_entrada" type="date" placeholder="00/00/0000">
 		</td>
 
 	</tr>

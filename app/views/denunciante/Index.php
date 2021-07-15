@@ -20,7 +20,7 @@
 				<tr class="cor1">
 				<td align="center"><?php echo $dnc->id_denunciante  ?></td>
 				<td><?php echo $dnc->nome_denunciante  ?></td>
-				<td><?php echo $dnc->observacao  ?></td>
+				<td><?php echo $dnc->observacaoDenunciante  ?></td>
 
 				<td align="center">
 					<div class="btn-editar">

@@ -409,6 +409,7 @@ select{
 
 .data{
       background-color:silver;
+      width: 50%;
 } 
 
 .txt_numero_processo{
@@ -496,3 +497,8 @@ select{
       text-transform: upperca
 }
  
+.dtEncerramento{
+      margin-top: 130px;
+      width: 400px;
+      height: 30px;
+}

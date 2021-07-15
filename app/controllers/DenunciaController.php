@@ -88,24 +88,23 @@ class DenunciaController extends Controller{
 
      $denuncia = isset($_POST['txt_denuncia']) ? strip_tags(filter_input(INPUT_POST, "txt_denuncia")) : FALSE;
 
-     $id_denunciante = isset($_POST['lst_id_denunciante']);
+     $id_denunciante = addslashes($_POST['lst_id_denunciante']) ? strip_tags(filter_input(INPUT_POST, "lst_id_denunciante")) : false;
+     if($id_denunciante == "Selecione o denunciante"){
+          header("Location:" . URL_BASE . "erro.html");
+     }
 
-     $tipo_documento = isset($_POST['lst_tipo_documento']) ? strip_tags(filter_input(INPUT_POST, "txt_tipo_documento")) : 8;
+     $tipo_documento = $_POST['lst_tipo_documento'];
 
-     $numero_documento = addslashes($_POST['txt_numero_documento']);
+     $numero_documento = $_POST['txt_numero_documento'];
 
      $data_entrada = isset($_POST['txt_data_entrada']) ? strip_tags(filter_input(INPUT_POST, "txt_data_entrada")) : NULL;
 
-     $observacao = isset($_POST['txt_observacao']) ? strip_tags(filter_input(INPUT_POST, "txt_observacao")) : NULL;
-          
+     $observacao = $_POST['txt_observacao'];
+
+
      if($id_denuncia){
           $d->Editar($id_denuncia, $denuncia, $id_denunciante, $tipo_documento, $numero_documento, $data_entrada, $observacao);
         
-          echo "<pre>";
-               print_($d);
-          echo "</pre>";
-          exit;
-
     }else{
 
 

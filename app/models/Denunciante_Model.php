@@ -30,7 +30,7 @@ class Denunciante_Model  extends Model{
     }
 
     public function Inserir($nome_denunciante, $observacao){
-        $sql = "INSERT INTO denunciante SET nome_denunciante = :denunciante, observacao = :observacao";
+        $sql = "INSERT INTO denunciante SET nome_denunciante = :denunciante, observacaoDenunciante = :observacao";
     
         if($this->ExisteDenunciante($nome_denunciante) == false){
             $sql = $this->db->prepare($sql);
@@ -44,7 +44,7 @@ class Denunciante_Model  extends Model{
     }
 
     public function Editar($id_denunciante, $nome_denunciante, $observacao){
-        $sql = "UPDATE denunciante SET id_denunciante =:id_denunciante, nome_denunciante = :nome_denunciante, observacao =:observacao WHERE id_denunciante =:id_denunciante";
+        $sql = "UPDATE denunciante SET id_denunciante =:id_denunciante, nome_denunciante = :nome_denunciante, observacaoDenunciante =:observacao WHERE id_denunciante =:id_denunciante";
     
             $sql = $this->db->prepare($sql);
             $sql->bindValue(":id_denunciante", $id_denunciante);
