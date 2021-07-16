@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 15-Jul-2021 às 07:20
+-- Tempo de geração: 16-Jul-2021 às 05:18
 -- Versão do servidor: 10.4.17-MariaDB
 -- versão do PHP: 8.0.2
 
@@ -114,6 +114,14 @@ CREATE TABLE `ocorrencia` (
   `data_digitacao` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Extraindo dados da tabela `ocorrencia`
+--
+
+INSERT INTO `ocorrencia` (`id_ocorrencia`, `id_processo`, `numero_processo`, `data_ocorrencia`, `ocorrencia`, `observacao`, `anexo`, `user`, `data_digitacao`) VALUES
+(2, 2, '4040', '2021-07-15', '																				teste de ocorrencia																', '																								nada		\r\n					mesmo	\r\n						\r\n						\r\n				', 0, 1, '2021-07-15 22:32:42'),
+(3, 2, '202', '2019-02-02', '', '', 0, 1, '2021-07-15 22:55:41');
+
 -- --------------------------------------------------------
 
 --
@@ -164,7 +172,7 @@ CREATE TABLE `processo` (
 --
 
 INSERT INTO `processo` (`id_processo`, `id_denuncia`, `id_fase`, `numero_processo`, `data_instauracao`, `observacao`, `anexo`, `data_encerramento`, `user`) VALUES
-(2, 40, 2, '40', '2015-01-15', ' \r\n					 \r\n					 \r\n					 \r\n					 teste 40 \r\n	 \r\n				 \r\n				 \r\n				 \r\n				 \r\n				 \r\n				', '', '0000-00-00', 1);
+(2, 40, 3, '4040', '2015-01-15', ' \r\n					teste pra ver data de encerramento \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					teste \r\n				 \r\n				 \r\n', '', '2021-07-11', 1);
 
 -- --------------------------------------------------------
 
@@ -298,7 +306,7 @@ ALTER TABLE `denunciante`
 -- AUTO_INCREMENT de tabela `ocorrencia`
 --
 ALTER TABLE `ocorrencia`
-  MODIFY `id_ocorrencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_ocorrencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `processo`
