@@ -8,21 +8,15 @@ use app\models\Denunciado_Model;
 use app\models\Denunciante_Model;
 use app\models\Processo_Model;
 
-class ProcessoController extends Controller{
+class AndamentoController extends Controller{
     
    public function index(){
         $processo = new Processo_Model();
         $dados["processo"] = $processo->lista();
-        $dados["view"] = "processo/Index";
+        $dados["view"] = "ocorrencia/andamento";
         $this->load("template", $dados);
     }
 
-    public function getCodigos(){
-        $denuncia = new Processo_Model();
-        $dados["denunciaId"] = $denuncia->getIdDenuncia();
-        $dados["view"] = "processo/Incluir";
-        $this->load("template", $dados);
-    }
 
 //Função para salvar e direcionar ou para Editar ou para Incluir 
     public function Salvar(){

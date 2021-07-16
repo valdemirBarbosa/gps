@@ -65,7 +65,8 @@ class Processo_Model extends Model{
 
 //Editar, alterar dados na tabela de sindicância
     public function Editar($id_processo, $id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $data_encerramento, $anexo, $user){
-        $sql = "UPDATE processo SET id_denuncia = :id_denuncia, id_fase = :id_fase, numero_processo = :numero_processo, data_instauracao = :data_instauracao, observacao = :observacao, data_encerramento = :data_encerramento = :anexo, user = :user WHERE id_processo = :id"; 
+        $sql = "UPDATE processo SET id_denuncia = :id_denuncia, id_fase = :id_fase, numero_processo = :numero_processo, data_instauracao = :data_instauracao, observacao = :observacao, data_encerramento =:data_encerramento, anexo = :anexo, user = :user WHERE id_processo = :id"; 
+
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":id", $id_processo);
         $sql->bindValue(":id_denuncia", $id_denuncia);
@@ -76,12 +77,8 @@ class Processo_Model extends Model{
         $sql->bindValue(":data_encerramento", $data_encerramento);
         $sql->bindValue(":anexo", $anexo);
         $sql->bindValue(":user", $user);
-        try {
-            $sql->execute();
-        } catch (Exception $e) {
-            echo "Erro ao salvar as alterações, integridade dos dados: ".$e->intl_get_error_message(), "\n";
-        }
-            
+        $sql->execute();
+
     }
 
     public function Deletar($id_processo){

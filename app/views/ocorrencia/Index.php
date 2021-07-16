@@ -11,9 +11,7 @@
 		  <thead>
 			<tr>
 				<th align="center" width="10%">Id ocorrencia</th>
-				<th align="center" width="10%">Id denuncia</th>
-				<th align="center" width="10%">Id id pp sindicancia</th>
-				<th align="center" width="10%">Id pad</th>
+				<th align="center" width="10%">Id processo</th>
 				<th align="center" width="15%">Numero do Processo</th>
 				<th align="center" width="13%">Data ocorrência </th>
 				<th align="center" width="25%">ocorrência </th>
@@ -25,12 +23,10 @@
 	?>
 			<tr>
 				<td align="center"><?php echo $oco->id_ocorrencia ?> </td>
-				<td align="center"><?php echo $oco->id_denuncia ?> </td>
-				<td align="center"><?php echo $oco->id_pp_sindicancia ?> </td>
-				<td align="center"><?php echo $oco->id_pad ?> </td>
+				<td align="center"><?php echo $oco->id_processo ?> </td>
 				<td align="center"><?php echo $oco->numero_processo ?> </td>
 				<td><?php echo date('d/m/Y', strtotime($oco->data_ocorrencia)) ?> </td> 
-				<td><?php echo $oco->ocorrencias ?> </td>
+				<td><?php echo $oco->ocorrencia ?> </td>
 				<td align="center"><?php echo $oco->anexo ?> </td>
 			
 				<td>

@@ -31,18 +31,14 @@ class OcorrenciaController extends Controller{
           $ocorre = new Ocorrencia_Model();
      
           $id_ocorrencia = isset($_POST['txt_id_ocorrencia']) ? strip_tags(filter_input(INPUT_POST, "txt_id_ocorrencia")) : NULL;
-
-          $id_denuncia = isset($_POST['txt_id_denuncia']) ? strip_tags(filter_input(INPUT_POST, "txt_id_denuncia")) : NULL;;
-
-          $id_pp_sindicancia = isset($_POST['txt_id_pp_sindicancia']) ? strip_tags(filter_input(INPUT_POST, "txt_id_pp_sindicancia")) : NULL;
-
-          $id_pad = isset($_POST['txt_id_pad']) ? strip_tags(filter_input(INPUT_POST, "txt_id_pp_sindicancia")) : NULL;
+          
+          $id_processo = isset($_POST['txt_id_processo']) ? strip_tags(filter_input(INPUT_POST, "txt_id_processo")) : NULL;
 
           $numero_processo = addslashes($_POST['txt_numero_processo']);
 
           $data_ocorrencia = addslashes($_POST['txt_data_ocorrencia']);
 
-          $ocorrencias = isset($_POST['txt_ocorrencia']) ? strip_tags(filter_input(INPUT_POST, "txt_ocorrencia")) : NULL;
+          $ocorrencia = isset($_POST['txt_ocorrencia']) ? strip_tags(filter_input(INPUT_POST, "txt_ocorrencia")) : NULL;
           
           $observacao = isset($_POST['txt_observacao']) ? strip_tags(filter_input(INPUT_POST, "txt_observacao")) : NULL;
           
@@ -50,22 +46,22 @@ class OcorrenciaController extends Controller{
           $user = 1;
           $data_digitacao = NULL;
 
+
           //Verifica se tem algum dos Id´s informado
-          if($this->VerificaId($id_denuncia, $id_pp_sindicancia, $id_pad) == false){
+       //   if($this->VerificaId($id_denuncia, $id_pp_sindicancia, $id_pad) == false){
 
                //Verifica se será postado o "id" se sim será Edição, senão inclusão
                if($id_ocorrencia){
-                    $ocorre->Editar($id_ocorrencia, $id_denuncia, $id_pp_sindicancia, $id_pad, $numero_processo, $data_ocorrencia, $ocorrencias, $observacao, $anexo, $user, $data_digitacao);
+                    $ocorre->Editar($id_ocorrencia, $id_processo, $numero_processo, $data_ocorrencia, $ocorrencia, $observacao, $anexo, $user);
                }else{
-                    $ocorre->Incluir($id_denuncia, $id_pp_sindicancia, $id_pad, $numero_processo, $data_ocorrencia, $ocorrencias, $observacao, $anexo, $user, $data_digitacao);
+                    $ocorre->Incluir($id_processo, $numero_processo, $data_ocorrencia, $ocorrencia, $observacao, $anexo, $user);
 
                     echo "<script> Document.alert('Denúncia  já existe, não pode mais cadastrar'); </script> ";
                }
                header("Location:" . URL_BASE . "ocorrencia/lista");
      }
-}
 
-//Verifica se foi passado o id de alguma das fases - id_denuncia, id_pp_sindicancia ou id_pad
+/* Verifica se foi passado o id de alguma das fases - id_denuncia, id_pp_sindicancia ou id_pad
      public function VerificaId($id_denuncia, $id_pp_sindicancia, $id_pad){
           if(($id_denuncia == 0) && ($id_pp_sindicancia == 0) && ($id_pad == 0)){
                $mensagem = "Informe um Id para continuar.<br/>
@@ -79,6 +75,7 @@ class OcorrenciaController extends Controller{
           $dados["view"] = "inconsistências";
           $this->load("template", $dados);
      }
+*/
 
 /*
    public function Anexar(){

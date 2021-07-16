@@ -9,15 +9,10 @@
 		<label>Id da ocorrência</label>
 			<input id="txt_id" name="txt_id_ocorrencia" value="<?php echo $ocor->id_ocorrencia ?>" >
 
-			<label>Id da denuncia</label>
-			<input id="txt_id" name="txt_id_denuncia" value="<?php echo $ocor->id_denuncia ?>" >
-			<label>Id da pp/sindicancia</label>
-			<input id="txt_id" name="txt_id_pp_sindicancia" value="<?php echo $ocor->id_pp_sindicancia ?>" >
+			<label>Id do processo</label>
+			<input id="txt_id" name="txt_id_pprocesso" value="<?php echo $ocor->id_processo ?>" >
 
-			<label>Id do pad</label>
-			<input id="txt_id" name="txt_id_pad" value="<?php echo $ocor->id_pad ?>" >
-
-			<label>Número do processo anterior</label>
+			<label>Número do processo</label>
 			<input name="txt_numero_processo" type="number" placeholder="Insira o número do processo" value="<?php echo $ocor->numero_processo ?>">
 </fieldset>
 
@@ -29,7 +24,7 @@
 			<div class="ocorrencia">		
 				<label>Ocorrência</label>
 				<textarea rows="2" cols="55" name="txt_ocorrencia">
-					<?php echo $ocor->ocorrencias ?>
+					<?php echo $ocor->ocorrencia ?>
 				</textarea>
 			</div>
 

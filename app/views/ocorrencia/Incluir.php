@@ -9,36 +9,33 @@
 		<input id="txt_id" name="txt_id_ocorrencia" enable="false" readonly>
 
 		<label>Id Processo</label>
-		<input id="txt_id_processo" name="txt_id_processo" type="number" placeholder="Informe o número do processo">
+		<input id="txt_id_processo" name="txt_id_processo" type="number" placeholder="Informe o ID do processo">
 
-		<label>Id Processo</label>
-		<input id="txt_id_processo" name="txt_id_processo" type="number" placeholder="Informe o número do processo">
-
-		<label>Fase</label>
-		<select name="txt_fase" id="txt_fase">
-			<option value="1">PROCEDIMENTO PRELIMINAR</option>
-			<option value="2">SINDICÂNCIA</option>
-		</select> 
-		
-		<label>Número do Processo/Documento</label>
+		<label>Número do Processo</label>
 		<input autofocus name="txt_numero_processo" type="number" placeholder="Insira o número do processo">
 	</legend>
+	</fieldset>
 
-		<label>Data de ocorrencia</label>
-		<input name="txt_data_ocorrencia" type="date" >
-
-		<label>Ocorrencia/Andamento</label>
-		<input name="txt_ocorrencia" type="text" >
-
+	<fieldset>
+		<legend>Ocorrências </legend>
+		<table>
+			<th>Data de ocorrencia</th>
+			<th>Ocorrencia/Andamento</th>
+			<tr>
+				<td><input name="txt_data_ocorrencia" type="date" ></td>
+				<td><input name="txt_ocorrencia" type="text" ></td>
+			</tr>
+		</table>
 		<label>Observação</label>
-		<input name="txt_observacao" type="text" placeholder="Livre para observações">
+		<input name="txt_observacao" type="text" placeholder="Livre para observações"></td>
 
 		<label>Anexo</label>
-		<input name="txt_anexo" type="file" >
+		<td><input name="txt_anexo" type="file" >
+</td>
 
-		<input type="submit" value="Cadastrar" class="btn">
-		<input type="reset" name="Reset" id="button" value="Limpar" class="btn limpar">
-	</fieldset>
+
+			<input type="submit" value="Cadastrar" class="btn">
+			<input type="reset" name="Reset" id="button" value="Limpar" class="btn limpar">
 	</form>
 </div>	
 </div>	
