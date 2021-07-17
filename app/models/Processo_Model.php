@@ -25,8 +25,23 @@ class Processo_Model extends Model{
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
+    
+    public function ProcessoOcorrencia(){
+        $sql = "SELECT * FROM processo as p LEFT JOIN fase as f ON p.id_fase = f.id_fase INNER JOIN ocorrencia as o ON p.id_processo = o.id_processo"; 
+        $qry = $this->db->query($sql);
+        return $qry->fetchAll(\PDO::FETCH_OBJ);
+    }
+    
+    public function getNumProcesso($numero_processo){
+        
+        $sql = "SELECT * FROM processo WHERE numero_processo =:numProcesso"; 
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":numProcesso", $numero_processo);
+        $sql->execute();
+        return $sql->fetchAll(\PDO::FETCH_OBJ);
+    }
 
-// Pegar os dados da tabela processo e disponibilizar para os Métodos Editar e Excluir
+    // Pegar os dados da tabela processo e disponibilizar para os Métodos Editar e Excluir
     public function getId($id_processo){
         $sql = "SELECT * FROM processo as p INNER JOIN fase as f ON p.id_fase = f.id_fase WHERE id_processo =:id";
         $sql = $this->db->prepare($sql);
@@ -40,13 +55,6 @@ class Processo_Model extends Model{
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
-
-    public function getIdSindicancia(){
-        $sql = "SELECT * FROM sindicancia";
-        $qry = $this->db->query($sql);
-        return $qry->fetchAll(\PDO::FETCH_OBJ);
-    }
-
 
 //Inserir dados na tabela de sindicância
     public function Incluir($id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $data_encerramento, $anexo,  $user){

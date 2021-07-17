@@ -12,5 +12,5 @@
 		<li><a href="<?php echo URL_BASE . "processo/" ?>" >Processo</a></li>
 		<li><a href="<?php echo URL_BASE . "ocorrencia/" ?>" >Ocorrencia</a></li>
 		<li><a href="<?php echo URL_BASE . "portaria" ?>" >Portarias</a></li>
-	</ul>
+	</ul> 
 </nav>	

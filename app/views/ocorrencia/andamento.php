@@ -1,5 +1,13 @@
 <div class="base-home">
-	<h1 class="titulo-pagina">Alterar dados do Processo</h1>
+	<h1 class="titulo-pagina">Dados do Processo</h1>
+
+<div class="frmConsulta">  
+	<form method="POST" action="<?php echo URL_BASE . 'Andamento/ConsultaPorNumeroProcesso' ?>" >
+		<label>Pesquisa por número do processo</label>
+		<input type="number" autofocus name="pesquisaPorNumeroProcesso">
+		<input type="submit" value="pesquisar">
+	</form>
+</div>
 </div>
 
 <form action="<?php echo URL_BASE ."Processo/Salvar" ?>" method="POST">
@@ -20,8 +28,8 @@
 						<option value="<?php echo $f->id_fase ?>"><?php echo $f->fase ?> </option>
 					<?PHP } ?>
 				</select>
-
 		</fieldset>		
+
 		<fieldset>
 			<legend>informações do processo</legend>
 				<label>Número do Processo</label>
@@ -39,39 +47,20 @@
 				
 				<label>Data de Encerramento</label>
 					<input name="txt_data_encerramento" type="date" value="<?php echo $pd->data_encerramento ?>">
-
 		</fieldset>
+		
 		<?php } ?>
-			<input type="hidden" name="id_processo" value="<?php echo $pd->id_processo ?>">	
-			<input type="submit" value="Salvar" class="btn">
-			<input type="reset" name="Reset" id="button" value="Voltar" class="btn limpar">
 
-		</form>
-
-<!-- Formulário para anexar arquivos   		
-		<form action="<?php echo URL_BASE .'Processo/Anexar' ?>" method="POST" multiple="multiple">
-			<?php //$id_processo = $pd->id_processo; ?>
-		<table>
-		  <tr>
-		    <td>
-		        <input type="hidden" name="id_processo" value="<?php //id_processo = $pd->id_processo; ?>">
-		 	  <input type="file" name="arquivo"></label>
-		    <td>
-		    <td>
-		  	 <input type="submit" value="Anexar arquivo">
-		    </td>
-		  </tr>
-		</table>
-		</form>	!-->
-	<div class="tabela">	
-		<table width="100%" border="1" cellspacing="0" cellpadding="0">
+	<fieldset>
+		<div >	
+		<table class="tabela_ocorrencia" width="98%" border="1" cellspacing="1" cellpadding="0">
 		  <thead>
 			<tr>
-				<th align="center" width="10%">Id ocorrencia</th>
-				<th align="center" width="10%">Id processo</th>
-				<th align="center" width="15%">Numero do Processo</th>
-				<th align="center" width="13%">Data ocorrência </th>
-				<th align="center" width="25%">ocorrência </th>
+				<th align="center" width="5%">Id</th>
+				<th align="center" width="5%">Id.proc..</th>
+				<th align="center" width="10%">Número do Processo</th>
+				<th align="center" width="10%">Data da ocorrência </th>
+				<th align="center" width="60%">ocorrência </th>
 				<th width="5%">Anexo</th>
 				<th align="center" colspan="2">Ação</th>
 			</tr>
@@ -98,14 +87,11 @@
 				</td>
 			</tr> 
 	<?php } ?>
-
-			<hr/><hr/>
+	  </div>
+	  </div>
 		</table>
-	</div>				
+	  </fieldset>
 		<p>...</P>
-</div>					
-</div>	
-</div>	
-
+					
 </body>
 </html>

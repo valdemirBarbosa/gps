@@ -7,14 +7,47 @@ use app\models\Denuncia_Model;
 use app\models\Denunciado_Model;
 use app\models\Denunciante_Model;
 use app\models\Processo_Model;
+use app\models\Ocorrencia_Model;
+
 
 class AndamentoController extends Controller{
     
    public function index(){
-        $processo = new Processo_Model();
-        $dados["processo"] = $processo->lista();
+     /*
+     $processo = new Processo_Model();
+        $dados["processo"] = $processo->ProcessoOcorrencia();
+      
+        $ocorrencia = new Ocorrencia_Model();
+        $dados["ocorrencia"] = $ocorrencia->lista();
+
+        $fase = new Processo_Model();
+        $dados["fase"] = $fase->faseLista();
+*/
+
         $dados["view"] = "ocorrencia/andamento";
         $this->load("template", $dados);
+}
+
+    public function ConsultaPorNumeroProcesso(){
+          $numero_processo = isset($_POST['pesquisaPorNumeroProcesso']) ? $_POST['pesquisaPorNumeroProcesso'] : NULL ;
+          
+          $processo = new Processo_Model();
+          $dados["processo"] = $processo->getNumProcesso($numero_processo);
+/*    
+          $processo = new Processo_Model();
+          $dados["processo"] = $processo->ProcessoOcorrencia();
+        
+          $ocorrencia = new Ocorrencia_Model();
+          $dados["ocorrencia"] = $ocorrencia->lista();
+  
+          $fase = new Processo_Model();
+          $dados["fase"] = $fase->faseLista();
+  */
+          $dados["view"] = "ocorrencia/andamento";
+          $this->load("template", $dados);
+
+
+        
     }
 
 

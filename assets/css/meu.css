@@ -494,11 +494,25 @@ select{
       border-color:springgreen;
       border-style: solid;
       text-align: center;
-      text-transform: upperca
+      text-transform: uppercase;
 }
  
 .dtEncerramento{
       margin-top: 130px;
       width: 400px;
       height: 30px;
+}
+
+.tabela_ocorrencia{
+      
+      margin-left: 10px;
+      margin-top: 20px;
+      border-color: white; 
+}
+
+.frmConsulta{
+      position: absolute;
+      float: right;
+      margin-left: 500px;
+      width: 400px;
 }
