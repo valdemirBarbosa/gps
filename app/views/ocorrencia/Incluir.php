@@ -26,6 +26,7 @@
 				<td><input name="txt_ocorrencia" type="text" ></td>
 			</tr>
 		</table>
+
 		<label>Observação</label>
 		<input name="txt_observacao" type="text" placeholder="Livre para observações"></td>
 

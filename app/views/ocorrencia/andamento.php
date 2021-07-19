@@ -1,5 +1,6 @@
 <div class="base-home">
 	<h1 class="titulo-pagina">Dados do Processo</h1>
+</div>
 
 <div class="frmConsulta">  
 	<form method="POST" action="<?php echo URL_BASE . 'Andamento/ConsultaPorNumeroProcesso' ?>" >
@@ -8,26 +9,27 @@
 		<input type="submit" value="pesquisar">
 	</form>
 </div>
-</div>
 
 <form action="<?php echo URL_BASE ."Processo/Salvar" ?>" method="POST">
-		<?php foreach($processo as $pd){ ?>
-		<fieldset>
-			<legend><h4>Códigos</h4></legend>	
-				<label>Id do Processo</label>
-						<input id="txt_id" readonly name="txt_id_processo" enable="false" value="<?php echo $pd->id_processo ?>" >
+
+<?php 
+	foreach($processo as $pd){ 
+				
+	}
+?>
+	<fieldset>
+		<legend><h4>Códigos</h4></legend>	
+		<label>Id do Processo</label>
+		<input id="txt_id" readonly name="txt_id_processo" enable="false" 
+			value="<?php isset($pd->id_processo) ? ($pd->id_processo) : ($pd->id_processo = 0);
+			echo ($pd->id_processo); ?>" >
 
 				<label>Id da denuncia</label>
 				<input readonly name="txt_id_denuncia" enable="false" value="<?php echo $pd->id_denuncia ?>" >
 
 				<label>fase</label>
-				<select name="txt_id_fase">
-					<option value="<?php echo $pd->id_fase ?>"><?php echo $pd->fase ?></option>
+				<input name="txt_id_fase" value="<?php echo $pd->fase ?>" >
 
-					<?php foreach($fase as $f){ ?>
-						<option value="<?php echo $f->id_fase ?>"><?php echo $f->fase ?> </option>
-					<?PHP } ?>
-				</select>
 		</fieldset>		
 
 		<fieldset>
@@ -37,19 +39,18 @@
 				
 				<label>Data de Instauração</label>
 					<input name="txt_data_instauracao" type="date" value="<?php echo $pd->data_instauracao ?>">
-
+<!--
 				<div class="obs">
 					<label id="obs">observação</label> 
 				</div>
 				<textarea rows="4" cols="100" name="txt_observacao"> 
-					<?php echo $pd->observacao ?> 
+					<?php //echo $pd->observacao ?> 
 				</textarea>	
-				
 				<label>Data de Encerramento</label>
-					<input name="txt_data_encerramento" type="date" value="<?php echo $pd->data_encerramento ?>">
-		</fieldset>
+					<input name="txt_data_encerramento" type="date" value="<?php // echo $pd->data_encerramento ?>">
+!-->				
+	</fieldset>
 		
-		<?php } ?>
 
 	<fieldset>
 		<div >	
@@ -85,8 +86,19 @@
 						<a href="<?php echo URL_BASE ."Ocorrencia/Excluir/".$oco->id_ocorrencia ?>" >Excluir</a>
 					  </div>
 				</td>
+	  		</tr>
+				<?php } ?>
+	  </table>
+	  <table width="98%">
+		  <tr></tr><tr></tr><tr></tr>
+	  
+		  <tr >	
+				<td colspan="2" align="center">
+					<div>
+						<a href="<?php echo URL_BASE . "Ocorrencia/Novo"?>" class="btn-inc-ocorrencia">Incluir</a>
+					</div>
+	  			</td>			
 			</tr> 
-	<?php } ?>
 	  </div>
 	  </div>
 		</table>

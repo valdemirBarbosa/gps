@@ -512,7 +512,31 @@ select{
 
 .frmConsulta{
       position: absolute;
-      float: right;
-      margin-left: 500px;
-      width: 400px;
+      z-index: 2;
+      width: 60%;
+      margin-top: 121px;
+      margin-left: 108px;
+
+}
+
+.btn-inc-ocorrencia{
+      width: 200px;
+      background-color:green;
+      color: yellow;      
+      border-radius: 3px;
+      border-style: solid;
+      padding-top: 2px;
+      text-align: center;
+      text-transform: uppercase;
+}
+
+.btn-inc-ocorrencia:hover{
+      width: 130px;
+      height: 40px;
+      background-color:black;
+      color: white;
+      border-radius: 8px;
+      border-color:white;
+      border-style: solid;
+      text-align: center;
 }

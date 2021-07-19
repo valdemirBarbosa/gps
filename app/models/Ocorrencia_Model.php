@@ -21,11 +21,20 @@ class Ocorrencia_Model extends Model{
     }
     
 // Pegar os dados da tabela ocorrencia e disponibilizar para os Métodos Editar e Excluir
+    public function getNumeroProcesso($numero_processo){
+        $qry = array();
+        $sql = "SELECT * FROM ocorrencia WHERE numero_processo = :numero_processo";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":numero_processo", $numero_processo);
+        $sql->execute();
+        return $sql->fetchAll(\PDO::FETCH_OBJ);
+    }
+
     public function getId($id_ocorrencia){
         $qry = array();
-        $sql = "SELECT * FROM ocorrencia WHERE id_ocorrencia = :id";
+        $sql = "SELECT * FROM ocorrencia WHERE id_ocorrencia = :id_ocorrencia";
         $sql = $this->db->prepare($sql);
-        $sql->bindValue(":id", $id_ocorrencia);
+        $sql->bindValue(":id_ocorrencia", $id_ocorrencia);
         $sql->execute();
         return $sql->fetchAll(\PDO::FETCH_OBJ);
     }
