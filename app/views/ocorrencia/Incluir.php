@@ -1,7 +1,7 @@
 <div class="base-home">
 	<h1 class="titulo-pagina"><span class="cor">Incluir </span>Ocorrencias/Andamento</h1>
 </div>
-
+						
 <form action="<?php echo URL_BASE ."Ocorrencia/Salvar" ?>" method="POST">
 	<fieldset>
 	<legend><h4>id - identificadores </h4></legend>
@@ -10,12 +10,12 @@
 
 		<label>Id Processo</label>
 		<input id="txt_id_processo" name="txt_id_processo" type="number" placeholder="Informe o ID do processo"value="<?php foreach($processo as $p){
-										echo $p->id_processo; 
-										}?>">
+								echo $p->id_processo; 
+							}?>">
 
 		<label>Número do Processo</label>
-		<input name="txt_numero_processo" type="number" placeholder="Insira o número do processo" value="<?php foreach($processo as $p){
-						echo $p->numero_processo;
+		<input name="txt_numero_processo" type="number" placeholder="Insira o número do processo" value="<?php foreach($processo as $pr){
+						echo $pr->numero_processo;
 					} ?>" >
 	</legend>
 	</fieldset>

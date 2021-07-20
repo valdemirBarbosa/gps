@@ -9,7 +9,7 @@ class Ocorrencia_Model extends Model{
     }
 
     public function lista(){
-        $sql = "SELECT * FROM ocorrencia"; 
+        $sql = "SELECT * FROM ocorrencia ORDER BY numero_processo"; 
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }

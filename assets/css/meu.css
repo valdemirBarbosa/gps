@@ -525,7 +525,7 @@ select{
 }
 
 .btn-inc-ocorrencia{
-      width: 120px;
+      width: 200px;
       height: 30px;
       vertical-align: middle;
       background-color:green;
@@ -539,7 +539,7 @@ select{
 
 .btn-inc-ocorrencia:hover{
       width: 130px;
-      height: 40px;
+      height: 60px;
       background-color:khaki;
       color:ghostwhite;
       border-radius: 8px;
@@ -550,4 +550,14 @@ select{
 
 .fase{
       width: 20%; 
+}
+
+.tela{
+      position: absolute;
+      z-index: 10;
+      width: 100px;
+      height: 40px;
+      margin-left: 200px;
+      background-color: red;
+
 }

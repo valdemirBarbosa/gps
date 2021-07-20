@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 16-Jul-2021 às 05:18
+-- Tempo de geração: 20-Jul-2021 às 13:21
 -- Versão do servidor: 10.4.17-MariaDB
 -- versão do PHP: 8.0.2
 
@@ -119,8 +119,13 @@ CREATE TABLE `ocorrencia` (
 --
 
 INSERT INTO `ocorrencia` (`id_ocorrencia`, `id_processo`, `numero_processo`, `data_ocorrencia`, `ocorrencia`, `observacao`, `anexo`, `user`, `data_digitacao`) VALUES
-(2, 2, '4040', '2021-07-15', '																				teste de ocorrencia																', '																								nada		\r\n					mesmo	\r\n						\r\n						\r\n				', 0, 1, '2021-07-15 22:32:42'),
-(3, 2, '202', '2019-02-02', '', '', 0, 1, '2021-07-15 22:55:41');
+(4, 3, '505', '2021-07-15', 'TESTE DE OCORRÊNCIA EM PROCESSO', '', 0, 1, '2021-07-17 09:39:09'),
+(9, 2, '209', '2021-07-19', 'reativando processo', '', 0, 1, '2021-07-19 06:19:15'),
+(18, 3, '505', '2021-07-19', 'teste com formulário vinculado', 'teste', 0, 1, '2021-07-19 21:19:22'),
+(19, 3, '505', '2021-07-19', 'TESTANDO HEADER', '', 0, 1, '2021-07-19 21:26:16'),
+(20, 3, '505', '2021-07-19', 'TESTE DE HEADER', '', 0, 1, '2021-07-19 21:26:57'),
+(21, 3, '505', '2021-07-19', 'TESTE', '', 0, 1, '2021-07-19 21:29:45'),
+(23, 4041, '202', '2021-07-19', 'incluindo ocorrência um processo que não existe', '', 0, 1, '2021-07-19 21:44:32');
 
 -- --------------------------------------------------------
 
@@ -149,6 +154,13 @@ CREATE TABLE `portaria` (
   `user` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Extraindo dados da tabela `portaria`
+--
+
+INSERT INTO `portaria` (`id_portaria`, `id_processo`, `id_fase`, `numero_processo`, `tipo`, `numero`, `data_elaboracao`, `conteudo`, `data_publicacao`, `veiculo`, `prazo`, `data_final`, `dias_a_vencer`, `data_realizada`, `prazo_atendido`, `observacao`, `anexo`, `user`) VALUES
+(0, 0, 0, '202', 'instauração', '10', '2021-07-01', '1', '2021-07-03', 'amm', 15, '2021-07-18', -2, '2021-07-25', '', '				', NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -172,7 +184,9 @@ CREATE TABLE `processo` (
 --
 
 INSERT INTO `processo` (`id_processo`, `id_denuncia`, `id_fase`, `numero_processo`, `data_instauracao`, `observacao`, `anexo`, `data_encerramento`, `user`) VALUES
-(2, 40, 3, '4040', '2015-01-15', ' \r\n					teste pra ver data de encerramento \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					teste \r\n				 \r\n				 \r\n', '', '2021-07-11', 1);
+(2, 40, 3, '4040', '2015-01-15', ' \r\n					 \r\n					teste pra ver data de encerramento \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					 \r\n					teste \r\n				 \r', '', '2021-07-11', 1),
+(3, 48, 2, '505', '2021-07-15', 'TESTANDO PROCESSO PARA INCLUSÃO DE OCORRÊNCIA \r\n	', '', '0000-00-00', 1),
+(4, 40, 1, '202', '2021-07-01', ' \r\n					Incluindo um processo que já foi até incluído ocorrência \r\n	 \r\n				', '', '0000-00-00', 1);
 
 -- --------------------------------------------------------
 
@@ -306,13 +320,13 @@ ALTER TABLE `denunciante`
 -- AUTO_INCREMENT de tabela `ocorrencia`
 --
 ALTER TABLE `ocorrencia`
-  MODIFY `id_ocorrencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_ocorrencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de tabela `processo`
 --
 ALTER TABLE `processo`
-  MODIFY `id_processo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_processo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `tipo_documento`

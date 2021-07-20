@@ -95,7 +95,7 @@
 		  <tr >	
 			<td height="30px" colspan="2" align="center">
 				<div class="btn-inc-ocorrencia">
-					<a href="<?php echo URL_BASE . "Ocorrencia/IncluirOcorrenciaVincProc/".$oco->numero_processo ?>" >Incluir</a>
+					<a href="<?php echo URL_BASE . "Ocorrencia/IncluirOcorrenciaVincProc/".$oco->numero_processo ?>" >Incluir ocorrências</a>
 				</div>
   			</td>			
 		</tr> 

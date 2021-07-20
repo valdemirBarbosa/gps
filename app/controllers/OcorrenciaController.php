@@ -116,7 +116,7 @@ class OcorrenciaController extends Controller{
      //Pega pelo id_processo o id e o número de processo pra vincular ao formulário de inclusão de ocorrência
      public function IncluirOcorrenciaVincProc($numero_processo){
           $processo = new Processo_Model();
-          $dados["processo"] = $processo->getId($numero_processo);
+          $dados["processo"] = $processo->getNumProcesso($numero_processo);
           $dados["view"] = "ocorrencia/Incluir";
           $this->load("template", $dados);
      }

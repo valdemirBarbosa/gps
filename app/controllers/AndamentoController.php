@@ -16,16 +16,14 @@ class AndamentoController extends Controller{
    public function index(){
           $dados["view"] = "ocorrencia/andamento";
           $mensagem = "Sem dados para pesquisa";
-          $processo = Array();
-          $ocorrencia = Array();
-
-               $processo = new AndamentoOcorrencia_Model();
-               $dados["processo"] = $processo->getNumProcesso(0);
+  
+          $processo = new AndamentoOcorrencia_Model();
+          $dados["processo"] = $processo->getNumProcesso(0);
    
-               $ocorrencia = new Ocorrencia_Model();
-               $dados["ocorrencia"] = $ocorrencia->getNumeroProcesso(0);
+          $ocorrencia = new Ocorrencia_Model();
+          $dados["ocorrencia"] = $ocorrencia->getNumeroProcesso(0);
    
-               $this->load("template", $dados);
+          $this->load("template", $dados);
 }
 
     public function ConsultaPorNumeroProcesso(){
