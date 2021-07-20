@@ -33,7 +33,6 @@ class Processo_Model extends Model{
     }
     
     public function getNumProcesso($numero_processo){
-        
         $sql = "SELECT * FROM processo WHERE numero_processo =:numProcesso"; 
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":numProcesso", $numero_processo);

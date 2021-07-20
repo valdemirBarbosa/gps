@@ -99,7 +99,7 @@ label, input{
 }
 
 #txt_id{
-      width: 80px;
+      width: 60px;
       text-align: center;
 }
 
@@ -118,11 +118,16 @@ input{
 }
 
 input[type="text"]{
-      width: 500px;
+      width: 150px;
+}
+
+input[type="number"]{
+      width: 80px;
+      text-align: center;
 }
 
 input[type="date"]{
-      width: 150px;
+      width: 140px;
 }
 
 #cpf{
@@ -143,7 +148,7 @@ fieldset{
 }
 
 legend{
-      color:darkslategray;
+      color:black;
 }
 
 
@@ -514,15 +519,17 @@ select{
       position: absolute;
       z-index: 2;
       width: 60%;
-      margin-top: 121px;
-      margin-left: 108px;
+      margin-top: 124px;
+      margin-left: 85px;
 
 }
 
 .btn-inc-ocorrencia{
-      width: 200px;
+      width: 120px;
+      height: 30px;
+      vertical-align: middle;
       background-color:green;
-      color: yellow;      
+      color: white;      
       border-radius: 3px;
       border-style: solid;
       padding-top: 2px;
@@ -533,10 +540,14 @@ select{
 .btn-inc-ocorrencia:hover{
       width: 130px;
       height: 40px;
-      background-color:black;
-      color: white;
+      background-color:khaki;
+      color:ghostwhite;
       border-radius: 8px;
-      border-color:white;
+      border-color:green;
       border-style: solid;
       text-align: center;
+}
+
+.fase{
+      width: 20%; 
 }

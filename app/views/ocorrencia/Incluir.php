@@ -9,10 +9,14 @@
 		<input id="txt_id" name="txt_id_ocorrencia" enable="false" readonly>
 
 		<label>Id Processo</label>
-		<input id="txt_id_processo" name="txt_id_processo" type="number" placeholder="Informe o ID do processo">
+		<input id="txt_id_processo" name="txt_id_processo" type="number" placeholder="Informe o ID do processo"value="<?php foreach($processo as $p){
+										echo $p->id_processo; 
+										}?>">
 
 		<label>Número do Processo</label>
-		<input autofocus name="txt_numero_processo" type="number" placeholder="Insira o número do processo">
+		<input name="txt_numero_processo" type="number" placeholder="Insira o número do processo" value="<?php foreach($processo as $p){
+						echo $p->numero_processo;
+					} ?>" >
 	</legend>
 	</fieldset>
 
@@ -22,7 +26,7 @@
 			<th>Data de ocorrencia</th>
 			<th>Ocorrencia/Andamento</th>
 			<tr>
-				<td><input name="txt_data_ocorrencia" type="date" ></td>
+				<td><input autofocus name="txt_data_ocorrencia" type="date" ></td>
 				<td><input name="txt_ocorrencia" type="text" ></td>
 			</tr>
 		</table>

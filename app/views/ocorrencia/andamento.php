@@ -25,7 +25,7 @@
 			echo ($pd->id_processo); ?>" >
 
 				<label>Id da denuncia</label>
-				<input readonly name="txt_id_denuncia" enable="false" value="<?php echo $pd->id_denuncia ?>" >
+				<input id="txt_id" readonly name="txt_id_denuncia" enable="false" value="<?php echo $pd->id_denuncia ?>" >
 
 				<label>fase</label>
 				<input name="txt_id_fase" value="<?php echo $pd->fase ?>" >
@@ -34,7 +34,7 @@
 
 		<fieldset>
 			<legend>informações do processo</legend>
-				<label>Número do Processo</label>
+					<label>Número do Processo</label>
 					<input class="txt_numero_processo" name="txt_numero_processo" type="number" placeholder="Insira o número do processo" value="<?php echo $pd->numero_processo ?>">
 				
 				<label>Data de Instauração</label>
@@ -93,12 +93,12 @@
 		  <tr></tr><tr></tr><tr></tr>
 	  
 		  <tr >	
-				<td colspan="2" align="center">
-					<div>
-						<a href="<?php echo URL_BASE . "Ocorrencia/Novo"?>" class="btn-inc-ocorrencia">Incluir</a>
-					</div>
-	  			</td>			
-			</tr> 
+			<td height="30px" colspan="2" align="center">
+				<div class="btn-inc-ocorrencia">
+					<a href="<?php echo URL_BASE . "Ocorrencia/IncluirOcorrenciaVincProc/".$oco->numero_processo ?>" >Incluir</a>
+				</div>
+  			</td>			
+		</tr> 
 	  </div>
 	  </div>
 		</table>

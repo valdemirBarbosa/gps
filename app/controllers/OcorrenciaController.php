@@ -5,8 +5,7 @@ use app\core\Controller;
 use app\models\Denuncia_Model;
 use app\models\Denunciado_Model;
 use app\models\Denunciante_Model;
-use app\models\PpSindicancia_Model;
-use app\models\Pad_Model;
+use app\models\Processo_Model;
 use app\models\Ocorrencia_Model;
 
 class OcorrenciaController extends Controller{
@@ -32,7 +31,7 @@ class OcorrenciaController extends Controller{
      
           $id_ocorrencia = isset($_POST['txt_id_ocorrencia']) ? strip_tags(filter_input(INPUT_POST, "txt_id_ocorrencia")) : NULL;
           
-          $id_processo = isset($_POST['txt_id_processo']) ? strip_tags(filter_input(INPUT_POST, "txt_id_processo")) : NULL;
+          $id_processo = isset($_POST['txt_id_processo']) && $_POST['txt_id_processo'] > 0? strip_tags(filter_input(INPUT_POST, "txt_id_processo")) : $msg = "Dever ser >0";
 
           $numero_processo = addslashes($_POST['txt_numero_processo']);
 
@@ -58,7 +57,8 @@ class OcorrenciaController extends Controller{
 
                     echo "<script> Document.alert('Denúncia  já existe, não pode mais cadastrar'); </script> ";
                }
-               header("Location:" . URL_BASE . "ocorrencia/lista");
+               
+               isset($_GET['IncluirOcorrenciaVincProc']) ? header("Location:" . URL_BASE . "ocorrencia/lista/") : header("Location:" . URL_BASE . "ANDAMENTO");
      }
 
 /* Verifica se foi passado o id de alguma das fases - id_denuncia, id_pp_sindicancia ou id_pad
@@ -106,11 +106,33 @@ class OcorrenciaController extends Controller{
           $this->load("template", $dados);
      }
 
+     public function GetNumeroProcesso($numero_processo){
+          $processo = new Processo_Model();
+          $dados["processo"] = $processo->getNumProcesso($numero_processo);
+          $dados["view"] = "ocorrencia/Incluir";
+          $this->load("template", $dados);
+     }
+
+     //Pega pelo id_processo o id e o número de processo pra vincular ao formulário de inclusão de ocorrência
+     public function IncluirOcorrenciaVincProc($numero_processo){
+          $processo = new Processo_Model();
+          $dados["processo"] = $processo->getId($numero_processo);
+          $dados["view"] = "ocorrencia/Incluir";
+          $this->load("template", $dados);
+     }
+
      public function Edit($id_ocorrencia){
           $ocorrencia = new Ocorrencia_Model();
           $dados["ocorrencia"] = $ocorrencia->getId($id_ocorrencia);
           $dados["view"] = "ocorrencia/Editar";
           $this->load("template", $dados);
+
+/* Estudar mais sobre o extrac pra pegar a variável e fazer a restrição no id_processo
+          extract($dados);
+          $id_processo = $ocorrencia->id_processo;
+          $this->ValidaIdProcessoEmOcorrencia($id_processo);
+*/
+
      }
      
      public function Excluir($id_ocorrencia){
@@ -118,6 +140,16 @@ class OcorrenciaController extends Controller{
           $dados["ocorrencia"] = $ocorrencia->getId($id_ocorrencia);
           $ocorrencia->Deletar($id_ocorrencia);
           header("Location:" . URL_BASE . "ocorrencia");
+  }
+
+  // Estudar mais sobre o extrac pra pegar a variável e fazer a restrição no id_processo
+  public function ValidaIdProcessoEmOcorrencia($id_processo){
+     $msg = "Id_processo deve ser válido. Deve ser maior que 0 (zero)";
+     if($id_processo > 0){
+          return true;
+     } else{
+          return $msg;
+     }
   }
 }
 

@@ -45,9 +45,10 @@ class PortariaController extends Controller{
      return $dias; 
    }
 
+   /* será implementado ainda
    public function status($data_final){
      $dias = $this->subtrairData($data_final);
-     $mensagem = "";
+     $mensagem = "Arrumar";
      if($dias == 0){
           $mensagem = $dias." vence hoje";
           if($dias < 0){
@@ -62,13 +63,11 @@ class PortariaController extends Controller{
                }else{
                     $mensagem = "faltam ".$dias." para vencer";
                }
-               //return $mensagem;
+               return $mensagem;
           }
      }
-     echo $mensagem;
-     exit;
 
-}
+} */
 
 //função para somar dias a uma data, não só no campo dias, mas com reflexo no mês e ano 
 //um dia tem 24 horas, que * 60 tem 1440 minu, que * 60 tem  86400 segundos
@@ -84,11 +83,12 @@ class PortariaController extends Controller{
      $p = new Portaria_Model();
      
      $id_portaria = isset($_POST['txt_id_portaria']) ? strip_tags(filter_input(INPUT_POST, "txt_id_portaria")) : NULL;
-
+          
      $id_fase = isset($_POST['txt_id_fase']) ? strip_tags(filter_input(INPUT_POST, "txt_id_fase")) : FALSE;
 
      $numero_processo = isset($_POST['txt_numero_processo']) ? strip_tags(filter_input(INPUT_POST, "txt_numero_processo")) : NULL;
 
+     
      $tipo = isset($_POST['txt_tipo']) ? strip_tags(filter_input(INPUT_POST, "txt_tipo")) : NULL;
 
      $numero = addslashes($_POST['txt_numero']) ? strip_tags(filter_input(INPUT_POST, "txt_numero")) : NULL;
@@ -110,10 +110,10 @@ class PortariaController extends Controller{
      //executa a função de cálculo de diferença entre as datas atual e data final
      $dias = $this->subtrairData($data_final);
      $dias_a_vencer = $dias;
-    
-     $status = $this->status($data_final);
-    
-     $data_realizada = isset($_POST['txt_data_realizada']) ? strip_tags(filter_input(INPUT_POST, "txt_data_realizada")) : NULL;
+        
+//     $status = $this->status($data_final);
+     $data_realizada = $_POST['txt_data_realizada'];
+
 
      $prazo_atendido = isset($_POST['txt_prazo_atendido']) ? strip_tags(filter_input(INPUT_POST, "txt_prazo_atendido")) : NULL;
 
@@ -128,15 +128,26 @@ class PortariaController extends Controller{
           $tabela = "portaria";
           $filtro = " WHERE id_portaria =:id_portaria";
 
-          $p->InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_fase, $numero_processo, $tipo, $numero, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $status, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
+          $p->InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_fase, $numero_processo, $tipo, $numero, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
       
     }else{
+         
           $id_portaria = NULL;
           $comando = "INSERT INTO";
           $tabela = "portaria";
           $filtro = "";
 
-          $p->InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_fase, $numero_processo, $tipo, $numero, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $status, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
+          $p->InsertEditar($comando, $tabela, $filtro, $id_fase, $numero_processo, $tipo, $numero, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
+
+     /*
+          $arr = array($comando, $tabela, $filtro, $id_portaria, $id_fase, $numero_processo, $tipo, $numero, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
+
+          echo "<pre>";
+              print_r($arr);
+          echo "<pre>";
+          exit;
+  */
+
 
           echo "<script> Document.alert('Denúncia  já existe, não pode mais cadastrar'); </script> ";
      }

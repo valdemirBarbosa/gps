@@ -42,7 +42,7 @@
 					<input name="txt_data_final" type="date">
 
 				<label>Data realizada</label>
-					<input name="txt_data_realizada" type="date">
+					<input NAME="txt_data_realizada" type="DATE">
 
 				<label>Prazo atendido</label>
 					<input name="txt_prazo_atendido" type="text" placeholder="Prazo para cumprimento em dias">
