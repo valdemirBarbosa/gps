@@ -9,51 +9,60 @@
 				<input id="txt_id_processo" type="number"  name="txt_id_processo" value="<?php foreach($vincProcess as $vp){ echo $vp->id_processo; }?>">
 
 				<label>Número do Processo</label>
-				<input autofocus id="txt_numero_processo" type="number"  name="txt_numero_processo" >
-
-				<label>Id fase</label>
-					<input id="txt_id_fase" name="txt_id_fase">
-
+				<input value="<?php echo $vp->numero_processo; ?>"  id="txt_numero_processo" type="number"  name="txt_numero_processo">
 		</fieldset>		
 
 		<fieldset>
+		<table>
+			<tr><td>
 			<legend>Informações da Portaria</legend>
 				<label>Tipo</label>
-					<input name="txt_tipo" type="text" placeholder="tipo da portaria">
+					<input autofocus name="txt_tipo" type="text" placeholder="tipo da portaria" required>
 
 				<label>Número da Portaria</label>
-					<input name="txt_numero" type="number" placeholder="Insira o  Número da Portaria">
+					<input name="txt_numero" type="number" placeholder="Insira o  Número da Portaria" required>
 				
 				<label>Data de elaboracao</label>
-					<input name="txt_data_elaboracao" type="date">
+					<input name="txt_data_elaboracao" type="date" required>
+			</td>
+			</tr>
 
-				<label>Conteúdo</label>
-					<input name="txt_conteudo" type="text" placeholder="conteúdo da portaria">
-
-				
+			<tr>
+			<td>
+			
 				<label>Data de publicação</label>
-					<input name="txt_data_publicacao" type="date">
+					<input name="txt_data_publicacao" type="date" required>
 
 				<label>Veículo</label>
-					<input name="txt_veículo" type="text" placeholder="veículo da publicação">
-				
+					<input name="txt_veículo" type="text" placeholder="veículo da publicação" required>
+
+									
 				<label>Prazo</label>
-					<input name="txt_prazo" type="number" placeholder="Prazo para cumprimento em dias">
+					<input name="txt_prazo" min="1" type="number" placeholder="Prazo para cumprimento em dias" required>
 				
-				<label>Data final</label>
-					<input name="txt_data_final" type="date">
+			</td>
+			</tr>
 
-				<label>Data realizada</label>
-					<input NAME="txt_data_realizada" type="DATE">
+			<tr>
+			<td>
+	
+				<label>Conteúdo</label>
+					<textarea name="txt_conteudo" rows="4" cols="100" placeholder="redação da portaria">
+				</textarea> 
+			</td>
+			</tr>
 
-				<label>Prazo atendido</label>
-					<input name="txt_prazo_atendido" type="text" placeholder="Prazo para cumprimento em dias">
-				
-				<div class="obs">
+			<tr>
+			<td>
+	
+				<div class="obs-portaria">
 					<label id="obs">observação</label> 
 				</div>
-				<textarea rows="4" cols="100" name="txt_observacao">
-				</textarea>		
+				<textarea rows="2" cols="112" name="txt_observacao">
+				</textarea>
+			</td>
+			</tr>
+		</table>		
 		</fieldset>
 				<input type="submit" value="Salvar" class="btn">
 				<input type="reset" name="Reset" id="button" value="Voltar" class="btn limpar">

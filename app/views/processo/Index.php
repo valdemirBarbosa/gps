@@ -54,7 +54,8 @@
 				
 				<td>
 				<div class="btn-editar">
-	  			</div>
+					<a href="<?php echo URL_BASE ."Processo/Edit/".$pd->id_processo ?>" >Editar</a>
+					</div>
 				</td>
 			
 				<td> 

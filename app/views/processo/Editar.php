@@ -17,7 +17,7 @@
 					<option value="<?php echo $pd->id_fase ?>"><?php echo $pd->fase ?></option>
 
 					<?php foreach($fase as $f){ ?>
-						<option value="<?php echo $f->id_fase ?>"><?php echo $f->fase ?> </option>
+						<option readonly value="<?php echo $f->id_fase ?>"><?php echo $f->fase ?> </option>
 					<?PHP } ?>
 				</select>
 

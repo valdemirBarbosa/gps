@@ -92,6 +92,8 @@ class PortariaController extends Controller{
      $p = new Portaria_Model();
      
      $id_portaria = isset($_POST['txt_id_portaria']) ? strip_tags(filter_input(INPUT_POST, "txt_id_portaria")) : NULL;
+
+     $id_processo = isset($_POST['txt_id_processo']) ? strip_tags(filter_input(INPUT_POST, "txt_id_processo")) : NULL;
           
      $id_fase = isset($_POST['txt_id_fase']) ? strip_tags(filter_input(INPUT_POST, "txt_id_fase")) : FALSE;
 
@@ -121,7 +123,7 @@ class PortariaController extends Controller{
      $dias_a_vencer = $dias;
         
 //     $status = $this->status($data_final);
-     $data_realizada = $_POST['txt_data_realizada'];
+     $data_realizada = isset($_POST['txt_data_realizada']) ? $_POST['txt_data_realizada'] : NULL;
 
 
      $prazo_atendido = isset($_POST['txt_prazo_atendido']) ? strip_tags(filter_input(INPUT_POST, "txt_prazo_atendido")) : NULL;
@@ -137,7 +139,7 @@ class PortariaController extends Controller{
           $tabela = "portaria";
           $filtro = " WHERE id_portaria =:id_portaria";
 
-          $p->InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_fase, $numero_processo, $tipo, $numero, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
+          $p->InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_processo, $id_fase, $numero_processo, $tipo, $numero, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
       
     }else{
          
@@ -146,7 +148,7 @@ class PortariaController extends Controller{
           $tabela = "portaria";
           $filtro = "";
 
-          $p->InsertEditar($comando, $tabela, $filtro, $id_fase, $numero_processo, $tipo, $numero, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
+          $p->InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_processo, $id_fase, $numero_processo, $tipo, $numero, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
 
      /*
           $arr = array($comando, $tabela, $filtro, $id_portaria, $id_fase, $numero_processo, $tipo, $numero, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);

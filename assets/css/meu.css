@@ -584,3 +584,9 @@ select{
       background-color:khaki;
       color:lightgreen;
 }
+
+.obs-portari{
+      float: auto;
+      width: 200px;
+      margin-top: 60px;
+}
