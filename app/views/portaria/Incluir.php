@@ -4,14 +4,16 @@
 <form action="<?php echo URL_BASE ."portaria/Salvar" ?>" method="POST">
 		<fieldset>
 			<legend><h4>Códigos</h4></legend>	
-				<label>Id Portaria</label>
-					<input id="txt_id" readonly name="txt_id_pad" enable="false" >
 
-				<label>Id fase</label>
-					<input id="txt_id_fase" autofocus name="txt_id_fase">
+				<label>Id do Processo</label>
+				<input id="txt_id_processo" type="number"  name="txt_id_processo" value="<?php foreach($vincProcess as $vp){ echo $vp->id_processo; }?>">
 
 				<label>Número do Processo</label>
-				<input id="txt_numero_processo" type="number"  name="txt_numero_processo" >
+				<input autofocus id="txt_numero_processo" type="number"  name="txt_numero_processo" >
+
+				<label>Id fase</label>
+					<input id="txt_id_fase" name="txt_id_fase">
+
 		</fieldset>		
 
 		<fieldset>

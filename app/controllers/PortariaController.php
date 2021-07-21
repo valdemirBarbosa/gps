@@ -4,6 +4,8 @@ use app\core\Controller;
 use app\models\Portaria_Model;
 use app\models\Denunciado_Model;
 use app\models\Denunciante_Model;
+use app\models\Processo_Model;
+
 
 class PortariaController extends Controller{
    public function index(){
@@ -14,6 +16,13 @@ class PortariaController extends Controller{
     }
 
    public function Novo(){
+          $dados["view"] = "portaria/Incluir";
+          $this->load("template", $dados);
+     }
+    
+   public function Vincular($id_processo){
+          $vp = new Processo_Model();
+          $dados["vincProcess"] = $vp->getId($id_processo);
           $dados["view"] = "portaria/Incluir";
           $this->load("template", $dados);
      }

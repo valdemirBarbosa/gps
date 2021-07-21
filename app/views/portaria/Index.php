@@ -19,7 +19,6 @@
 				<th width="25%">Veículo</th>
 				<th width="25%">Prazo</th>
 				<th width="10%">Data Vencimento</th>
-				<th width="10%">Status</th>
 				<th width="25%">Dias a vencer</th>
 				<th width="5%">Anexo</th>
 				<th align="center" colspan="2">Ação</th>
@@ -38,7 +37,6 @@
 				<td><?php echo $port->veiculo ?></td>
 				<td id="prazo"><?php echo $port->prazo ?></td>
 				<td><input id="dataFinal" class="data" type="date" readonly value="<?php echo $port->data_final ?>"> </td>
-				<td><?php echo $port->status ?></td>
 				<td><?php echo $port->dias_a_vencer ?></td>
 
 				<td>

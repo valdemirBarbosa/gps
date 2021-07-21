@@ -17,9 +17,8 @@
 				<th width="15%">Data Instauração </th>
 				<th width="25%">Observação</th>
 				<th width="25%">Data encerramento</th>
-				<th width="5%">Anexo</th>
-
-				<th align="center" colspan="2">Ação</th>
+	
+				<th align="center" colspan="3">Ação</th>
 			</tr>
 		</thead>
 	<?php 
@@ -47,11 +46,14 @@
 				?>
 
 				<td align="center"><?php echo $dia."/".$mes."/".$ano ?> </td> 
-				<td align="center"><?php echo $pd->anexo ?> </td>
 
 				<td>
-				<div class="btn-editar"> 
-					<a href="<?php echo URL_BASE ."Processo/Edit/".$pd->id_processo ?>" >Editar</a>
+				<div class="btn-portaria"> 
+					<a href="<?php echo URL_BASE ."Portaria/Vincular/".$pd->id_processo ?>" >Portaria</a>
+	  			</div>
+				
+				<td>
+				<div class="btn-editar">
 	  			</div>
 				</td>
 			

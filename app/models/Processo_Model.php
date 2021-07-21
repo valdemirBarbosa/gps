@@ -48,6 +48,15 @@ class Processo_Model extends Model{
         $sql->execute();
         return $sql->fetchAll(\PDO::FETCH_OBJ);
     }
+
+    //Usado para pegar número de processo para recuperar os dados do processo para formulario de Portaria - inclusão 
+    public function getIdProcesso($id_processo){
+        $sql = "SELECT * FROM processo WHERE id_processo =:id";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":id", $id_processo);
+        $sql->execute();
+        return $sql->fetchAll(\PDO::FETCH_OBJ);
+    }
  
     public function getIdDenuncia(){
         $sql = "SELECT * FROM denuncia as d INNER JOIN denunciante as den ON d.id_denunciante = den.id_denunciante";

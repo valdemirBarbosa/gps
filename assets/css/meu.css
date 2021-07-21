@@ -117,17 +117,13 @@ input{
       color: black;
 }
 
-input[type="text"]{
-      width: 150px;
-}
-
 input[type="number"]{
       width: 80px;
       text-align: center;
 }
 
 input[type="date"]{
-      width: 140px;
+      width: 150px;
 }
 
 #cpf{
@@ -560,4 +556,31 @@ select{
       margin-left: 200px;
       background-color: red;
 
+}
+
+.txt_ocorrencia{
+      width: 690px;
+
+}
+
+.txt_observacao{
+      width: 780px;
+
+}
+
+.btn-portaria{
+      height: 40px;
+      background-color:darkkhaki;
+      color:black;
+      border-radius: 3px;
+      border-style: solid;
+      padding-top: 2px;
+      text-align: center;
+      text-transform: uppercase;
+}
+
+.btn-portaria:hover{
+      height: 50px;
+      background-color:khaki;
+      color:lightgreen;
 }

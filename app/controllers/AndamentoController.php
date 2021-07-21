@@ -15,8 +15,7 @@ class AndamentoController extends Controller{
     
    public function index(){
           $dados["view"] = "ocorrencia/andamento";
-          $mensagem = "Sem dados para pesquisa";
-  
+   
           $processo = new AndamentoOcorrencia_Model();
           $dados["processo"] = $processo->getNumProcesso(0);
    

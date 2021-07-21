@@ -15,7 +15,8 @@ class ProcessoController extends Controller{
         $dados["processo"] = $processo->lista();
         $dados["view"] = "processo/Index";
         $this->load("template", $dados);
-    }
+
+   }
 
     public function getCodigos(){
         $denuncia = new Processo_Model();
@@ -93,5 +94,14 @@ class ProcessoController extends Controller{
           $processo->Deletar($id_processo);
           header("Location:" . URL_BASE . "processo");
   }
+
+     public function Portaria(){
+     $processsoPraPortaria = new Processo_Model();
+     $dados["processsoPraPortaria"] = $processsoPraPortaria->getIdProcesso($id_processo);
+
+     $dados["view"] = "portaria/Incluir";
+     $this->load("template", $dados);
+}
+
 }
 
