@@ -33,9 +33,9 @@ class OcorrenciaController extends Controller{
           
           $id_processo = isset($_POST['txt_id_processo']) && $_POST['txt_id_processo'] > 0? strip_tags(filter_input(INPUT_POST, "txt_id_processo")) : $msg = "Dever ser >0";
 
-          $numero_processo = addslashes($_POST['txt_numero_processo']);
-
-          $data_ocorrencia = addslashes($_POST['txt_data_ocorrencia']);
+          $numero_processo = $_POST['txt_numero_processo'];
+         
+          $data_ocorrencia =$_POST['txt_data_ocorrencia'];
 
           $ocorrencia = isset($_POST['txt_ocorrencia']) ? strip_tags(filter_input(INPUT_POST, "txt_ocorrencia")) : NULL;
           
@@ -55,11 +55,17 @@ class OcorrenciaController extends Controller{
                }else{
                     $ocorre->Incluir($id_processo, $numero_processo, $data_ocorrencia, $ocorrencia, $observacao, $anexo, $user);
 
+                    echo "<pre>";
+                         print_r($ocorre);
+                         exit;
+                    echo "<pre>";
+
+
                     echo "<script> Document.alert('Denúncia  já existe, não pode mais cadastrar'); </script> ";
                }
                
-               isset($_GET['IncluirOcorrenciaVincProc']) ? header("Location:" . URL_BASE . "ocorrencia/lista/") : header("Location:" . URL_BASE . "ANDAMENTO");
-     }
+               header("Location:" . URL_BASE . "ocorrencia/");
+          }
 
 /* Verifica se foi passado o id de alguma das fases - id_denuncia, id_pp_sindicancia ou id_pad
      public function VerificaId($id_denuncia, $id_pp_sindicancia, $id_pad){

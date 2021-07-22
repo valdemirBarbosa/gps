@@ -10,14 +10,17 @@
 
 				<label>Número do Processo</label>
 				<input value="<?php echo $vp->numero_processo; ?>"  id="txt_numero_processo" type="number"  name="txt_numero_processo">
-		</fieldset>		
+
+				<label>fase</label>
+					<input autofocus name="txt_id_fase" type="number" min="1" max="3" placeholder="Id da portaria de 1 a 3" required>
+			</fieldset>		
 
 		<fieldset>
 		<table>
 			<tr><td>
 			<legend>Informações da Portaria</legend>
 				<label>Tipo</label>
-					<input autofocus name="txt_tipo" type="text" placeholder="tipo da portaria" required>
+					<input name="txt_tipo" type="text" placeholder="tipo da portaria" required>
 
 				<label>Número da Portaria</label>
 					<input name="txt_numero" type="number" placeholder="Insira o  Número da Portaria" required>

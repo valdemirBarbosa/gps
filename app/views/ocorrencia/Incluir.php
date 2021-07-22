@@ -5,15 +5,16 @@
 <form action="<?php echo URL_BASE ."Ocorrencia/Salvar" ?>" melabelod="POST">
 	<fieldset>
 	<legend><h4>id - identificadores </h4></legend>
+
+<?php
+?>
 		<label>Id Processo</label>
-		<input id="txt_id_processo" name="txt_id_processo" type="number" placeholder="Informe o ID do processo"value="<?php foreach($processo as $p){
-								echo $p->id_processo; 
-							}?>">
+		<input id="txt_id_processo" name="txt_id_processo" type="number" value="<?php foreach($vincularProcessoOcorrencia as $vp){
+							echo $vp->id_processo; } ?>">
 
 		<label>Número do Processo</label>
-		<input name="txt_numero_processo" type="number" placeholder="Insira o número do processo" value="<?php foreach($processo as $pr){
-						echo $pr->numero_processo;
-					} ?>" >
+		<input id="txt_numero_processo" name="txt_numero_processo" type="number" value="<?php foreach($vincularProcessoOcorrencia as $vp){
+							echo $vp->numero_processo; } ?>" >
 	</legend>
 	</fieldset>
 

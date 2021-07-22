@@ -139,7 +139,7 @@ class PortariaController extends Controller{
           $tabela = "portaria";
           $filtro = " WHERE id_portaria =:id_portaria";
 
-          $p->InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_processo, $id_fase, $numero_processo, $tipo, $numero, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
+          $p->InsertEditar($comando, $tabela, $filtro, $comando, $tabela, $filtro, $id_portaria, $id_processo, $numero_processo, $id_fase, $numero, $tipo,$data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
       
     }else{
          
@@ -148,17 +148,17 @@ class PortariaController extends Controller{
           $tabela = "portaria";
           $filtro = "";
 
-          $p->InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_processo, $id_fase, $numero_processo, $tipo, $numero, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
+          $p->InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_processo, $numero_processo, $id_fase, $numero, $tipo,$data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
 
-     /*
-          $arr = array($comando, $tabela, $filtro, $id_portaria, $id_fase, $numero_processo, $tipo, $numero, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
+     
+          $arr = array($comando, $tabela, $filtro, $comando, $tabela, $filtro, $id_portaria, $id_processo, $numero_processo, $id_fase, $numero, $tipo,$data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
 
-          echo "<pre>";
+   /*       echo "<pre>";
               print_r($arr);
           echo "<pre>";
           exit;
-  */
-
+  
+*/
 
           echo "<script> Document.alert('Denúncia  já existe, não pode mais cadastrar'); </script> ";
      }

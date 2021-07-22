@@ -12,5 +12,7 @@
 		<li><a href="<?php echo URL_BASE . "andamento" ?>">Andamento</a></li>
 		<li><a href="<?php echo URL_BASE . "ocorrencia/" ?>" >Ocorrencia</a></li>
 		<li><a href="<?php echo URL_BASE . "portaria" ?>" >Portarias</a></li>
+		<li><a href="<?php echo URL_BASE . "upload/" ?>">Upload</a></li>
+
 	</ul> 
 </nav>	

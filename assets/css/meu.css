@@ -585,7 +585,26 @@ select{
       color:lightgreen;
 }
 
-.obs-portari{
+.btn-ocorrencia{
+      height: 40px;
+      background-color:cadetblue;
+      color:blue;
+      border-radius: 3px;
+      border-style: solid;
+      padding-top: 2px;
+      text-align: center;
+      text-transform: uppercase;
+      background-color:cadetblue;
+}
+
+.btn-ocorrencia:hover{
+      height: 50px;
+      background-color:whitesmoke;
+      color:yellow;
+      font- 
+}
+
+.obs-portaria{
       float: auto;
       width: 200px;
       margin-top: 60px;

@@ -48,6 +48,11 @@
 				<td align="center"><?php echo $dia."/".$mes."/".$ano ?> </td> 
 
 				<td>
+				<div class="btn-ocorrencia"> 
+					<a href="<?php echo URL_BASE ."Vincular/Ocorrencia/".$pd->id_processo ?>" >Ocorrência</a>
+	  			</div>
+				
+				<td>
 				<div class="btn-portaria"> 
 					<a href="<?php echo URL_BASE ."Portaria/Vincular/".$pd->id_processo ?>" >Portaria</a>
 	  			</div>
