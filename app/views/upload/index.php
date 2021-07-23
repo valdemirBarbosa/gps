@@ -18,16 +18,9 @@
             foreach($arq as $aq){
             }
 
-        print_r(array_keys($aq));
+        print_r($aq);
         echo "<br/>";
        
-        $nome = array_values($aq)[0];
-        $tipo = array_values($aq)[1];
-        $tamanho = array_values($aq)[4];
-            echo "Arquivo enviado com sucesso. Segue informações do arquivo: <br/>";
-            echo "nome: (".$nome.")   :::  ";
-            echo "tipo: (".$tipo.")   :::  ";
-            echo "tamano: (".$tamanho.")   :::  ";
 
 //A última alteração foi a mudança do colchete do if da linha 20 para a linah 33
         }
