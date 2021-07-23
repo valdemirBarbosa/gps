@@ -33,8 +33,13 @@ class OcorrenciaController extends Controller{
           
           $id_processo = isset($_POST['txt_id_processo']) && $_POST['txt_id_processo'] > 0? strip_tags(filter_input(INPUT_POST, "txt_id_processo")) : $msg = "Dever ser >0";
 
-          $numero_processo = $_POST['txt_numero_processo'];
-         
+          $numero_processo = isset($_POST['txt_numero_processo']) && $_POST['txt_numero_processo'] > 0 ?  strip_tags(filter_input(INPUT_POST, "txt_numero_processo")) : $msg = "Número do Processo dever ser >0";
+
+          echo "<pre>";
+          print_r($numero_processo);
+          echo "<pre>";
+          exit;
+
           $data_ocorrencia =$_POST['txt_data_ocorrencia'];
 
           $ocorrencia = isset($_POST['txt_ocorrencia']) ? strip_tags(filter_input(INPUT_POST, "txt_ocorrencia")) : NULL;
@@ -45,6 +50,10 @@ class OcorrenciaController extends Controller{
           $user = 1;
           $data_digitacao = NULL;
 
+          echo "<pre>";
+          print_r($ocorre);
+          echo "<pre>";
+          exit;
 
           //Verifica se tem algum dos Id´s informado
        //   if($this->VerificaId($id_denuncia, $id_pp_sindicancia, $id_pad) == false){
@@ -57,8 +66,9 @@ class OcorrenciaController extends Controller{
 
                     echo "<pre>";
                          print_r($ocorre);
-                         exit;
                     echo "<pre>";
+                    exit;
+
 
 
                     echo "<script> Document.alert('Denúncia  já existe, não pode mais cadastrar'); </script> ";

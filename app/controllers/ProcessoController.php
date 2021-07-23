@@ -15,7 +15,6 @@ class ProcessoController extends Controller{
         $dados["processo"] = $processo->lista();
         $dados["view"] = "processo/Index";
         $this->load("template", $dados);
-
    }
 
     public function getCodigos(){
@@ -23,6 +22,7 @@ class ProcessoController extends Controller{
         $dados["denunciaId"] = $denuncia->getIdDenuncia();
         $dados["view"] = "processo/Incluir";
         $this->load("template", $dados);
+
     }
 
 //Função para salvar e direcionar ou para Editar ou para Incluir 

@@ -13,11 +13,23 @@ class UploadController extends Controller{
     }
 
     public function recebedor(){
-      //  $upload = new Recebedor_Model();
-      print_r($arq = $_FILES["arquivo"]);
-     // exit;
-        $dados = $arq; 
+        $arquivo = $_FILES['arquivo'];
+
+        $msg = "";
+        if(isset($arquivo['tmp_name']) && empty($arquivo['tmp_name']) == false ){
+
+            $nomeDoArquivo = md5(time().rand(0,99));
+            move_uploaded_file($arquivo['tmp_name'], 'C:/xampp/htdocs/up/'.$nomeDoArquivo);
+               $dados['arq'] = [$arquivo];
+               $dados['arq2'] = [$nomeDoArquivo];
+               $dados["view"] = "upload/index";
+               $this->load("template", $dados);
+       
+            }else{
+                echo "Não foi dessa vez, tente novamente";
+        }
         $dados["view"] = "upload/index";
         $this->load("template", $dados);
+    
     }
 }

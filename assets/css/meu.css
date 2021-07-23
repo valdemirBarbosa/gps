@@ -601,11 +601,16 @@ select{
       height: 50px;
       background-color:whitesmoke;
       color:yellow;
-      font- 
 }
 
 .obs-portaria{
       float: auto;
       width: 200px;
       margin-top: 60px;
+}
+
+.upload{
+      margin-top: 30px;
+      margin-left: 200px;
+      background-color: #DBE06C;
 }
