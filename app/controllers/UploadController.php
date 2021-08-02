@@ -14,23 +14,22 @@ class UploadController extends Controller{
     }
 
     public function recebedor(){
-        $arquivo = $_FILES['arquivo'];
-
+        $dados = Array();
         if(isset($arquivo['tmp_name']) && empty($arquivo['tmp_name']) == false ){
+            $arquivo = $_FILES['arquivo'];
 
             $extencao = $this->getExtensao($arquivo);
             $nomeDoArquivo = md5(time().rand(0,99));
             move_uploaded_file($arquivo['tmp_name'], 'C:/xampp/htdocs/uploads/'.$nomeDoArquivo.$extencao);
-               //$dados['arq'] = [$arquivo];
-               $dados2['arq'] = [$nomeDoArquivo];
-               $dados["view"] = "upload/index";
-               $this->load("template", $dados, $dados2);
-       
-            }else{
-                echo "Não foi dessa vez, tente novamente";
-        }
-        return $dados;
-    }
+                //$dados['arquivo'] = $arquivo;
+                $dados['arquivo'] = array($nomeDoArquivo);
+                $dados['arquivo2'] = array($extensao);
+                $dados["view"] = "upload/index";
+                $this->load("template", $dados);
+                return $dados;
+             }
+         }  
+
 //Pegar a extensão do arquivo 
     private function getExtensao($arquivo){
         if(isset($arquivo)){

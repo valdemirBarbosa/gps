@@ -9,12 +9,12 @@ class ServidorController extends Controller{
   public function index(){
         $servidores = new Servidor_Model();
         $dados["servidores"] = $servidores->lista();
-        $dados["view"] = "servidor/Index";
+        $dados["view"] = "servidor/index";
         $this->load("template",$dados);
    } 
 
    public function novo(){
-        $dados["view"] = "servidor/Incluir";
+        $dados["view"] = "servidor/incluir";
         $this->load("template",$dados);
    }
  

@@ -7,38 +7,86 @@
     <title>Fase</title>
 </head>
 <body>
-    <form method="POST"  action="<?php echo  URL_BASE . "Fase/Salvar" ?>">
-    
+<form method="POST"  action="<?php echo  URL_BASE . "Fase/Salvar" ?>">
     <fieldset>
         <legend>Dados atuais do processo</legend><br/>
-            <?php if(isset($processo)){
-                foreach($processo as $p){ ?>
-                
+            <?php if(isset($tramitar)){
+                foreach($tramitar as $p){ ?>
+                <?php 
+            } ?>
+        <table>
+            <tr>
+                <td>        
                     <label>Id_processo</label>
-                    <input type="number" name="id_processo" value="<?php echo $p->id_processo ?>"><br/><br/>
+                    <input type="number" name="txt_id_processo" value="<?php echo $p->id_processo ?>">
 
-                    <label>Id_Fase atual</label>
-                    <input type="number" name="id_fase" value="<?php echo $p->id_fase ?>"><br/><br/>
-                    
+                    <label>id_denuncia</label>
+                    <input type="number" name="txt_id_denuncia" value="<?php echo $p->id_denuncia ?>">
+
                     <label>Fase atual</label>
-                    <input type="text" name="fase" value="<?php echo $p->fase ?>">
-                <?php } ?>
+                    <input type="text" name="fase" value="<?php  echo $p->fase ?>">
+                </td>
+            </tr>    
+            
+            <tr>
+                <td>        
+                    <label>Número do Processo</label>
+                    <input type="number" name="txt_numero_processo" value="<?php  echo $p->numero_processo ?>">
+                    
+                    <label>Data instauração</label>
+                    <input type="date" name="txt_data_instauracao" value="<?php echo 
+                     $p->data_instauracao ?>"><br/><br/>
+
+                    <label>Data encerramento</label>
+                    <input autofocus type="date" name="txt_data_encerramento" value="<?php echo $p->data_encerramento ?>">
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+
+                    <label>Observação</label>
+                    <textarea readonly rows="3" cols="100">
+                        <?php  echo $p->observacao ?> 
+                    </textarea>
+                </td>
+            </tr>
+        </table>
+
+    </fieldset>
+    <fieldset>
+        <legend>Próxima fase</legend>
+        <table>
+            <tr><td>
+            <label>Nova fase a tramitar</label>
+                <select name="txt_fase">
+                
+                <?php foreach($fase as $f){?>
+                <option  value="<?php echo $f->id_fase ?>"> <?php echo $f->fase ?> </option>
+                    <?php } ?>
+                </select>
+            </td></tr>
+            
+            <tr><td>
+
+            <label>Data instauração nova fase</label>
+                    <input required type="date" name="txt_nova_data_instauracao" ><br/><br/>
+            </td></tr>
+
+            <tr>
+                <td>
+                    <label>Observação</label>
+                    <textarea rows="3" cols="100" name="txt_observacao">
+                    </textarea>
+                </td>
+            </tr>
+        </table>
     </fieldset>
 
     <fieldset>
-        <legend>Próxima fase</legend>
-            <label>Id_processo</label>
-            <input type="number" name="id_processo" value="<?php echo $processo->id_processo ?>"><br/><br/>
-
-            <label>Nova fase a tramitar</label>
-            <?php foreach($fase as $f){}?>
-                <select name="fase">
-                    <option value="<?php $f->id_fase ?>"> <?php echo $f->fase ?> </option>
-                </select>
-
-                <input type="submit" name="Alterar Fase">
-
+        <input type="submit" name="AlterarFase" value="Alterar Fase">
     </fieldset>
+    <?php } ?>
 </form>
 
 </body>

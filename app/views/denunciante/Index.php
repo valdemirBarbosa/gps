@@ -6,7 +6,7 @@
 	<span class="qtde">Há <b><?php echo count($denunciante) ?></b> denunciante(s) cadastrado(s)</span>
 	<div class="btn-inc"><a href="<?php echo URL_BASE . "denunciante/novo" ?>" >INCLUIR </a></div>
 	<div class="tabela">	
-		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<table width="100%" border="1" cellspacing="0" cellpadding="0">
 		  <thead>
 			   <tr>
 				<th width="10%" align="left">codigo</th>

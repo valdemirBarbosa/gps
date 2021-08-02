@@ -11,7 +11,6 @@
 		<table width="100%" border="1" cellspacing="0" cellpadding="0">
 		  <thead class="thead">
 				<th width="10%">Id Portaria</th>
-				<th width="10%">Id Fase</th>
 				<th width="10%">Número Processo</th>
 				<th width="10%">Tipo</td>
 				<th width="10%">Data Elaboração </th>
@@ -29,7 +28,6 @@
 	?>
 			<tr>
 				<td><?php echo $port->id_portaria ?></td>
-				<td><?php echo $port->id_fase ?></td>
 				<td><?php echo $port->numero_processo ?></td>
 				<td><?php echo $port->tipo ?></td>
 				<td><input class="data" type="date" readonly value="<?php  echo $port->data_elaboracao  ?>" ></td>

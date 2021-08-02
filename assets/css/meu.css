@@ -26,11 +26,17 @@
 
 }
 
+.imagem{
+      width: 700px;
+      height: 150px;
+      margin-top: 90px;
+}
+
 .base-home{
       position: absolute;
       z-index: 5;
       background-color:royalblue;
-      width: 85%;
+      width: 84%;
       height: 5%;
       margin-top: 80px;
       margin-left: 0%;
@@ -63,9 +69,9 @@ li{
 }
 
 
-.menu li a:hover{
+.menu li a:hove{
       background-color:royalblue;
-      font-size: 22px;
+      font-size: 18px;
 }
 
 
@@ -109,8 +115,7 @@ label, input{
       margin-left: 16%;
       background-color:gainsboro;
       text-align: center;
-  
-}
+ }
 
 input{
       height: 25px;
@@ -123,7 +128,7 @@ input[type="number"]{
 }
 
 input[type="date"]{
-      width: 150px;
+      width: 160px;
 }
 
 #cpf{
@@ -181,7 +186,7 @@ span{
 }
 
 .span{
-      font-size: 22px;
+      font-size: 20px;
       font-weight: bolder;
       color:gainsboro;
       padding-left: 200px;
@@ -190,7 +195,7 @@ span{
 
 .titulo-pagina{
       font-weight: bolder;
-      font-size: 25px;
+      font-size: 23px;
       color:whitesmoke;
       width: 100%;
       text-align: center;
@@ -260,7 +265,7 @@ span{
       text-transform: uppercase;
 }
 
-.btn:hover{
+.btn:hove{
       width: 130px;
       height: 50px;
       background-color:royalblue;
@@ -288,12 +293,12 @@ span{
       color: white;
 }
 
-.btn-inc:hover{
+.btn-inc:hove{
       width: 130px;
       height: 45px;
       background-color:royalblue;
       border-color:blue;
-      font-size: 25px;
+      font-size: 20px;
 }
 
 .btn-excluir{
@@ -312,13 +317,13 @@ span{
       color: red;
 }
 
-.btn-excluir:hover{
+.btn-excluir:hove{
       width: 100px;
       height: 50px;
       background-color:greenyellow;
       border-color: yellow;
       color:white;
-      font-size: 20px;
+      font-size: 16px;
 }
 
 .btn-editar{
@@ -337,13 +342,13 @@ span{
       color:yellow;
 }
 
-.btn-editar:hover{
+.btn-editar:hove{
       width: 85px;
       height: 55px;
       background-color:darkblue;
       border-color:darkgreen;
       color:white;
-      font-size: 20px;
+      font-size: 18px;
 }
 
 .tabela {
@@ -353,8 +358,8 @@ span{
       --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
       --bs-table-active-color: #212529;
       --bs-table-active-bg: rgba(0, 0, 0, 0.1);
-      --bs-table-hover-color: #212529;
-      --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+      --bs-table-hove-color: #212529;
+      --bs-table-hove-bg: rgba(0, 0, 0, 0.075);
       width: 100%;
       margin-bottom: 1rem;
       color:indianred;
@@ -533,7 +538,7 @@ select{
       text-transform: uppercase;
 }
 
-.btn-inc-ocorrencia:hover{
+.btn-inc-ocorrencia:hove{
       width: 130px;
       height: 60px;
       background-color:khaki;
@@ -579,7 +584,7 @@ select{
       text-transform: uppercase;
 }
 
-.btn-portaria:hover{
+.btn-portaria:hove{
       height: 50px;
       background-color:khaki;
       color:lightgreen;
@@ -597,7 +602,7 @@ select{
       background-color:cadetblue;
 }
 
-.btn-ocorrencia:hover{
+.btn-ocorrencia:hove{
       height: 50px;
       background-color:whitesmoke;
       color:yellow;
@@ -614,4 +619,18 @@ select{
       margin-left: 300px;
       width: 1200px;
       background-color: #DBE06C;
+}
+
+.erros{
+      width: 600px;
+      margin-left: 400px;
+      float: left;
+      margin-top: 200px;
+      margin-bottom: auto;
+      height: 100px;
+      background-color:yellow;
+      color: red;
+      display: block;
+      position: absolute;
+      
 }
