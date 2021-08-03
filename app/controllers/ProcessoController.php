@@ -38,13 +38,6 @@ class ProcessoController extends Controller{
           $data_encerramento = $_POST['txt_data_encerramento'];
           $anexo = "";
           $user = 1;
-/*
-          $arr = Array($id_processo, $id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $data_encerramento, $anexo, $user);     
-          echo "<pre>";
-               print_r($arr);
-          echo "<pre>";
-          exit;
-*/
 
 //Verifica se será postado o "id" se sim será Edição, senão inclusão
      if($id_processo){

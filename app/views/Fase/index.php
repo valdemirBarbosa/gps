@@ -25,6 +25,7 @@
 
                     <label>Fase atual</label>
                     <input type="text" name="fase" value="<?php  echo $p->fase ?>">
+                    <input type="number" name="txt_id_fase" value="<?php  echo $p->id_fase ?>">
                 </td>
             </tr>    
             
@@ -59,10 +60,10 @@
         <table>
             <tr><td>
             <label>Nova fase a tramitar</label>
-                <select name="txt_fase">
-                
+                <select name="txt_id_nova_fase">
+                    
                 <?php foreach($fase as $f){?>
-                <option  value="<?php echo $f->id_fase ?>"> <?php echo $f->fase ?> </option>
+                <option readonly value="<?php echo $f->id_fase ?>"> <?php echo $f->fase ?> </option>
                     <?php } ?>
                 </select>
             </td></tr>

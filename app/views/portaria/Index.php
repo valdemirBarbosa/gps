@@ -13,8 +13,8 @@
 				<th width="10%">Id Portaria</th>
 				<th width="10%">Número Processo</th>
 				<th width="10%">Tipo</td>
-				<th width="10%">Data Elaboração </th>
-				<th width="10%">Data Publicação</th>
+				<th>Data Elaboração </th>
+				<th>Data Publicação</th>
 				<th width="25%">Veículo</th>
 				<th width="25%">Prazo</th>
 				<th width="10%">Data Vencimento</th>

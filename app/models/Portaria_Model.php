@@ -22,7 +22,6 @@ class Portaria_Model extends Model{
             $sql = "INSERT INTO denuncia SET denuncia_fato = :denuncia, id_denunciante = :id_denunciante, tipo_documento = :tipo, numero_documento = :numero, data_entrada = :data_entrada, observacao = :observacao, anexo =: anexo"; 
             $sql = $this->db->prepare($sql);
             $sql->bindValue(":id_portaria", $id_portaria);
-            $sql->bindValue(":id_fase", $id_fase);
             $sql->bindValue(":numero_processo", $numero_processo);
             $sql->bindValue(":tipo", $tipo);
             $sql->bindValue(":numero", $numero);
@@ -63,16 +62,15 @@ class Portaria_Model extends Model{
         $sql->execute();
     }
 
-    public function InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_processo, $numero_processo, $id_fase, $numero, $tipo,$data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user){
+    public function InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_processo, $numero_processo,  $numero, $tipo,$data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user){
 
-        $sql = $comando." ".$tabela." SET id_portaria =:id_portaria, id_processo =:id_processo, numero_processo =:numero_processo, id_fase =:id_fase, numero =:numero, tipo =:tipo, data_elaboracao =:data_elaboracao, conteudo =:conteudo, data_publicacao =:data_publicacao, veiculo =:veiculo, prazo =:prazo, data_final =:data_final, dias_a_vencer =:dias_a_vencer, data_realizada =:data_realizada, prazo_atendido =:prazo_atendido, observacao =:observacao, anexo =:anexo, user =:user
+        $sql = $comando." ".$tabela." SET id_portaria =:id_portaria, id_processo =:id_processo, numero_processo =:numero_processo, numero =:numero, tipo =:tipo, data_elaboracao =:data_elaboracao, conteudo =:conteudo, data_publicacao =:data_publicacao, veiculo =:veiculo, prazo =:prazo, data_final =:data_final, dias_a_vencer =:dias_a_vencer, data_realizada =:data_realizada, prazo_atendido =:prazo_atendido, observacao =:observacao, anexo =:anexo, user =:user
         ".$filtro;
     
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":id_portaria", $id_portaria); 
         $sql->bindValue(":id_processo", $id_processo); 
         $sql->bindValue(":numero_processo", $numero_processo);
-        $sql->bindValue(":id_fase", $id_fase);
         $sql->bindValue(":numero", $numero);
         $sql->bindValue(":tipo", $tipo);
         $sql->bindValue(":data_elaboracao", $data_elaboracao);

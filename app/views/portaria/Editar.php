@@ -10,21 +10,18 @@
 				<label>Id Portaria</label>
 					<input id="txt_id" readonly name="txt_id_portaria" enable="false" value="<?php echo $port->id_portaria ?>" >
 
-				<label>Id fase</label>
-					<input id="txt_id_fase" readonly name="txt_id_fase"  enable="false" value="<?php echo $port->id_fase ?>" >
-
-				<label>Número do Process</label>
-				<input id="txt_numero_processo" type="number" readonly name="txt_numero_processo" value="<?php echo $port->numero_processo?>" >
+				<label>Número do Processo</label>
+					<input id="txt_numero_processo" type="number" readonly name="txt_numero_processo" value="<?php echo $port->numero_processo?>" >
 		</fieldset>		
 		<fieldset>
 			<legend>Informações da Portaria</legend>
 				<label>Tipo</label>
-					<input name="txt_tipo" type="text" placeholder="tipo da portaria" value="<?php echo $port->tipo ?>">
+					<input autofocus name="txt_tipo" type="text" placeholder="tipo da portaria" value="<?php echo $port->tipo ?>">
 
-				<label>Número da Portaria</label>
+				<label>Número</label>
 					<input name="txt_numero" type="number" placeholder="Insira o  Número da Portaria" value="<?php echo $port->numero ?>">
 				
-				<label>Data de data_elaboracao</label>
+				<label>Data de elaboracao</label>
 					<input name="txt_data_elaboracao" type="date" value="<?php echo $port->data_elaboracao ?>">
 
 				<label>Conteúdo</label>
