@@ -10,22 +10,21 @@
 </head>
 
 <body>
-	<a href="index.php?link=1" class="logo"></a>
+<!--	<a href="index.php?link=1" class="logo"></a>
 		<div class="base-busca">
 				<form action="">
-			<!--		<input type="text" placeholder="Pesquisa">
+					<input type="text" placeholder="Pesquisa">
 					<input type="submit" value="" class="but">
-			!-->	</form>				
+			</form>				
 		</div>
 </div>
-
+	!-->
 
 <div class="container">	
-		
 	<?php 
-		echo '<div class="">';
+		//echo '<div class="">';
 			include ('cabecalho.php');
-		echo "</div>";
+		//echo "</div>";
 				
 		$this->load($view, $viewData, $viewData2);
 

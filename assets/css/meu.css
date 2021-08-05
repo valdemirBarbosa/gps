@@ -111,7 +111,7 @@ label, input{
 
 .base-lista{
       width: 80%;
-      margin-top: 15%;
+      margin-top: 9%;
       margin-left: 16%;
       background-color:gainsboro;
       text-align: center;
@@ -222,11 +222,11 @@ span{
 }
 
 .rodape{
-      position: absolute;
-      margin-top: 62%;
-      width: 100%;
-      height: 22px;
-      padding-left: 500px;
+      margin-top: 79%;
+      margin-left: -163px;
+      width: 1360px;
+      height: 29px;
+      padding-left: 450px;
       color:goldenrod;
       background-color:darkslategray;
 }
@@ -519,9 +519,10 @@ select{
 .frmConsulta{
       position: absolute;
       z-index: 2;
+      background-color: blanchedalmond;
       width: 60%;
       margin-top: 124px;
-      margin-left: 85px;
+      margin-left: 108px;
 
 }
 

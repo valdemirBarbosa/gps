@@ -41,7 +41,7 @@ class FaseController extends Controller{
         $anexo = "";
         $user = 1;
       
-        //Verifica qtde de resitro - verifica se há menos de 3 registros
+        //Verifica qtde de regitro por número de processo  - verifica se há menos de 3 registros
         if($this->verQtdeProcesso($numero_processo));
 
         //valida as datas antes de fazer a alteração de data de encerramento na fase do processo
@@ -97,7 +97,6 @@ class FaseController extends Controller{
         $processo = new Processo_Model();
         $dados['proc'] = $processo->getNumProcesso($numero_processo);
         extract($dados);
-
 
         if(count($proc) < 3){
             return true;

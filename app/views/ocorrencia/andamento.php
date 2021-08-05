@@ -3,16 +3,25 @@
 </div>
 
 <div class="frmConsulta">  
-	<form method="POST" action="<?php echo URL_BASE . 'Andamento/ConsultaPorNumeroProcesso' ?>" >
+	<form method="POST" action="<?php 
+		$limit = 0;
+		echo URL_BASE . 'Andamento/ConsultaPorNumeroProcesso/'; ?>" >
 		<label>Pesquisa por número do processo</label>
 		<input type="number" autofocus name="pesquisaPorNumeroProcesso">
+		<input type="hidden" name="limite" value="<?php echo $limit ?>">
 		<input type="submit" value="pesquisar">
 	</form>
 </div>
+<table>
+<tr>
+<div class="btn-inc-ocorrencia">
+ 	<a href="<?php echo URL_BASE ."Ocorrencia/IncluirOcorrenciaVincProc/".$oco->numero_processo ?>">Incluir ocorrências</a>
+</div>
 
-<form action="<?php echo URL_BASE ."Processo/Salvar" ?>" method="POST">
-
-<?php 
+</tr>
+</table>
+	<form action="<?php echo URL_BASE ."Processo/Salvar" ?>" method="POST">
+<?php
 	foreach($processo as $pd){ 
 				
 	}
@@ -21,14 +30,26 @@
 		<legend><h4>Códigos</h4></legend>	
 		<label>Id do Processo</label>
 		<input id="txt_id" readonly name="txt_id_processo" enable="false" 
-			value="<?php isset($pd->id_processo) ? ($pd->id_processo) : ($pd->id_processo = 0);
-			echo ($pd->id_processo); ?>" >
+			value="<?php if(!empty($pd->id_processo)){
+						echo $pd->id_processo; 
+					}else{ 
+						echo 0;
+					}
+			?>" >
 
 				<label>Id da denuncia</label>
-				<input id="txt_id" readonly name="txt_id_denuncia" enable="false" value="<?php echo $pd->id_denuncia ?>" >
+				<input id="txt_id" readonly name="txt_id_denuncia" enable="false" value="<?php if(!empty($pd->id_denuncia)){
+						echo $pd->id_denuncia;
+					}else{
+						echo 0;
+					} ?>" >
 
 				<label>fase</label>
-				<input name="txt_id_fase" value="<?php echo $pd->fase ?>" >
+				<input name="txt_id_fase" value="<?php if(!empty($pd->fase)){
+					echo $pd->fase;
+				 }else{
+					 echo "";
+				 } ?>" >
 
 		</fieldset>		
 
@@ -39,21 +60,9 @@
 				
 				<label>Data de Instauração</label>
 					<input name="txt_data_instauracao" type="date" value="<?php echo $pd->data_instauracao ?>">
-<!--
-				<div class="obs">
-					<label id="obs">observação</label> 
-				</div>
-				<textarea rows="4" cols="100" name="txt_observacao"> 
-					<?php //echo $pd->observacao ?> 
-				</textarea>	
-				<label>Data de Encerramento</label>
-					<input name="txt_data_encerramento" type="date" value="<?php // echo $pd->data_encerramento ?>">
-!-->				
 	</fieldset>
 		
-
 	<fieldset>
-		<div >	
 		<table class="tabela_ocorrencia" width="98%" border="1" cellspacing="1" cellpadding="0">
 		  <thead>
 			<tr>
@@ -94,14 +103,9 @@
 	  
 		  <tr >	
 			<td height="30px" colspan="2" align="center">
-				<div class="btn-inc-ocorrencia">
-					<a href="<?php echo URL_BASE ."Ocorrencia/IncluirOcorrenciaVincProc/".$oco->numero_processo ?>">Incluir ocorrências</a>
-				</div>
   			</td>			
 		</tr> 
-	  </div>
-	  </div>
-		</table>
+	  	</table>
 	  </fieldset>
 		<p>...</P>
 					

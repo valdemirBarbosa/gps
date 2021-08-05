@@ -27,18 +27,18 @@ class AndamentoController extends Controller{
 
     public function ConsultaPorNumeroProcesso(){
           $numero_processo = isset($_POST['pesquisaPorNumeroProcesso']) ? $_POST['pesquisaPorNumeroProcesso'] : NULL ;
-          
-          $processo = new AndamentoOcorrencia_Model();
-          $dados["processo"] = $processo->getNumProcesso($numero_processo);
+          if(isset($_POST['limite'])){
+               $limit = $_POST['limite'];
 
-          $ocorrencia = new Ocorrencia_Model();
-          $dados["ocorrencia"] = $ocorrencia->getNumeroProcesso($numero_processo);
-  
-          $dados["view"] = "ocorrencia/andamento";
-          $this->load("template", $dados);
+               $processo = new AndamentoOcorrencia_Model();
+               $dados["processo"] = $processo->getNumProcesso($numero_processo, $limit);
 
-
-        
+               $ocorrencia = new Ocorrencia_Model();
+               $dados["ocorrencia"] = $ocorrencia->getNumeroProcesso($numero_processo, $limit);
+     
+               $dados["view"] = "ocorrencia/andamento";
+               $this->load("template", $dados);
+          }
     }
 
 

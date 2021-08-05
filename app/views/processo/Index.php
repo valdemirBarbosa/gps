@@ -10,19 +10,19 @@
 	<div class="tabela">	
 		<table width="100%" border="1" cellspacing="0" cellpadding="0">
 		  <thead class="thead">
-				<th width="10%">Id Processo</th>
-				<th width="10%">Id denuncia</th>
-				<th width="10%">Fase</th>
-				<th width="15%">Numero do Processo</td>
-				<th width="15%">Data Instauração </th>
+				<th align="center" width="5%">Id Processo</th>
+				<th align="center" width="5%">Id denuncia</th>
+				<th align="center" width="20%">Fase</th>
+				<th align="center" width="10%">Numero do Processo</td>
+				<th align="center" width="10%">Data Instauração </th>
 			<!--	<th width="25%">Observação</th>  !-->
-				<th width="25%">Data encerramento</th>
+				<th width="10%">Data encerramento</th>
 	
 				<th align="center" colspan="5">Ação</th>
 			</tr>
 		</thead>
 	<?php 
-	  foreach($processo as $pd){
+	  	foreach($processo as $pd){
 	?>
 			<tr>
 				<td align="center"><?php echo $pd->id_processo ?> </td>
@@ -31,12 +31,12 @@
 				<td align="center"><?php echo $pd->numero_processo ?> </td>
 			<!--	<td><?php //echo $pd->observacao  ?> </td>  !-->
 
-				 <td> <?php $data = new DateTime($pd->data_instauracao);
+				 <td align="center"> <?php $data = new DateTime($pd->data_instauracao);
 				 		echo $data->format('d-m-Y');
 				 	?>
 				 </td> 
 
-				 <td> <?php $data = new DateTime($pd->data_encerramento);
+				 <td align="center"> <?php $data = new DateTime($pd->data_encerramento);
 				 		echo $data->format('d-m-Y');
 				 	?>
 				 </td> 
