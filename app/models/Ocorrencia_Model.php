@@ -21,9 +21,8 @@ class Ocorrencia_Model extends Model{
     }
     
 // Pegar os dados da tabela ocorrencia e disponibilizar para os Métodos Editar e Excluir
-    public function getNumeroProcesso($numero_processo){
-        $qry = array();
-        $sql = "SELECT * FROM ocorrencia WHERE numero_processo = :numero_processo";
+    public function getNumeroProcesso($numero_processo, $limit){
+        $sql = "SELECT * FROM ocorrencia WHERE numero_processo = :numero_processo LIMIT ".$limit;
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":numero_processo", $numero_processo);
         $sql->execute();

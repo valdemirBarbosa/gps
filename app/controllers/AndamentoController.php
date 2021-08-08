@@ -16,19 +16,16 @@ class AndamentoController extends Controller{
    public function index(){
           $dados["view"] = "ocorrencia/andamento";
    
-          $processo = new AndamentoOcorrencia_Model();
-          $dados["processo"] = $processo->getNumProcesso(0);
-   
-          $ocorrencia = new Ocorrencia_Model();
-          $dados["ocorrencia"] = $ocorrencia->getNumeroProcesso(0);
-   
           $this->load("template", $dados);
 }
 
-    public function ConsultaPorNumeroProcesso(){
+     public function ConsultaPorNumeroProcesso(){
+          $numero_processo = 0;
+          $limit = 0;
+
           $numero_processo = isset($_POST['pesquisaPorNumeroProcesso']) ? $_POST['pesquisaPorNumeroProcesso'] : NULL ;
-          if(isset($_POST['limite'])){
-               $limit = $_POST['limite'];
+          if(isset($_POST['limit'])){
+               $limit = $_POST['limit'];
 
                $processo = new AndamentoOcorrencia_Model();
                $dados["processo"] = $processo->getNumProcesso($numero_processo, $limit);
@@ -36,6 +33,8 @@ class AndamentoController extends Controller{
                $ocorrencia = new Ocorrencia_Model();
                $dados["ocorrencia"] = $ocorrencia->getNumeroProcesso($numero_processo, $limit);
      
+
+               echo "Limit ".$limit;
                $dados["view"] = "ocorrencia/andamento";
                $this->load("template", $dados);
           }
@@ -44,7 +43,7 @@ class AndamentoController extends Controller{
 
 //Função para salvar e direcionar ou para Editar ou para Incluir 
     public function Salvar(){
-          $processo = new AndamentoIOcorrencia_Model();
+          $processo = new AndamentoOcorrencia_Model();
 
           $id_processo = isset($_POST['txt_id_processo']) ? addslashes($_POST['txt_id_processo']) : NULL;
           $id_denuncia = addslashes($_POST['txt_id_denuncia']) ? addslashes($_POST['txt_id_denuncia']) : NULL;

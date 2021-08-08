@@ -36,9 +36,9 @@
       position: absolute;
       z-index: 5;
       background-color:royalblue;
-      width: 84%;
+      width: 85%;
       height: 5%;
-      margin-top: 80px;
+      margin-top: 70px;
       margin-left: 0%;
       left: 15%;
 }
@@ -199,7 +199,8 @@ span{
       color:whitesmoke;
       width: 100%;
       text-align: center;
-      margin-left: 0px; 
+      margin-left: 0px;
+      margin-top: 10px; 
 }
 
 .titulo{
@@ -222,9 +223,8 @@ span{
 }
 
 .rodape{
-      margin-top: 79%;
-      margin-left: -163px;
-      width: 1360px;
+      margin-top: 714px;
+      width: 100%;
       height: 29px;
       padding-left: 450px;
       color:goldenrod;

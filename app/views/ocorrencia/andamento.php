@@ -4,27 +4,30 @@
 
 <div class="frmConsulta">  
 	<form method="POST" action="<?php 
-		$limit = 0;
+		$limit = 1;
 		echo URL_BASE . 'Andamento/ConsultaPorNumeroProcesso/'; ?>" >
 		<label>Pesquisa por número do processo</label>
 		<input type="number" autofocus name="pesquisaPorNumeroProcesso">
-		<input type="hidden" name="limite" value="<?php echo $limit ?>">
+		<input type="hidden" name="limit" value="<?php echo $limit ?>">
+
+?>
 		<input type="submit" value="pesquisar">
 	</form>
 </div>
 <table>
 <tr>
 <div class="btn-inc-ocorrencia">
- 	<a href="<?php echo URL_BASE ."Ocorrencia/IncluirOcorrenciaVincProc/".$oco->numero_processo ?>">Incluir ocorrências</a>
-</div>
+  	<a href="<?php echo URL_BASE ."Ocorrencia/IncluirOcorrenciaVincProc/".$oco->numero_processo ?>">Incluir ocorrências</a>
 
 </tr>
 </table>
 	<form action="<?php echo URL_BASE ."Processo/Salvar" ?>" method="POST">
 <?php
-	foreach($processo as $pd){ 
-				
+	if(isset($processo)){
+		foreach($processo as $pd){ 
 	}
+}
+	
 ?>
 	<fieldset>
 		<legend><h4>Códigos</h4></legend>	
@@ -56,10 +59,10 @@
 		<fieldset>
 			<legend>informações do processo</legend>
 					<label>Número do Processo</label>
-					<input class="txt_numero_processo" name="txt_numero_processo" type="number" placeholder="Insira o número do processo" value="<?php echo $pd->numero_processo ?>">
+					<input class="txt_numero_processo" name="txt_numero_processo" type="number" placeholder="Insira o número do processo" value="<?php if(isset($numero_processo)){echo $pd->numero_processo;} ?>">
 				
 				<label>Data de Instauração</label>
-					<input name="txt_data_instauracao" type="date" value="<?php echo $pd->data_instauracao ?>">
+					<input name="txt_data_instauracao" type="date" value="<?php  if(isset($numero_processo)){echo $pd->data_instauracao;} ?>">
 	</fieldset>
 		
 	<fieldset>
@@ -75,6 +78,7 @@
 				<th align="center" colspan="2">Ação</th>
 			</tr>
 	<?php 
+	if(isset($ocorrencia)){
 	  foreach($ocorrencia as $oco){
 	?>
 			<tr>
@@ -96,7 +100,7 @@
 					  </div>
 				</td>
 	  		</tr>
-				<?php } ?>
+				<?php }} ?>
 	  </table>
 	  <table width="98%">
 		  <tr></tr><tr></tr><tr></tr>

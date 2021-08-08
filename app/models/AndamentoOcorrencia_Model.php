@@ -33,8 +33,8 @@ class AndamentoOcorrencia_Model extends Model{
     }
     
     public function getNumProcesso($numero_processo, $limit){
-        $sql = "SELECT * FROM processo as p INNER JOIN fase as f ON f.id_fase = f.id_fase WHERE numero_processo =:numProcesso ".$limit; 
-        $sql = $this->db->prepare($sql);
+        $sql = "SELECT * FROM processo as p INNER JOIN fase as f ON f.id_fase = f.id_fase WHERE numero_processo =:numProcesso LIMIT ".$limit; 
+        $sql = $this->db->prepare($sql);    
         $sql->bindValue(":numProcesso", $numero_processo);
         $sql->execute();
         return $sql->fetchAll(\PDO::FETCH_OBJ);
