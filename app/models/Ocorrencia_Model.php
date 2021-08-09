@@ -14,6 +14,15 @@ class Ocorrencia_Model extends Model{
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
+    public function contarOcorrencia(){
+        $sql = "SELECT FROM ocorrencia "; 
+        $qry = $this->db->query($sql);
+        $qtde = $this->db->COUNT($qry) ;
+        echo "Quantidade de registros ".$qtde; 
+
+        return $qry->fetchAll(\PDO::FETCH_OBJ);
+    }
+
     public function Iddenuncia(){
         $sql = "SELECT * FROM denuncia"; 
         $qry = $this->db->query($sql);

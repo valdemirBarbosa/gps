@@ -4,23 +4,14 @@
 
 <div class="frmConsulta">  
 	<form method="POST" action="<?php 
-		$limit = 1;
+		$limit = LIMITE_LISTA;
 		echo URL_BASE . 'Andamento/ConsultaPorNumeroProcesso/'; ?>" >
 		<label>Pesquisa por número do processo</label>
 		<input type="number" autofocus name="pesquisaPorNumeroProcesso">
 		<input type="hidden" name="limit" value="<?php echo $limit ?>">
-
-?>
 		<input type="submit" value="pesquisar">
 	</form>
-</div>
-<table>
-<tr>
-<div class="btn-inc-ocorrencia">
-  	<a href="<?php echo URL_BASE ."Ocorrencia/IncluirOcorrenciaVincProc/".$oco->numero_processo ?>">Incluir ocorrências</a>
-
-</tr>
-</table>
+	</div>
 	<form action="<?php echo URL_BASE ."Processo/Salvar" ?>" method="POST">
 <?php
 	if(isset($processo)){
@@ -32,6 +23,7 @@
 	<fieldset>
 		<legend><h4>Códigos</h4></legend>	
 		<label>Id do Processo</label>
+
 		<input id="txt_id" readonly name="txt_id_processo" enable="false" 
 			value="<?php if(!empty($pd->id_processo)){
 						echo $pd->id_processo; 
@@ -59,10 +51,10 @@
 		<fieldset>
 			<legend>informações do processo</legend>
 					<label>Número do Processo</label>
-					<input class="txt_numero_processo" name="txt_numero_processo" type="number" placeholder="Insira o número do processo" value="<?php if(isset($numero_processo)){echo $pd->numero_processo;} ?>">
+					<input class="txt_numero_processo" name="txt_numero_processo" type="number" placeholder="Insira o número do processo" value="<?php if(!empty($pd->numero_processo)){echo $pd->numero_processo;} ?>">
 				
 				<label>Data de Instauração</label>
-					<input name="txt_data_instauracao" type="date" value="<?php  if(isset($numero_processo)){echo $pd->data_instauracao;} ?>">
+					<input name="txt_data_instauracao" type="date" value="<?php  if(!empty($pd->data_instauracao)){echo $pd->data_instauracao;} ?>">
 	</fieldset>
 		
 	<fieldset>
