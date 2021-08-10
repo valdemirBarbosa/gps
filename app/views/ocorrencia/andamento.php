@@ -7,7 +7,7 @@
 		$limit = LIMITE_LISTA;
 		echo URL_BASE . 'Andamento/ConsultaPorNumeroProcesso/'; ?>" >
 		<label>Pesquisa por número do processo</label>
-		<input type="number" autofocus name="pesquisaPorNumeroProcesso">
+		<input type="number" autofocus name="numero_processo">
 		<input type="hidden" name="limit" value="<?php echo $limit ?>">
 		<input type="submit" value="pesquisar">
 	</form>
@@ -69,11 +69,13 @@
 				<th width="5%">Anexo</th>
 				<th align="center" colspan="2">Ação</th>
 			</tr>
-	<?php 
-	if(isset($ocorrencia)){
-	  foreach($ocorrencia as $oco){
-	?>
-			<tr>
+	<?php
+		if(isset($ocorrencia)){
+  		foreach($ocorrencia as $oco){
+		
+?>
+		
+		<tr>
 				<td align="center"><?php echo $oco->id_ocorrencia ?> </td>
 				<td align="center"><?php echo $oco->id_processo ?> </td>
 				<td align="center"><?php echo $oco->numero_processo ?> </td>
@@ -92,7 +94,17 @@
 					  </div>
 				</td>
 	  		</tr>
-				<?php }} ?>
+				<?php }
+			}	
+		?>
+
+		<fieldset>
+			<tr><td colspan="9"><?php
+				for($q=0; $q<$totalPaginas; $q++){
+					echo "<a href=".URL_BASE."/ConsultaPorNumeroProcesso/?q=".($q+1).">[".($q+1)."]</a>";
+						}?> 
+			</fieldset>
+
 	  </table>
 	  <table width="98%">
 		  <tr></tr><tr></tr><tr></tr>

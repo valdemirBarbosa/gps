@@ -6,7 +6,6 @@ use app\core\Controller;
 use app\models\Denuncia_Model;
 use app\models\Denunciado_Model;
 use app\models\Denunciante_Model;
-use app\models\AndamentoIOcorrencia_Model;
 use app\models\Ocorrencia_Model;
 use app\models\AndamentoOcorrencia_Model;
 
@@ -25,15 +24,18 @@ class AndamentoController extends Controller{
           $limit = 0;
           
           $numero_processo = isset($_POST['pesquisaPorNumeroProcesso']) ? $_POST['pesquisaPorNumeroProcesso'] : NULL ;
-          if(isset($_POST['limit'])){
+
+          if(isset($_POST['numero_processo'])){
+               $numero_processo = $_POST['numero_processo'];
+
+               if(isset($_POST['limit'])){
                $limit = $_POST['limit'];
+               }
+          }
 
                $processo = new AndamentoOcorrencia_Model();
-               $dados["processo"] = $processo->getNumProcesso($numero_processo, $limit);
+               $dados["processo"] = $processo->getNumProcesso($numero_processo);
 
-               $pgn = new AndamentoOcorrencia_Model();
-               $totalPag = $pgn->contarOcorrencia($numero_processo, $limit); 
-        
                $pg=1;
                if(isset($_GET['p']) && !empty($_GET['p'])){
                     $pg = addslashes($_GET['p']); 
@@ -41,17 +43,20 @@ class AndamentoController extends Controller{
 
                $p = ($pg - 1) * $limit;
 
-               for($p=0; $p<$totalPag; $p++){
-                    echo '<a href="'.URL_BASE."andamento/?p=".($p+1).'">['.($p+1).'] </a>';
-               }
+               $pgn = new AndamentoOcorrencia_Model();
+               $totalPag = $pgn->contarOcorrencia($numero_processo);
+
+             //  for($p=0; $p<$totalPag; $p++){
+                    $link = '<a href="'.URL_BASE."andamento/?p=".($p+1).'">['.($p+1).'] </a>';
+               //}
 
                $ocorrencia = new Ocorrencia_Model();
-               $dados["ocorrencia"] = $ocorrencia->getNumeroProcesso($numero_processo, $limit);
-               
+               $dados['totalPaginas'] = $totalPag;
+               $dados["paginas"] = $link;
+               $dados["ocorrencia"] = $ocorrencia->getNumeroProcessoLimit($numero_processo, $pg, $limit);
                $dados["view"] = "ocorrencia/andamento";
                $this->load("template", $dados);
           }
-    }
 
 
 //Função para salvar e direcionar ou para Editar ou para Incluir 
@@ -79,12 +84,13 @@ class AndamentoController extends Controller{
           header("Location:" . URL_BASE . "processo/lista");
    }
 
+
 //Incluir novo processo de andamento
      public function Novo(){
-          $denuncia = new AndamentoIOcorrencia_Model();
+          $denuncia = new AndamentoOcorrencia_Model();
           $dados["denunciaId"] = $denuncia->getIdDenuncia();
   
-          $fase = new AndamentoIOcorrencia_Model();
+          $fase = new AndamentoOcorrencia_Model();
           $dados["fase"] = $fase->faseLista();
 
           $dados["view"] = "processo/Incluir";
@@ -92,27 +98,27 @@ class AndamentoController extends Controller{
      }
 
      public function Edit($id_processo){
-          $fase = new AndamentoIOcorrencia_Model();
+          $fase = new AndamentoOcorrencia_Model();
           $dados["fase"] = $fase->faseLista();
 
-          $processo = new AndamentoIOcorrencia_Model();
+          $processo = new AndamentoOcorrencia_Model();
           $dados["processo"] = $processo->getId($id_processo);
           $dados["view"] = "processo/Editar";
           $this->load("template", $dados);
      }
 
      public function andamento(){
-          $fase = new AndamentoIOcorrencia_Model();
+          $fase = new AndamentoOcorrencia_Model();
           $dados["fase"] = $fase->faseLista();
 
-          $processo = new AndamentoIOcorrencia_Model();
+          $processo = new AndamentoOcorrencia_Model();
           $dados["processo"] = $processo->getId($id_processo);
           $dados["view"] = "ocorrencia/andamento";
           $this->load("template", $dados);
      }
      
      public function Excluir($id_processo){
-          $processo = new AndamentoIOcorrencia_Model();
+          $processo = new AndamentoOcorrencia_Model();
           $processo->Deletar($id_processo);
           header("Location:" . URL_BASE . "processo");
   }

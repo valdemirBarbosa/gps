@@ -15,12 +15,11 @@ class AndamentoOcorrencia_Model extends Model{
     }
   
  //Serve para fazer a paginação da Pesquisa Por Número Do Processo
-    public function contarOcorrencia($numero_processo, $limit){
-        $sql = "SELECT * FROM ocorrencia WHERE numero_processo = ".$numero_processo; 
+    public function contarOcorrencia($numero_processo){
+        $sql = "SELECT * FROM ocorrencia WHERE numero_processo = $numero_processo"; 
         $sql = $this->db->query($sql);
         $total = $sql->rowCount();
-        $totalPag = $total/$limit;
-        return round($totalPag);
+        return $total;
     }
   
     public function faseLista(){
@@ -41,8 +40,8 @@ class AndamentoOcorrencia_Model extends Model{
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
     
-    public function getNumProcesso($numero_processo, $limit){
-        $sql = "SELECT * FROM processo as p INNER JOIN fase as f ON f.id_fase = f.id_fase WHERE numero_processo =:numProcesso LIMIT ".$limit; 
+    public function getNumProcesso($numero_processo){
+        $sql = "SELECT * FROM processo as p INNER JOIN fase as f ON f.id_fase = f.id_fase WHERE numero_processo =:numProcesso"; 
         $sql = $this->db->prepare($sql);    
         $sql->bindValue(":numProcesso", $numero_processo);
         $sql->execute();

@@ -38,6 +38,15 @@ class Ocorrencia_Model extends Model{
         return $sql->fetchAll(\PDO::FETCH_OBJ);
     }
 
+    // Pegar os dados da tabela ocorrencia e disponibilizar para os Métodos Editar e Excluir
+    public function getNumeroProcessoLimit($numero_processo, $pg, $limit){
+        $sql = "SELECT * FROM ocorrencia WHERE numero_processo = :numero_processo LIMIT $pg, $limit";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":numero_processo", $numero_processo);
+        $sql->execute();
+        return $sql->fetchAll(\PDO::FETCH_OBJ);
+    }
+
     public function getId($id_ocorrencia){
         $qry = array();
         $sql = "SELECT * FROM ocorrencia WHERE id_ocorrencia = :id_ocorrencia";

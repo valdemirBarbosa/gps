@@ -50,71 +50,17 @@ class OcorrenciaController extends Controller{
           $user = 1;
           $data_digitacao = NULL;
 
-/*           echo "<pre>";
-          print_r($ocorre);
-          echo "<pre>";
-          exit;
- */
-          //Verifica se tem algum dos Id´s informado
-       //   if($this->VerificaId($id_denuncia, $id_pp_sindicancia, $id_pad) == false){
 
-               //Verifica se será postado o "id" se sim será Edição, senão inclusão
-               if($id_ocorrencia){
-                    $ocorre->Editar($id_ocorrencia, $id_processo, $numero_processo, $data_ocorrencia, $ocorrencia, $observacao, $anexo, $user);
-               }else{
-                    $ocorre->Incluir($id_processo, $numero_processo, $data_ocorrencia, $ocorrencia, $observacao, $anexo, $user);
-
-        /*             echo "<pre>";
-                         print_r($ocorre);
-                    echo "<pre>";
-                    exit;
-
- */
-
-                    echo "<script> Document.alert('Denúncia  já existe, não pode mais cadastrar'); </script> ";
+          //Verifica se será postado o "id" se sim será Edição, senão inclusão
+          if($id_ocorrencia){
+               $ocorre->Editar($id_ocorrencia, $id_processo, $numero_processo, $data_ocorrencia, $ocorrencia, $observacao, $anexo, $user);
+          }else{
+               $ocorre->Incluir($id_processo, $numero_processo, $data_ocorrencia, $ocorrencia, $observacao, $anexo, $user);
+                  echo "<script> Document.alert('Denúncia  já existe, não pode mais cadastrar'); </script> ";
                }
-               
                header("Location:" . URL_BASE . "ocorrencia/");
           }
 
-/* Verifica se foi passado o id de alguma das fases - id_denuncia, id_pp_sindicancia ou id_pad
-     public function VerificaId($id_denuncia, $id_pp_sindicancia, $id_pad){
-          if(($id_denuncia == 0) && ($id_pp_sindicancia == 0) && ($id_pad == 0)){
-               $mensagem = "Informe um Id para continuar.<br/>
-               Id da denúncia, ou Id da sindicância ou Id do PAD";
-               $this->inconsistencias($mensagem);
-          }
-     }
-
-     public function inconsistencias($mensagem){
-          $dados["msg"] = $mensagem;
-          $dados["view"] = "inconsistências";
-          $this->load("template", $dados);
-     }
-*/
-
-/*
-   public function Anexar(){
-     $ocorrencia = new Ocorrencia_Model();
-     $anexo = $_FILES['arquivo'];
-     $id_ocorrencia = $_POST["id_ocorrencia"];
-
-     echo $id,$anexo." - ".$id_ocorrencia;
-     echo "Id: ".$id."<br/>".$anexo."<br/>";
-     exit;
-   }
-     if(isset($anexo['tmp_name']) && !empty(['tmp_name'])){
-          $infArquivo = move_uploaded_file($anexo['tmp_name'], UPLOAD_PRINCIPAL ."portarias\\".$anexo['name']);
-
-          move_uploaded_file($anexo['tmp_name'], UPLOAD_PRINCIPAL ."portarias\\".$anexo['name']);
-          $ocorrencia->Anexar($id_ocorrencia, $infArquivo);
-     }else{
-          return false;
-     }
-          print_r($anexo);
-          exit;
- }
-*/
 
 //Incluir novo processo de sindicância
      public function Novo(){
@@ -142,13 +88,6 @@ class OcorrenciaController extends Controller{
           $dados["ocorrencia"] = $ocorrencia->getId($id_ocorrencia);
           $dados["view"] = "ocorrencia/Editar";
           $this->load("template", $dados);
-
-/* Estudar mais sobre o extrac pra pegar a variável e fazer a restrição no id_processo
-          extract($dados);
-          $id_processo = $ocorrencia->id_processo;
-          $this->ValidaIdProcessoEmOcorrencia($id_processo);
-*/
-
      }
      
      public function Excluir($id_ocorrencia){
