@@ -32,28 +32,26 @@ class AndamentoController extends Controller{
                $limit = $_POST['limit'];
                }
           }
-
                $processo = new AndamentoOcorrencia_Model();
                $dados["processo"] = $processo->getNumProcesso($numero_processo);
 
+               $pgn = new Ocorrencia_Model();
+               $totalPag = $pgn->contarOcorrencia($numero_processo);
+               $dados['totalPaginas'] = $totalPag;
+    
                $pg=1;
                if(isset($_GET['p']) && !empty($_GET['p'])){
-                    $pg = addslashes($_GET['p']); 
+                   $pg = addslashes($_GET['p']);
+ 
                }
-
                $p = ($pg - 1) * $limit;
 
-               $pgn = new AndamentoOcorrencia_Model();
-               $totalPag = $pgn->contarOcorrencia($numero_processo);
-
-             //  for($p=0; $p<$totalPag; $p++){
-                    $link = '<a href="'.URL_BASE."andamento/?p=".($p+1).'">['.($p+1).'] </a>';
-               //}
+               $ocorrencia = new Ocorrencia_Model();
+               $dados["view"] = "ocorrencia/andamento";
+               $this->load("template", $dados);
 
                $ocorrencia = new Ocorrencia_Model();
-               $dados['totalPaginas'] = $totalPag;
-               $dados["paginas"] = $link;
-               $dados["ocorrencia"] = $ocorrencia->getNumeroProcessoLimit($numero_processo, $pg, $limit);
+               $dados["ocorrencia"] = $ocorrencia->getNumeroProcesso($numero_processo, $limit);
                $dados["view"] = "ocorrencia/andamento";
                $this->load("template", $dados);
           }

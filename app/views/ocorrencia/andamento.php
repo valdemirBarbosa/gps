@@ -101,7 +101,7 @@
 		<fieldset>
 			<tr><td colspan="9"><?php
 				for($q=0; $q<$totalPaginas; $q++){
-					echo "<a href=".URL_BASE."/ConsultaPorNumeroProcesso/?q=".($q+1).">[".($q+1)."]</a>";
+					echo "<a href=".URL_BASE."Andamento/p=".($q+1).">[".($q+1)."]</a>";
 						}?> 
 			</fieldset>
 

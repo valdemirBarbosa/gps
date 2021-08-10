@@ -14,13 +14,12 @@ class Ocorrencia_Model extends Model{
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
-    public function contarOcorrencia(){
-        $sql = "SELECT FROM ocorrencia "; 
-        $qry = $this->db->query($sql);
-        $qtde = $this->db->COUNT($qry) ;
-        echo "Quantidade de registros ".$qtde; 
-
-        return $qry->fetchAll(\PDO::FETCH_OBJ);
+    //Serve para fazer a paginação da Pesquisa Por Número Do Processo
+    public function contarOcorrencia($numero_processo){
+        $sql = "SELECT * FROM ocorrencia WHERE numero_processo = $numero_processo"; 
+        $sql = $this->db->query($sql);
+        $total = $sql->rowCount();
+        return $total;
     }
 
     public function Iddenuncia(){
@@ -40,7 +39,7 @@ class Ocorrencia_Model extends Model{
 
     // Pegar os dados da tabela ocorrencia e disponibilizar para os Métodos Editar e Excluir
     public function getNumeroProcessoLimit($numero_processo, $pg, $limit){
-        $sql = "SELECT * FROM ocorrencia WHERE numero_processo = :numero_processo LIMIT $pg, $limit";
+        $sql = "SELECT * FROM ocorrencia as o INNER JOIN processo as p ON o.id_processo = p.id_processo WHERE numero_processo = :numero_processo LIMIT $pg, $limit";
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":numero_processo", $numero_processo);
         $sql->execute();
