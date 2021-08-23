@@ -15,13 +15,20 @@ class Ocorrencia_Model extends Model{
     }
 
     //Serve para fazer a paginação da Pesquisa Por Número Do Processo
-    public function contarOcorrencia($numero_processo){
-        $sql = "SELECT * FROM ocorrencia WHERE numero_processo = $numero_processo"; 
-        $sql = $this->db->query($sql);
-        $total = $sql->rowCount();
-        return $total;
-    }
+    public function contarOcorrencia(){
+        if(isset($_POST['txt_numero_processo'])){
+            $numero_processo = addslashes($_POST['txt_numero_processo']);
+            $condicao = " = ".$numero_processo;
+        }else{
+            $condicao = "> 0";
+        }
 
+        $sql = "SELECT * FROM ocorrencia WHERE numero_processo $condicao"; 
+        $sql = $this->db->query($sql);
+        $totalRegistro = $sql->rowCount();
+        return $totalRegistro;
+    }
+    
     public function Iddenuncia(){
         $sql = "SELECT * FROM denuncia"; 
         $qry = $this->db->query($sql);
@@ -29,21 +36,23 @@ class Ocorrencia_Model extends Model{
     }
     
 // Pegar os dados da tabela ocorrencia e disponibilizar para os Métodos Editar e Excluir
-    public function getNumeroProcesso($numero_processo, $limit){
-        $sql = "SELECT * FROM ocorrencia WHERE numero_processo = :numero_processo LIMIT ".$limit;
+    public function getOcorrenciaLink($offset, $limit){
+        $sql = "SELECT * FROM ocorrencia LIMIT $offset, $limit";  
         $sql = $this->db->prepare($sql);
-        $sql->bindValue(":numero_processo", $numero_processo);
         $sql->execute();
         return $sql->fetchAll(\PDO::FETCH_OBJ);
     }
 
+   
     // Pegar os dados da tabela ocorrencia e disponibilizar para os Métodos Editar e Excluir
-    public function getNumeroProcessoLimit($numero_processo, $pg, $limit){
-        $sql = "SELECT * FROM ocorrencia as o INNER JOIN processo as p ON o.id_processo = p.id_processo WHERE numero_processo = :numero_processo LIMIT $pg, $limit";
-        $sql = $this->db->prepare($sql);
-        $sql->bindValue(":numero_processo", $numero_processo);
-        $sql->execute();
-        return $sql->fetchAll(\PDO::FETCH_OBJ);
+    public function getNumeroProcessoLimit($numero_processo, $offset, $limit){
+        $sql = "SELECT * FROM ocorrencia as o LEFT JOIN processo as p ON o.id_processo = p.id_processo WHERE o.numero_processo = $numero_processo LIMIT $offset, $limit";
+        $qry = $this->db->query($sql);
+
+/*         print_r($qry);
+        exit;
+ */
+        return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
     public function getId($id_ocorrencia){

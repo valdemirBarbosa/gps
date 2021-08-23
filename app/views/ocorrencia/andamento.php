@@ -2,17 +2,16 @@
 	<h1 class="titulo-pagina">Dados do Processo</h1>
 </div>
 
+<?php session_start(); ?>
 <div class="frmConsulta">  
-	<form method="POST" action="<?php 
-		$limit = LIMITE_LISTA;
-		echo URL_BASE . 'Andamento/ConsultaPorNumeroProcesso/'; ?>" >
+	<form method="GET" action="<?php echo URL_BASE . 'Andamento/porProcesso/'; ?>" >
 		<label>Pesquisa por número do processo</label>
 		<input type="number" autofocus name="numero_processo">
-		<input type="hidden" name="limit" value="<?php echo $limit ?>">
 		<input type="submit" value="pesquisar">
 	</form>
 	</div>
-	<form action="<?php echo URL_BASE ."Processo/Salvar" ?>" method="POST">
+
+<form action="<?php  echo URL_BASE ."Processo/Salvar" ?>" method="POST">
 <?php
 	if(isset($processo)){
 		foreach($processo as $pd){ 
@@ -70,8 +69,8 @@
 				<th align="center" colspan="2">Ação</th>
 			</tr>
 	<?php
-		if(isset($ocorrencia)){
-  		foreach($ocorrencia as $oco){
+		if(isset($procOcorr)){
+  		foreach($procOcorr as $oco){
 		
 ?>
 		
@@ -99,10 +98,14 @@
 		?>
 
 		<fieldset>
-			<tr><td colspan="9"><?php
-				for($q=0; $q<$totalPaginas; $q++){
-					echo "<a href=".URL_BASE."Andamento/p=".($q+1).">[".($q+1)."]</a>";
-						}?> 
+			<tr><td align="center" colspan="9"><?php
+		
+			$numero_processo = $_SESSION['numero_processo'];
+			
+			   for($q=1; $q<=$totalPaginas; $q++): ?> 
+				 <a href="<?php echo URL_BASE.'andamento/porProcesso' ?>?p=<?php echo $q ?>&numero_processo=<?php echo $numero_processo  ?> "> <?php echo '[ '.$q.' ]' ?>
+				
+			 <?php endfor ?>
 			</fieldset>
 
 	  </table>

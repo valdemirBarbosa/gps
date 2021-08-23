@@ -32,15 +32,19 @@ class Processo_Model extends Model{
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
     
+/* Guardado pra retornar  
     public function getNumProcesso($numero_processo){
-        echo "num process: ".$numero_processo;
-        exit;
-        
         $sql = "SELECT * FROM processo WHERE numero_processo =:numProcesso"; 
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":numProcesso", $numero_processo);
         $sql->execute();
         return $sql->fetchAll(\PDO::FETCH_OBJ);
+    }
+ */
+    public function getNumProcesso(){
+        $sql = "SELECT * FROM processo"; 
+        $qry = $this->db->query($sql);
+        return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
     // Pegar os dados da tabela processo e disponibilizar para os Métodos Editar e Excluir

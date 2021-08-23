@@ -518,11 +518,11 @@ select{
 
 .frmConsulta{
       position: absolute;
-      z-index: 2;
+      z-index: 10;
       background-color: blanchedalmond;
-      width: 60%;
-      margin-top: 124px;
-      margin-left: 108px;
+      width: 40%;
+      margin-top: 20px;
+      margin-left: 118px;
 
 }
 
