@@ -12,14 +12,21 @@ use app\models\AndamentoOcorrencia_Model;
 
 class AndamentoController extends Controller{
 
-//inicio do teste de copia do método
-
+     public function index(){
+          $ocorrencia = new Ocorrencia_Model();
+ /*          $dados["procOcorr"] = $ocorrencia->lista();
+  */      $dados["totalPaginas"] = 0;
+          $dados["numero_processo"] = 0;
+          $dados["view"] = "ocorrencia/andamento";
+          $this->load("template", $dados);
+     }
+  
      public function contarRegistro(){
           $registros = new Ocorrencia_Model();
 
           if(isset($_GET['numero_processo']) && !empty('numero_processo')){
-               session_start();
-
+                    session_start();
+               
               $numero_processo = addslashes($_GET['numero_processo']);
 
                $totalRegistro = $registros->contarOcorrencia($numero_processo);
@@ -31,13 +38,30 @@ class AndamentoController extends Controller{
           return $totalRegistro;
      }
      
+// Em construção da lista integral
+
+/*
+     public function getAll(){
+         $dados["totalPaginas"] = 0;
+         $dados["numero_processo"] = 0;
+
+         $ocorrencia = new Ocorrencia_Model();
+         $dados["procOcorr"] = $ocorrencia->lista();
+         $totalRegistro = $ocorrencia->contarOcorrencia();
+         $dados['totalRegistro'] = $totalRegistro;
+
+         return $dados;
+         
+     } */
+      
+
      public function porProcesso(){
           $limit = LIMITE_LISTA;
           $offset = 0;
          
           $processoEocorrencia = new Ocorrencia_Model();
           $totalRegistros = $this->contarRegistro();
-          
+         
           $totalPaginas = ceil($totalRegistros / $limit);
           $dados['totalPaginas'] = ceil($totalPaginas);
         
@@ -60,58 +84,12 @@ class AndamentoController extends Controller{
                $dados['processo'] = $processo->getNumProcesso($numero_processo);
                $dados["view"] = "ocorrencia/andamento";
 
-          } else{
-               $numero_processo = $_GET['numero_processo'];
-               $dados['procOcorr'] = $processoEocorrencia->getNumeroProcessoLimit($numero_processo, $offset, $limit); 
           }
+     
           $dados["view"] = "ocorrencia/andamento";
           $this->load("template", $dados);
      }
 
-     public function index(){
-          $registros = new Ocorrencia_Model();
-          $totalRegistro = $registros->contarOcorrencia();
-          return $totalRegistro;
-
-     }
-//Fim da cópia do métodos
-
-/* public function porProcesso(){
-     $limit = LIMITE_LISTA;
-     $registros = new Ocorrencia_Model();
-
-     if(isset($_GET['txt_numero_processo']) && !empty('txt_numero_processo')){
-         
-     $numero_processo = addslashes($_GET['txt_numero_processo']);
-     $totalRegistro = $registros->contarOcorrencia($numero_processo);
-
-     $totalRegistro;
-     $processoEocorrencia = new Ocorrencia_Model();
-     $totalRegistros = $totalRegistro;
-     $totalPaginas = $totalRegistros / $limit;
-     $dados['totalPaginas'] = ceil($totalPaginas);
-
-     $dados['paginaAtual'] = 1;
-
-     if(!empty($_GET['p']) && empty($_GET['txt_numero_processo'])){
-          $dados['paginaAtual'] = intval($_GET['p']);
-     }else{
-          echo "estou aqui no ELSE";
-          exit;
-
-     }
-
-
-     $offset = ($dados['paginaAtual'] * $limit) - $limit;
-
-     $dados['procOcorr'] = $processoEocorrencia->getNumeroProcessoLimit($numero_processo, $offset, $limit);
-
-     $dados["view"] = "ocorrencia/andamento";
-     $this->load("template", $dados);
-     }
- */
-
-// fim da cópia mesmo
 
      //Função para salvar e direcionar ou para Editar ou para Incluir 
     public function Salvar(){

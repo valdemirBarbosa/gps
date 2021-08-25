@@ -6,10 +6,10 @@
 		<li><a href="<?php echo URL_BASE ?>" >Home</a></li>
 		<li><a href="<?php echo URL_BASE . "denunciante" ?>" >Denunciante</a></li>
 		<li><a href="<?php echo URL_BASE . "servidor" ?>" >Servidores</a></li>
-		<li><a href="<?php echo URL_BASE . "denunciado" ?>" >Denunciados</a></li>
-		<li><a href="<?php echo URL_BASE . "denuncia" ?>" >Denuncias</a></li>
+<!-- 		<li><a href="<?php echo URL_BASE . "denunciado" ?>" >Denunciados</a></li>
+ -->		<li><a href="<?php echo URL_BASE . "denuncia" ?>" >Denuncias</a></li>
 		<li><a href="<?php echo URL_BASE . "processo" ?>" >Processo</a></li>
-		<li><a href="<?php echo URL_BASE . "andamento/porProcesso" ?>">Andamento</a></li>
+		<li><a href="<?php echo URL_BASE . "andamento/getAll" ?>">Andamento</a></li>
 		<li><a href="<?php echo URL_BASE . "upload/" ?>">Upload</a></li>
 
 

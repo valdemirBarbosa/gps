@@ -12,9 +12,10 @@ class OcorrenciaController extends Controller{
     
    public function index(){
         $ocorrencia = new Ocorrencia_Model();
-        $dados["ocorrencia"] = $ocorrencia->lista();
-        $dados["view"] = "ocorrencia/Index";
+        $dados["procOcorr"] = $ocorrencia->lista();
+        $dados["view"] = "ocorrencia/andamento";
         $this->load("template", $dados);
+
     }
 
 //Consulta a tabela de denúncia para informar o id da denuncia pro option no Editar denúncia

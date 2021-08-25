@@ -16,8 +16,8 @@ class Ocorrencia_Model extends Model{
 
     //Serve para fazer a paginação da Pesquisa Por Número Do Processo
     public function contarOcorrencia(){
-        if(isset($_POST['txt_numero_processo'])){
-            $numero_processo = addslashes($_POST['txt_numero_processo']);
+        if(isset($_GET['numero_processo'])){
+            $numero_processo = addslashes($_GET['numero_processo']);
             $condicao = " = ".$numero_processo;
         }else{
             $condicao = "> 0";
@@ -28,7 +28,7 @@ class Ocorrencia_Model extends Model{
         $totalRegistro = $sql->rowCount();
         return $totalRegistro;
     }
-    
+
     public function Iddenuncia(){
         $sql = "SELECT * FROM denuncia"; 
         $qry = $this->db->query($sql);

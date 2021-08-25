@@ -2,7 +2,9 @@
 	<h1 class="titulo-pagina">Dados do Processo</h1>
 </div>
 
-<?php session_start(); ?>
+<?php !isset($_SESSION['numero_processo']) ? session_start() : NULL ; ?>
+
+<div class="containerPesqusa">
 <div class="frmConsulta">  
 	<form method="GET" action="<?php echo URL_BASE . 'Andamento/porProcesso/'; ?>" >
 		<label>Pesquisa por número do processo</label>
@@ -10,6 +12,7 @@
 		<input type="submit" value="pesquisar">
 	</form>
 	</div>
+
 
 <form action="<?php  echo URL_BASE ."Processo/Salvar" ?>" method="POST">
 <?php
@@ -119,6 +122,6 @@
 	  	</table>
 	  </fieldset>
 		<p>...</P>
-					
+		</div> <!-- teste -->				
 </body>
 </html>
