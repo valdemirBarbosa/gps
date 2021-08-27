@@ -65,9 +65,6 @@ class AndamentoController extends Controller{
           $totalPaginas = ceil($totalRegistros / $limit);
           $dados['totalPaginas'] = ceil($totalPaginas);
         
-          $dados["view"] = "ocorrencia/andamento";
-          $this->load("template", $dados);
-
           $dados['paginaAtual'] = 1;
           if(!empty($_GET['p']) && !empty($_GET['numero_processo'])){
                $dados['paginaAtual'] = intval($_GET['p']);

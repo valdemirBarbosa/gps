@@ -14,7 +14,7 @@
 					<input id="txt_numero_processo" type="number" readonly name="txt_numero_processo" value="<?php echo $port->numero_processo?>" >
 		</fieldset>		
 		<fieldset>
-			<legend>Informações da Portaria</legend>
+<!-- 			<legend>Informações da Portaria</legend>
 				<label>Tipo</label>
 					<input autofocus name="txt_tipo" type="text" placeholder="tipo da portaria" value="<?php echo $port->tipo ?>">
 
@@ -44,11 +44,11 @@
 
 				<label>Prazo atendido</label>
 					<input name="txt_prazo_atendido" type="text" placeholder="Prazo para cumprimento em dias" value="<?php echo $port->prazo ?>">
-				
+ -->				
 				<div class="obs">
 					<label id="obs">observação</label> 
 				</div>
-				<textarea rows="4" cols="100" name="txt_observacao" 
+				<textarea rows="2" cols="100" name="txt_observacao" 
 					<?php echo $port->observacao ?> >
 				</textarea>		
 		</fieldset>
@@ -56,23 +56,5 @@
 				<input type="submit" value="Salvar" class="btn">
 				<input type="reset" name="Reset" id="button" value="Voltar" class="btn limpar">
 
-		</form>
-
-<!-- Formulário para anexar arquivos   		
-		<form action="<?php echo URL_BASE .'Pad/Anexar' ?>" method="POST" multiple="multiple">
-			<?php //$id_pad = $port->id_pad; ?>
-		<table>
-		  <tr>
-		    <td>
-		        <input type="hidden" name="id_pad" value="<?php //id_pad = $port->id_pad; ?>">
-		 	  <input type="file" name="arquivo"></label>
-		    <td>
-		    <td>
-		  	 <input type="submit" value="Anexar arquivo">
-		    </td>
-		  </tr>
-		</table>
-		</form>	!-->
-		</div>	
-</div>	
+</form>
 	

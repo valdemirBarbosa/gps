@@ -64,8 +64,7 @@
 		  <thead>
 			<tr>
 				<th align="center" width="5%">Id</th>
-				<th align="center" width="5%">Id.proc..</th>
-				<th align="center" width="10%">Número do Processo</th>
+ 				<th align="center" width="10%">Número Processo</th>
 				<th align="center" width="10%">Data da ocorrência </th>
 				<th align="center" width="60%">ocorrência </th>
 				<th width="5%">Anexo</th>
@@ -79,7 +78,6 @@
 		
 		<tr>
 				<td align="center"><?php echo $oco->id_ocorrencia ?> </td>
-				<td align="center"><?php echo $oco->id_processo ?> </td>
 				<td align="center"><?php echo $oco->numero_processo ?> </td>
 				<td><?php echo date('d/m/Y', strtotime($oco->data_ocorrencia)) ?> </td> 
 				<td><?php echo $oco->ocorrencia ?> </td>

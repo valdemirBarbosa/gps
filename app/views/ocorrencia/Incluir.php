@@ -57,6 +57,4 @@
 
 	</fieldset>				
 </form>
-</div>	
-</div>	
 	

@@ -68,22 +68,4 @@
 				<input type="reset" name="Reset" id="button" value="Voltar" class="btn limpar">
 
 		</form>
-
-<!-- Formulário para anexar arquivos   		
-		<form action="<?php echo URL_BASE .'Pad/Anexar' ?>" method="POST" multiple="multiple">
-			<?php //$id_pad = $port->id_pad; ?>
-		<table>
-		  <tr>
-		    <td>
-		        <input type="hidden" name="id_pad" value="<?php //id_pad = $port->id_pad; ?>">
-		 	  <input type="file" name="arquivo"></label>
-		    <td>
-		    <td>
-		  	 <input type="submit" value="Anexar arquivo">
-		    </td>
-		  </tr>
-		</table>
-		</form>	!-->
-		</div>	
-</div>	
 	
