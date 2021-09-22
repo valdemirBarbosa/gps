@@ -9,30 +9,28 @@
 				<input id="txt_id" name="txt_id" value="<?php echo $denuncia->id_denuncia ?>" >
 
 			<label>Naração dos fatos da denúncia</label>
-		      	<textarea rows="3" cols="85" class="denuncia" name="txt_denuncia"> <?php echo $denuncia->denuncia_fato ?>
+		      	<textarea rows="3" cols="80" class="denuncia" name="txt_denuncia"> <?php echo $denuncia->denuncia_fato ?>
 				</textarea>
 		</fieldset>
-
+		
 		<fieldset>
 			<table class="denuncianteTab">
 			<tr>
 			<td>
-				<label for="denuncianteLst" class="denunciante">Denunciante</label>
-					<select name="lst_id_denunciante" id="denuncianteLst" class="denuncianteLst">
-						<option>Selecione o denunciante</option>
-							<?php foreach($denunciante as $d){?>
-						
-						<option value="<?php echo $d->id_denunciante  ?>" >
-							<?php echo $d->nome_denunciante   ?> 
-						</option>
-						<?php }  ?>	
-					</select>
-			</td>
+		<label for="denuncianteLst" class="denunciante">Denunciante</label>
+		<select class="denunciante" name="denunciante" class="denunciante">
+					<option><?php echo $denuncia->nome_denunciante ?>
+						<?php foreach($denunciante as $den){?>
+							<option value="<?php echo $den->id_denunciante ?>"> <?php echo $den->nome_denunciante ?>
+					</option>
+				<?php } ?>
+		</select>
+	</td>
 			<td>	
 				<label class="tipo_document">tipo de documento</label>
 					<select nome="lst_tipo_documento" class="tipo_documento">
-						<option>Selecione o tipo de documento</option>
-							<?php foreach($documento as $doc){?>
+						<option><?php echo $denuncia->tipo_de_documento?></option>
+							<?php foreach($tipo_doc as $doc){?>
 							<option value="<?php $doc->id_tipo_documento   ?>">
 								<?php echo $doc->tipo_de_documento   ?> </option>
 						<?php }  ?>	
@@ -46,7 +44,7 @@
 		  <tr>
 			<td width="45%">
 				<label>numero do documento</label>
-					<input name="txt_numero_documento" type="number" value="<?php echo $denuncia->numero_documento ?>"  >
+					<input name="txt_numero_documento" type="text" value="<?php echo $denuncia->numero_documento ?>"  >
 			</td>	
 			<td width="55%">
 				<div>
@@ -57,11 +55,17 @@
 			<td></td>
 			</tr>
 			</table> 
-				<div class="observacao">
-					<label>Observação</label>
-				</div>
-	
-				<textarea rows="3" cols="85" class="denuncia" name="txt_observacao">
+		</fieldset>					
+			<fieldset>
+				<label>Denunciados</label>
+				<textarea rows="3" cols="98"  class="areaDenuncia" name="txt_denunciados">
+							<?php echo $denuncia->denunciados ?> 
+				</textarea> 
+			</fieldset>
+
+			<fieldset>
+				<label>Observação</label>
+				<textarea rows="3" cols="100" class="denuncia" name="txt_observacao">
 						<?php echo $denuncia->observacao ?> 
 				</textarea> 
 			</fieldset>
@@ -70,6 +74,4 @@
 		<input type="submit" value="Editar" class="btn">
 		<input type="reset" name="Reset" id="button" value="Limpar" class="btn limpar">
 	</form>
-</div>	
-</div>	
 	

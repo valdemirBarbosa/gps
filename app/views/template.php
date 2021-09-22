@@ -10,28 +10,18 @@
 </head>
 
 <body>
-<!--	<a href="index.php?link=1" class="logo"></a>
-		<div class="base-busca">
-				<form action="">
-					<input type="text" placeholder="Pesquisa">
-					<input type="submit" value="" class="but">
-			</form>				
-		</div>
-</div>
-	!-->
 
 <div class="container">	
 	<?php 
-		//echo '<div class="">';
-			include ('cabecalho.php');
-		//echo "</div>";
+		include ('cabecalho.php');
 				
 		$this->load($view, $viewData, $viewData2);
 
-		include ('rodape.php');
-	?>
+	 	include ('rodape.php'); 
+ 	?>
 	
 </div>		
+
 </body>
 <script type="text/javascript" src="<?php URL_BASE . "/assets/js/jquery-3.3.1.min.js" ?>"> </script>
 <script type="text/javascript" src="<?php URL_BASE . "/assets/js/bootstrap.bundle.min.js" ?>"> </script>

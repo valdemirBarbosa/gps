@@ -391,11 +391,6 @@ span{
       margin-top: 4px;
 }
 
-
-.observacao{
-      margin-left: 188px;
-}
-
 select{
       height: 30px;
       width: 220px;
@@ -639,5 +634,4 @@ select{
 .containerPesqusa{
       background-color: blueviolet;
       width: 100%;
-
 }

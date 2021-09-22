@@ -29,6 +29,14 @@ class Denunciante_Model  extends Model{
         return $ret;
     }
 
+    //Pega as informações do denunciante que esteja relacionado à denuncia a partir do ID da denuncia
+    public function getDenuncianteDenuncia($id_denuncia){
+        $sql = "SELECT * FROM denunciante as den INNER JOIN denuncia as d ON den.id_denunciante = d.id_denunciante WHERE d.id_denuncia = :id_denuncia";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":id_denuncia", $id_denuncia);
+        $sql->execute();
+    }
+
     public function Inserir($nome_denunciante, $observacao){
         $sql = "INSERT INTO denunciante SET nome_denunciante = :denunciante, observacaoDenunciante = :observacao";
     

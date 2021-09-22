@@ -84,10 +84,17 @@ class Denuncia_Model extends Model{
         $sql->execute();
 */
     }
-
        public function  getEditar($id_denuncia){
         $ret = array();
-        $sql = "SELECT * FROM denuncia as d INNER JOIN denunciante as dc ON d.id_denunciante = dc.id_denunciante WHERE id_denuncia = :id";
+        $sql = "SELECT * FROM denuncia as d 
+        INNER JOIN 
+        denunciante as dc 
+        ON d.id_denunciante = dc.id_denunciante 
+        LEFT JOIN  
+        tipo_documento as td 
+        ON d.tipo_documento = td.id_tipo_documento 
+        WHERE id_denuncia = :id";
+
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":id", $id_denuncia);
         $sql->execute();

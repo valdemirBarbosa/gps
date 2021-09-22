@@ -4,6 +4,7 @@ use app\core\Controller;
 use app\models\Denuncia_Model;
 use app\models\Denunciado_Model;
 use app\models\Denunciante_Model;
+use app\models\TipoDocumento_Model;
 
 class DenunciaController extends Controller{
    public function index(){
@@ -70,6 +71,13 @@ class DenunciaController extends Controller{
    public function Edit($id_denuncia){
         $denuncias = new Denuncia_Model();
         $dados["denuncia"] = $denuncias->getEditar($id_denuncia);
+
+        $denunciante = new Denunciante_Model();
+        $dados['denunciante'] = $denunciante->lista();
+
+        $tiposDocumentos = new TipoDocumento_Model();
+        $dados['tipo_doc'] = $tiposDocumentos->lista();
+
         $dados["view"] = "denuncia/Editar";
         $this->load("template", $dados);
    }

@@ -15,7 +15,7 @@
 				<th width="10%">tipo documento</th>
 				<th width="10%">número</td>
 				<th width="10%">data de entrada</th>
-				<th width="20%">observação</th>
+				<th width="20%">denunciados</th>
 				<th width="10%" align="center" colspan="2">Ação</th>
 			</tr>
 	<?php 
@@ -32,7 +32,7 @@
 		   $ano = $dt_entrada[0];
 	?>
 	         <td align="center"><?php echo $dia."/".$mes."/".$ano  ?> </td> 
-		   <td><?php echo $den->observacao ?> </td>
+		   <td><?php echo $den->denunciados ?> </td>
 		   <td>
 			<div class="btn-editar"> 
 				<a href="<?php echo URL_BASE ."denuncia/Edit/".$den->id_denuncia ?>" >Editar</a>

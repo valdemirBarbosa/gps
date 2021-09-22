@@ -38,7 +38,7 @@
 				</textarea>	
 				
 				<label>Data de Encerramento</label>
-					<input name="txt_data_encerramento" type="date" value="<?php echo $pd->data_encerramento ?>">
+					<input name="txt_data_encerramento" type="date" readonly value="<?php echo $pd->data_encerramento ?>">
 
 		</fieldset>
 		<?php } ?>

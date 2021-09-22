@@ -37,7 +37,11 @@
 				 </td> 
 
 				 <td align="center"> <?php $data = new DateTime($pd->data_encerramento);
+				 	if($data > "01/01/1900"){
 				 		echo $data->format('d-m-Y');
+					 }else{
+						 echo "00/00/0000";
+					 }
 				 	?>
 				 </td> 
 
