@@ -1,9 +1,43 @@
 <div class="base-home">
 	<h1 class="titulo-pagina">Lista de denúncias</h1>
 </div>
+<?php //paramentros para pesquisa dos formulários de denuncia e processo
+ 		$tabela = 'denuncia';
+ 		$view = 'denuncia/Index';
+		$retorno = 'denunciaRet';
+?>
+
+<div class="containerPesqusa">
+<div class="frmConsulta">  
+	<form method="GET" action="<?php echo URL_BASE . 'Pesquisa/Consulta'; ?>" >
+		<table>
+			<tr>
+				<td>
+					<label>Pesquisa</label>
+						<select name="pesquisa" classe="select">
+								<option value="1">Número do documento</option>
+								<option value="2">Número do Processo</option>
+								<option value="3">Nome</option>
+								<option value="4">CPF</option>
+						</select>
+				</td>
+				<td>
+						<input type="text" autofocus name="valorPreenchidoUsuario">
+						<input type="hidden" name="view" value="<?php echo $view ?>">
+						<input type="hidden" name="retorno" value="<?php echo $retorno ?>">
+						<input type="hidden" name="tabela" value='<?php echo $tabela ?>'>
+						<input type="submit" value="pesquisar">
+				</td>
+			</tr>
+			</table>
+
+			</form>
+		</div>
+	</div>
+		
 	
 <div class="base-lista">
-	<span class="qtde">Há <b><?php echo count($denuncia) ?></b> denuncia(s) cadastrada(s)</span>
+	<span class="qtde">Há <b><?php echo  count($denunciaRet) ?></b> denuncia(s) cadastrada(s)</span>
 	<div class="btn-inc"><a href="<?php echo URL_BASE . "denuncia/Novo" ?>" >INCLUIR </a></div>
 
 	<div class="tabela">	
@@ -19,7 +53,7 @@
 				<th width="10%" align="center" colspan="2">Ação</th>
 			</tr>
 	<?php 
-	  foreach($denuncia as $den){
+	  foreach($denunciaRet as $den){
 	?>
 		<tr>
 		   <td align="center"><?php echo $den->id_denuncia  ?> </td>

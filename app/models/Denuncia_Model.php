@@ -13,7 +13,7 @@ class Denuncia_Model extends Model{
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
-
+      
     public function Documentos(){
         $sql = "SELECT * FROM tipo_documento";
         $qry = $this->db->query($sql);

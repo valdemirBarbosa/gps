@@ -37,8 +37,8 @@
       z-index: 5;
       background-color:royalblue;
       width: 85%;
-      height: 5%;
-      margin-top: 70px;
+      height: auto;
+      margin-top: 62px;
       margin-left: 0%;
       left: 15%;
 }
@@ -80,10 +80,11 @@ a:link{
 }
 
 form{
-      background-color:royalblue;
+      /* background-color:royalblue;
       width: 80%;
       margin-left: 2%;
-      position: absolute;
+      height: 90%;
+       */position: absolute;
       top:20%;
       left: 15%;
 }
@@ -110,8 +111,8 @@ label, input{
 }
 
 .base-lista{
-      width: 80%;
-      margin-top: 9%;
+      width: 84%;
+      padding-top: 4%;
       margin-left: 16%;
       background-color:gainsboro;
       text-align: center;
@@ -198,6 +199,7 @@ span{
       font-size: 23px;
       color:whitesmoke;
       width: 100%;
+      height: 10%;
       text-align: center;
       margin-left: 0px;
       margin-top: 10px; 
@@ -244,10 +246,10 @@ span{
 .btn{
       width: 120px;
       height: 40px;
-      margin-left: 10px;
-      margin-top: 112px;
+      margin-left: 50px;
+      margin-top: 20px;
       border-radius: 4px;
-      border-color:springgreen;
+      border-color:green;
       border-style: solid;
       text-align: center;
       text-transform: uppercase;
@@ -265,7 +267,7 @@ span{
       text-transform: uppercase;
 }
 
-.btn:hove{
+.btn:hover{
       width: 130px;
       height: 50px;
       background-color:royalblue;
@@ -389,6 +391,7 @@ span{
 
 .denuncia{
       margin-top: 4px;
+      padding-bottom: 1px;
 }
 
 select{
@@ -515,9 +518,7 @@ select{
       position: absolute;
       z-index: 1;
       background-color: blanchedalmond;
-      width: 560px;
-      margin-top: 110px;
-      margin-left: 100px;
+      width: 100%;
 
 }
 
@@ -634,4 +635,5 @@ select{
 .containerPesqusa{
       background-color: blueviolet;
       width: 100%;
+      margin-top: 8%;
 }

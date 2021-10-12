@@ -2,23 +2,23 @@
 		<h1 class="titulo-pagina">Alterar denúncia</h1>
 	</div>
 
-	  <form action="<?php echo URL_BASE ."denuncia/Salvar" ?>" method="POST">
+  <form action="<?php echo URL_BASE ."denuncia/Salvar" ?>" method="POST">
 		<fieldset>
 		<legend><h4>denúncia</h4></legend>
 			<label>id denuncia</label>
 				<input id="txt_id" name="txt_id" value="<?php echo $denuncia->id_denuncia ?>" >
 
 			<label>Naração dos fatos da denúncia</label>
-		      	<textarea rows="3" cols="80" class="denuncia" name="txt_denuncia"> <?php echo $denuncia->denuncia_fato ?>
+		      	<textarea rows="3" cols="80" clas="denuncia" name="txt_denuncia"> <?php echo $denuncia->denuncia_fato ?>
 				</textarea>
 		</fieldset>
 		
 		<fieldset>
-			<table class="denuncianteTab">
+			<table clas="denuncianteTab">
 			<tr>
 			<td>
-		<label for="denuncianteLst" class="denunciante">Denunciante</label>
-		<select class="denunciante" name="denunciante" class="denunciante">
+		<label for="denuncianteLst" clas="denunciante">Denunciante</label>
+		<select clss="denunciante" name="denunciante" clas="denunciante">
 					<option><?php echo $denuncia->nome_denunciante ?>
 						<?php foreach($denunciante as $den){?>
 							<option value="<?php echo $den->id_denunciante ?>"> <?php echo $den->nome_denunciante ?>
@@ -27,8 +27,8 @@
 		</select>
 	</td>
 			<td>	
-				<label class="tipo_document">tipo de documento</label>
-					<select nome="lst_tipo_documento" class="tipo_documento">
+				<label clas="tipo_document">tipo de documento</label>
+					<select nome="lst_tipo_documento" clas="tipo_documento">
 						<option><?php echo $denuncia->tipo_de_documento?></option>
 							<?php foreach($tipo_doc as $doc){?>
 							<option value="<?php $doc->id_tipo_documento   ?>">
@@ -58,20 +58,21 @@
 		</fieldset>					
 			<fieldset>
 				<label>Denunciados</label>
-				<textarea rows="3" cols="98"  class="areaDenuncia" name="txt_denunciados">
+				<textarea rows="3" cols="98"  clas="areaDenuncia" name="txt_denunciados">
 							<?php echo $denuncia->denunciados ?> 
 				</textarea> 
 			</fieldset>
 
 			<fieldset>
 				<label>Observação</label>
-				<textarea rows="3" cols="100" class="denuncia" name="txt_observacao">
+				<textarea rows="3" cols="100" name="txt_observacao">
 						<?php echo $denuncia->observacao ?> 
 				</textarea> 
 			</fieldset>
-		
-		<input type="hidden" name="id_denuncia" value="<?php echo $denuncia->id_denuncia ?>">
-		<input type="submit" value="Editar" class="btn">
-		<input type="reset" name="Reset" id="button" value="Limpar" class="btn limpar">
+
+			<input type="hidden" name="id_denuncia" value="<?php echo $denuncia->id_denuncia ?>">
+			<input type="submit" value="Editar" class="btn">
+			<input type="reset" name="Reset" id="button" value="Limpar" class="btn limpar">
+
 	</form>
 	
