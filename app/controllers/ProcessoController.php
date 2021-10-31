@@ -10,10 +10,11 @@ use app\models\Processo_Model;
 
 class ProcessoController extends Controller{
     
-   public function index(){
+  public function index(){
         $processo = new Processo_Model();
         $dados["processo"] = $processo->lista();
         $dados["view"] = "processo/Index";
+        
         $this->load("template", $dados);
    }
 

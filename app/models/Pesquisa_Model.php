@@ -21,4 +21,37 @@ class Pesquisa_Model extends Model{
         $sql->execute();
         return $sql->fetchAll(\PDO::FETCH_OBJ);
     }
-}
+
+    public function PesquisaServidor($tabela, $campo, $informacao){
+        $sql = "SELECT * FROM $tabela  WHERE  $campo LIKE '%$informacao%'";
+        $sql = $this->db->query($sql);
+        return $sql->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+
+    public function PesquisaProcesso($tabela, $campo, $informacao){
+        $sql = "SELECT * FROM $tabela as p LEFT JOIN denuncia as d ON p.id_denuncia = d.id_denuncia LEFT JOIN fase as f ON p.id_fase = f.id_fase WHERE $campo=:parametro";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":parametro", $informacao);
+        $sql->execute();
+        return $sql->fetchAll(\PDO::FETCH_OBJ);
+    }
+    
+    public function contaRegistro($tabela, $parametro){
+        $sql = "SELECT COUNT(*) FROM $tabela WHERE nome_servidor LIKE '$parametro'";
+        $sql = $this->db->query($sql);
+        $totalRegistro = $sql->rowCount();
+        return $totalRegistro;
+    }
+
+    // Pegar os dados da tabela ocorrencia e disponibilizar para os Métodos Editar e Excluir
+    public function getNumeroProcessoLimit($parametro, $offset, $limit){
+        $sql = "SELECT * FROM servidor WHERE nome_servidor LIKE '%$parametro%' LIMIT $offset, $limit";
+/*         print_r($sql);
+        exit;
+ */        
+        $qry = $this->db->query($sql);
+        return $qry->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+}    

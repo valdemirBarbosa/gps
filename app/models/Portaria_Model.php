@@ -55,10 +55,9 @@ class Portaria_Model extends Model{
 
     //Usado para o formulário de editar e função de excluir da lista
     public function GetId($id_portaria){
-        $sql = "SELECT * FROM portaria WHERE id_portaria = ".$id_portaria;
-        $qry = $this->db->query($sql);
-        return $qry->fetchAll(\PDO::FETCH_OBJ);
-        $sql->bindValue(':id', $id_portaria);
+        $sql = "SELECT * FROM portaria WHERE id_portaria = id_portaria =: id";
+        $qry = $this->db->pepare($sql);
+        $qry->bindValue(":id", $id_portaria);
         $sql->execute();
     }
 

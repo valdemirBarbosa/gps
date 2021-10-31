@@ -17,7 +17,7 @@ class AndamentoController extends Controller{
  /*          $dados["procOcorr"] = $ocorrencia->lista();
   */      $dados["totalPaginas"] = 0;
           $dados["numero_processo"] = 0;
-          $dados["view"] = "ocorrencia/andamento";
+          $dados["view"] = "andamento/index";
           $this->load("template", $dados);
      }
   
@@ -83,7 +83,7 @@ class AndamentoController extends Controller{
 
           }
      
-          $dados["view"] = "ocorrencia/andamento";
+          $dados["view"] = "andamento/index";
           $this->load("template", $dados);
      }
 

@@ -4,9 +4,10 @@
 <form action="<?php echo URL_BASE ."portaria/Salvar" ?>" method="POST">
 		<fieldset>
 			<legend><h4>Códigos</h4></legend>	
+			<?php foreach($vincProcess as $vp){ }?>
 
 				<label>Id do Processo</label>
-				<input id="txt_id_processo" type="number"  name="txt_id_processo" value="<?php foreach($vincProcess as $vp){ echo $vp->id_processo; }?>">
+				<input id="txt_id_processo" type="number"  name="txt_id_processo" value="<?php  echo $vp->id_processo; ?>">
 
 				<label>Número do Processo</label>
 				<input value="<?php echo $vp->numero_processo; ?>"  id="txt_numero_processo" type="number"  name="txt_numero_processo">
@@ -17,7 +18,7 @@
 			<tr><td>
 			<legend>Informações da Portaria</legend>
 				<label>Tipo</label>
-					<input name="txt_tipo" type="text" placeholder="tipo da portaria" required>
+					<input name="txt_tipo" type="text" placeholder="tipo da portaria" required autofocus>
 
 				<label>Número da Portaria</label>
 					<input name="txt_numero" type="number" placeholder="Insira o  Número da Portaria" required>

@@ -10,7 +10,7 @@ class Servidor_Model  extends Model{
 
 
     public function lista(){
-        $sql = "SELECT * FROM servidor";
+        $sql = "SELECT * FROM servidor ORDER BY id_servidor ASC LIMIT 5";
         $qry = $this->db->query($sql);
         
         return $qry->fetchAll(\PDO::FETCH_OBJ);

@@ -8,8 +8,12 @@
 </head>
 <body>
     <form method="POST" enctype="multipart/form-data" action="<?php echo  URL_BASE . "Upload/recebedor" ?>">
-        <input type="file" name="arquivo"><br/><br/>
-        <input type="submit" name="enviar">
+    <?php 
+        $view = "upload/index"; 
+    ?>
+       <input type="file" name="arquivo"><br/><br/>
+       <input type="submit" name="enviar">
+       <input type="hidden" name="view" value="<?php echo $view ?>">
     </form>
 
     <div class="upload">
@@ -18,6 +22,7 @@
             foreach($arq as $aq){
             }
 
+        echo "<br/>Arquivo enviado com sucesso, dados abaixo: <br/>";
         print_r($aq);
         echo "<br/>";
        

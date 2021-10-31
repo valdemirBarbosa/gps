@@ -22,7 +22,7 @@
       background-color:silver;
       float: left;
       width: 100%;
-      height: 100%;
+      height:auto;
 
 }
 
@@ -37,8 +37,8 @@
       z-index: 5;
       background-color:royalblue;
       width: 85%;
-      height: auto;
-      margin-top: 62px;
+      height: 5%;
+      margin-top: 60px;
       margin-left: 0%;
       left: 15%;
 }
@@ -80,11 +80,10 @@ a:link{
 }
 
 form{
-      /* background-color:royalblue;
+      background-color:royalblue;
       width: 80%;
       margin-left: 2%;
-      height: 90%;
-       */position: absolute;
+      position: absolute;
       top:20%;
       left: 15%;
 }
@@ -111,9 +110,17 @@ label, input{
 }
 
 .base-lista{
-      width: 84%;
-      padding-top: 4%;
+      width: 80%;
+      margin-top: 14%;
       margin-left: 16%;
+      background-color:gainsboro;
+      text-align: center;
+ }
+
+ .base-lista2{
+      width: 80%;
+      margin-top: 8%;
+      margin-left: 17%;
       background-color:gainsboro;
       text-align: center;
  }
@@ -199,7 +206,6 @@ span{
       font-size: 23px;
       color:whitesmoke;
       width: 100%;
-      height: 10%;
       text-align: center;
       margin-left: 0px;
       margin-top: 10px; 
@@ -246,10 +252,10 @@ span{
 .btn{
       width: 120px;
       height: 40px;
-      margin-left: 50px;
-      margin-top: 20px;
+      margin-left: 10px;
+      margin-top: 112px;
       border-radius: 4px;
-      border-color:green;
+      border-color:springgreen;
       border-style: solid;
       text-align: center;
       text-transform: uppercase;
@@ -267,7 +273,7 @@ span{
       text-transform: uppercase;
 }
 
-.btn:hover{
+.btn:hove{
       width: 130px;
       height: 50px;
       background-color:royalblue;
@@ -391,7 +397,6 @@ span{
 
 .denuncia{
       margin-top: 4px;
-      padding-bottom: 1px;
 }
 
 select{
@@ -515,10 +520,10 @@ select{
 }
 
 .frmConsulta{
-      position: absolute;
-      z-index: 1;
-      background-color: blanchedalmond;
-      width: 100%;
+      background-color:lightgray;
+      width: 1200px;
+      margin-top: 110px;
+      margin-left: 250px;
 
 }
 
@@ -612,9 +617,9 @@ select{
 }
 
 .upload{
-      margin-top: 80px;
-      margin-left: 200px;
-      width: 800px;
+      margin-top: 15%;
+      margin-left: 300px;
+      width: 1000px;
       background-color: #DBE06C;
 }
 
@@ -632,8 +637,24 @@ select{
       
 }
 
+.containerForm{
+      width:1100px;
+
+      background-color: red;
+      margin-top: 80px;
+      margin-left: 250px;
+}
+
 .containerPesqusa{
-      background-color: blueviolet;
-      width: 100%;
-      margin-top: 8%;
+      margin-top: 13%; 
+}
+
+.voltar{
+      position:absolute;
+      height: 60px;
+      width: 100px;     
+      background-color:yellow;
+      margin-left: 30%;
+      margin-top: 20%;
+      font-size: 30px;     
 }

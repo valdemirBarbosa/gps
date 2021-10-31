@@ -2,16 +2,18 @@
 	<div class="titulo-pagina">Cadastro de Denunciantes</div>
 </div>
 
-<div class="base-lista">
+<div class="base-lista2">
+<!-- 	
 	<span class="qtde">Há <b><?php echo count($denunciante) ?></b> denunciante(s) cadastrado(s)</span>
-	<div class="btn-inc"><a href="<?php echo URL_BASE . "denunciante/novo" ?>" >INCLUIR </a></div>
+ -->
+ 	<div class="btn-inc"><a href="<?php echo URL_BASE . "denunciante/novo" ?>" >INCLUIR </a></div>
 	<div class="tabela">	
 		<table width="100%" border="1" cellspacing="0" cellpadding="0">
 		  <thead>
 			   <tr>
-				<th width="10%" align="left">codigo</th>
-				<th width="30%" align="left">denunciante</th>
-				<th width="40%" align="left">observação</th>
+				<th width="5%" align="left">codigo</th>
+				<th width="60%" align="left">denunciante</th>
+				<th width="25%" align="left">observação</th>
 				<th colspan="2" align="center">Ação</th>
 			  </tr>
 		  </thead>

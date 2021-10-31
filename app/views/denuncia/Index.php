@@ -14,7 +14,7 @@
 			<tr>
 				<td>
 					<label>Pesquisa</label>
-						<select name="pesquisa" classe="select">
+						<select name="pesquisa" class="select">
 								<option value="1">Número do documento</option>
 								<option value="2">Número do Processo</option>
 								<option value="3">Nome</option>

@@ -2,10 +2,46 @@
 	<h1 class="titulo-pagina">Lista de Processos</h1>
 </div>
 
+<?php //paramentros para pesquisa dos formulários de denuncia e processo
+ 		$tabela = 'processo';
+ 		$view = 'processo/Index';
+		$retorno = 'processo';
+?>
+
+<div class="containerPesqusa">
+<div class="frmConsulta">  
+	<form method="GET" action="<?php echo URL_BASE . 'Pesquisa/ConsultaProcesso'; ?>" >
+		<table>
+			<tr>
+				<td>
+					<label>Pesquisa</label>
+						<select name="pesquisa" classe="select">
+								<option value="1">Número documento da denúncia</option>
+								<option value="2" selected="selected">Número do Processo</option>
+								<option value="3">Nome</option>
+								<option value="4">CPF</option>
+						</select>
+				</td>
+				<td>
+						<input type="text" autofocus name="valorPreenchidoUsuario">
+						<input type="hidden" name="view" value="<?php echo $view ?>">
+						<input type="hidden" name="retorno" value="<?php echo $retorno ?>">
+						<input type="hidden" name="tabela" value='<?php echo $tabela ?>'>
+						<input type="submit" value="pesquisar">
+				</td>
+			</tr>
+			</table>
+
+			</form>
+		</div>
+	</div>
+		
+	
 <div class="base-lista">
-	<span class="qtde">Há <b><?php echo count($processo) ?></b> Processos</span>
-	<div class="btn-inc"><a href="<?php 
-				    echo URL_BASE . "processo/Novo"; ?>" >INCLUIR </a></div>
+<!-- 	
+	<span class="qtde">Há <b><?php echo  count($processo) ?></b> denuncia(s) cadastrada(s)</span>
+ -->
+ 	<div class="btn-inc"><a href="<?php echo URL_BASE . "denuncia/Novo" ?>" >INCLUIR </a></div>
 
 	<div class="tabela">	
 		<table width="100%" border="1" cellspacing="0" cellpadding="0">

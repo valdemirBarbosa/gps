@@ -20,6 +20,19 @@ class Fase_Model extends Model{
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
+ //Verifica qtde de regitro por número de processo  - verifica se há menos de 3 registros
+    public function EvitarDuplicidadeFase($numero_processo, $id_nova_fase){
+/*         $sql = "SELECT * FROM processo WHERE numero_processo =:processo && id_fase =:fase";
+ */       
+        $sql = "SELECT * FROM processo WHERE numero_processo =:processo";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":processo", $numero_processo);
+        $sql->execute();
+        if($sql->rowCount() > 0){
+            return $sql->fetchAll();
+    }
+ }
+
     public function getNumProcesso($numero_processo){
         $sql = "SELECT * FROM processo WHERE numero_processo =:numProcesso"; 
         $sql = $this->db->prepare($sql);
@@ -58,16 +71,13 @@ class Fase_Model extends Model{
 
     }   
 
-    public function Inserir($id_denuncia, $numero_processo, $id_fase, $nova_data_instauracao, $observacao, $anexo, $user){
+    public function Inserir($id_denuncia, $numero_processo, $id_nova_fase, $nova_data_instauracao, $observacao, $anexo, $user){
         $sql = "INSERT INTO processo SET id_denuncia=:id_denuncia, numero_processo=:numero_processo ,id_fase=:fase, data_instauracao=:data_instauracao, observacao=:observacao, anexo=:anexo, user=:user"; 
 
-/*     echo "Id_denuncia: ".$id_denuncia."numero do processo: ".$numero_processo." data_instauracao: ".$nova_data_instauracao." id fase: ".$id_fase." obs: ".$observacao." anexo: ".$anexo." user: ". $user;
-    exit;
- */
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":id_denuncia", $id_denuncia);
         $sql->bindValue(":numero_processo", $numero_processo);
-        $sql->bindValue(":fase", $id_fase);
+        $sql->bindValue(":fase", $id_nova_fase);
         $sql->bindValue(":data_instauracao", $nova_data_instauracao);
         $sql->bindValue(":observacao", $observacao);
         $sql->bindValue(":anexo", $anexo);

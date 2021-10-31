@@ -2,9 +2,41 @@
 	<h1 class="titulo-pagina">Lista de servidores</h1>
 </div>
 
+<?php //paramentros para pesquisa dos formulários de denuncia e processo
+ 		$tabela = 'servidor';
+ 		$view = 'servidor/Index';
+		$retorno = 'servidorRet';
+?>
+
+<div class="frmConsulta">  
+	<form method="GET" action="<?php echo URL_BASE . 'Pesquisa/porParametro'; ?>" >
+		<table>
+			<tr>
+				<td>
+					<label>Pesquisa</label>
+						<select name="pesquisa" class="select">
+<!-- 								<option value="1">Número do documento</option>
+								<option value="2">Número do Processo</option>
+ -->								<option value="3">Nome</option>
+								<option value="4">CPF</option>
+						</select>
+				</td>
+				<td>
+						<input type="text" autofocus name="valorPreenchidoUsuario">
+						<input type="hidden" name="view" value="<?php echo $view ?>">
+						<input type="hidden" name="retorno" value="<?php echo $retorno ?>">
+						<input type="hidden" name="tabela" value="<?php echo $tabela ?>">
+						<input type="submit" value="pesquisar">
+				</td>
+			</tr>
+			</table>
+
+			</form>
+		</div>
+
 <div class="base-lista">
-	<span class="qtde">Há <b><?php echo count($servidores) ?></b> servidor(es) cadastrado(s)</span>
-	<div class="btn-inc"><a href="<?php echo URL_BASE . "servidor/novo" ?>" >INCLUIR </a></div>
+<!-- 	<span class="qtde">Há <b><?php echo count($dados) ?></b> servidor(es) cadastrado(s)</span>
+ -->	<div class="btn-inc"><a href="<?php echo URL_BASE . "servidor/novo" ?>" >INCLUIR </a></div>
 
 	<div class="tabela">	
 		<table width="100%" border="1" cellspacing="0" cellpadding="0">
@@ -22,7 +54,7 @@
 			  </tr>
 		  </thead>
 		  <tbody>
-		  	<?php foreach($servidores as $servidor){   ?>
+		  	<?php foreach($dados as $servidor){   ?>
 				<tr class="cor1">
 				<td align="center"><?php echo $servidor->id_servidor  ?></td>
 				<td align="center"><?php echo $servidor->nome_servidor  ?></td>

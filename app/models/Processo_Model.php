@@ -9,7 +9,7 @@ class Processo_Model extends Model{
     }
 
     public function lista(){
-        $sql = "SELECT * FROM processo as p LEFT JOIN fase as f ON p.id_fase = f.id_fase"; 
+        $sql = "SELECT * FROM processo as p LEFT JOIN fase as f ON p.id_fase = f.id_fase ORDER BY p.numero_processo"; 
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
@@ -45,6 +45,17 @@ class Processo_Model extends Model{
         $sql = "SELECT * FROM processo"; 
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
+    }
+    
+    public function qtdProcesso($numero_processo){
+        $sql = "SELECT count(*) FROM processo WHERE numero_processo = $numero_processo"; 
+        $qry = $this->db->query($sql);
+
+        if($qry->rowCount()>0){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     // Pegar os dados da tabela processo e disponibilizar para os Métodos Editar e Excluir
