@@ -134,7 +134,8 @@ public function porParametro(){
           $parametro = $_GET['valorPreenchidoUsuario'];
           $dados['dados'] = $dadosTabela->getNumeroProcessoLimit($parametro, $offset, $limit);
           $dados["view"] = addslashes($_GET["view"]);
-
+print_r($dados);
+exit;
      }
 
      $dados["view"] = addslashes($_GET["view"]);

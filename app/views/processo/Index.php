@@ -41,7 +41,6 @@
 <!-- 	
 	<span class="qtde">Há <b><?php echo  count($processo) ?></b> denuncia(s) cadastrada(s)</span>
  -->
- 	<div class="btn-inc"><a href="<?php echo URL_BASE . "denuncia/Novo" ?>" >INCLUIR </a></div>
 
 	<div class="tabela">	
 		<table width="100%" border="1" cellspacing="0" cellpadding="0">
@@ -115,10 +114,18 @@
 	<?php } ?>
 
 			<hr/><hr/>
+		
+			<!--Botões !-->
+			<div class="btn-inc">
+				<script> //Link para voltar à página anterior
+					document.write('<a href="' + document.referrer + '">Voltar</a>');
+				</script>
+			</div>			
+			
+			<div class="btn-inc">
+				<a href="<?php echo URL_BASE . "processo/novo" ?>" >INCLUIR </a>
+			</div>
 		</table>
 	</div>				
 		<p>...</P>
 </div>
-
-</body>
-</html>

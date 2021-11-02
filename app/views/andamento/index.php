@@ -12,7 +12,27 @@
 		<input type="submit" value="pesquisar">
 	</form>
 
-<table border="2">
+		<!--Botões !-->
+		<div class="btn-inc">
+				<script> //Link para voltar à página anterior
+					document.write('<a href="' + document.referrer + '">Voltar</a>');
+				</script>
+			</div>			
+			
+			<div class="btn-inc">
+				<a href="<?php echo URL_BASE . "ocorrencia/novo" ?>" >INCLUIR </a>
+
+<!-- Parei aqui tentando passar o id para o formulário
+ 				<?php
+					if(isset($processo)){
+				foreach($processo as $pd){ 
+				}} ?>
+
+				<a href="<?php echo URL_BASE ."Ocorrencia/Excluir/".$pd->id_ocorrencia ?>" >Excluir</a>
+ -->
+			</div>
+
+	<table border="2">
 	<form action="<?php  echo URL_BASE ."Processo/Salvar" ?>" method="POST">
 	<?php
 		if(isset($processo)){
@@ -57,7 +77,7 @@
 					<input name="txt_data_instauracao" type="date" value="<?php  if(!empty($pd->data_instauracao)){echo $pd->data_instauracao;} ?>">
 	</fieldset>
 	</table>
-	
+		
 	<table class="tabela_ocorrencia" width="98%" border="2">
 		  <thead>
 			<tr>
@@ -105,7 +125,8 @@
 		</fieldset>
 			</td>
         </tr>
-	    </table>
+
+   </table>
    </div>
 </body>
 </html>

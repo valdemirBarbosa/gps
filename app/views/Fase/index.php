@@ -7,8 +7,9 @@
     <title>Fase</title>
 </head>
 <body>
+
 <form method="POST"  action="<?php echo  URL_BASE . "Fase/Salvar" ?>">
-    <fieldset>
+<fieldset>
         <legend>Dados atuais do processo</legend><br/>
             <?php if(isset($tramitar)){
                 foreach($tramitar as $p){ ?>
@@ -47,7 +48,7 @@
                 <td>
 
                     <label>Observação</label>
-                    <textarea readonly rows="3" cols="100">
+                    <textarea disabled readonly rows="3" cols="100">
                         <?php  echo $p->observacao ?> 
                     </textarea>
                 </td>
@@ -85,9 +86,33 @@
     </fieldset>
 
     <fieldset>
-        <input type="submit" name="AlterarFase" value="Alterar Fase">
+    <table class="tabela">    
+        <tr>
+            <td>
+                <div class="btn-inc">
+                    <script> //Link para voltar à página anterior
+                        document.write('<a href="' + document.referrer + '">Voltar</a>');
+                    </script>
+                </div>			
+            </td>
+
+            <td>
+                <div>
+                    <input type="submit" name="AlterarFase" class="btn-inc" value="Mudar Fase">
+                </div>
+            </td>
+            
+            <div class="text">
+                <td>formulário</td>
+                <td>para</td>
+                <td>alteração</td>
+                <td>de </td>
+                <td>fase</td>
+            </div>
+    </table>
     </fieldset>
     <?php } ?>
+
 </form>
 
 </body>

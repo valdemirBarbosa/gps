@@ -8,12 +8,20 @@
 </head>
 <body>
     <form method="POST" enctype="multipart/form-data" action="<?php echo  URL_BASE . "Upload/recebedor" ?>">
-    <?php 
+
+		<?php 
         $view = "upload/index"; 
     ?>
        <input type="file" name="arquivo"><br/><br/>
-       <input type="submit" name="enviar">
+       <input class="btn-inc" type="submit" name="ENVIAR">
        <input type="hidden" name="view" value="<?php echo $view ?>">
+
+       <!--Botões !-->
+				<script> //Link para voltar à página anterior
+					document.write('<a href="' + document.referrer + '">Voltar</a>');
+				</script>
+
+
     </form>
 
     <div class="upload">
@@ -26,6 +34,7 @@
         print_r($aq);
         echo "<br/>";
        
+
 
 //A última alteração foi a mudança do colchete do if da linha 20 para a linah 33
         }

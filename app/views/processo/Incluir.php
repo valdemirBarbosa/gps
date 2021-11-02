@@ -3,7 +3,14 @@
 </div>
 
 <form action="<?php echo URL_BASE ."Processo/Salvar" ?>" method="POST">
-	<fieldset>
+					<!--Botões !-->
+					<div class="btn-inc">
+				<script> //Link para voltar à página anterior
+					document.write('<a href="' + document.referrer + '">Voltar</a>');
+				</script>
+			</div>			
+
+<fieldset>
 	<legend><h4>id - identificadores </h4></legend>
 		<label>Id da denuncia</label>
 		<select autofocus name="txt_id_denuncia">
@@ -50,5 +57,5 @@
 
 		<input type="submit" value="Cadastrar" class="btn">
 		<input type="reset" name="Reset" id="button" value="Limpar" class="btn_limpar">
-</form>
+	</form>
 </fieldset>

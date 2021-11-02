@@ -37,19 +37,22 @@
 		
 	
 <div class="base-lista">
-	<span class="qtde">Há <b><?php echo  count($denunciaRet) ?></b> denuncia(s) cadastrada(s)</span>
-	<div class="btn-inc"><a href="<?php echo URL_BASE . "denuncia/Novo" ?>" >INCLUIR </a></div>
+<!-- 	<span class="qtde">Há <b><?php echo  count($denunciaRet) ?></b> denuncia(s) cadastrada(s)</span>
+ -->	
+
 
 	<div class="tabela">	
 		<table width="100%" border="1" cellspacing="0" cellpadding="0">
 		  <thead>
 			<tr>
-				<th width="10%" align="center"> id</th>
+				<th width="5%" align="center"> id</th>
 				<th width="30%">Narração da denúncia</th>
 				<th width="10%">tipo documento</th>
-				<th width="10%">número</td>
-				<th width="10%">data de entrada</th>
+				<th width="3%">número</td>
+				<th width="7%">data de entrada</th>
 				<th width="20%">denunciados</th>
+				<th width="30%">documentos anexados</th>
+
 				<th width="10%" align="center" colspan="2">Ação</th>
 			</tr>
 	<?php 
@@ -66,8 +69,12 @@
 		   $ano = $dt_entrada[0];
 	?>
 	         <td align="center"><?php echo $dia."/".$mes."/".$ano  ?> </td> 
-		   <td><?php echo $den->denunciados ?> </td>
-		   <td>
+		
+			 <td><?php echo $den->denunciados ?> </td>
+		
+			 <td><?php echo $den->documentos_anexados ?> </td>
+	
+			 <td>
 			<div class="btn-editar"> 
 				<a href="<?php echo URL_BASE ."denuncia/Edit/".$den->id_denuncia ?>" >Editar</a>
 	  	      </div>	
@@ -79,9 +86,20 @@
 			</td>
 		   </tr> 
 	<?php } ?>
+	</div>
+	</td>
 
-			<hr/><hr/>
-		</table>
+	<!--Botões !-->
+	<div class="btn-inc">
+		<script> //Link para voltar à página anterior
+  			document.write('<a href="' + document.referrer + '">Voltar</a>');
+ 		</script>
+	</div>			
+	
+	<div class="btn-inc">
+		<a href="<?php echo URL_BASE . "denuncia/Novo" ?>" >INCLUIR </a>
+	</div>
+</table>
 </div>		
 </body>
 </html>

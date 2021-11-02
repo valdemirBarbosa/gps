@@ -8,15 +8,20 @@
 </head>
 <body>
 
-<div class="erros">
-               <?php 
-                //Mensagem vindo da classe MensageiroController método Error. Solicitado pela função verData da classe FaseController
-                        echo $viewData2; ?>
-           </div>
+    <div class="erros">
+        <?php 
+            //Mensagem vindo da classe MensageiroController método Error. Solicitado pela função verData da classe FaseController
+            echo $viewData2; ?>
 
-          <div class="voltar">
-              <a href="<?= $previous ?>"> <img src="<?php echo URL_BASE . asset\voltar.png ?>">   </a>
-          </div>
-      
+                  <!--Botões !-->
+		<div class="btn-inc">
+				<script> //Link para voltar à página anterior
+					document.write('<a href="' + document.referrer + '">Voltar</a>');
+				</script>
+		</div>			
+
+    </div>
+
+        
 </body>
 </html>

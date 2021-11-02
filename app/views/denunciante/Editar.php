@@ -1,6 +1,12 @@
 <div class="base-home">
 	<h1 class="titulo-pagina">Alterar cadastro de denunciante</h1>
 </div>
+			<!--Botões !-->
+			<div class="btn-inc">
+				<script> //Link para voltar à página anterior
+					document.write('<a href="' + document.referrer + '">Voltar</a>');
+				</script>
+			</div>			
 
   <form action="<?php echo URL_BASE ."denunciante/Salvar" ?>" method="POST">
 	<fieldset>

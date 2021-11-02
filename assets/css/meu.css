@@ -69,7 +69,7 @@ li{
 }
 
 
-.menu li a:hove{
+.menu li a:hover{
       background-color:royalblue;
       font-size: 18px;
 }
@@ -158,6 +158,9 @@ fieldset{
 
 legend{
       color:black;
+      font-size: 20px;
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: bold;
 }
 
 
@@ -241,7 +244,7 @@ span{
 
 .minhaTabela{
 	width: 100%;
-	padding:4px;
+	padding:2px;
 	text-transform:uppercase;
 	color:#20202F;
 	background:slategray;
@@ -273,7 +276,7 @@ span{
       text-transform: uppercase;
 }
 
-.btn:hove{
+.btn:hover{
       width: 130px;
       height: 50px;
       background-color:royalblue;
@@ -287,6 +290,7 @@ span{
 .btn-inc{
       width: 120px;
       height: 40px;
+      float: left;
       background-color: blue;
       color: white;
       border-radius: 10px;
@@ -301,7 +305,7 @@ span{
       color: white;
 }
 
-.btn-inc:hove{
+.btn-inc:hover{
       width: 130px;
       height: 45px;
       background-color:royalblue;
@@ -325,7 +329,7 @@ span{
       color: red;
 }
 
-.btn-excluir:hove{
+.btn-excluir:hover{
       width: 100px;
       height: 50px;
       background-color:greenyellow;
@@ -350,7 +354,7 @@ span{
       color:yellow;
 }
 
-.btn-editar:hove{
+.btn-editar:hover{
       width: 85px;
       height: 55px;
       background-color:darkblue;
@@ -617,11 +621,11 @@ select{
 }
 
 .upload{
-      margin-top: 15%;
+    /*   margin-top: 15%;
       margin-left: 300px;
       width: 1000px;
       background-color: #DBE06C;
-}
+ */}
 
 .erros{
       width: 600px;
@@ -633,8 +637,8 @@ select{
       background-color:yellow;
       color: red;
       display: block;
-      position: absolute;
-      
+/*       position: absolute;
+ */      
 }
 
 .containerForm{
@@ -649,12 +653,11 @@ select{
       margin-top: 13%; 
 }
 
-.voltar{
-      position:absolute;
+.text{
+      color:white;
+      background-color: red;
+}
+
+.botoes{
       height: 60px;
-      width: 100px;     
-      background-color:yellow;
-      margin-left: 30%;
-      margin-top: 20%;
-      font-size: 30px;     
 }
