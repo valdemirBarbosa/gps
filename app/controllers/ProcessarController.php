@@ -2,14 +2,12 @@
 namespace app\controllers;
 use app\core\Controller;
 use app\models\Denuncia_Model;
-use app\models\Denunciado_Model;
-use app\models\Denunciante_Model;
-use app\models\TipoDocumento_Model;
+use app\models\Processo_Model;
 use app\models\Pesquisa_Model;
 use app\models\Servidor_Model;
 
 
-class PesquisaController extends Controller{
+class ProcessarController extends Controller{
    public function index(){
         /* $denuncias = new Denuncia_Model();
         $denunciados = new Denuncia_Model();
@@ -38,6 +36,10 @@ class PesquisaController extends Controller{
   }
      //Pesquisa para tabela de processo    
     public function ConsultaProcesso(){
+        if(isset($_GET['id_processo'])){
+            $id_processo = addslashes(['id_processo']);
+    }
+        
         $parametrosPesquisa = $this->pegarDadosDoUsuario();
         
         if(isset($_GET['tabela']) && !empty(['valorPreenchidoUsuario'])){
@@ -46,8 +48,7 @@ class PesquisaController extends Controller{
      
                $dados["view"] = addslashes($_GET['view']);
                $retornoDados = addslashes($_GET['retorno']);
-               
-
+              
                $campo = $parametrosPesquisa[0];
                $informacao = $parametrosPesquisa[1];
 
@@ -124,17 +125,31 @@ public function porParametro(){
      }
 
      $offset = ($dados['paginaAtual'] * $limit) - $limit;
-     
 
+
+//Pegar o número do processo do formulário para reusar na voltar          
      if(isset($_GET['valorPreenchidoUsuario']) && !empty($_GET['tabela'])){
           $parametro = $_GET['valorPreenchidoUsuario'];
-          $dados['dados'] = $dadosTabela->getNumeroProcessoLimit($parametro, $offset, $limit);
-          $dados["view"] = addslashes($_GET["view"]);
-     }
+          $campo = $_GET['campo'];
+//          $dados['processo'] = addslashes($_GET['processoFormulario']);
 
-     $dados["view"] = addslashes($_GET["view"]);
-     $this->load("template", $dados);
+
+          $dados['processo'] = $dadosTabela->getNumeroProcessoLimit($parametro, $offset, $limit);
+
+          $servidor = new Servidor_Model();
+          $dados['processar'] = $servidor->getServidorProcessar($campo, $parametro);
+          $dados["view"] = addslashes($_GET["view"]);
+          $this->load("template", $dados);
+
+     }
 }
+
+//INCLUIR VIA UPDATE NA TABELA DE PROCESSO PELO ID_SERVIDOR
+public function incluir($id_servidor, $id_processo){{
+     $incluirServidor = new Servidor_Model();
+     $dados['processado'] = $incluirServidor->IncluirServProcesso($id_servidor, $id_processo);
+}
+     
 
 public function contarRegistro(){
      if(isset($_GET['valorPreenchidoUsuario']) && !empty('valorPreenchidoUsuario')){

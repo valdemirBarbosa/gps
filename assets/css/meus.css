@@ -661,3 +661,29 @@ select{
 .botoes{
       height: 60px;
 }
+
+.processarServidor{
+      height: 260px;
+      width: auto;
+      margin-left: 100px;
+      margin-top: 100px;
+      position:absolute;
+}
+
+.processarServidorFormulario{
+      height: auto;
+      width: auto;
+      margin-top: 240px;
+      margin-left: 186px;
+      background-color:aliceblue;
+      position: relative;
+
+}
+
+.processarServidorTabela{
+      height: auto;
+      width: auto;
+      margin-top: 30px;
+      background-color:gainsboro;
+
+}

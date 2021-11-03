@@ -73,6 +73,16 @@ class ProcessoController extends Controller{
           $this->load("template", $dados);
      }
 
+     public function Processar($id_processo){
+          $fase = new Processo_Model();
+          $dados["fase"] = $fase->faseLista();
+
+          $processo = new Processo_Model();
+          $dados["processo"] = $processo->getId($id_processo);
+          $dados["view"] = "processo/processarServidor";
+          $this->load("template", $dados);
+     }
+
      public function andamento(){
           $fase = new Processo_Model();
           $dados["fase"] = $fase->faseLista();

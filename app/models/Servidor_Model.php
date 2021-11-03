@@ -12,7 +12,6 @@ class Servidor_Model  extends Model{
     public function lista(){
         $sql = "SELECT * FROM servidor ORDER BY id_servidor ASC LIMIT 5";
         $qry = $this->db->query($sql);
-        
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
@@ -27,6 +26,20 @@ class Servidor_Model  extends Model{
             $ret = $sql->fetch(\PDO::FETCH_OBJ);
         }
         return $ret;
+    }
+    
+    //USADO PARA CONSULTA DE SERVIDOR A SER PROCESSADO
+    public function getServidorProcessar($campo, $parametro){
+        $sql = "SELECT * FROM servidor WHERE $campo LIKE '$parametro%'";
+        $qry = $this->db->query($sql);
+        return $qry->fetchAll(\PDO::FETCH_OBJ);
+    }
+    
+    //USADO PARA VISUALIZAÇÃO NA TABELA JÁ RELACIONADA COM O PROCESSO OU SEJA SERVIDOR JÁ PROCESSADO
+    public function getServidorProcesso($campo, $parametro){
+        $sql = "SELECT * FROM servidor as s INNER JOIN processo as p ON s.id_processo = p.id_processo LIKE $campo = '$parametro%'";
+        $qry = $this->db->query($sql);
+        return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
     public function Inserir($nome_servidor, $cpf, $matricula, $vinculo, $secretaria, $unidade, $observacao){
@@ -60,6 +73,15 @@ class Servidor_Model  extends Model{
             $sql->bindValue(":Secretaria", $secretaria);
             $sql->bindValue(":Unidade", $unidade);
             $sql->bindValue(":Observacao", $observacao);
+            $sql->execute();
+        }
+
+        public function IncluirServProcesso($id_servidor, $id_processo){
+        $sql = "UPDATE servidor SET id_processo = :id_processo,  WHERE id_servidor = :id";
+   
+            $sql = $this->db->prepare($sql);
+            $sql->bindValue(":id", $id_servidor);
+            $sql->bindValue(":id_processo", $id_processo);
             $sql->execute();
         }
 

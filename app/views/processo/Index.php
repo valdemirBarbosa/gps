@@ -31,12 +31,9 @@
 				</td>
 			</tr>
 			</table>
-
-			</form>
 		</div>
 	</div>
 		
-	
 <div class="base-lista">
 <!-- 	
 	<span class="qtde">Há <b><?php echo  count($processo) ?></b> denuncia(s) cadastrada(s)</span>
@@ -47,13 +44,13 @@
 		  <thead class="thead">
 				<th align="center" width="5%">Id Processo</th>
 				<th align="center" width="5%">Id denuncia</th>
-				<th align="center" width="20%">Fase</th>
+				<th align="center" width="15%">Fase</th>
 				<th align="center" width="10%">Numero do Processo</td>
-				<th align="center" width="10%">Data Instauração </th>
+				<th align="center" width="8%">Data de Instauração </th>
 			<!--	<th width="25%">Observação</th>  !-->
-				<th width="10%">Data encerramento</th>
+				<th width="8%">Data de encerramento</th>
 	
-				<th align="center" colspan="5">Ação</th>
+				<th align="center" colspan="6">Ação</th>
 			</tr>
 		</thead>
 	<?php 
@@ -104,6 +101,12 @@
 					<a href="<?php echo URL_BASE ."Processo/Edit/".$pd->id_processo ?>" >Editar</a>
 					</div>
 				</td>
+
+				<td>
+				<div class="btn-ocorrencia">
+					<a href="<?php echo URL_BASE ."Processo/Processar/".$pd->id_processo ?>" >Processar</a>
+					</div>
+				</td>
 			
 				<td> 
 				<div class="btn-excluir">
@@ -129,3 +132,4 @@
 	</div>				
 		<p>...</P>
 </div>
+</form>
