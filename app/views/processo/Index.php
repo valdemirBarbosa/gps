@@ -6,6 +6,7 @@
  		$tabela = 'processo';
  		$view = 'processo/Index';
 		$retorno = 'processo';
+		session_start();
 ?>
 
 <div class="containerPesqusa">
@@ -47,7 +48,7 @@
 				<th align="center" width="15%">Fase</th>
 				<th align="center" width="10%">Numero do Processo</td>
 				<th align="center" width="8%">Data de Instauração </th>
-			<!--	<th width="25%">Observação</th>  !-->
+				<th width="25%">Observação</th>
 				<th width="8%">Data de encerramento</th>
 	
 				<th align="center" colspan="6">Ação</th>
@@ -57,12 +58,12 @@
 	  	foreach($processo as $pd){
 	?>
 			<tr>
-				<td align="center"><?php echo $pd->id_processo ?> </td>
+				<td align="center"><?php $_SESSION['id_processo'] = $pd->id_processo;
+										echo $pd->id_processo ?> </td>
 				<td align="center"><?php echo $pd->id_denuncia ?> </td>
 				<td align="center"><?php echo $pd->fase  ?> </td>
 				<td align="center"><?php echo $pd->numero_processo ?> </td>
-			<!--	<td><?php //echo $pd->observacao  ?> </td>  !-->
-
+				<td><?php echo $pd->observacao  ?> </td>
 				 <td align="center"> <?php $data = new DateTime($pd->data_instauracao);
 				 		echo $data->format('d-m-Y');
 				 	?>

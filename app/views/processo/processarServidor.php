@@ -1,8 +1,12 @@
 <div class="base-home">
 	<h1 class="titulo-pagina">Alterar dados do Processo</h1>
 </div>
-<!-- <?php //isset($processoFormulario) ?>
- -->
+ <?php 
+
+if(session_start() == false){
+	session_start();
+}?>
+
  <div class="processarServidor">
 <form action="<?php //echo URL_BASE ."Processo/Salvar" ?>" method="POST">
 	<!--Botões !-->
@@ -16,7 +20,7 @@
 <?php
 	if(isset($processo)){
 	   foreach($processo as $pd){ 
-		 $processoFormulario = $processo; }  
+		 $processoFormulario = array($processo); }  
 		   ?>
 		<fieldset>
 		<legend><h4>Códigos</h4></legend>	
@@ -50,7 +54,10 @@
     
             <label>Data de Encerramento</label>
 				<input name="txt_data_encerramento" type="date" readonly value="<?php echo $pd->data_encerramento ?>">
-		<input type="hidden" name="id_processo" value="<?php echo $pd->id_processo ?>">	
+		<input type="hidden" name="id_processo" value="<?php echo $pd->id_processo ?>">
+
+		<?php $id = $_SESSION['id_processo'] = $pd->id_processo; ?>
+
 	</fieldset>
 
 	</td></tr>
@@ -58,6 +65,7 @@
 
 </form>
 <br/><br/>
+
 <div class="processarServidorFormulario">
 <!-- CONSULTA SERVIDOR PARA INCLUSÃO !-->
 <?php //paramentros para pesquisa dos formulários de denuncia e processo
@@ -96,7 +104,14 @@
 				</td>
 			</tr>
 </table>
-</form>
+
+<form method="GET" action="<?php echo URL_BASE . 'Processar/incluir' ?>" >
+<?php 
+isset($processo);
+foreach($processo as $p){
+	$id_processo = $p->id_processo; 
+}
+?>
 
 	<table>
 		<tr>
@@ -108,19 +123,29 @@
 		</tr>
 
 		<tr>
-		<?php
+
+<?php
 		if(isset($processar)){
 		 foreach($processar as $servidor){ ?>  
 			<td align="center"><?php echo $servidor->id_servidor  ?></td>
-			<td align="center"><?php echo $servidor->nome_servidor;  ?></td>
+			<td><?php echo $servidor->nome_servidor;  ?></td>
 			<td align="center"><?php echo $servidor->cpf;  ?></td>
 			<td><?php echo $servidor->matricula;  ?></td>
-			<td align="center">
+			<td>
 				<div class="btn-editar">
 
-// parei aqui tenho que passar o parametro id_processo para fazer o update na tabela do servidor processá-lo				
-					<a href="<?php echo URL_BASE ."Processar/incluir/".$servidor->id_servidor &  ?>" >Incluir servidor</a>
-				</div>
+<!-- passar o parametro id_processo para fazer o update na tabela do servidor processá-lo !-->				
+
+<?php 
+	$id_servidor =  $servidor->id_servidor;  
+?>
+
+	<input type="hidden" name="id_servidor" value="<?php echo $id_servidor ?>">
+	<input type="hidden" name="id_processo" value="<?php echo $id_processo ?>">
+
+<input type="submit" value="Incluir servidor">
+<!-- <a href="<?php //echo URL_BASE ."Processar/incluir/".$id_servidor&$id_processo; ?>" >Incluir servidor</a>
+ -->		</div>
 			</td>
 		</tr>
 <?php }} ?>
@@ -143,7 +168,9 @@
 		  </thead>
 
 		  <tbody>
-		  	<?php foreach($proc as $servidor){   ?>
+  <?php
+		  if(isset($processado)){	 
+		   foreach($processado as $servidor){   ?>
 				<tr class="cor1">
 				<td align="center"><?php echo $servidor->id_servidor  ?></td>
 				<td align="center"><?php echo $servidor->nome_servidor  ?></td>
@@ -163,7 +190,8 @@
 					</div>
 				</td>
 			 </tr>	
- <?php } ?>									  
+ <?php }}
+  ?>									  
 		  </tbody>
 	</table>
 </div>				

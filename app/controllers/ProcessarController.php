@@ -6,6 +6,9 @@ use app\models\Processo_Model;
 use app\models\Pesquisa_Model;
 use app\models\Servidor_Model;
 
+if(session_start() == false){
+     session_start();
+}
 
 class ProcessarController extends Controller{
    public function index(){
@@ -131,8 +134,12 @@ public function porParametro(){
      if(isset($_GET['valorPreenchidoUsuario']) && !empty($_GET['tabela'])){
           $parametro = $_GET['valorPreenchidoUsuario'];
           $campo = $_GET['campo'];
+          $id_processo = $_SESSION['id_processo'];
+
 //          $dados['processo'] = addslashes($_GET['processoFormulario']);
 
+          $processo = new Processo_Model();
+          $dado['processo'] = $processo->getId($id_processo);
 
           $dados['processo'] = $dadosTabela->getNumeroProcessoLimit($parametro, $offset, $limit);
 
@@ -147,16 +154,19 @@ public function porParametro(){
 //INCLUIR VIA UPDATE NA TABELA DE PROCESSO PELO ID_SERVIDOR
 public function incluir($id_servidor, $id_processo){{
      $incluirServidor = new Servidor_Model();
+     $id_processo = $_SESSION['id_servidor'];
      $dados['processado'] = $incluirServidor->IncluirServProcesso($id_servidor, $id_processo);
-}
-     
+     print_r($dados);
+     exit;
 
+     }
+    
+}
 public function contarRegistro(){
      if(isset($_GET['valorPreenchidoUsuario']) && !empty('valorPreenchidoUsuario')){
           $parametro = addslashes($_GET['valorPreenchidoUsuario']);
 
           if(isset($_GET['tabela']) && !empty('tabela')){
-               session_start();
                $tabela = addslashes($_GET['tabela']);
                
                $registros = new Pesquisa_Model();
