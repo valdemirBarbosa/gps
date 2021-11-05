@@ -56,7 +56,6 @@ if(session_start() == false){
 				<input name="txt_data_encerramento" type="date" readonly value="<?php echo $pd->data_encerramento ?>">
 		<input type="hidden" name="id_processo" value="<?php echo $pd->id_processo ?>">
 
-		<?php $id = $_SESSION['id_processo'] = $pd->id_processo; ?>
 
 	</fieldset>
 
@@ -71,7 +70,7 @@ if(session_start() == false){
 <?php //paramentros para pesquisa dos formulários de denuncia e processo
  		$tabela = 'servidor';
 		$campo = 'nome_servidor';
- 		$view = 'processo/processarServidor';
+ 		$_SESSION['view'] = 'processo/processarServidor';
 		$retorno = 'processo';
 ?>
 
@@ -80,7 +79,7 @@ if(session_start() == false){
 <table class=""> 		
 		<tr>
 			<td>
-			<form method="GET" action="<?php echo URL_BASE . 'Processar/porParametro' ?>" >
+			<form method="POST" action="<?php echo URL_BASE . 'Processar/porParametro' ?>" >
 			<tr>
 				<td>
 					<label>Campo de pesquisa</label>
@@ -105,7 +104,7 @@ if(session_start() == false){
 			</tr>
 </table>
 
-<form method="GET" action="<?php echo URL_BASE . 'Processar/incluir' ?>" >
+<form method="POST" action="<?php echo URL_BASE . 'Processar/incluir' ?>" >
 <?php 
 isset($processo);
 foreach($processo as $p){
@@ -125,8 +124,8 @@ foreach($processo as $p){
 		<tr>
 
 <?php
-		if(isset($processar)){
-		 foreach($processar as $servidor){ ?>  
+		if(isset($processando)){
+		 foreach($processando as $servidor){ ?>  
 			<td align="center"><?php echo $servidor->id_servidor  ?></td>
 			<td><?php echo $servidor->nome_servidor;  ?></td>
 			<td align="center"><?php echo $servidor->cpf;  ?></td>
@@ -137,12 +136,12 @@ foreach($processo as $p){
 <!-- passar o parametro id_processo para fazer o update na tabela do servidor processá-lo !-->				
 
 <?php 
-	$id_servidor =  $servidor->id_servidor;  
+	$_SESSION['id_servidor'] =  $servidor->id_servidor;  
 ?>
 
 	<input type="hidden" name="id_servidor" value="<?php echo $id_servidor ?>">
-	<input type="hidden" name="id_processo" value="<?php echo $id_processo ?>">
-
+	<!-- <input type="hidden" name="id_processo" value="<?php //echo $id_processo ?>">
+ -->
 <input type="submit" value="Incluir servidor">
 <!-- <a href="<?php //echo URL_BASE ."Processar/incluir/".$id_servidor&$id_processo; ?>" >Incluir servidor</a>
  -->		</div>
@@ -150,9 +149,9 @@ foreach($processo as $p){
 		</tr>
 <?php }} ?>
 	</table>
+</form>
 
 	<div class="processarServidorTabela">
-
 	<table>
 		<thead>
 			<tr>

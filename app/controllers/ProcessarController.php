@@ -122,46 +122,50 @@ public function porParametro(){
      $dados['totalPaginas'] = ceil($totalPaginas);
    
      $dados['paginaAtual'] = 1;
-     if(!empty($_GET['p']) && !empty($_GET['valorPreenchidoUsuario'])){
-          $dados['paginaAtual'] = intval($_GET['p']);
-          //$parametro = $_GET['valorPreenchidoUsuario'];
+     if(!empty($_POST['p']) && !empty($_POST['valorPreenchidoUsuario'])){
+          $dados['paginaAtual'] = intval($_POST['p']);
+          //$parametro = $_POST['valorPreenchidoUsuario'];
      }
 
      $offset = ($dados['paginaAtual'] * $limit) - $limit;
 
 
 //Pegar o número do processo do formulário para reusar na voltar          
-     if(isset($_GET['valorPreenchidoUsuario']) && !empty($_GET['tabela'])){
-          $parametro = $_GET['valorPreenchidoUsuario'];
-          $campo = $_GET['campo'];
-          $id_processo = $_SESSION['id_processo'];
+     if(isset($_POST['valorPreenchidoUsuario']) && !empty($_POST['tabela'])){
+          $parametro = $_POST['valorPreenchidoUsuario'];
+          $campo = $_POST['campo'];
+     
+//          $dados['processo'] = addslashes($_POST['processoFormulario']);
 
-//          $dados['processo'] = addslashes($_GET['processoFormulario']);
-
-          $processo = new Processo_Model();
-          $dado['processo'] = $processo->getId($id_processo);
 
           $dados['processo'] = $dadosTabela->getNumeroProcessoLimit($parametro, $offset, $limit);
 
           $servidor = new Servidor_Model();
-          $dados['processar'] = $servidor->getServidorProcessar($campo, $parametro);
-          $dados["view"] = addslashes($_GET["view"]);
+          $dados['processando'] = $servidor->getServidorProcessar($campo, $parametro);
+          $dados["view"] = addslashes($_POST["view"]);
           $this->load("template", $dados);
 
      }
 }
 
 //INCLUIR VIA UPDATE NA TABELA DE PROCESSO PELO ID_SERVIDOR
-public function incluir($id_servidor, $id_processo){{
+public function incluir(){
+    echo "Entrou no metodo incluir";  
+    exit;
+
      $incluirServidor = new Servidor_Model();
      $id_processo = $_SESSION['id_servidor'];
+     $id_processo = $_SESSION['id_processo'];
      $dados['processado'] = $incluirServidor->IncluirServProcesso($id_servidor, $id_processo);
      print_r($dados);
      exit;
+     $processo = new Processo_Model();
+     $dados['processo'] = $processo->getId($id_processo);
+     $dados["view"] = addslashes($_POST["view"]);
+     $this->load("template", $dados);
 
-     }
-    
-}
+  }
+
 public function contarRegistro(){
      if(isset($_GET['valorPreenchidoUsuario']) && !empty('valorPreenchidoUsuario')){
           $parametro = addslashes($_GET['valorPreenchidoUsuario']);
