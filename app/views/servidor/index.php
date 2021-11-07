@@ -7,7 +7,6 @@
  		$view = 'servidor/Index';
 		$retorno = 'servidorRet';
 ?>
-
 <div class="frmConsulta">  
 	<form method="GET" action="<?php echo URL_BASE . 'Pesquisa/porParametro'; ?>" >
 		<table>

@@ -15,6 +15,20 @@ class Servidor_Model  extends Model{
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
+    public function listaProcessados(){
+        $sql = "SELECT * FROM servidor as s INNER JOIN processo as p ON s.id_processo = p.id_processo ORDER BY id_servidor ASC LIMIT 5";
+        $sql = $this->db->query($sql);
+        return $sql->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+    public function listaProcessadosAguardando($id_servidor, $id_processo){
+        $sql = "SELECT * FROM servidor as s INNER JOIN processo as p ON s.id_processo = p.id_processo WHERE s.id_processo =: id_processo ORDER BY id_servidor ASC LIMIT 5";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":id_servidor", $id_servidor);
+        $sql->bindValue(":id_processo", $id_processo);
+        $sql->execute();
+    }
+
     public function  getServidor($id_servidor){
         $ret = array();
         $sql = "SELECT * FROM servidor WHERE id_servidor = :id";
@@ -76,13 +90,12 @@ class Servidor_Model  extends Model{
             $sql->execute();
         }
 
-        public function IncluirServProcesso($id_servidor, $id_processo){
-        $sql = "UPDATE servidor SET id_processo = :id_processo,  WHERE id_servidor = :id";
-   
-            $sql = $this->db->prepare($sql);
-            $sql->bindValue(":id", $id_servidor);
-            $sql->bindValue(":id_processo", $id_processo);
-            $sql->execute();
+    public function IncluirServProcesso($id_servidor, $id_processo){
+        $sql = "UPDATE servidor SET id_processo = :id_processo  WHERE id_servidor = :id_servidor";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":id_servidor", $id_servidor);
+        $sql->bindValue(":id_processo", $id_processo);
+        $sql->execute();
         }
 
     public function Deletar($id_servidor){

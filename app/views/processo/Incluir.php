@@ -6,7 +6,7 @@
 					<!--Botões !-->
 					<div class="btn-inc">
 				<script> //Link para voltar à página anterior
-					document.write('<a href="' + document.referrer + '">Voltar</a>');
+						document.write('<a href="' + document.referrer + '">Voltar</a>');
 				</script>
 			</div>			
 

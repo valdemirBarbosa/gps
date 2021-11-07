@@ -3,10 +3,10 @@
 </div>
 
 <?php //paramentros para pesquisa dos formulários de denuncia e processo
- 		$tabela = 'processo';
+		session_start();
+		$tabela = 'processo';
  		$view = 'processo/Index';
 		$retorno = 'processo';
-		session_start();
 ?>
 
 <div class="containerPesqusa">
@@ -36,10 +36,6 @@
 	</div>
 		
 <div class="base-lista">
-<!-- 	
-	<span class="qtde">Há <b><?php echo  count($processo) ?></b> denuncia(s) cadastrada(s)</span>
- -->
-
 	<div class="tabela">	
 		<table width="100%" border="1" cellspacing="0" cellpadding="0">
 		  <thead class="thead">
@@ -115,9 +111,8 @@
 	  			</div>
 				</td>
 			</tr> 
-	<?php } ?>
-
-			<hr/><hr/>
+			<?php } ?>
+		<hr/><hr/>
 		
 			<!--Botões !-->
 			<div class="btn-inc">

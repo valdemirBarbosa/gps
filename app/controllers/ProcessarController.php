@@ -150,18 +150,17 @@ public function porParametro(){
 
 //INCLUIR VIA UPDATE NA TABELA DE PROCESSO PELO ID_SERVIDOR
 public function incluir(){
-    echo "Entrou no metodo incluir";  
-    exit;
+     $id_servidor = $_SESSION['id_servidor'];
+     $id_processo = $_SESSION['id_processo'];
 
      $incluirServidor = new Servidor_Model();
-     $id_processo = $_SESSION['id_servidor'];
-     $id_processo = $_SESSION['id_processo'];
-     $dados['processado'] = $incluirServidor->IncluirServProcesso($id_servidor, $id_processo);
-     print_r($dados);
-     exit;
+   
+     $incluirServidor->IncluirServProcesso($id_servidor, $id_processo);
+     $dados['processado'] = $incluirServidor->listaProcessados($id_servidor, $id_processo);
+     
      $processo = new Processo_Model();
      $dados['processo'] = $processo->getId($id_processo);
-     $dados["view"] = addslashes($_POST["view"]);
+     $dados["view"] = $_SESSION['view'];
      $this->load("template", $dados);
 
   }

@@ -8,7 +8,7 @@
 	<input id="txt_id" name="txt_id" class="txt-id" type="number" value="">
 
 	<label for="txt_denuncia">naração dos fatos da denúncia</label>
-	<textarea id="txt_denuncia" name="txt_denuncia" class="denuncia" rows="4" cols="60">
+	<textarea autofocus="true" id="txt_denuncia" name="txt_denuncia" class="denuncia" rows="4" cols="60">
 	</textarea>
 </fieldset>
 

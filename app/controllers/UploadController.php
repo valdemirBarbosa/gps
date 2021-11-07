@@ -13,7 +13,9 @@ class UploadController extends Controller{
     }
 
 public function recebedor(){
-    $view = $_POST['view']; //pega o arquivo onde vai ser renderizado
+    if(isset($_POST['view'])){
+        $view = $_POST['view']; //pega o arquivo onde vai ser renderizado
+    }
 
     if($arquivo = $_FILES['arquivo']){
       
