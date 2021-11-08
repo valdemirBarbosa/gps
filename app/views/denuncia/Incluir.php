@@ -8,7 +8,7 @@
 	<input id="txt_id" name="txt_id" class="txt-id" type="number" value="">
 
 	<label for="txt_denuncia">naração dos fatos da denúncia</label>
-	<textarea autofocus="true" id="txt_denuncia" name="txt_denuncia" class="denuncia" rows="4" cols="60">
+	<textarea autofocus="true" id="txt_denuncia" name="txt_denuncia" class="denuncia" rows="3" cols="70">
 	</textarea>
 </fieldset>
 
@@ -59,12 +59,12 @@
 		</textarea>
 	</fieldset>
 
-<fieldset class="btnsDenuncia">				
-	<input type="hidden" name="acao" value="Cadastrar">
-	<input type="hidden" name="id" value="">
-	<input type="submit" value="Cadastrar" class="btnDenuncia">
-	<input type="reset" name="Reset" id="button" value="Limpar" class="btn_limpar_denuncia">
-</fieldset>
-
-</form>
-	
+	<fieldset>				
+			<input type="hidden" name="acao" value="Editar">
+				<input type="submit" value="Incluir" class="btn">
+				<input type="reset" name="Reset" id="button" value="Limpar" class="btn">
+				<input name="Voltar" onclick="history.back()" type="submit" value="Voltar" class="btn">
+			</fieldset>
+	</form>
+	<div class="fim">
+	</div>

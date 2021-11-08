@@ -35,13 +35,15 @@
 				<label id="obs">observação</label> 
 				<input type="text" size="130" name="txt_observacao" value="<?php echo $servidor->observacao ?>" >		
 			</div>
-
-		<div>
+	</fieldset>
+	
+	<fieldset class="fieldBotoes">
 			<input type="hidden" name="acao" value="Cadastrar">
 			<input type="hidden" name="id" value="<?php echo $servidor->id_servidor ?>">
 			<input type="submit" value="Cadastrar" class="btn">
 			<input type="reset" name="Reset" id="button" value="Limpar" class="btn limpar">
 			<input name="Voltar" onclick="history.back()" type="submit" value="Voltar" class="btn limpar"/>
-		</div>
 	</fieldset>
-  </form>
+	<div class="fim">
+	</div>
+</form>

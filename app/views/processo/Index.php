@@ -43,9 +43,10 @@
 				<th align="center" width="5%">Id denuncia</th>
 				<th align="center" width="15%">Fase</th>
 				<th align="center" width="10%">Numero do Processo</td>
-				<th align="center" width="8%">Data de Instauração </th>
+				<th align="center" width="10%">Data de Instauração </th>
+				<th width="10%">Data de encerramento</th>
 				<th width="25%">Observação</th>
-				<th width="8%">Data de encerramento</th>
+
 	
 				<th align="center" colspan="6">Ação</th>
 			</tr>
@@ -54,18 +55,11 @@
 	  	foreach($processo as $pd){
 	?>
 			<tr>
-				<td align="center"><?php $_SESSION['id_processo'] = $pd->id_processo;
-										echo $pd->id_processo ?> </td>
+				<td align="center"><?php echo $_SESSION['id_processo'] = $pd->id_processo; ?></td>
 				<td align="center"><?php echo $pd->id_denuncia ?> </td>
 				<td align="center"><?php echo $pd->fase  ?> </td>
 				<td align="center"><?php echo $pd->numero_processo ?> </td>
-				<td><?php echo $pd->observacao  ?> </td>
 				 <td align="center"> <?php $data = new DateTime($pd->data_instauracao);
-				 		echo $data->format('d-m-Y');
-				 	?>
-				 </td> 
-
-				 <td align="center"> <?php $data = new DateTime($pd->data_encerramento);
 				 	if($data > "01/01/1900"){
 				 		echo $data->format('d-m-Y');
 					 }else{
@@ -74,7 +68,23 @@
 				 	?>
 				 </td> 
 
+ 	 			<td align="center">
+				<?php $data = $pd->data_encerramento;
+					$dataCompara = '2000-01-01';
+				 	if(strtotime($data) > strtotime($dataCompara)){
+				 		echo $data;
+					 }else{
+						echo  "00/00/0000";
+					 }
+				 	
+					 ?>
+				 </td> 
+
+				 </td> 
+				 <td><?php echo $pd->observacao  ?> </td>
+
 				<td>
+					
 				<div class="btn-ocorrencia"> 
 					<a href="<?php echo URL_BASE ."Fase/Tramitar/".$pd->id_processo ?>" >Fase</a>
 	  			</div>

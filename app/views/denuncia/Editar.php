@@ -58,21 +58,23 @@
 		</fieldset>					
 			<fieldset>
 				<label>Denunciados</label>
-				<textarea rows="3" cols="98"  clas="areaDenuncia" name="txt_denunciados">
+				<textarea rows="2" cols="110"  clas="areaDenuncia" name="txt_denunciados">
 							<?php echo $denuncia->denunciados ?> 
 				</textarea> 
+
+					<label id="obs">observação</label> 
+					<input type="text" size="116" name="txt_observacao" value="<?php echo $denuncia->observacao ?>"> 
+
 			</fieldset>
 
-			<fieldset>
-				<label>Observação</label>
-				<textarea rows="3" cols="100" name="txt_observacao">
-						<?php echo $denuncia->observacao ?> 
-				</textarea> 
+			<fieldset>				
+				<input type="hidden" name="acao" value="Editar">
+				<input type="hidden" name="id" value="<?php echo $denuncia->id_denuncia ?>">
+				<input type="submit" value="Alterar" class="btn">
+				<input type="reset" name="Reset" id="button" value="Limpar" class="btn">
+				<input name="Voltar" onclick="history.back()" type="submit" value="Voltar" class="btn">
 			</fieldset>
-
-			<input type="hidden" name="id_denuncia" value="<?php echo $denuncia->id_denuncia ?>">
-			<input type="submit" value="Editar" class="btn">
-			<input type="reset" name="Reset" id="button" value="Limpar" class="btn limpar">
-
 	</form>
-	
+	<div class="fim">
+	</div>
+</form>

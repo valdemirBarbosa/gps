@@ -20,41 +20,28 @@
 
 	<fieldset>
 		<legend>Ocorrências </legend>
-		<table>
-			<tr>
-				<td>
-					<label>Data de ocorrencia</label>
-					<input autofocus name="txt_data_ocorrencia" type="date" >
-				</td>
-			</tr>
+			<label>Data de ocorrencia</label>
+			<input autofocus name="txt_data_ocorrencia" type="date" >
 
-			<tr>
-				<td>
-					<label>Ocorrencia/Andamento</label>
-					<input class="txt_ocorrencia" name="txt_ocorrencia" type="text" >
-				</td>
-			</tr>
-	
-			<tr>
-				<td>
-					<label>Observação</label>
-					<input class="txt_observacao" name="txt_observacao" type="text" placeholder="observações">
-				</td>
-			</tr>
-					</table>
-					<table>
-			<tr>
-				<td>
-					<label>Anexo</label>
-				</td>
-				<td>
-					<input name="txt_anexo" type="file" >
-				</td>
-			</tr>
-		</table>
-			<input type="submit" value="Cadastrar" class="btn">
-			<input type="reset" name="Reset" id="button" value="Limpar" class="btn limpar">
+			<br/>
+			<label>Ocorrencia/Andamento</label>
+			<input class="txt_ocorrencia" size="110" name="txt_ocorrencia" type="text" >
 
-	</fieldset>				
+			<label>Observação</label>
+			<input class="txt_observacao" size="119" name="txt_observacao" type="text" placeholder="observações">
+
+		<label>Anexo</label>
+			<input name="txt_anexo" type="file" >
+		</fieldset>				
+
+	<fieldset>				
+					<input type="hidden" name="acao" value="Editar">
+					<input type="submit" value="Incluir" class="btn">
+					<input type="reset" name="Reset" id="button" value="Limpar" class="btn">
+					<input name="Voltar" onclick="history.back()" type="submit" value="Voltar" class="btn">
+		</fieldset>
+    <div class="fim">
+	</div>
 </form>
+
 	

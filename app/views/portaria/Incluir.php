@@ -14,8 +14,6 @@
 			</fieldset>		
 
 		<fieldset>
-		<table>
-			<tr><td>
 			<legend>Informações da Portaria</legend>
 				<label>Tipo</label>
 					<input name="txt_tipo" type="text" placeholder="tipo da portaria" required autofocus>
@@ -25,48 +23,33 @@
 				
 				<label>Data de elaboracao</label>
 					<input name="txt_data_elaboracao" type="date" required>
-			</td>
-			</tr>
-
-			<tr>
-			<td>
-			
+				<br/>
 				<label>Data de publicação</label>
 					<input name="txt_data_publicacao" type="date" required>
 
 				<label>Veículo</label>
 					<input name="txt_veículo" type="text" placeholder="veículo da publicação" required>
-
 									
 				<label>Prazo</label>
 					<input name="txt_prazo" min="1" type="number" placeholder="Prazo para cumprimento em dias" required>
-				
-			</td>
-			</tr>
 
-			<tr>
-			<td>
+					<br/>
 	
 				<label>Conteúdo</label>
-					<textarea name="txt_conteudo" rows="4" cols="100" placeholder="redação da portaria">
+					<textarea name="txt_conteudo" rows="4" cols="127" placeholder="redação da portaria">
 				</textarea> 
-			</td>
-			</tr>
-
-			<tr>
-			<td>
 	
-				<div class="obs-portaria">
-					<label id="obs">observação</label> 
-				</div>
-				<textarea rows="2" cols="112" name="txt_observacao">
-				</textarea>
-			</td>
-			</tr>
-		</table>		
+				<label>observação</label>
+		    		<input name="txt_observacao" type="text" size="120" cols="40" rows="2">
+	    </fieldset>
+
+		<fieldset>				
+					<input type="hidden" name="acao" value="Editar">
+					<input type="submit" value="Incluir" class="btn">
+					<input type="reset" name="Reset" id="button" value="Limpar" class="btn">
+					<input name="Voltar" onclick="history.back()" type="submit" value="Voltar" class="btn">
 		</fieldset>
-				<input type="submit" value="Salvar" class="btn">
-				<input type="reset" name="Reset" id="button" value="Voltar" class="btn limpar">
+    <div class="fim">
+	</div>
+</form>
 
-		</form>
-	
