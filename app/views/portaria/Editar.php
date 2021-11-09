@@ -3,9 +3,10 @@
 </div>
 
 <form action="<?php echo URL_BASE ."Portaria/Salvar" ?>" method="POST">
-	<legend><h4>ids</h4></legend>
-		<?php foreach($portaria as $port){ ?>
-		<fieldset>
+		<?php
+			if(isset($portaria)){ 
+				foreach($portaria as $port){ ?>
+	<fieldset>
 			<legend><h4>Códigos</h4></legend>	
 				<label>Id Portaria</label>
 					<input id="txt_id" readonly name="txt_id_portaria" enable="false" value="<?php echo $port->id_portaria ?>" >
@@ -14,7 +15,7 @@
 					<input id="txt_numero_processo" type="number" readonly name="txt_numero_processo" value="<?php echo $port->numero_processo?>" >
 		</fieldset>		
 		<fieldset>
-<!-- 			<legend>Informações da Portaria</legend>
+ 			<legend>Informações da Portaria</legend>
 				<label>Tipo</label>
 					<input autofocus name="txt_tipo" type="text" placeholder="tipo da portaria" value="<?php echo $port->tipo ?>">
 
@@ -24,9 +25,13 @@
 				<label>Data de elaboracao</label>
 					<input name="txt_data_elaboracao" type="date" value="<?php echo $port->data_elaboracao ?>">
 
+				<br/><br/>
 				<label>Conteúdo</label>
-					<input name="txt_conteudo" type="text" placeholder="conteúdo da portaria" value="<?php echo $port->conteudo ?>">
+					<textarea name="txt_conteudo" cols="100" rows="2"> 
+						<?php echo $port->conteudo ?>
+				</textarea>
 
+				<br/><br/>
 				<label>Data Publicação</label>
 					<input name="txt_data_publicacao" type="date" value="<?php echo $port->data_publicacao ?>">
 
@@ -34,8 +39,9 @@
 					<input name="txt_veículo" type="text" placeholder="veículo da publicação" value="<?php echo $port->veiculo ?>">
 				
 				<label>Prazo</label>
-					<input name="txt_prazo" type="number" placeholder="Prazo para cumprimento em dias" value="<?php echo $port->prazo ?>">
-				
+					<input name="txt_prazo" type="number" value="<?php echo $port->prazo ?>">
+
+				<br/><br/>
 				<label>Data final</label>
 					<input name="txt_data_final" type="date" value="<?php echo $port->data_final ?>">
 
@@ -44,17 +50,16 @@
 
 				<label>Prazo atendido</label>
 					<input name="txt_prazo_atendido" type="text" placeholder="Prazo para cumprimento em dias" value="<?php echo $port->prazo ?>">
- -->				
-				<div class="obs">
-					<label id="obs">observação</label> 
-				</div>
-				<textarea rows="2" cols="100" name="txt_observacao" 
-					<?php echo $port->observacao ?> >
-				</textarea>		
-		</fieldset>
-		<?php } ?>
-				<input type="submit" value="Salvar" class="btn">
-				<input type="reset" name="Reset" id="button" value="Voltar" class="btn limpar">
 
+					<br/><br/>
+					<label id="obs">observação</label> 
+					<input type="text" name="txt_observacao" size="100" value="<?php echo $port->observacao ?>" >
+				<?php }} ?>
+				<br/><br/><br/>
+				<input type="submit" value="Salvar" class="btn">
+				<input type="reset" name="Reset" id="button" value="Limpar" class="btn limpar">
+				<input name="Voltar" onclick="history.back()" type="submit" value="Voltar" class="btn">
+
+		</fieldset>
 </form>
 	

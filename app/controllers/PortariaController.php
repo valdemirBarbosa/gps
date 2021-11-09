@@ -28,10 +28,10 @@ class PortariaController extends Controller{
      }
     
    public function Edit($id_portaria){
-        $portarias = new Portaria_Model();
-        $dados["portaria"] = $portarias->GetId($id_portaria);
-        $dados["view"] = "portaria/Editar";
-        $this->load("template", $dados);
+     $portarias = new Portaria_Model();
+     $dados["portaria"] = $portarias->GetId($id_portaria);
+     $dados["view"] = "portaria/Editar";
+     $this->load("template", $dados);
    }
    
    public function Excluir($id_portaria){
@@ -136,7 +136,7 @@ class PortariaController extends Controller{
           $tabela = "portaria";
           $filtro = " WHERE id_portaria =:id_portaria";
 
-          $p->InsertEditar($comando, $tabela, $filtro, $comando, $tabela, $filtro, $id_portaria, $id_processo, $numero_processo, $numero, $tipo,$data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
+          $p->InsertEditar($comando, $tabela, $filtro, $comando,  $id_portaria, $id_processo, $numero_processo, $numero, $tipo,$data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
       
     }else{
          
@@ -148,15 +148,9 @@ class PortariaController extends Controller{
           $p->InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_processo, $numero_processo,  $numero, $tipo,$data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
 
      
-          $arr = array($comando, $tabela, $filtro, $comando, $tabela, $filtro, $id_portaria, $id_processo, $numero_processo, $numero, $tipo,$data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
-
-   /*       echo "<pre>";
-              print_r($arr);
-          echo "<pre>";
-          exit;
-  
-*/
-
+/*           $arr = array($comando, $tabela, $filtro, $id_portaria, $id_processo, $numero_processo,  $numero, $tipo,$data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
+ */ 
+   
           echo "<script> Document.alert('Denúncia  já existe, não pode mais cadastrar'); </script> ";
      }
           header("Location:" . URL_BASE . "portaria/lista");

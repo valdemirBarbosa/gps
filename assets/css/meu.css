@@ -74,7 +74,7 @@ li{
 
 .menu li a:hover{
       background-color:royalblue;
-      font-size: 18px;
+      font-size: 20px;
 }
 
 
@@ -272,26 +272,29 @@ span{
         th{background-color:darkslategray; color: whitesmoke;}
 
 .btn{
+      width: 80px;
+      height: 30px;
       margin-left: 10px;
       margin-top: 5px;
       border-radius: 4px;
-      border-color:springgreen;
-      border-style: solid;
+      border-color:darkslategray;
+      border-style:groove;
       text-align: center;
+      box-shadow: 3px 6px #888888;
       text-transform: uppercase;
 }
 
 .btn_limpar{
       border-radius: 4px;
-      border-color:springgreen;
+      border-color:darkslategray;
       border-style: solid;
       text-align: center;
       text-transform: uppercase;
 }
 
 .btn:hover{
-      width: 100px;
-      height: 30px;
+      width: 90px;
+      height: 40px;
       background-color:royalblue;
       color: white;
       border-radius: 8px;
@@ -301,25 +304,22 @@ span{
 }
 
 .btn-inc{
-      width: 120px;
+      width: 80px;
       height: 40px;
       float: left;
-      background-color: blue;
       color: white;
       border-radius: 10px;
       border-color:royalblue;
       border-style: solid;
       padding-top: 8px;
       text-align: center;
+      box-shadow: 3px 6px #888888;
       text-transform: uppercase;
-}
-
-.btn-inc a{
-      color: white;
+      
 }
 
 .btn-inc:hover{
-      width: 130px;
+      width: 100px;
       height: 45px;
       background-color:royalblue;
       border-color:blue;
@@ -328,49 +328,44 @@ span{
 
 .btn-excluir{
       width: 80px;
-      height: 40px;
-      background-color:#DBE06C;
-      color:crimson;
+      height: 30px;
+      color:blue;
       border-radius: 5px;
       border-style: solid;
       padding-top: 2px;
       text-align: center;
       text-transform: uppercase;
-}
+      box-shadow: 3px 6px #888888;
 
-.btn-excluir a{
-      color: red;
 }
 
 .btn-excluir:hover{
-      width: 100px;
-      height: 50px;
+      width: 85px;
+      height: 40px;
       background-color:greenyellow;
-      border-color: yellow;
+      border-color:red;
       color:white;
-      font-size: 16px;
+      font-size: 15px;
 }
 
 .btn-editar{
       width: 80px;
-      height: 40px;
-      background-color:darkcyan;
-      color:black;
-      border-radius: 3px;
+      height: 30px;
+      color:blue;
+      border-radius: 5px;
       border-style: solid;
       padding-top: 2px;
       text-align: center;
       text-transform: uppercase;
+      box-shadow: 3px 6px #888888;
+
 }
 
-.btn-editar a{
-      color:yellow;
-}
 
 .btn-editar:hover{
       width: 85px;
-      height: 55px;
-      background-color:darkblue;
+      height: 40px;
+      background-color:lightslategray;
       border-color:darkgreen;
       color:white;
       font-size: 18px;
@@ -491,23 +486,25 @@ select{
 }
 
 .btnDenuncia{
-      width: 120px;
-      height: 40px;
-      margin-left: 10px;
-      border-radius: 4px;
-      border-color:springgreen;
+      width: 80px;
+      height: 30px;
+      color:blue;
+      border-radius: 5px;
       border-style: solid;
+      padding-top: 2px;
       text-align: center;
       text-transform: uppercase;
+      box-shadow: 3px 6px #888888;
+
 }
 
 .btn_limpar_denuncia{
-      width: 120px;
-      height: 40px;
-      margin-left: 10px;
-      border-radius: 4px;
-      border-color:springgreen;
+      width: 80px;
+      height: 30px;
+      color:blue;
+      border-radius: 5px;
       border-style: solid;
+      padding-top: 2px;
       text-align: center;
       text-transform: uppercase;
 }
@@ -519,36 +516,28 @@ select{
 }
 
 .tabela_ocorrencia{
-      
+     
       margin-left: 10px;
       margin-top: 20px;
       border-color: white; 
 }
 
-/* .frmConsulta{
-      background-color:lightgray;
-      width: 1200px;
-      margin-top: 110px;
-      margin-left: 250px;
-
-}
- */
 .btn-inc-ocorrencia{
-      width: 200px;
+      width: 80px;
       height: 30px;
-      vertical-align: middle;
-      background-color:green;
-      color: white;      
-      border-radius: 3px;
+      color:blue;
+      border-radius: 5px;
       border-style: solid;
       padding-top: 2px;
       text-align: center;
       text-transform: uppercase;
+      box-shadow: 3px 6px #888888;
+
 }
 
 .btn-inc-ocorrencia:hover{
-      width: 130px;
-      height: 60px;
+      width: 100px;
+      height: 40px;
       background-color:khaki;
       color:ghostwhite;
       border-radius: 8px;
@@ -582,32 +571,35 @@ select{
 }
 
 .btn-portaria{
-      height: 40px;
-      background-color:darkkhaki;
-      color:black;
-      border-radius: 3px;
+      width: 80px;
+      height: 30px;
+      color:blue;
+      border-radius: 5px;
       border-style: solid;
       padding-top: 2px;
       text-align: center;
       text-transform: uppercase;
+      box-shadow: 3px 6px #888888;
+
 }
 
 .btn-portaria:hover{
-      height: 50px;
+      height: 40px;
       background-color:khaki;
       color:lightgreen;
 }
 
 .btn-ocorrencia{
-      height: 40px;
-      background-color:cadetblue;
+      width: 85px;
+      height: 30px;
       color:blue;
-      border-radius: 3px;
+      border-radius: 5px;
       border-style: solid;
       padding-top: 2px;
       text-align: center;
       text-transform: uppercase;
-      background-color:cadetblue;
+      box-shadow: 3px 6px #888888;
+
 }
 
 .btn-ocorrencia:hover{
@@ -627,6 +619,8 @@ select{
       margin-left: 300px;
       width: 1000px;
       background-color: #DBE06C;
+      box-shadow: 3px 6px #888888;
+
  }
 
 .erros{
@@ -639,8 +633,6 @@ select{
       background-color:yellow;
       color: red;
       display: block;
-/*       position: absolute;
- */      
 }
 
 .containerForm{
@@ -659,10 +651,6 @@ select{
       color:white;
       background-color: red;
 }
-
-.botoes{
-/*       height: 60px;
- */}
 
 .processarServidor{
       display: block;

@@ -4,9 +4,7 @@
 <script type="text/javascript" src="<?php URL_BASE . "/assets/js/funcoes.js" ?>"> </script>
 
 <div class="base-lista">
-	<span class="qtde">Há <b><?php echo count($portaria) ?></b> Portarias</span>
-	<div class="btn-inc"><a href="<?php echo URL_BASE . "Portaria/Novo" ?>" >INCLUIR </a></div>
-
+	
 	<div class="tabela">	
 		<table width="100%" border="1" cellspacing="0" cellpadding="0">
 		  <thead class="thead">

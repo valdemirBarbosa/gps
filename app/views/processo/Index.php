@@ -85,7 +85,7 @@
 
 				<td>
 					
-				<div class="btn-ocorrencia"> 
+				<div class="btn-portaria"> 
 					<a href="<?php echo URL_BASE ."Fase/Tramitar/".$pd->id_processo ?>" >Fase</a>
 	  			</div>
 	  			</td>

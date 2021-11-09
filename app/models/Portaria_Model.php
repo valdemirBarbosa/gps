@@ -37,28 +37,25 @@ class Portaria_Model extends Model{
             $sql->bindValue(":anexo", $anexo);
             $sql->bindValue(":user", $user);
             $sql->execute();
-
-            echo "<pre>";
-                print_r($sql);
-            echo "<pre>";
-            exit;
     }
 }
 
     public function Consultar($id_portaria){
-            $sql = "SELECT * FROM portaria WHERE id_portaria = ".$id_portaria;
-            $qry = $this->db->query($sql);
-            return $qry->fetchAll(\PDO::FETCH_OBJ);
+            $sql = "SELECT * FROM portaria WHERE id_portaria =:id";
+            $sql = $this->db->prepare($sql);
             $sql->bindValue(':id', $id_portaria);
             $sql->execute();
+            return $sql->fetchAll(\PDO::FETCH_OBJ);
+
     }      
 
     //Usado para o formulário de editar e função de excluir da lista
     public function GetId($id_portaria){
-        $sql = "SELECT * FROM portaria WHERE id_portaria = id_portaria =: id";
-        $qry = $this->db->pepare($sql);
-        $qry->bindValue(":id", $id_portaria);
+        $sql = "SELECT * FROM portaria WHERE id_portaria =:id";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(':id', $id_portaria);
         $sql->execute();
+        return $sql->fetchAll(\PDO::FETCH_OBJ);
     }
 
     public function InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_processo, $numero_processo,  $numero, $tipo,$data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user){
@@ -85,7 +82,6 @@ class Portaria_Model extends Model{
         $sql->bindValue(":anexo", $anexo);
         $sql->bindValue(":user", $user);
         $sql->execute();
-
       
     }
 
