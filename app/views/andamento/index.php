@@ -2,15 +2,14 @@
 	<h1 class="titulo-pagina">Dados do Processo</h1>
 </div>
 
-<?php !isset($_SESSION['numero_processo']) ? session_start() : NULL ; ?>
+<?php 
+	session_start();
+?>
 
 <div class="containerPesqusa">
 <div class="frmConsulta">  
-	<form method="GET" action="<?php echo URL_BASE . 'Andamento/porProcesso/'; ?>" >
-		<label>Pesquisa por número do processo</label>
-		<input type="number" autofocus name="numero_processo">
-		<input type="submit" value="pesquisar">
-	</form>
+<form method="GET" action="<?php echo URL_BASE . 'Andamento/porProcesso/'; ?>" >
+
 
 		<!--Botões !-->
 		<div class="btn-inc">
@@ -20,21 +19,24 @@
 			</div>			
 			
 			<div class="btn-inc">
-				<a href="<?php echo URL_BASE . "ocorrencia/novo" ?>" >INCLUIR </a>
+				<a href="<?php echo URL_BASE . "ocorrencia/novo" ?>">INCLUIR</a>
+			</div>
 
-<!-- Parei aqui tentando passar o id para o formulário
+			
+<label>Pesquisa por número do processo</label>
+		<input type="number" autofocus name="numero_processo">
+		<input type="submit" value="pesquisar">
+	</form>
+
  				<?php
 					if(isset($processo)){
 				foreach($processo as $pd){ 
 				}} ?>
 
-				<a href="<?php echo URL_BASE ."Ocorrencia/Excluir/".$pd->id_ocorrencia ?>" >Excluir</a>
- -->
-			</div>
-
-	<table border="2">
+	<table>
 	<form action="<?php  echo URL_BASE ."Processo/Salvar" ?>" method="POST">
-	<?php
+
+<?php
 		if(isset($processo)){
 			foreach($processo as $pd){ 
 		}
@@ -42,7 +44,7 @@
 		
 	?>
 		<fieldset>
-			<legend><h4>Códigos</h4></legend>	
+				<legend><h4>Códigos</h4></legend>	
 			<label>Id do Processo</label>
 
 			<input id="txt_id" readonly name="txt_id_processo" enable="false" 
@@ -73,20 +75,28 @@
 		<legend>informações do processo</legend>
 			<label>Número do Processo</label>
 			<input class="txt_numero_processo" name="txt_numero_processo" type="number" placeholder="Insira o número do processo" value="<?php if(!empty($pd->numero_processo)){echo $pd->numero_processo;} ?>">
-				<label>Data de Instauração</label>
+			
+				<?php 
+					if(isset($pd->numero_processo)){
+						$_SESSION['numero_processo'] = $pd->numero_processo; 
+					}
+				?>
+			
+				 <label>Data de Instauração</label>
 					<input name="txt_data_instauracao" type="date" value="<?php  if(!empty($pd->data_instauracao)){echo $pd->data_instauracao;} ?>">
 	</fieldset>
 	</table>
-		
-	<table class="tabela_ocorrencia" width="98%" border="2">
+</form>
+
+	<table border="2">
 		  <thead>
 			<tr>
 				<th align="center" width="5%">Id</th>
  				<th align="center" width="10%">Número Processo</th>
 				<th align="center" width="10%">Data da ocorrência </th>
-				<th align="center" width="60%">ocorrência </th>
+				<th align="center" width="40%">ocorrência </th>
 				<th width="5%">Anexo</th>
-				<th align="center" colspan="2">Ação</th>
+				<th align="center" width="20%" colspan="2">Ação</th>
 			</tr>
 	<?php
 		if(isset($procOcorr)){
@@ -118,7 +128,7 @@
 		<fieldset>
 			<tr><td align="center" colspan="9"><?php
 
-		$numero_processo = isset($_SESSION['numero_processo']);
+		$numero_processo = $_SESSION['numero_processo'];
 	    for($q=1; $q<=$totalPaginas; $q++): ?> 
 			 <a href="<?php echo URL_BASE.'andamento/porProcesso' ?>?p=<?php echo $q ?>&numero_processo=<?php echo $numero_processo  ?> "> <?php echo '[ '.$q.' ]' ?>
         <?php endfor ?>
@@ -127,6 +137,6 @@
         </tr>
 
    </table>
-   </div>
+</div>
 </body>
 </html>

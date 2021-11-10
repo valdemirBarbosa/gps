@@ -1,4 +1,3 @@
-<div class="div1">
 	<div class="base-home">
 		<h1 class="titulo-pagina">Alterar dados do Processo</h1>
 	</div>
@@ -127,6 +126,7 @@
 					<td align="center"><?php echo $servidor->cpf;  ?></td>
 					<td><?php echo $servidor->matricula;  ?></td>
 					<td>
+		</div>
 						<div class="btn-editar">
 
 		<input type="submit" value="Incluir servidor">

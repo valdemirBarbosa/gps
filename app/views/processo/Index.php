@@ -50,6 +50,7 @@
 	
 				<th align="center" colspan="6">Ação</th>
 			</tr>
+			<tr>
 		</thead>
 	<?php 
 	  	foreach($processo as $pd){

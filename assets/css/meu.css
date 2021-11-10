@@ -11,6 +11,44 @@
       font-family:monospace;
 }
 
+html, body{height:100%; background:#ddd url(../img/fundo.png) fixed no-repeat center; background-size:100%;}
+body{font-size:1em; font-family: 'rregular';}
+h1, h2, h3, h4, h5{margin:0; padding:0; text-transform:uppercase; font-weight:inherit;}
+p{line-height:1.2em; font-size:1em; letter-spacing:0; color:#263238;}
+a {text-decoration:none; color:#444;}
+input,textarea, select {background:#EEEEEE;  text-transform: uppercase;}
+input[type=image]{border:0;}
+input[type=date], select{padding:8px}
+ul ,li{list-style:none;}
+
+@font-face {
+    font-family: 'rbold';
+    src: url('fonts/roboto-bold-webfont.woff2') format('woff2'),
+         url('fonts/roboto-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'rregular';
+    src: url('fonts/roboto-regular-webfont.woff2') format('woff2'),
+         url('fonts/roboto-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+	font-family:"rlight";
+	src:url("fonts/Roboto-Light.eot?") format("eot"),
+	url("fonts/Roboto-Light.woff") format("woff"),
+	url("fonts/Roboto-Light.ttf") format("truetype"),
+	url("fonts/Roboto-Light.svg#Roboto-Light") format("svg");
+	font-weight:normal;
+	font-style:normal;
+}
+
+
+
 .base-topo{
       background-color:darkslategray;
       float: left;
@@ -24,7 +62,7 @@
       background-color:silver;
       float: left;
       width: 100%;
-      height:auto;
+      height: 100%;
 
 }
 
@@ -85,6 +123,7 @@ a:link{
 form{
       background-color:azure;
       width: 80%;
+      height: auto;
       margin-left: 2%;
       position: absolute;
       top:20%;
@@ -259,16 +298,17 @@ span{
 
       table {
             border-collapse: collapse;
-            width: 100%;
+            width: 90%;
             vertical-align: var(--bs-table-active-color);
-        }
+            margin-left: 40px;
+      }
         
         th, td {
             text-align: left;
-            padding: 8px;
-        }
+            padding: 2px;
+}
         tr:nth-child(even){background-color:#ddd}
-        tr:hover {background-color:lightblue; color:mediumblue;  font-size: 15px;}
+        tr:hover {background-color:lightblue; color:mediumblue;  font-size: 14px;}
         th{background-color:darkslategray; color: whitesmoke;}
 
 .btn{
@@ -517,7 +557,8 @@ select{
 
 .tabela_ocorrencia{
      
-      margin-left: 10px;
+      margin-left: 20px;
+      margin-right: 15px;
       margin-top: 20px;
       border-color: white; 
 }
@@ -708,4 +749,8 @@ select{
 .fim{
       height: 50px;
       width: auto;
+}
+
+.frmConsulta{
+      margin-left: 210px;
 }

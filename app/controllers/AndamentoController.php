@@ -11,6 +11,7 @@ use app\models\AndamentoOcorrencia_Model;
 
 
 class AndamentoController extends Controller{
+     session_stary();
 
      public function index(){
           $ocorrencia = new Ocorrencia_Model();

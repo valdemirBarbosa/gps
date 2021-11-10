@@ -22,6 +22,7 @@
 				<input name="txt_observacao" type="text" size="100" cols="40" rows="2" value="<?php echo $denunciante->observacaoDenunciante ?>" >
 			</div>
 			</div>
+		</fieldset>
 
 		<fieldset>				
 			<input type="hidden" name="acao" value="Editar">
@@ -29,5 +30,7 @@
 			<input type="submit" value="Alterar" class="btn">
 			<input type="reset" name="Reset" id="button" value="Limpar" class="btn">
 			<input name="Voltar" onclick="history.back()" type="submit" value="Voltar" class="btn">
+			<br/><br/>
+
 		</fieldset>
 	</form>
