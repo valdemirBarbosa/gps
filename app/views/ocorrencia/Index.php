@@ -3,10 +3,17 @@
 </div>
 
 <div class="base-lista">
-	<span class="qtde">Há <b><?php echo count($ocorrencia) ?></b> ocorrencias</span>
-	<div class="btn-inc"><a href="<?php echo URL_BASE . "Ocorrencia/Novo" ?>" >INCLUIR </a></div>
-
-	<div class="tabela">	
+			<!--Botões !-->
+     		<div class="btn-inc">
+				<script> //Link para voltar à página anterior
+					document.write('<a href="' + document.referrer + '">Voltar</a>');
+				</script>
+			</div>			
+			
+			<div class="btn-inc">
+				<a href="<?php echo URL_BASE . "ocorrencia/novo" ?>" >INCLUIR </a>
+			</div>
+	<div>	
 		<table width="100%" border="1" cellspacing="0" cellpadding="0">
 		  <thead>
 			<tr>
@@ -19,7 +26,8 @@
 				<th align="center" colspan="2">Ação</th>
 			</tr>
 	<?php 
-	  foreach($ocorrencia as $oco){
+	if(isset($procOcorr)){
+	  foreach($procOcorr as $oco){
 	?>
 			<tr>
 				<td align="center"><?php echo $oco->id_ocorrencia ?> </td>
@@ -40,13 +48,15 @@
 					  </div>
 				</td>
 			</tr> 
-	<?php } ?>
+	<?php }
+} ?>
 
 			<hr/><hr/>
 		</table>
 	</div>				
 		<p>...</P>
 </div>					
+
 
 </body>
 </html>

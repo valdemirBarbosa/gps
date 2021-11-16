@@ -3,15 +3,6 @@
 </div>
 
 <form action="<?php echo URL_BASE ."Processo/Salvar" ?>" method="POST">
-	<!--Botões !-->
-	<div class="btn-inc">
-		<script> //Link para voltar à página anterior
-			document.write('<a href="' + document.referrer + '">Voltar</a>');
-		</script>
-	</div>	
-
-		<input type="submit" value="Salvar" class="btn-inc">
-
 <?php foreach($processo as $pd){ ?>
 	<fieldset>
 		<legend><h4>Códigos</h4></legend>	
@@ -49,6 +40,16 @@
 	</fieldset>
 
 	</td></tr>
-    
+
+	<br/>
+				<!--Botões !-->
+	<div class="btn">
+		<script> //Link para voltar à página anterior
+			document.write('<a href="' + document.referrer + '">Voltar</a>');
+		</script>
+	</div>	
+
+		<input type="submit" value="Salvar" class="btn">
+		
 	</table>
 </form>

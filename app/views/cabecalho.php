@@ -12,5 +12,6 @@
 		<li><a href="<?php echo URL_BASE . "andamento/getAll" ?>">Andamentos</a></li>
 		<li><a href="<?php echo URL_BASE . "portaria" ?>">Portarias</a></li>
 		<li><a href="<?php echo URL_BASE . "upload" ?>">Upload</a></li>
+		<li><a href="<?php echo URL_BASE . "processo/estudo" ?>">Estudo CSS flex Box</a></li>
 	</ul> 
 </nav>	

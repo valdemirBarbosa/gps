@@ -5,7 +5,7 @@
 
 <div class="base-lista">
 	
-	<div class="tabela">	
+	<div>	
 		<!--Botões !-->
 	
 		<div class="btn-inc">

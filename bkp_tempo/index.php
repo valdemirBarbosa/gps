@@ -1,11 +1,12 @@
 <div class="base-home">
-	<h1 class="titulo-pagina">Andamento do Processo</h1>
+	<h1 class="titulo-pagina">Dados do Processo</h1>
 </div>
 
 <?php 
-	if(!isset($_SESSION))session_start();
+	session_start();
 ?>
 
+<div class="containerPesqusa">
 <div class="frmConsulta">  
 <form method="GET" action="<?php echo URL_BASE . 'Andamento/porProcesso/'; ?>" >
 
@@ -78,10 +79,7 @@
 				<?php 
 					if(isset($pd->numero_processo)){
 						$_SESSION['numero_processo'] = $pd->numero_processo; 
-					}else{
-						echo "Não tem sessão";
 					}
-
 				?>
 			
 				 <label>Data de Instauração</label>
@@ -128,17 +126,15 @@
 		?>
 
 		<fieldset>
-			<tr><td align="center" colspan="9">
+			<tr><td align="center" colspan="9"><?php
+
 				
-			<?php
- 			if(!isset($_SESSION))session_start();
-			 	!isset($_SESSION['numero_processo']) ? $numero_processo = $_SESSION['numero_processo'] : $numero_processo = 0;
-
-					for($q=1; $q<=$totalPaginas; $q++):  
-						echo "<a href=".URL_BASE.'andamento/porProcesso/?p='.($q).'&numero_processo='.isset($numero_processo); ?> " > <?php echo "[".($q)."]" ?> </a> 
-
-		  <?php endfor; 
-		  ?>
+		if(isset($numero_processo)){
+			$numero_processo = $_SESSION['numero_processo'];
+		}  
+		    for($q=1; $q<=$totalPaginas; $q++): ?> 
+			 <a href="<?php echo URL_BASE.'andamento/porProcesso' ?>?p=<?php echo $q ?>&numero_processo=<?php echo $numero_processo  ?> "> <?php echo '[ '.$q.' ]' ?>
+        <?php endfor ?>
 		</fieldset>
 			</td>
         </tr>

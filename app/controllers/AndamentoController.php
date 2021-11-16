@@ -11,12 +11,10 @@ use app\models\AndamentoOcorrencia_Model;
 
 
 class AndamentoController extends Controller{
-     session_stary();
 
      public function index(){
           $ocorrencia = new Ocorrencia_Model();
- /*          $dados["procOcorr"] = $ocorrencia->lista();
-  */      $dados["totalPaginas"] = 0;
+          $dados["totalPaginas"] = 0;
           $dados["numero_processo"] = 0;
           $dados["view"] = "andamento/index";
           $this->load("template", $dados);
@@ -39,25 +37,9 @@ class AndamentoController extends Controller{
           return $totalRegistro;
      }
      
-// Em construção da lista integral
-
-/*
-     public function getAll(){
-         $dados["totalPaginas"] = 0;
-         $dados["numero_processo"] = 0;
-
-         $ocorrencia = new Ocorrencia_Model();
-         $dados["procOcorr"] = $ocorrencia->lista();
-         $totalRegistro = $ocorrencia->contarOcorrencia();
-         $dados['totalRegistro'] = $totalRegistro;
-
-         return $dados;
-         
-     } */
-      
 
      public function porProcesso(){
-          $limit = LIMITE_LISTA;
+          $limit = 7;
           $offset = 0;
          
           $processoEocorrencia = new Ocorrencia_Model();

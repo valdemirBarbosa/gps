@@ -19,21 +19,17 @@
 	<fieldset>
 		<legend>Ocorrências</legend>
 			<label>Data da ocorrencia</label>
-			<input name="txt_data_ocorrencia" type="date" value="<?php echo $ocor->data_ocorrencia ?>">
+			<input autofocus name="txt_data_ocorrencia" type="date" value="<?php echo $ocor->data_ocorrencia ?>">
 
 			<div class="ocorrencia">		
 				<label>Ocorrência</label>
-				<textarea rows="2" cols="55" name="txt_ocorrencia">
-					<?php echo $ocor->ocorrencia ?>
-				</textarea>
+				<input type="text" size="110" name="txt_ocorrencia" value="<?php echo $ocor->ocorrencia ?>"> 
 			</div>
 
-			<div class="obs">
+			<br/>
 				<label id="obs">observação</label> 
-			</div>
-				<textarea rows="4" cols="100" name="txt_observacao">
-						<?php echo $ocor->observacao ?>		
-				</textarea>
+				<input type="text" size="110" name="txt_observacao" value="<?php echo $ocor->observacao ?>"> 
+			<br/>
 	</fieldset>
 	
 		<?php } ?>
@@ -41,5 +37,8 @@
 		<input type="hidden" name="id_ocorrencia" value="<?php echo $ocor->id_ocorrencia ?>">
 		<input type="submit" value="Editar" class="btn">
 		<input type="reset" name="Reset" id="button" value="Limpar" class="btn limpar">
-
+		<br/>
+		<br/>
+		<br/>
+		
 		</form>

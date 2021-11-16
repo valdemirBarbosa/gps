@@ -3,35 +3,32 @@
 </div>
 
 <?php //paramentros para pesquisa dos formulários de denuncia e processo
- 		$tabela = 'servidor';
- 		$view = 'servidor/Index';
+session_start();
+
+		$tabela = 'servidor';
+		$_SESSION['view'] = 'servidor/Index'; 
+		$view =  $_SESSION['view'];
 		$retorno = 'servidorRet';
 ?>
 <div class="frmConsulta">  
 	<form method="GET" action="<?php echo URL_BASE . 'Pesquisa/porParametro'; ?>" >
-		<table>
-			<tr>
-				<td>
-					<label>Pesquisa</label>
-						<select name="pesquisa" class="select">
-<!-- 								<option value="1">Número do documento</option>
-								<option value="2">Número do Processo</option>
- -->								<option value="3">Nome</option>
-								<option value="4">CPF</option>
-						</select>
-				</td>
-				<td>
-						<input type="text" autofocus name="valorPreenchidoUsuario">
-						<input type="hidden" name="view" value="<?php echo $view ?>">
-						<input type="hidden" name="retorno" value="<?php echo $retorno ?>">
-						<input type="hidden" name="tabela" value="<?php echo $tabela ?>">
-						
-						<input type="submit" value="pesquisar">
-				</td>
-			</tr>
-			</table>
-			</form>
-		</div>
+	
+	<label>Pesquisa</label>
+		<select name="pesquisa" class="select">
+<!-- 				<option value="1">Número do documento</option>
+				<option value="2">Número do Processo</option>
+ -->				<option value="3">Nome</option>
+				<option value="4">CPF</option>
+		</select>
+	
+		<input class="pesquisa" type="text" autofocus name="valorPreenchidoUsuario">
+		<input type="hidden" name="view" value="<?php echo $view ?>">
+		<input type="hidden" name="retorno" value="<?php echo $retorno ?>">
+		<input type="hidden" name="tabela" value="<?php echo $tabela ?>">
+		
+		<input type="submit" value="pesquisar">
+	</form>
+</div>
 
 <div class="base-lista">
 		<table width="100%" border="1" cellspacing="0" cellpadding="0">
@@ -79,6 +76,20 @@
 			<div class="btn-inc">
 				<a href="<?php echo URL_BASE . "servidor/novo" ?>" >INCLUIR </a>
 			</div>
+
+			<tr><td align="center" colspan="9">
+				
+				<?php
+				 if(!isset($_SESSION))session_start();
+					 !isset($_SESSION['campo']) ? $campo = $_SESSION['campo'] : $campo = 0;
+	
+						for($q=1; $q<=$totalPaginas; $q++):  
+							echo "<a href=".URL_BASE.'pesquisa/porParametro/?p='.($q).'&$campo='.isset($$campo); ?> " > <?php echo "[".($q)."]" ?> </a> 
+	
+			  <?php endfor; 
+			  ?>
+			</fieldset>
+				</td>
 	</table>
 </div>
 </body>

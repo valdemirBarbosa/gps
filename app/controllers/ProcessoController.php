@@ -17,6 +17,13 @@ class ProcessoController extends Controller{
         
         $this->load("template", $dados);
    }
+  
+   //Função para acessar o view estudo de CSS Flex Box
+   public function estudo(){
+        $processo = new Processo_Model();
+        $dados["view"] = "estudo/home";
+        $this->load("template", $dados);
+   }
 
     public function getCodigos(){
         $denuncia = new Processo_Model();

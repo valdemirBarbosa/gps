@@ -8,8 +8,6 @@
  		$view = 'processo/Index';
 		$retorno = 'processo';
 ?>
-
-<div class="containerPesqusa">
 <div class="frmConsulta">  
 	<form method="GET" action="<?php echo URL_BASE . 'Pesquisa/ConsultaProcesso'; ?>" >
 		<table>
@@ -33,10 +31,9 @@
 			</tr>
 			</table>
 		</div>
-	</div>
-		
+	
 <div class="base-lista">
-	<div class="tabela">	
+	<div>	
 		<table width="100%" border="1" cellspacing="0" cellpadding="0">
 		  <thead class="thead">
 				<th align="center" width="5%">Id Processo</th>

@@ -26,11 +26,13 @@
 			<br/>
 			<label>Ocorrencia/Andamento</label>
 			<input class="txt_ocorrencia" size="110" name="txt_ocorrencia" type="text" >
-
+		
+			<br/>
 			<label>Observação</label>
 			<input class="txt_observacao" size="119" name="txt_observacao" type="text" placeholder="observações">
 
-		<label>Anexo</label>
+			<br/>
+			<label>Anexo</label>
 			<input name="txt_anexo" type="file" >
 		</fieldset>				
 

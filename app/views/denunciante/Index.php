@@ -1,11 +1,8 @@
 <div class="base-home">
-	<div class="titulo-pagina">Cadastro de Denunciantes</div>
+	<h1 class="titulo-pagina">Lista de Denunciantes</h1>
 </div>
 
-<div class="base-lista2">
-<!-- 	
-	<span class="qtde">Há <b><?php echo count($denunciante) ?></b> denunciante(s) cadastrado(s)</span>
- -->
+<div class="base-lista">
 			<!--Botões !-->
      		<div class="btn-inc">
 				<script> //Link para voltar à página anterior
@@ -17,7 +14,7 @@
 				<a href="<?php echo URL_BASE . "denunciante/novo" ?>" >INCLUIR </a>
 			</div>
 
-	 <div class="tabela">	
+	 <div>	
 		<table width="100%" border="1" cellspacing="0" cellpadding="0">
 		  <thead>
 			   <tr>

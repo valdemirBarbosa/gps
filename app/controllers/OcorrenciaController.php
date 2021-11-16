@@ -13,7 +13,7 @@ class OcorrenciaController extends Controller{
    public function index(){
         $ocorrencia = new Ocorrencia_Model();
         $dados["procOcorr"] = $ocorrencia->lista();
-        $dados["view"] = "ocorrencia/andamento";
+        $dados["view"] = "ocorrencia/index";
         $this->load("template", $dados);
 
     }
@@ -29,11 +29,8 @@ class OcorrenciaController extends Controller{
 //Função para salvar e direcionar ou para Editar ou para Incluir 
     public function Salvar(){
           $ocorre = new Ocorrencia_Model();
-     
           $id_ocorrencia = isset($_POST['txt_id_ocorrencia']) ? strip_tags(filter_input(INPUT_POST, "txt_id_ocorrencia")) : NULL;
-          
           $id_processo = isset($_POST['txt_id_processo']) && $_POST['txt_id_processo'] > 0? strip_tags(filter_input(INPUT_POST, "txt_id_processo")) : $msg = "Dever ser >0";
-
           $numero_processo = isset($_POST['txt_numero_processo']) && $_POST['txt_numero_processo'] > 0 ?  strip_tags(filter_input(INPUT_POST, "txt_numero_processo")) : $msg = "Número do Processo dever ser >0";
 
 /*           echo "<pre>";
@@ -42,15 +39,11 @@ class OcorrenciaController extends Controller{
           exit;
  */
           $data_ocorrencia =$_POST['txt_data_ocorrencia'];
-
           $ocorrencia = isset($_POST['txt_ocorrencia']) ? strip_tags(filter_input(INPUT_POST, "txt_ocorrencia")) : NULL;
-          
           $observacao = isset($_POST['txt_observacao']) ? strip_tags(filter_input(INPUT_POST, "txt_observacao")) : NULL;
-          
           $anexo = "sem anexo";
           $user = 1;
           $data_digitacao = NULL;
-
 
           //Verifica se será postado o "id" se sim será Edição, senão inclusão
           if($id_ocorrencia){
@@ -59,7 +52,7 @@ class OcorrenciaController extends Controller{
                $ocorre->Incluir($id_processo, $numero_processo, $data_ocorrencia, $ocorrencia, $observacao, $anexo, $user);
                   echo "<script> Document.alert('Denúncia  já existe, não pode mais cadastrar'); </script> ";
                }
-               header("Location:" . URL_BASE . "ocorrencia/");
+               header("Location:" . URL_BASE . "ocorrencia/index");
           }
 
 
@@ -87,7 +80,7 @@ class OcorrenciaController extends Controller{
      public function Edit($id_ocorrencia){
           $ocorrencia = new Ocorrencia_Model();
           $dados["ocorrencia"] = $ocorrencia->getId($id_ocorrencia);
-          $dados["view"] = "ocorrencia/Editar";
+          $dados["view"] = "ocorrencia/editar";
           $this->load("template", $dados);
      }
      

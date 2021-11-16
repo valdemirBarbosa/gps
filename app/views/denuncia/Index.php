@@ -6,53 +6,34 @@
  		$view = 'denuncia/Index';
 		$retorno = 'denunciaRet';
 ?>
-
-<div class="containerPesqusa">
-<div class="frmConsulta">  
+<div class="frmconsulta">
 	<form method="GET" action="<?php echo URL_BASE . 'Pesquisa/Consulta'; ?>" >
-		<table>
-			<tr>
-				<td>
-					<label>Pesquisa</label>
-						<select name="pesquisa" class="select">
-								<option value="1">Número do documento</option>
-								<option value="2">Número do Processo</option>
-								<option value="3">Nome</option>
-								<option value="4">CPF</option>
-						</select>
-				</td>
-				<td>
-						<input type="text" autofocus name="valorPreenchidoUsuario">
+					<label>Pesquisa</label> 
+					<select name="pesquisa" class="select">
+						<option value="1">Número do documento</option>
+						<option value="2">Número do Processo</option>
+						<option value="3">Nome</option>
+						<option value="4">CPF</option>
+					</select>
+						<input class="pesquisa" type="text" autofocus name="valorPreenchidoUsuario">
 						<input type="hidden" name="view" value="<?php echo $view ?>">
 						<input type="hidden" name="retorno" value="<?php echo $retorno ?>">
 						<input type="hidden" name="tabela" value='<?php echo $tabela ?>'>
 						<input type="submit" value="pesquisar">
-				</td>
-			</tr>
-			</table>
+	</form>
+</div>
 
-			</form>
-		</div>
-	</div>
-		
-	
 <div class="base-lista">
-<!-- 	<span class="qtde">Há <b><?php echo  count($denunciaRet) ?></b> denuncia(s) cadastrada(s)</span>
- -->	
-
-
-	<div class="tabela">	
-		<table width="100%" border="1" cellspacing="0" cellpadding="0">
+		<table border="1" cellspacing="0" cellpadding="0">
 		  <thead>
 			<tr>
 				<th width="5%" align="center"> id</th>
 				<th width="30%">Narração da denúncia</th>
 				<th width="10%">tipo documento</th>
-				<th width="3%">número</td>
+				<th width="1%">número</th>
 				<th width="7%">data de entrada</th>
 				<th width="20%">denunciados</th>
 				<th width="30%">documentos anexados</th>
-
 				<th width="10%" align="center" colspan="2">Ação</th>
 			</tr>
 	<?php 
@@ -63,10 +44,10 @@
 		   <td><?php echo $den->denuncia_fato  ?> </td>
 		   <td align="center"><?php echo $den->tipo_de_documento ?> </td>
 		   <td align="center"><?php echo $den->numero_documento  ?></td>
-		   <?php $dt_entrada = explode("-",$den->data_entrada);
-		   $dia = $dt_entrada[2];
-		   $mes = $dt_entrada[1];
-		   $ano = $dt_entrada[0];
+	<?php $dt_entrada = explode("-",$den->data_entrada);
+	   $dia = $dt_entrada[2];
+	   $mes = $dt_entrada[1];
+	   $ano = $dt_entrada[0];
 	?>
 	         <td align="center"><?php echo $dia."/".$mes."/".$ano  ?> </td> 
 		
@@ -87,7 +68,6 @@
 		   </tr> 
 	<?php } ?>
 	</div>
-	</td>
 
 	<!--Botões !-->
 	<div class="btn-inc">
@@ -100,6 +80,5 @@
 		<a href="<?php echo URL_BASE . "denuncia/Novo" ?>" >INCLUIR </a>
 	</div>
 </table>
-</div>		
 </body>
 </html>
