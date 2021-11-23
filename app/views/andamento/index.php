@@ -3,8 +3,8 @@
 </div>
 
 <?php 
-	if(!isset($_SESSION))session_start();
-?>
+/* 	if(!isset($_SESSION))session_start();
+ */?>
 
 <div class="frmConsulta">  
 <form method="GET" action="<?php echo URL_BASE . 'Andamento/porProcesso/'; ?>" >
@@ -78,10 +78,7 @@
 				<?php 
 					if(isset($pd->numero_processo)){
 						$_SESSION['numero_processo'] = $pd->numero_processo; 
-					}else{
-						echo "Não tem sessão";
 					}
-
 				?>
 			
 				 <label>Data de Instauração</label>

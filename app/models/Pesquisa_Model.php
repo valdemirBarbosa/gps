@@ -40,14 +40,13 @@ class Pesquisa_Model extends Model{
     public function contaRegistro($tabela, $campo, $parametro){
         $sql = "SELECT * FROM $tabela WHERE $campo LIKE  '%$parametro%'";
         $sql = $this->db->query($sql);
-        
         $totalRegistro = $sql->rowCount();
         return $totalRegistro;
     }
 
     // Pegar os dados da tabela ocorrencia e disponibilizar para os Métodos Editar e Excluir
-    public function getNumeroProcessoLimit($campo, $parametro, $offset, $limit){
-        $sql = "SELECT * FROM servidor WHERE $campo LIKE '%$parametro%' LIMIT $offset, $limit";
+    public function getNumeroProcessoLimit($tabela, $campo, $parametro, $offset, $limit){
+        $sql = "SELECT * FROM $tabela WHERE $campo LIKE '%$parametro%' LIMIT $offset, $limit";
 /*         print_r($sql);
         exit;
  */        

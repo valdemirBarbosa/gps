@@ -6,8 +6,8 @@
 session_start();
 
 		$tabela = 'servidor';
-		$_SESSION['view'] = 'servidor/Index'; 
-		$view =  $_SESSION['view'];
+/* 		$_SESSION['view'] = 'servidor/Index'; 
+ */		$view =  'servidor/index';
 		$retorno = 'servidorRet';
 ?>
 <div class="frmConsulta">  
@@ -80,14 +80,16 @@ session_start();
 			<tr><td align="center" colspan="9">
 				
 				<?php
-				 if(!isset($_SESSION))session_start();
-					 !isset($_SESSION['campo']) ? $campo = $_SESSION['campo'] : $campo = 0;
-	
+/* 				 if(!isset($_SESSION))session_start();
+ */					 !isset($_SESSION['campo']) ? $dado = $_SESSION['campo'] : $dado = 0;
+						$campo = $_SESSION['campo'];
+						$dado = $_SESSION['dado'];
+
 						for($q=1; $q<=$totalPaginas; $q++):  
-							echo "<a href=".URL_BASE.'pesquisa/porParametro/?p='.($q).'&$campo='.isset($$campo); ?> " > <?php echo "[".($q)."]" ?> </a> 
-	
-			  <?php endfor; 
-			  ?>
+							echo "<a href=".URL_BASE.'pesquisa/porParametro/?p='.($q).'&'.$campo=$dado; ?> " > <?php echo "[".($q)."]" ?> </a> 
+			<?php
+			   endfor;
+		     ?>
 			</fieldset>
 				</td>
 	</table>

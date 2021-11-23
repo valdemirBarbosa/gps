@@ -28,13 +28,8 @@ class PesquisaController extends Controller{
      
                $dados["view"] = addslashes($_GET['view']);
                $retornoDados = addslashes($_GET['retorno']);
-               $campoTabela = addslashes($_GET['pesquisa']);
 
-               session_start();
-               $_SESSION['campo'] = $campo = $parametrosPesquisa[0];
-               $campoPesquisa = $_SESSION['campo'];
- 
-                      $campo = $parametrosPesquisa[0];
+               $campo = $parametrosPesquisa[0];
                $informacao = $parametrosPesquisa[1];
 
                $dados[$retornoDados] = $pesquisa->Pesquisa($tabela, $campo, $informacao);
@@ -82,8 +77,8 @@ class PesquisaController extends Controller{
 //Pega a opção de campo do select do usuário - campo opção e valor do campos
     public function pegarDadosDoUsuario(){
      if(isset($_GET['pesquisa']) && !empty('pesquisa')){
-          $pesquisa = addslashes($_GET['pesquisa']);
-              $valorPreenchidoUsuario = $_GET['valorPreenchidoUsuario'];
+         $pesquisa = addslashes($_GET['pesquisa']);
+         $valorPreenchidoUsuario = $_GET['valorPreenchidoUsuario'];
           
           switch($pesquisa){
                case 1:
@@ -109,38 +104,46 @@ class PesquisaController extends Controller{
           
            $dadosInformados = array($campo, $valorRecebidoDoUsuario);
            return $dadosInformados;
-          }
      }
-
+    }
 // paginar consulta
 public function porParametro(){
-     $limit = 10;
+     $limit = LIMITE_LISTA;
      $offset = 0;
     
      $dadosTabela = new Pesquisa_Model();
      $totalRegistros = $this->contarRegistro();
-    
+
      $totalPaginas = ceil($totalRegistros / $limit);
      $dados['totalPaginas'] = ceil($totalPaginas);
      $dados['paginaAtual'] = 1;
      if(!empty($_GET['p']) && !empty($_GET['valorPreenchidoUsuario'])){
           $dados['paginaAtual'] = intval($_GET['p']);
-          //$parametro = $_GET['valorPreenchidoUsuario'];
      }
 
      $offset = ($dados['paginaAtual'] * $limit) - $limit;
-     
 
      if(isset($_GET['valorPreenchidoUsuario']) && !empty($_GET['tabela'])){
-          $dadosUsuario = $this->pegarDadosDoUsuario();
-          $campo = $dadosUsuario[0];
-          $parametro = $dadosUsuario[1];
-          $dados['dados'] = $dadosTabela->getNumeroProcessoLimit($campo, $parametro, $offset, $limit);
-          $dados["view"] = addslashes($_GET["view"]);
+          session_start();
+          $tabela = $_GET['tabela'];
+          $parametrosPesquisa = $this->pegarDadosDoUsuario();
+          $campo = $parametrosPesquisa[0];
+          $dado = $parametrosPesquisa[1];
+          $_SESSION['campo'] = $campo;
+          $_SESSION['dado'] = $dado;
+
+          $parametro = $_GET['valorPreenchidoUsuario'];
+          $dados['dados'] = $dadosTabela->getNumeroProcessoLimit($tabela, $campo, $parametro, $offset, $limit);
+          $dados["view"] = $_GET["view"];
+
+/*           print_r($dados);
+          exit;
+ */          
+          $this->load("template", $dados);
+          
      }
 
-     $dados["view"] = $_SESSION['view'];
-     $this->load("template", $dados);
+
 }
 
 public function contarRegistro(){
@@ -148,16 +151,14 @@ public function contarRegistro(){
           $parametro = addslashes($_GET['valorPreenchidoUsuario']);
 
           if(isset($_GET['tabela']) && !empty('tabela')){
-               session_start();
-               
                $tabela = addslashes($_GET['tabela']);
-               $dadosUsuario = $this->pegarDadosDoUsuario();
-               $campo = $dadosUsuario[0];
-               
-               $registros = new Pesquisa_Model();
-               $totalRegistro = $registros->contaRegistro($tabela, $campo, $parametro);
-               $_SESSION['parametro'] = $parametro;
+               $parametrosPesquisa = $this->pegarDadosDoUsuario();
+               $campo = $parametrosPesquisa[0];
 
+               $registros = new Pesquisa_Model();
+               $totalRegistro = $registros->contaRegistro($tabela, $campo,  $parametro);
+               $_SESSION['parametro'] = $parametro;
+               $totalRegistro;
      }else{
           $totalRegistro = $registros->contarOcorrencia();
      }
