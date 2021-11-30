@@ -1,17 +1,21 @@
+<?php
+	if(!isset($_SESSION)){
+	session_start();
+	}
+?>
+
 <div class="base-home">
 	<h1 class="titulo-pagina">Lista de servidores</h1>
 </div>
 
 <?php //paramentros para pesquisa dos formulários de denuncia e processo
-session_start();
 
 		$tabela = 'servidor';
-/* 		$_SESSION['view'] = 'servidor/Index'; 
- */		$view =  'servidor/index';
+		$view =  'servidor/index';
 		$retorno = 'servidorRet';
 ?>
 <div class="frmConsulta">  
-	<form method="GET" action="<?php echo URL_BASE . 'Pesquisa/porParametro'; ?>" >
+	<form method="POST" action="<?php echo URL_BASE . 'Pesquisa/porParametro'; ?>" >
 	
 	<label>Pesquisa</label>
 		<select name="pesquisa" class="select">
@@ -79,15 +83,15 @@ session_start();
 
 			<tr><td align="center" colspan="9">
 				
-				<?php
-/* 				 if(!isset($_SESSION))session_start();
- */					 !isset($_SESSION['campo']) ? $dado = $_SESSION['campo'] : $dado = 0;
-						$campo = $_SESSION['campo'];
-						$dado = $_SESSION['dado'];
-
-						for($q=1; $q<=$totalPaginas; $q++):  
-							echo "<a href=".URL_BASE.'pesquisa/porParametro/?p='.($q).'&'.$campo=$dado; ?> " > <?php echo "[".($q)."]" ?> </a> 
 			<?php
+				$campo = $_SESSION['campo'];
+				$dado = $_SESSION['dado'];
+				$totalPaginas = $_SESSION['totalPaginas'];
+
+
+				for($q=1; $q<=$totalPaginas; $q++):  
+					echo "<a href=".URL_BASE.'pesquisa/porParametroLink/?p='.($q).'&'.$campo.'='.$dado; ?>" > <?php echo "[".($q)."]" ?> </a> 
+<?php
 			   endfor;
 		     ?>
 			</fieldset>

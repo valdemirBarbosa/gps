@@ -9,6 +9,9 @@ use app\models\Processo_Model;
 use app\models\Ocorrencia_Model;
 use app\models\AndamentoOcorrencia_Model;
 
+	if(!isset($_SESSION)){
+	session_start();
+	}
 
 class AndamentoController extends Controller{
 
@@ -24,7 +27,6 @@ class AndamentoController extends Controller{
           $registros = new Ocorrencia_Model();
 
           if(isset($_GET['numero_processo']) && !empty('numero_processo')){
-                    session_start();
                
               $numero_processo = addslashes($_GET['numero_processo']);
 
@@ -39,7 +41,7 @@ class AndamentoController extends Controller{
      
 
      public function porProcesso(){
-          $limit = 7;
+          $limit = LIMITE_LISTA;
           $offset = 0;
          
           $processoEocorrencia = new Ocorrencia_Model();
@@ -58,6 +60,8 @@ class AndamentoController extends Controller{
 
           if(isset($_GET['numero_processo'])){
                $numero_processo = $_GET['numero_processo'];
+               $_SESSION['numero_processo'] = $numero_processo;
+
                $dados['procOcorr'] = $processoEocorrencia->getNumeroProcessoLimit($numero_processo, $offset, $limit);
 
                $processo = new AndamentoOcorrencia_Model();

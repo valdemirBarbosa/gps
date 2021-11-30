@@ -8,6 +8,10 @@ use app\models\TipoDocumento_Model;
 use app\models\Pesquisa_Model;
 use app\models\Servidor_Model;
 
+	if(!isset($_SESSION)){
+     	session_start();
+	}
+
 
 class PesquisaController extends Controller{
    public function index(){
@@ -22,12 +26,12 @@ class PesquisaController extends Controller{
     public function Consulta(){
         $parametrosPesquisa = $this->pegarDadosDoUsuario();
         
-        if(isset($_GET['tabela']) && !empty(['valorPreenchidoUsuario'])){
-               $tabela = addslashes($_GET['tabela']);
+        if(isset($_POST['tabela']) && !empty(['valorPreenchidoUsuario'])){
+               $tabela = addslashes($_POST['tabela']);
                $pesquisa = new Pesquisa_Model();
      
-               $dados["view"] = addslashes($_GET['view']);
-               $retornoDados = addslashes($_GET['retorno']);
+               $dados["view"] = addslashes($_POST['view']);
+               $retornoDados = addslashes($_POST['retorno']);
 
                $campo = $parametrosPesquisa[0];
                $informacao = $parametrosPesquisa[1];
@@ -76,87 +80,103 @@ class PesquisaController extends Controller{
 
 //Pega a opção de campo do select do usuário - campo opção e valor do campos
     public function pegarDadosDoUsuario(){
-     if(isset($_GET['pesquisa']) && !empty('pesquisa')){
-         $pesquisa = addslashes($_GET['pesquisa']);
-         $valorPreenchidoUsuario = $_GET['valorPreenchidoUsuario'];
-          
-          switch($pesquisa){
-               case 1:
-                    $campo = "numero_documento";
-                    $valorRecebidoDoUsuario = $valorPreenchidoUsuario;
-                    break;
-               case 2:
-                    $campo = "numero_processo";
-                    $valorRecebidoDoUsuario = $valorPreenchidoUsuario;
-                    break;
-               case 3:
-                    $campo = "nome_servidor";
-                    $valorRecebidoDoUsuario = $valorPreenchidoUsuario;
-                    break;
-               case 4:
-                    $campo = "cpf";
-                    $valorRecebidoDoUsuario = $valorPreenchidoUsuario;
-                    break;
-               default:
-                    echo "Nenhuma opção escolhida e informada";
-                    break;
+     if(isset($_POST['pesquisa']) && !empty('pesquisa')){
+         $pesquisa = addslashes($_POST['pesquisa']);
+         $valorPreenchidoUsuario = $_POST['valorPreenchidoUsuario'];
+               switch($pesquisa){
+                    case 1:
+                         $campo = "numero_documento";
+                         $valorRecebidoDoUsuario = $valorPreenchidoUsuario;
+                         break;
+                    case 2:
+                         $campo = "numero_processo";
+                         $valorRecebidoDoUsuario = $valorPreenchidoUsuario;
+                         break;
+                    case 3:
+                         $campo = "nome_servidor";
+                         $valorRecebidoDoUsuario = $valorPreenchidoUsuario;
+                         break;
+                    case 4:
+                         $campo = "cpf";
+                         $valorRecebidoDoUsuario = $valorPreenchidoUsuario;
+                         break;
+                    default:
+                         echo "Nenhuma opção escolhida e informada";
+                         break;
+                    }
+                    $tabela = $_POST['tabela'];
+                    $_SESSION['tabela'] = $tabela;
+                    $_SESSION['valorRecebidoDoUsuario'] = $valorRecebidoDoUsuario;
+                    $_SESSION['campo'] = $campo;
+                    $dadosInformados = array($_SESSION['campo'], $_SESSION['valorRecebidoDoUsuario'], $_SESSION['tabela']);
+                    return $dadosInformados;
           }
-          
-           $dadosInformados = array($campo, $valorRecebidoDoUsuario);
-           return $dadosInformados;
      }
-    }
-// paginar consulta
+    // paginar consulta
 public function porParametro(){
-     $limit = LIMITE_LISTA;
+     $_SESSION['limit'] = LIMITE_LISTA;
+     $limit = $_SESSION['limit'];
      $offset = 0;
-    
+
      $dadosTabela = new Pesquisa_Model();
      $totalRegistros = $this->contarRegistro();
+     $_SESSION['totalRegistros'] = $totalRegistros;
 
      $totalPaginas = ceil($totalRegistros / $limit);
-     $dados['totalPaginas'] = ceil($totalPaginas);
+     $totalPaginas = ceil($totalPaginas);
+     $_SESSION['totalPaginas'] = $totalPaginas;
      $dados['paginaAtual'] = 1;
-     if(!empty($_GET['p']) && !empty($_GET['valorPreenchidoUsuario'])){
-          $dados['paginaAtual'] = intval($_GET['p']);
-     }
 
      $offset = ($dados['paginaAtual'] * $limit) - $limit;
+     
+     $dados = $this->pegarDadosDoUsuario();     
+     $tabela = $dados[2];
+     $campo = $dados[0];
+     $parametro = $dados[1];
 
-     if(isset($_GET['valorPreenchidoUsuario']) && !empty($_GET['tabela'])){
-          session_start();
-          $tabela = $_GET['tabela'];
-          $parametrosPesquisa = $this->pegarDadosDoUsuario();
-          $campo = $parametrosPesquisa[0];
-          $dado = $parametrosPesquisa[1];
-          $_SESSION['campo'] = $campo;
-          $_SESSION['dado'] = $dado;
+     $dados['dados'] = $dadosTabela->getNumeroProcessoLimit($tabela, $campo, $parametro, $offset, $limit);
 
-          $parametro = $_GET['valorPreenchidoUsuario'];
-          $dados['dados'] = $dadosTabela->getNumeroProcessoLimit($tabela, $campo, $parametro, $offset, $limit);
-          $dados["view"] = $_GET["view"];
-
-/*           print_r($dados);
-          exit;
- */          
-          $this->load("template", $dados);
-          
-     }
-
-
+     $_SESSION['view'] = $_POST['view'];
+     $dados["view"] = $_POST['view'];
+     $this->load("template", $dados);
 }
 
-public function contarRegistro(){
-     if(isset($_GET['valorPreenchidoUsuario']) && !empty('valorPreenchidoUsuario')){
-          $parametro = addslashes($_GET['valorPreenchidoUsuario']);
+public function porParametroLink(){
+   if($_GET['p']){
+     $dados['paginaAtual'] = $_GET['p'];
+     $_SESSION['limit'] = LIMITE_LISTA;
+     $limit = $_SESSION['limit'];
+     $offset = 0;
 
-          if(isset($_GET['tabela']) && !empty('tabela')){
-               $tabela = addslashes($_GET['tabela']);
+     $dadosTabela = new Pesquisa_Model();
+     $totalRegistros = $_SESSION['totalRegistros'];
+     $totalPaginas = $_SESSION['totalPaginas'];
+     $totalP = $_SESSION['totalPaginas'] = $totalPaginas;
+
+     $offset = ($dados['paginaAtual'] * $limit) - $limit;
+     
+          $tabela = $_SESSION['tabela'];
+          $campo = $_SESSION['campo'];
+          $parametro = $_SESSION['parametro'];
+
+          $dados['dados'] = $dadosTabela->getNumeroProcessoLimit($tabela, $campo, $parametro, $offset, $limit);
+
+          $dados["view"] = $_SESSION['view'];
+          $this->load("template", $dados);
+}
+}
+public function contarRegistro(){
+     if(isset($_POST['valorPreenchidoUsuario']) || $_GET['p']){
+          $registros = new Pesquisa_Model();
+
+          if(isset($_POST['tabela']) && !empty('tabela')){
+
+               $tabela = $_SESSION['tabela'];
                $parametrosPesquisa = $this->pegarDadosDoUsuario();
                $campo = $parametrosPesquisa[0];
+               $parametro = $parametrosPesquisa[1];
 
-               $registros = new Pesquisa_Model();
-               $totalRegistro = $registros->contaRegistro($tabela, $campo,  $parametro);
+               $totalRegistro = $registros->contaRegistro($tabela, $campo, $parametro);
                $_SESSION['parametro'] = $parametro;
                $totalRegistro;
      }else{

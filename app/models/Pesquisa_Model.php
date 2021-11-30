@@ -14,6 +14,12 @@ class Pesquisa_Model extends Model{
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
+    public function contarOcorrencia(){
+        $sql = "SELECT * FROM servidor";
+        $qry = $this->db->query($sql);
+        return $qry->fetchAll(\PDO::FETCH_OBJ);
+    }
+
     public function Pesquisa($tabela, $campo, $informacao){
         $sql = "SELECT * FROM $tabela as d LEFT JOIN denunciante as dc ON d.id_denunciante = dc.id_denunciante LEFT JOIN tipo_documento as t ON d.tipo_documento = t.id_tipo_documento WHERE $campo=:parametro";
         $sql = $this->db->prepare($sql);
@@ -47,10 +53,9 @@ class Pesquisa_Model extends Model{
     // Pegar os dados da tabela ocorrencia e disponibilizar para os Métodos Editar e Excluir
     public function getNumeroProcessoLimit($tabela, $campo, $parametro, $offset, $limit){
         $sql = "SELECT * FROM $tabela WHERE $campo LIKE '%$parametro%' LIMIT $offset, $limit";
-/*         print_r($sql);
-        exit;
- */        
-        $qry = $this->db->query($sql);
+   /*  print_r($sql);
+   exit;
+    */     $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 

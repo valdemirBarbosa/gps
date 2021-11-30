@@ -1,10 +1,12 @@
+<?php
+	if(!isset($_SESSION)){
+	session_start();
+	}
+?>
+
 <div class="base-home">
 	<h1 class="titulo-pagina">Andamento do Processo</h1>
 </div>
-
-<?php 
-/* 	if(!isset($_SESSION))session_start();
- */?>
 
 <div class="frmConsulta">  
 <form method="GET" action="<?php echo URL_BASE . 'Andamento/porProcesso/'; ?>" >
@@ -128,11 +130,10 @@
 			<tr><td align="center" colspan="9">
 				
 			<?php
- 			if(!isset($_SESSION))session_start();
-			 	!isset($_SESSION['numero_processo']) ? $numero_processo = $_SESSION['numero_processo'] : $numero_processo = 0;
+					$numero_processo = $_SESSION['numero_processo'];
 
 					for($q=1; $q<=$totalPaginas; $q++):  
-						echo "<a href=".URL_BASE.'andamento/porProcesso/?p='.($q).'&numero_processo='.isset($numero_processo); ?> " > <?php echo "[".($q)."]" ?> </a> 
+						echo "<a href=".URL_BASE.'andamento/porProcesso/?p='.($q).'&numero_processo='.$numero_processo; ?> " > <?php echo "[".($q)."]" ?> </a> 
 
 		  <?php endfor; 
 		  ?>
