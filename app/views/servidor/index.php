@@ -84,13 +84,11 @@
 			<tr><td align="center" colspan="9">
 				
 			<?php
-				$campo = $_SESSION['campo'];
-				$dado = $_SESSION['dado'];
 				$totalPaginas = $_SESSION['totalPaginas'];
 
 
 				for($q=1; $q<=$totalPaginas; $q++):  
-					echo "<a href=".URL_BASE.'pesquisa/porParametroLink/?p='.($q).'&'.$campo.'='.$dado; ?>" > <?php echo "[".($q)."]" ?> </a> 
+					echo "<a href=".URL_BASE.'pesquisa/porParametroLink/?p='.($q); ?>" > <?php echo "[".($q)."]" ?> </a> 
 <?php
 			   endfor;
 		     ?>

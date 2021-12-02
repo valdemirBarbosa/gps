@@ -118,6 +118,8 @@ public function porParametro(){
      $limit = $_SESSION['limit'];
      $offset = 0;
 
+     $tabela = $_POST['tabela'];
+     $_SESSION['tabela'] = $tabela;
      $dadosTabela = new Pesquisa_Model();
      $totalRegistros = $this->contarRegistro();
      $_SESSION['totalRegistros'] = $totalRegistros;
