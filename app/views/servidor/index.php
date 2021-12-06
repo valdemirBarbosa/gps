@@ -88,7 +88,7 @@
 
 
 				for($q=1; $q<=$totalPaginas; $q++):  
-					echo "<a href=".URL_BASE.'pesquisa/porParametroLink/?p='.($q); ?>" > <?php echo "[".($q)."]" ?> </a> 
+					echo "<a href=".URL_BASE.'pesquisa/porParametroLink/?p='.($q); ?> > <?php echo "[".($q)."]" ?> </a> 
 <?php
 			   endfor;
 		     ?>

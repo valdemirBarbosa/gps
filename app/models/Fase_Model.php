@@ -22,15 +22,13 @@ class Fase_Model extends Model{
 
  //Verifica qtde de regitro por número de processo  - verifica se há menos de 3 registros
     public function EvitarDuplicidadeFase($numero_processo, $id_nova_fase){
-/*         $sql = "SELECT * FROM processo WHERE numero_processo =:processo && id_fase =:fase";
- */       
-        $sql = "SELECT * FROM processo WHERE numero_processo =:processo";
+        $sql = "SELECT * FROM processo WHERE numero_processo =:processo AND id_fase =:id_nova_fase";
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":processo", $numero_processo);
+        $sql->bindValue(":id_nova_fase", $id_nova_fase);
         $sql->execute();
-        if($sql->rowCount() > 0){
-            return $sql->fetchAll();
-    }
+        $sql->rowCount();
+            return $sql->fetch();
  }
 
     public function getNumProcesso($numero_processo){

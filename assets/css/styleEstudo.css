@@ -18,6 +18,7 @@ a {text-decoration:none; color:#444;}
 input,textarea, select {background:#EEEEEE;  text-transform: uppercase;}
 input[type=image]{border:0;}
 input[type=date], select{padding:2px}
+select{height: 35px;}
 ul ,li{list-style:none;}
 
 @font-face {
@@ -178,6 +179,7 @@ form{
     width: 80%;
     position: absolute;
     top:20%;
+    left: 100px;
 }
 
 form.pesquisa{
@@ -233,7 +235,7 @@ label, input{
 
 
 input[type="number"]{
-    width: 100px;
+    width: auto;
     text-align: center;
 }
 
@@ -359,7 +361,9 @@ span{
 
     table {
           border-collapse: collapse;
-          width: 100%;
+          width: 95%;
+          margin-left: 10px;
+          margin-right: 10px;
           vertical-align: var(--bs-table-active-color);
     }
       
@@ -368,7 +372,7 @@ span{
           padding: 2px;
 }
       tr:nth-child(even){background-color:#ddd}
-      tr:hover {background-color:lightblue; color:mediumblue;  font-size: 14px;}
+      tr:hover {background-color:lightblue; color:mediumblue;  font-size: 12px;}
       th{background-color:darkslategray; color: whitesmoke;}
 
 .btn{

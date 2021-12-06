@@ -1,9 +1,14 @@
+<?php
+	if(!isset($_SESSION)){
+	session_start();
+	}
+?>
+
 <div class="base-home">
 	<h1 class="titulo-pagina">Lista de Processos</h1>
 </div>
 
 <?php //paramentros para pesquisa dos formulários de denuncia e processo
-		session_start();
 		$tabela = 'processo';
  		$view = 'processo/Index';
 		$retorno = 'processo';
@@ -133,7 +138,19 @@
 				<a href="<?php echo URL_BASE . "processo/novo" ?>" >INCLUIR </a>
 			</div>
 		</table>
-	</div>				
+	</div>			
+	
+	<?php
+				$totalPaginas = $_SESSION['totalPaginas'];
+
+
+				for($q=1; $q<=$totalPaginas; $q++):  
+					echo "<a href=".URL_BASE.'pesquisa/porParametroLink/?p='.($q); ?> > <?php echo "[".($q)."]" ?> </a> 
+<?php
+			   endfor;
+		     ?>
+
+
 		<p>...</P>
 </div>
 </form>

@@ -1,3 +1,9 @@
+<?php
+	if(!isset($_SESSION)){
+	session_start();
+	}
+?>
+
 <div class="base-home">
 	<h1 class="titulo-pagina">Lista de denúncias</h1>
 </div>
@@ -7,7 +13,7 @@
 		$retorno = 'denunciaRet';
 ?>
 <div class="frmconsulta">
-	<form method="GET" action="<?php echo URL_BASE . 'Pesquisa/Consulta'; ?>" >
+	<form method="POST" action="<?php echo URL_BASE . 'Pesquisa/porParametro'; ?>" >
 					<label>Pesquisa</label> 
 					<select name="pesquisa" class="select">
 						<option value="1">Número do documento</option>
@@ -36,8 +42,9 @@
 				<th width="30%">documentos anexados</th>
 				<th width="10%" align="center" colspan="2">Ação</th>
 			</tr>
-	<?php 
-	  foreach($denunciaRet as $den){
+	<?php
+	if(isset($dados)){ 
+	foreach($dados as $den){
 	?>
 		<tr>
 		   <td align="center"><?php echo $den->id_denuncia  ?> </td>
@@ -66,7 +73,8 @@
 				</div>
 			</td>
 		   </tr> 
-	<?php } ?>
+	<?php }
+	} ?>
 	</div>
 
 	<!--Botões !-->
@@ -79,6 +87,17 @@
 	<div class="btn-inc">
 		<a href="<?php echo URL_BASE . "denuncia/Novo" ?>" >INCLUIR </a>
 	</div>
+
 </table>
+<?php
+				$totalPaginas = $_SESSION['totalPaginas'];
+
+
+				for($q=1; $q<=$totalPaginas; $q++):  
+					echo "<a href=".URL_BASE.'pesquisa/porParametroLink/?p='.($q); ?> > <?php echo "[".($q)."]" ?> </a> 
+<?php
+			   endfor;
+		     ?>
+
 </body>
 </html>

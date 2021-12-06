@@ -2,23 +2,20 @@
 namespace app\controllers;
 use app\core\Controller;
 use app\models\Denuncia_Model;
-use app\models\Denunciado_Model;
 use app\models\Denunciante_Model;
 use app\models\TipoDocumento_Model;
 
 class DenunciaController extends Controller{
    public function index(){
         $denuncias = new Denuncia_Model();
-        $denunciados = new Denuncia_Model();
 
-        $dados["denunciaRet"] = $denuncias->lista();
+        $dados["dados"] = $denuncias->lista();
         $dados["view"] = "denuncia/Index";
         $this->load("template", $dados);
     }
    
     public function _Denuncia(){
         $denuncias = new Denuncia_Model();
-        $denunciados = new Denuncia_Model();
 
         $dados["denuncia"] = $denuncias->getDenuncia($id_denuncia);
         $dados["denunciado"] = $denunciados->DenunciadosTodos();

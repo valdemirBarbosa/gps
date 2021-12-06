@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1,shrink-to-fit=no" />
 <link rel="stylesheet" href="<?php echo URL_BASE ."/assets/css/styleEstudo.css" ?>" />
 <!-- <link rel="stylesheet" href="<?php echo URL_BASE ."/assets/css/style.css" ?>" />
- --><link rel="stylesheet" href="<?php echo URL_BASE ."/assets/css/bootstrap.min.css" ?>" />
-
+ <link rel="stylesheet" href="<?php echo URL_BASE ."/assets/css/bootstrap.min.css" ?>" />
+!-->
 </head>
 <body>
 

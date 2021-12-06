@@ -41,18 +41,20 @@
                     <?php } ?>
                 </select>
 
+            <label>Número</label>
+      		<input name="txt_numero_processo_novo" type="number" required>
+
             <label>Data instauração nova fase</label>
                     <input required type="date" name="txt_nova_data_instauracao" ><br/><br/>
-                <div>
-                    <br/>
-	    			<label>observação</label>
-		    		<input name="txt_observacao" type="text" size="120" cols="40" rows="2" value="<?php echo $p->observacao ?>" >
-			    </div>
+            <div>
+                <label>observação</label>
+	        		<input name="txt_observacao" type="text" size="110" cols="40" rows="2" value="<?php echo $p->observacao ?>" >
+		    </div>
     </fieldset>
 
     <fieldset>				
 			<input type="hidden" name="acao" value="Editar">
-				<input type="submit" value="Mudar de Fase   " class="btn">
+				<input type="submit" value="Mudar" class="btn">
 				<input type="reset" name="Reset" id="button" value="Limpar" class="btn">
 				<input name="Voltar" onclick="history.back()" type="submit" value="Voltar" class="btn">
 			</fieldset>

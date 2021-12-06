@@ -33,7 +33,7 @@ class FaseController extends Controller{
         $id_denuncia = isset($_POST['txt_id_denuncia']) ? addslashes($_POST['txt_id_denuncia']) : NULL;
         $id_fase = isset($_POST['txt_id_fase']) ? $_POST['txt_id_fase'] : NULL;
         $id_nova_fase = $_POST['txt_id_nova_fase'];
-        $numero_processo = isset($_POST['txt_numero_processo']) ? $_POST['txt_numero_processo'] : NULL;
+        $numero_processo = isset($_POST['txt_numero_processo_novo']) ? $_POST['txt_numero_processo_novo'] : NULL;
         $data_instauracao = addslashes($_POST['txt_data_instauracao']) ? $_POST['txt_data_instauracao'] : NULL;
         $nova_data_instauracao = addslashes($_POST["txt_nova_data_instauracao"]);
         $data_encerramento = isset($_POST['txt_data_encerramento']) ? addslashes($_POST['txt_data_encerramento']) : "1900-01-01";
@@ -74,11 +74,15 @@ class FaseController extends Controller{
 
     //Verifica se já existe o processo na fase escolhida para não dar duplicidade de fase
     public function verSeExisteProcessoNaFase($numero_processo, $id_nova_fase){
-        $verificar = new Fase_Model();
-        if($fase = $verificar->EvitarDuplicidadeFase($numero_processo, $id_nova_fase)){
-
-        for($i=0; $i<count($fase); $i++){
-            if($fase[$i]['id_fase'] == $id_nova_fase){
+       $verificar = new Fase_Model();
+       if($fase = $verificar->EvitarDuplicidadeFase($numero_processo, $id_nova_fase)){
+        if(count($fase)>0){
+            echo "quantidade de processo: ".count($fase);
+        }else{
+            echo "menor que 0";
+        }
+            for($i=0; $i<count($fase); $i++){
+             if($fase[$i]['id_fase'] == $id_nova_fase){
                 return true;
             }
         }
@@ -106,11 +110,11 @@ class FaseController extends Controller{
     public function VerSeExisteFase($numero_processo, $id_fase){
         $verificar = new Fase_Model();
 
-        if($verificar->EvitarDuplicidadeFase($numero_processo, $id_fase)){
-           return true;
+        if($verificar->EvitarDuplicidadeFase($numero_processo, $id_fase) == false){
+            return true;
        }else{
-           $msg =  "O processo já passou por essa fase, verifique por favor.: ".$id_fase;
-           $this->Error($msg);
+            $msg =  "O processo já passou por essa fase, verifique por favor.: ".$id_fase;
+            $this->Error($msg);
        }
     }
     
