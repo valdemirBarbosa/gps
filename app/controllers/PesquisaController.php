@@ -23,7 +23,25 @@ class PesquisaController extends Controller{
  */    }
 
 //Pesquisa para tabela de denúncia    
-    public function Consulta(){
+    public function ConsultaDenuncia(){
+        $parametrosPesquisa = $this->pegarDadosDoUsuario();
+        
+        if(isset($_POST['tabela']) && !empty(['valorPreenchidoUsuario'])){
+               $tabela = addslashes($_POST['tabela']);
+               $pesquisa = new Pesquisa_Model();
+     
+               $dados["view"] = $_POST['view'];
+               $retornoDados = addslashes($_POST['retorno']);
+
+               $campo = $parametrosPesquisa[0];
+               $informacao = $parametrosPesquisa[1];
+
+               $dados['dados'] = $pesquisa->PesquisaDenuncia($tabela, $campo, $informacao);
+               $this->load("template", $dados);
+     }
+  }
+     //Pesquisa para tabela de processo    
+    public function ConsultaProcesso(){
         $parametrosPesquisa = $this->pegarDadosDoUsuario();
         
         if(isset($_POST['tabela']) && !empty(['valorPreenchidoUsuario'])){
@@ -32,26 +50,7 @@ class PesquisaController extends Controller{
      
                $dados["view"] = addslashes($_POST['view']);
                $retornoDados = addslashes($_POST['retorno']);
-
-               $campo = $parametrosPesquisa[0];
-               $informacao = $parametrosPesquisa[1];
-
-               $dados[$retornoDados] = $pesquisa->Pesquisa($tabela, $campo, $informacao);
-               $this->load("template", $dados);
-     }
-  }
-     //Pesquisa para tabela de processo    
-    public function ConsultaProcesso(){
-        $parametrosPesquisa = $this->pegarDadosDoUsuario();
-        
-        if(isset($_GET['tabela']) && !empty(['valorPreenchidoUsuario'])){
-               $tabela = addslashes($_GET['tabela']);
-               $pesquisa = new Pesquisa_Model();
-     
-               $dados["view"] = addslashes($_GET['view']);
-               $retornoDados = addslashes($_GET['retorno']);
                
-
                $campo = $parametrosPesquisa[0];
                $informacao = $parametrosPesquisa[1];
 
@@ -63,16 +62,16 @@ class PesquisaController extends Controller{
      public function ConsultaServidor(){
         $parametrosPesquisa = $this->pegarDadosDoUsuario();
         
-        if(isset($_GET['tabela']) && !empty(['valorPreenchidoUsuario'])){
-               $tabela = addslashes($_GET['tabela']);
+        if(isset($_POST['tabela']) && !empty(['valorPreenchidoUsuario'])){
+               $tabela = addslashes($_POST['tabela']);
                $pesquisa = new Pesquisa_Model();
  
                $campo = $parametrosPesquisa[0];
                $informacao = $parametrosPesquisa[1];
 
-               $dados["view"] = addslashes($_GET['view']);
+               $dados["view"] = addslashes($_POST['view']);
 
-               $retornoDados = addslashes($_GET['retorno']);
+               $retornoDados = addslashes($_POST['retorno']);
                $dados[$retornoDados] = $pesquisa->PesquisaServidor($tabela, $campo, $informacao);
                $this->load("template", $dados);
           }
@@ -120,6 +119,10 @@ public function porParametro(){
 
      $tabela = $_POST['tabela'];
      $_SESSION['tabela'] = $tabela;
+     
+     $tabela1 = 'fase';
+     $_SESSION['tabela1'] = $tabela1;
+     
      $dadosTabela = new Pesquisa_Model();
      $totalRegistros = $this->contarRegistro();
      $_SESSION['totalRegistros'] = $totalRegistros;
@@ -136,7 +139,7 @@ public function porParametro(){
      $campo = $dados[0];
      $parametro = $dados[1];
 
-     $dados['dados'] = $dadosTabela->getNumeroProcessoLimit($tabela, $campo, $parametro, $offset, $limit);
+     $dados['processo'] = $dadosTabela->getNumeroProcessoLimit($tabela, $tabela1, $campo, $parametro, $offset, $limit);
 
      $_SESSION['view'] = $_POST['view'];
      $dados["view"] = $_POST['view'];
@@ -144,8 +147,8 @@ public function porParametro(){
 }
 
 public function porParametroLink(){
-   if($_GET['p']){
-     $dados['paginaAtual'] = $_GET['p'];
+   if($_POST['p']){
+     $dados['paginaAtual'] = $_POST['p'];
      $_SESSION['limit'] = LIMITE_LISTA;
      $limit = $_SESSION['limit'];
      $offset = 0;

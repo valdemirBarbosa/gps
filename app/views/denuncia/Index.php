@@ -9,11 +9,11 @@
 </div>
 <?php //paramentros para pesquisa dos formulários de denuncia e processo
  		$tabela = 'denuncia';
- 		$view = 'denuncia/Index';
+ 		$view = 'denuncia/index';
 		$retorno = 'denunciaRet';
 ?>
 <div class="frmconsulta">
-	<form method="POST" action="<?php echo URL_BASE . 'Pesquisa/porParametro'; ?>" >
+	<form method="POST" action="<?php echo URL_BASE . 'Pesquisa/ConsultaDenuncia'; ?>" >
 					<label>Pesquisa</label> 
 					<select name="pesquisa" class="select">
 						<option value="1">Número do documento</option>

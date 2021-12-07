@@ -14,7 +14,7 @@
 		$retorno = 'processo';
 ?>
 <div class="frmConsulta">  
-	<form method="GET" action="<?php echo URL_BASE . 'Pesquisa/ConsultaProcesso'; ?>" >
+	<form method="POST" action="<?php echo URL_BASE . 'Pesquisa/porParametro'; ?>" >
 		<table>
 			<tr>
 				<td>

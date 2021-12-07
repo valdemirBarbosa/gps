@@ -20,7 +20,7 @@ class Pesquisa_Model extends Model{
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
-    public function Pesquisa($tabela, $campo, $informacao){
+    public function PesquisaDenuncia($tabela, $campo, $informacao){
         $sql = "SELECT * FROM $tabela as d LEFT JOIN denunciante as dc ON d.id_denunciante = dc.id_denunciante LEFT JOIN tipo_documento as t ON d.tipo_documento = t.id_tipo_documento WHERE $campo=:parametro";
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":parametro", $informacao);
@@ -51,11 +51,9 @@ class Pesquisa_Model extends Model{
     }
 
     // Pegar os dados da tabela ocorrencia e disponibilizar para os Métodos Editar e Excluir
-    public function getNumeroProcessoLimit($tabela, $campo, $parametro, $offset, $limit){
-        $sql = "SELECT * FROM $tabela WHERE $campo LIKE '%$parametro%' LIMIT $offset, $limit";
-   /*  print_r($sql);
-   exit;
-    */     $qry = $this->db->query($sql);
+    public function getNumeroProcessoLimit($tabela1, $tabela2, $campo, $parametro, $offset, $limit){
+        $sql = "SELECT * FROM $tabela1 as t1 LEFT JOIN $tabela2 as t2 ON t1.id_fase = t2.id_fase WHERE $campo LIKE '%$parametro%' LIMIT $offset, $limit";
+        $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
