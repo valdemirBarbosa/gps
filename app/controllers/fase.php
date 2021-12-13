@@ -14,3 +14,7 @@ class FaseController extends Controller{
         $this->load("template", $dados);
     }
 }
+
+    public function verificarFase($id_processo){
+        
+    }

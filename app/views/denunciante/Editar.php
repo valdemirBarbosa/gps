@@ -7,6 +7,7 @@
 					document.write('<a href="' + document.referrer + '">Voltar</a>');
 				</script>
 			</div>			
+			
 
   <form action="<?php echo URL_BASE ."denunciante/Salvar" ?>" method="POST">
 <fieldset>

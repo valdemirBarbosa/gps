@@ -44,17 +44,24 @@ class Pesquisa_Model extends Model{
     }
     
     public function contaRegistro($tabela, $campo, $parametro){
-        $sql = "SELECT * FROM $tabela WHERE $campo LIKE  '%$parametro%'";
+       $sql = "SELECT * FROM $tabela WHERE $campo LIKE  '%$parametro%'";
+
         $sql = $this->db->query($sql);
         $totalRegistro = $sql->rowCount();
         return $totalRegistro;
     }
 
     // Pegar os dados da tabela ocorrencia e disponibilizar para os Métodos Editar e Excluir
-    public function getNumeroProcessoLimit($tabela1, $tabela2, $campo, $parametro, $offset, $limit){
-        $sql = "SELECT * FROM $tabela1 as t1 LEFT JOIN $tabela2 as t2 ON t1.id_fase = t2.id_fase WHERE $campo LIKE '%$parametro%' LIMIT $offset, $limit";
+    public function getNumeroProcessoLimit($tabela, $tabela1, $campo, $parametro, $offset, $limit){
+        $sql = "SELECT * FROM $tabela as t LEFT JOIN $tabela1 as t1 ON t.id_fase = t1.id_fase WHERE $campo LIKE '%$parametro%' LIMIT $offset, $limit";
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+    public function getNumeroProcessoLimit2($campo, $parametro, $offset, $limit){
+       print_r($sql = "SELECT * FROM servidor  WHERE $campo LIKE '%$parametro%' LIMIT $offset, $limit");
+            $qry = $this->db->query($sql);
+            return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
 }    

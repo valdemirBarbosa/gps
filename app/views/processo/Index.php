@@ -55,6 +55,7 @@
 			<tr>
 		</thead>
 	<?php 
+	
 	  	foreach($processo as $pd){
 	?>
 			<tr>
@@ -112,12 +113,20 @@
 					</div>
 				</td>
 
-				<td>
-				<div class="btn-ocorrencia">
-					<a href="<?php echo URL_BASE ."Processo/Processar/".$pd->id_processo ?>" >Processar</a>
-					</div>
-				</td>
-			
+				<?php
+					if(isset($fase) && ($fase == "PAD")){		 
+						echo '<td>
+						<div class="btn-ocorrencia">'; 
+				?>
+						<a href="'<?php echo URL_BASE ."Processo/Processar/".$pd->id_processo ?>'">Processar</a>
+ 						</div>
+						</td>
+				<?php
+					}else{
+						echo '<td></td>';
+					}
+				?>
+
 				<td> 
 				<div class="btn-excluir">
 					<a href="<?php echo URL_BASE ."Processo/Excluir/".$pd->id_processo ?>" >Excluir</a>
@@ -141,13 +150,15 @@
 	</div>			
 	
 	<?php
-				$totalPaginas = $_SESSION['totalPaginas'];
-
+				if(isset($totalPaginas)){
+					$totalPaginas = $_SESSION['totalPaginas'];
+					
 
 				for($q=1; $q<=$totalPaginas; $q++):  
 					echo "<a href=".URL_BASE.'pesquisa/porParametroLink/?p='.($q); ?> > <?php echo "[".($q)."]" ?> </a> 
 <?php
 			   endfor;
+			}
 		     ?>
 
 

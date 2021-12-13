@@ -12,10 +12,9 @@
 
 		$tabela = 'servidor';
 		$view =  'servidor/index';
-		$retorno = 'servidorRet';
 ?>
 <div class="frmConsulta">  
-	<form method="POST" action="<?php echo URL_BASE . 'Pesquisa/porParametro'; ?>" >
+	<form method="POST" action="<?php echo URL_BASE . 'Pesquisa/ConsultaServidor'; ?>" >
 	
 	<label>Pesquisa</label>
 		<select name="pesquisa" class="select">
@@ -81,8 +80,8 @@
 				<a href="<?php echo URL_BASE . "servidor/novo" ?>" >INCLUIR </a>
 			</div>
 
+			<br/><br/><br/>
 			<tr><td align="center" colspan="9">
-				
 			<?php
 				$totalPaginas = $_SESSION['totalPaginas'];
 

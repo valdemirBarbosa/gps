@@ -40,14 +40,11 @@ class Denunciante_Model  extends Model{
     public function Inserir($nome_denunciante, $observacao){
         $sql = "INSERT INTO denunciante SET nome_denunciante = :denunciante, observacaoDenunciante = :observacao";
     
-        if($this->ExisteDenunciante($nome_denunciante) == false){
+        if($this->ExisteDenunciante($nome_denunciante)){
             $sql = $this->db->prepare($sql);
             $sql->bindValue(":denunciante", $nome_denunciante);
             $sql->bindValue(":observacao", $observacao);
             $sql->execute();
-            return true;
-         }else{
-            return false;
          }
     }
 
@@ -93,7 +90,7 @@ class Denunciante_Model  extends Model{
         $sql = "SELECT * FROM denunciante WHERE nome_denunciante = :nome";
         $sql = $this->db->prepare($sql);
         $sql->bindValue(':nome', $nome_denunciante);
-        
+       
         $sql->execute();
         
         if($sql->rowCount() > 0){

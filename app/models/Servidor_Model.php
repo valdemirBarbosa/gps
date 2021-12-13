@@ -15,6 +15,14 @@ class Servidor_Model  extends Model{
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
+    public function contaRegistro($tabela, $campo, $parametro){
+        $sql = "SELECT * FROM servidor WHERE $campo LIKE  '%$parametro%'";
+ 
+         $sql = $this->db->query($sql);
+         $totalRegistro = $sql->rowCount();
+         return $totalRegistro;
+     }
+ 
     public function listaProcessados(){
         $sql = "SELECT * FROM servidor as s INNER JOIN processo as p ON s.id_processo = p.id_processo ORDER BY id_servidor ASC LIMIT 5";
         $sql = $this->db->query($sql);

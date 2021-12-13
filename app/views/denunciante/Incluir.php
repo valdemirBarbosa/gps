@@ -1,5 +1,5 @@
 <div class="base-home">
-	<h1 class="titulo-pagina"><span class="cor">Incluir </span>Ocorrencias/Denunciante</h1>
+	<h1 class="titulo-pagina"><span class="cor">Incluir </span>Denunciante</h1>
 </div>
 
 			<!--Botões !-->

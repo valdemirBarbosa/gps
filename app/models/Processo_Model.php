@@ -25,6 +25,14 @@ class Processo_Model extends Model{
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
+
+    public function ProcessoFase($parametro){ //Seleciona da tabela processo todos os registro cuja fase seja igual ao parâmetro
+        $sql = "SELECT * FROM processo as p INNER JOIN fase as f ON p.id_fase = f.id_fase WHERE fase =:fase";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":fase", $parametro);
+        $sql->execute();
+        return $sql->fetchAll(\PDO::FETCH_OBJ);
+    }
     
     public function ProcessoOcorrencia(){
         $sql = "SELECT * FROM processo as p LEFT JOIN fase as f ON p.id_fase = f.id_fase INNER JOIN ocorrencia as o ON p.id_processo = o.id_processo"; 

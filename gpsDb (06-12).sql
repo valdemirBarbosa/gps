@@ -3,13 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 09-Nov-2021 às 10:36
+-- Tempo de geração: 07-Dez-2021 às 03:56
 -- Versão do servidor: 10.4.21-MariaDB
 -- versão do PHP: 7.4.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -25,6 +23,8 @@ SET time_zone = "+00:00";
 
 --
 -- Estrutura da tabela `denuncia`
+--
+-- Criação: 03-Nov-2021 às 20:51
 --
 
 CREATE TABLE `denuncia` (
@@ -857,6 +857,8 @@ INSERT INTO `denuncia` (`id_denuncia`, `id_denunciante`, `denuncia_fato`, `tipo_
 --
 -- Estrutura da tabela `denunciante`
 --
+-- Criação: 03-Nov-2021 às 20:51
+--
 
 CREATE TABLE `denunciante` (
   `id_denunciante` int(11) NOT NULL,
@@ -968,6 +970,8 @@ INSERT INTO `denunciante` (`id_denunciante`, `nome_denunciante`, `observacaoDenu
 --
 -- Estrutura da tabela `fase`
 --
+-- Criação: 03-Nov-2021 às 20:51
+--
 
 CREATE TABLE `fase` (
   `id_fase` int(11) NOT NULL,
@@ -988,6 +992,8 @@ INSERT INTO `fase` (`id_fase`, `fase`) VALUES
 --
 -- Estrutura da tabela `ocorrencia`
 --
+-- Criação: 03-Nov-2021 às 20:51
+--
 
 CREATE TABLE `ocorrencia` (
   `id_ocorrencia` int(11) NOT NULL,
@@ -1007,9 +1013,9 @@ CREATE TABLE `ocorrencia` (
 --
 
 INSERT INTO `ocorrencia` (`id_ocorrencia`, `id_processo`, `numero_processo`, `status`, `data_ocorrencia`, `ocorrencia`, `observacao`, `anexo`, `user`, `data_digitacao`) VALUES
-(9, 2, '702018', 0, '2021-07-19', 'reativando processo', '', 0, 1, '2021-07-19 06:19:15'),
+(9, 0, '702018', 0, '2021-07-19', 'reativando processo				', 'MAIS UM TESTE', 0, 1, '2021-07-19 06:19:15'),
 (23, 4041, '702018', 0, '2021-07-19', 'incluindo ocorrência um processo que não existe', '', 0, 1, '2021-07-19 21:44:32'),
-(26, 7, '702018', 0, '2021-10-12', 'TESTE2', 'SOMENTE TESTE', 0, 1, '2021-10-12 14:19:36'),
+(26, 0, '702018', 0, '2021-10-12', 'TESTE234								', 'SOMENTE TESTE												', 0, 1, '2021-10-12 14:19:36'),
 (27, 7, '702018', 0, '2021-10-12', 'TESTE3', 'SOMENTE  TESTE', 0, 1, '2021-10-12 14:20:04'),
 (28, 7, '702018', 0, '2021-10-12', 'TESTE 4', 'SOMENTE TESTE', 0, 1, '2021-10-12 14:20:31'),
 (29, 7, '702018', 0, '2021-10-12', 'TESTE5', 'SOMENTE TESTE', 0, 1, '2021-10-12 14:21:06'),
@@ -1018,13 +1024,19 @@ INSERT INTO `ocorrencia` (`id_ocorrencia`, `id_processo`, `numero_processo`, `st
 (32, 6, '44', 0, '2021-10-18', 'PRORROGAÇÃO', 'TESTE', 0, 1, '2021-10-18 20:34:21'),
 (33, 0, '44', 0, '2021-10-18', '										CARGA DO PROCESSO PARA O RÉU								', '												TESTE		\r\n						\r\n				', 0, 1, '2021-10-18 20:37:11'),
 (34, 6, '44', 0, '2021-11-08', 'TESTE DE ENVIO DE ANEXO', 'TESTE DE ENVIO DE ANEXO', 0, 1, '2021-11-08 07:17:43'),
-(35, 6, '44', 0, '0000-00-00', '', '', 0, 1, '2021-11-08 09:10:14'),
-(36, 6, '44', 0, '0000-00-00', '', '', 0, 1, '2021-11-08 09:10:43');
+(57, 6, '44', 0, '2021-11-15', 'TESTE EM 15/11', 'TESTE EM 15/11', 0, 1, '2021-11-15 18:59:05'),
+(63, 7, '702018', 0, '2021-10-13', 'teste 13/10', '', 0, 1, '2021-12-05 20:06:51'),
+(64, 7, '702018', 0, '2021-10-14', 'teste 14/10', '', 0, 1, '2021-12-05 20:07:38'),
+(65, 7, '702018', 0, '2021-10-15', 'teste 15/10', '', 0, 1, '2021-12-05 20:07:49'),
+(66, 7, '702018', 0, '2021-10-17', 'teste 17/10/2021', '', 0, 1, '2021-12-05 20:11:00'),
+(67, 7, '702018', 0, '0000-00-00', '', '', 0, 1, '2021-12-05 20:11:21');
 
 -- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `portaria`
+--
+-- Criação: 03-Nov-2021 às 20:51
 --
 
 CREATE TABLE `portaria` (
@@ -1060,6 +1072,8 @@ INSERT INTO `portaria` (`id_portaria`, `id_processo`, `id_fase`, `numero_process
 --
 -- Estrutura da tabela `processo`
 --
+-- Criação: 03-Nov-2021 às 20:51
+--
 
 CREATE TABLE `processo` (
   `id_processo` int(11) NOT NULL,
@@ -1081,12 +1095,15 @@ INSERT INTO `processo` (`id_processo`, `id_denuncia`, `id_fase`, `numero_process
 (6, 44, 1, '44', '2021-09-20', '', '', '2021-09-20', 1),
 (7, 21, 3, '702018', '2018-11-28', '', '', '2018-11-29', 1),
 (8, 3, 3, '57', '2020-09-07', '', '', '2020-09-07', 1),
-(18, 44, 2, '44', '2021-09-22', '                    ', '', NULL, 1);
+(18, 44, 2, '44', '2021-09-21', '', '', '2021-09-21', 2021),
+(21, 44, 3, '442021', '2021-12-01', '', '', NULL, 1);
 
 -- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `servidor`
+--
+-- Criação: 03-Nov-2021 às 20:51
 --
 
 CREATE TABLE `servidor` (
@@ -5583,7 +5600,7 @@ INSERT INTO `servidor` (`id_servidor`, `nome_servidor`, `cpf`, `matricula`, `vin
 (32110, 'JUAREZ FERREIRA DA SILVA', '32912943191', 101138, 'EFETIVO', 'SAÚDE', 'CENTRO CONTROLE DE ZOONOZES', '', NULL, NULL, 0),
 (32111, 'JUAREZ LOPES PEREIRA', '36162035115', 142617, 'CONTRATO TEMPOR', 'SAÚDE', 'SAUDE ADMINISTRATIVO', '', NULL, NULL, 0),
 (32112, 'JUAREZ MOACYR DE CAMPOS', '93805837100', 24846, 'EFETIVO', 'ASSISTÊNCIA SOCIAL', 'ADMINISTRATIVO', '', NULL, NULL, 0),
-(32113, 'JUCANIRA BENEDITO DA SILVA', '00598159142', 145020, 'CONTRATO TEMPOR', 'EDUCAÇÃO, CULTURA, ESPORTE LAZER', 'EMEB FAUSTINO ANTONIO DA SILVA', '', NULL, NULL, 0),
+(32113, 'JUCANIRA BENEDITO DA SILVA', '00598159142', 145020, 'CONTRATO TEMPOR', 'EDUCAÇÃO, CULTURA, ESPORTE LAZER', 'EMEB FAUSTINO ANTONIO DA SILVA', '', NULL, 7, 0),
 (32114, 'JUCELHA DE ARRUDA CUNHA', '98391925153', 144766, 'CONTRATO TEMPOR', 'EDUCAÇÃO, CULTURA, ESPORTE LAZER', 'EMEB AIR ADDOR', '', NULL, NULL, 0),
 (32115, 'JUCELHA FERREIRA DA SILVA', '68915535120', 146359, 'EFETIVO', 'EDUCAÇÃO, CULTURA, ESPORTE LAZER', 'EMEB SENHORA DIRCE LEITE DE CAMPOS', '', NULL, NULL, 0),
 (32116, 'JUCELIA ALVES PEREIRA MARQUES', '38391813134', 24894, 'EFETIVO', 'EDUCAÇÃO, CULTURA, ESPORTE LAZER', 'EMEB GONCALO DOMINGOS DE CAMPOS', '', NULL, NULL, 0),
@@ -9928,6 +9945,8 @@ INSERT INTO `servidor` (`id_servidor`, `nome_servidor`, `cpf`, `matricula`, `vin
 --
 -- Estrutura da tabela `status`
 --
+-- Criação: 03-Nov-2021 às 20:51
+--
 
 CREATE TABLE `status` (
   `id_status` int(11) NOT NULL,
@@ -9947,6 +9966,8 @@ INSERT INTO `status` (`id_status`, `status`) VALUES
 
 --
 -- Estrutura da tabela `tipo_documento`
+--
+-- Criação: 03-Nov-2021 às 20:51
 --
 
 CREATE TABLE `tipo_documento` (
@@ -9971,6 +9992,8 @@ INSERT INTO `tipo_documento` (`id_tipo_documento`, `tipo_de_documento`) VALUES
 --
 -- Estrutura da tabela `tipo_portaria`
 --
+-- Criação: 03-Nov-2021 às 20:51
+--
 
 CREATE TABLE `tipo_portaria` (
   `id_tipo` int(11) NOT NULL,
@@ -9989,6 +10012,8 @@ INSERT INTO `tipo_portaria` (`id_tipo`, `tipo_portaria`) VALUES
 
 --
 -- Estrutura da tabela `usuario`
+--
+-- Criação: 03-Nov-2021 às 20:51
 --
 
 CREATE TABLE `usuario` (
@@ -10100,7 +10125,7 @@ ALTER TABLE `denunciante`
 -- AUTO_INCREMENT de tabela `ocorrencia`
 --
 ALTER TABLE `ocorrencia`
-  MODIFY `id_ocorrencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id_ocorrencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT de tabela `portaria`
@@ -10112,7 +10137,7 @@ ALTER TABLE `portaria`
 -- AUTO_INCREMENT de tabela `processo`
 --
 ALTER TABLE `processo`
-  MODIFY `id_processo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_processo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de tabela `servidor`
@@ -10161,7 +10186,6 @@ ALTER TABLE `processo`
 --
 ALTER TABLE `servidor`
   ADD CONSTRAINT `id_processoFk` FOREIGN KEY (`id_processo`) REFERENCES `processo` (`id_processo`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -16,12 +16,12 @@
 	<ul class="menu">
 		<li><a href="<?php echo URL_BASE ?>" >Home</a></li>
 		<li><a href="<?php echo URL_BASE . "denunciante" ?>" >Denunciantes</a></li>
-<!-- 		<li><a href="<?php echo URL_BASE . "denunciado" ?>" >Denunciados</a></li> -->
 		<li><a href="<?php echo URL_BASE . "denuncia" ?>" >Denuncias</a></li>
 		<li><a href="<?php echo URL_BASE . "servidor" ?>" >Servidores</a></li>
-		<li><a href="<?php echo URL_BASE . "processo" ?>" >Processos</a></li>
+		<li><a href="<?php echo URL_BASE . "processo/pp" ?>" >Processo Preliminar</a></li>
+		<li><a href="<?php echo URL_BASE . "processo/sin" ?>" >Sindicância</a></li>
+		<li><a href="<?php echo URL_BASE . "processo/pad" ?>" >PAD</a></li>
 		<li><a href="<?php echo URL_BASE . "andamento/getAll" ?>">Andamentos</a></li>
-		<li><a href="<?php echo URL_BASE . "portaria" ?>">Portarias</a></li>
 		<li><a href="<?php echo URL_BASE . "upload" ?>">Upload</a></li>
 	</ul> 
 </nav>		</header>

@@ -17,6 +17,36 @@ class ProcessoController extends Controller{
         
         $this->load("template", $dados);
    }
+
+   public function pp(){ //Seleciona de Processo tudo que for Processo Preliminar
+        $processo = new Processo_Model();
+        $parametro = "PROCESSO PRELIMIAR";
+        $dados["fase"] = $parametro;
+        $dados["processo"] = $processo->ProcessoFase($parametro);
+        $dados["view"] = "processo/Index";
+                  
+        $this->load("template", $dados);
+   }
+
+   public function sin(){ //Seleciona de Processo tudo que for Sindicância
+        $processo = new Processo_Model();
+        $parametro = "SINDICANCIA";
+        $dados["fase"] = $parametro;
+        $dados["processo"] = $processo->ProcessoFase($parametro);
+        $dados["view"] = "processo/Index";
+        
+        $this->load("template", $dados);
+   }
+
+   public function pad(){ //Seleciona de Processo tudo que for PAD - PROCESSO ADMINISTRATIVO
+        $processo = new Processo_Model();
+        $parametro = "PAD";
+        $dados["fase"] = $parametro;
+        $dados["processo"] = $processo->ProcessoFase($parametro);
+        $dados["view"] = "processo/Index";
+        
+        $this->load("template", $dados);
+   }
   
    //Função para acessar o view estudo de CSS Flex Box
    public function estudo(){

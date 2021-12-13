@@ -24,7 +24,7 @@ class DenuncianteController extends Controller{
 
 
    public function novo(){
-        $dados["view"] = "denunciante/Incluir";
+        $dados["view"] = "denunciante/incluir";
         $this->load("template", $dados);
    }
  

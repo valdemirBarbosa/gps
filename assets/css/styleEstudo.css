@@ -19,7 +19,7 @@ input,textarea, select {background:#EEEEEE;  text-transform: uppercase;}
 input[type=image]{border:0;}
 input[type=date], select{padding:2px}
 select{height: 35px;}
-ul ,li{list-style:none;}
+ul, li{list-style:none;}
 
 @font-face {
     font-family: 'rbold';
@@ -176,7 +176,7 @@ a:link{
 
 form{
     background-color:lightsteelblue;
-    width: 80%;
+    width: 90%;
     position: absolute;
     top:20%;
     left: 100px;
@@ -208,7 +208,7 @@ label, input{
     border-radius: 2%;
     background-color:lightcyan;
     margin: 5px;
-    padding: 10px;
+    padding: 5px;
     font-weight: bold;
     text-transform: capitalize;
 }
@@ -362,7 +362,7 @@ span{
     table {
           border-collapse: collapse;
           width: 95%;
-          margin-left: 10px;
+          margin-left: 30px;
           margin-right: 10px;
           vertical-align: var(--bs-table-active-color);
     }
@@ -747,15 +747,18 @@ span{
 .div1{
     width: 1270px;
     height: 200px;
-    margin-left: 220px;
+    margin-left: 20px;
     margin-right: 10px;
-    margin-top: 64px;
+    margin-top: 4px;
+    background-color:cadetblue;
 }
 
 .div2{
+    margin-top: 1px;
     width: 1270px;
-    height: 80px;
-    margin-left: 220px;
+    margin-left: 20px;
+    margin-right: 10px;
+    background-color: blue;
 }     
 
 .div2.processarServidorFormulario{
@@ -763,9 +766,11 @@ span{
 }
 
 .div3{
-    width: 1270px;
+    width: auto;
     height: auto;
-    margin-left: 220px;
+    margin-left: 20px;
+    margin-right: 10px;
+    background-color: red;
 }
 
 .div4{

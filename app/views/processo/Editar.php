@@ -1,5 +1,5 @@
 <div class="base-home">
-	<h1 class="titulo-pagina">Alterar dados do Processo</h1>
+	<h1 class="titulo-pagina">Alterar dados do Processo </h1>
 </div>
 
 <form action="<?php echo URL_BASE ."Processo/Salvar" ?>" method="POST">
@@ -32,11 +32,15 @@
 			
 		<label>Data de Instauração</label>
             <input name="txt_data_instauracao" type="date" value="<?php echo $pd->data_instauracao ?>">
-			<input class="" name="observacao" type="text" placeholder="Insira o número do processo" value="<?php echo $pd->observacao ?>">
-    
-            <label>Data de Encerramento</label>
-				<input name="txt_data_encerramento" type="date" readonly value="<?php echo $pd->data_encerramento ?>">
+   
+        <label>Data de Encerramento</label>
+		<input name="txt_data_encerramento" type="date" readonly value="<?php echo $pd->data_encerramento ?>">
 		<input type="hidden" name="id_processo" value="<?php echo $pd->id_processo ?>">	
+
+		<br/>
+		<label>Observação</label>
+			<input class="" size="125px" name="observacao" type="text" placeholder="Insira o número do processo" value="<?php echo $pd->observacao ?>">
+
 	</fieldset>
 
 	</td></tr>

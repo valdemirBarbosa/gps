@@ -23,12 +23,12 @@ class ProcessarController extends Controller{
     public function Consulta(){
         $parametrosPesquisa = $this->pegarDadosDoUsuario();
         
-        if(isset($_GET['tabela']) && !empty(['valorPreenchidoUsuario'])){
-               $tabela = addslashes($_GET['tabela']);
+        if(isset($_POST['tabela']) && !empty(['valorPreenchidoUsuario'])){
+               $tabela = addslashes($_POST['tabela']);
                $pesquisa = new Pesquisa_Model();
      
-               $dados["view"] = addslashes($_GET['view']);
-               $retornoDados = addslashes($_GET['retorno']);
+               $dados["view"] = addslashes($_POST['view']);
+               $retornoDados = addslashes($_POST['retorno']);
 
                $campo = $parametrosPesquisa[0];
                $informacao = $parametrosPesquisa[1];
@@ -39,18 +39,18 @@ class ProcessarController extends Controller{
   }
      //Pesquisa para tabela de processo    
     public function ConsultaProcesso(){
-        if(isset($_GET['id_processo'])){
+        if(isset($_POST['id_processo'])){
             $id_processo = addslashes(['id_processo']);
     }
         
         $parametrosPesquisa = $this->pegarDadosDoUsuario();
         
-        if(isset($_GET['tabela']) && !empty(['valorPreenchidoUsuario'])){
-               $tabela = addslashes($_GET['tabela']);
+        if(isset($_POST['tabela']) && !empty(['valorPreenchidoUsuario'])){
+               $tabela = addslashes($_POST['tabela']);
                $pesquisa = new Pesquisa_Model();
      
-               $dados["view"] = addslashes($_GET['view']);
-               $retornoDados = addslashes($_GET['retorno']);
+               $dados["view"] = addslashes($_POST['view']);
+               $retornoDados = addslashes($_POST['retorno']);
               
                $campo = $parametrosPesquisa[0];
                $informacao = $parametrosPesquisa[1];
@@ -63,16 +63,16 @@ class ProcessarController extends Controller{
      public function ConsultaServidor(){
         $parametrosPesquisa = $this->pegarDadosDoUsuario();
         
-        if(isset($_GET['tabela']) && !empty(['valorPreenchidoUsuario'])){
-               $tabela = addslashes($_GET['tabela']);
+        if(isset($_POST['tabela']) && !empty(['valorPreenchidoUsuario'])){
+               $tabela = addslashes($_POST['tabela']);
                $pesquisa = new Pesquisa_Model();
  
                $campo = $parametrosPesquisa[0];
                $informacao = $parametrosPesquisa[1];
 
-               $dados["view"] = addslashes($_GET['view']);
+               $dados["view"] = addslashes($_POST['view']);
 
-               $retornoDados = addslashes($_GET['retorno']);
+               $retornoDados = addslashes($_POST['retorno']);
                $dados[$retornoDados] = $pesquisa->PesquisaServidor($tabela, $campo, $informacao);
                $this->load("template", $dados);
           }
@@ -80,9 +80,9 @@ class ProcessarController extends Controller{
 
 //Pega a opção de campo do select do usuário - campo opção e valor do campos
     public function pegarDadosDoUsuario(){
-     if(isset($_GET['pesquisa']) && !empty('pesquisa')){
-         $pesquisa = addslashes($_GET['pesquisa']);
-         $valorPreenchidoUsuario = $_GET['valorPreenchidoUsuario'];
+     if(isset($_POST['pesquisa']) && !empty('pesquisa')){
+         $pesquisa = addslashes($_POST['pesquisa']);
+         $valorPreenchidoUsuario = $_POST['valorPreenchidoUsuario'];
           
           switch($pesquisa){
                case 1:
@@ -115,16 +115,21 @@ public function porParametro(){
      $limit = LIMITE_LISTA;
      $offset = 0;
     
+     $dadosUsuario = $this->pegarDadosDoUsuario();
+     $campo = $dadosUsuario[0];
+     $parametro = $dadosUsuario[1];
+
      $dadosTabela = new Pesquisa_Model();
      $totalRegistros = $this->contarRegistro();
-    
+
      $totalPaginas = ceil($totalRegistros / $limit);
      $dados['totalPaginas'] = ceil($totalPaginas);
-   
+
+
      $dados['paginaAtual'] = 1;
-     if(!empty($_POST['p']) && !empty($_POST['valorPreenchidoUsuario'])){
-          $dados['paginaAtual'] = intval($_POST['p']);
-          //$parametro = $_POST['valorPreenchidoUsuario'];
+     if(!empty($_GET['p']) && !empty($_POST['valorPreenchidoUsuario'])){
+          $dados['paginaAtual'] = intval($_GET['p']);
+          $parametro = $_POST['valorPreenchidoUsuario'];
      }
 
      $offset = ($dados['paginaAtual'] * $limit) - $limit;
@@ -132,13 +137,9 @@ public function porParametro(){
 
 //Pegar o número do processo do formulário para reusar na voltar          
      if(isset($_POST['valorPreenchidoUsuario']) && !empty($_POST['tabela'])){
-          $parametro = $_POST['valorPreenchidoUsuario'];
-          $campo = $_POST['campo'];
      
-//          $dados['processo'] = addslashes($_POST['processoFormulario']);
 
-
-          $dados['processo'] = $dadosTabela->getNumeroProcessoLimit($parametro, $offset, $limit);
+          //$dados['processo'] = $dadosTabela->getNumeroProcessoLimit2($campo, $parametro, $offset, $limit);
 
           $servidor = new Servidor_Model();
           $dados['processando'] = $servidor->getServidorProcessar($campo, $parametro);
@@ -153,6 +154,8 @@ public function incluir(){
      $id_servidor = $_SESSION['id_servidor'];
      $id_processo = $_SESSION['id_processo'];
 
+     $fase = $this->verificarFase($id_processo);
+
      $incluirServidor = new Servidor_Model();
    
      $incluirServidor->IncluirServProcesso($id_servidor, $id_processo);
@@ -166,22 +169,31 @@ public function incluir(){
   }
 
 public function contarRegistro(){
-     if(isset($_GET['valorPreenchidoUsuario']) && !empty('valorPreenchidoUsuario')){
-          $parametro = addslashes($_GET['valorPreenchidoUsuario']);
+     if(isset($_POST['valorPreenchidoUsuario']) && !empty('valorPreenchidoUsuario')){
+          $dadosUsuario = $this->pegarDadosDoUsuario();
+          $parametro = $dadosUsuario[1];
+          $campo = $dadosUsuario[0];
 
-          if(isset($_GET['tabela']) && !empty('tabela')){
-               $tabela = addslashes($_GET['tabela']);
+          $campo = $_SESSION['campo'] = $campo;
+          $parametro = $_SESSION['parametro'] = $parametro;
+
+          if(isset($_POST['tabela']) && !empty('tabela')){
+               $tabela = addslashes($_POST['tabela']);
+               $_SESSION['tabela'] = $tabela;
                
                $registros = new Pesquisa_Model();
-               $totalRegistro = $registros->contaRegistro($tabela, $parametro);
-               $_SESSION['parametro'] = $parametro;
-
+               $totalRegistro = $registros->contaRegistro($tabela, $campo, $parametro);
      }else{
           $totalRegistro = $registros->contarOcorrencia();
      }
      return $totalRegistro;
 }
 }
+
+     public function verificarFase($id_processo){
+     //V     
+
+     }
 
      public function Error($msg){
           $msger = new MensageiroController();

@@ -1,12 +1,14 @@
 	<div class="base-home">
-		<h1 class="titulo-pagina">Alterar dados do Processo</h1>
+		<h1 class="titulo-pagina">Processar servidor</h1>
 	</div>
 	<?php
 			if(isset($_SESSION['id_processo']) == false){
 				session_start(); 
 			}
 	?>
-	<form action="<?php echo URL_BASE ."Processo/Salvar" ?>" method="POST">
+
+<div class="div1">
+<form action="<?php echo URL_BASE ."Processo/Salvar" ?>" method="POST">
 		<!--Botões !-->
 		<div class="btn-inc">
 			<script> //Link para voltar à página anterior
@@ -14,7 +16,6 @@
 			</script>
 		</div>	
 
-		<input type="submit" value="Salvar" class="btn-inc">
 	<?php
 		if(isset($processo)){
 		foreach($processo as $pd){ 
@@ -25,16 +26,18 @@
 				<label>Id do Processo</label>
 					<input id="txt_id" readonly name="txt_id_processo" enable="false" value="<?php echo $pd->id_processo ?>" >
 				<label>Id da denuncia</label>
-				<input readonly name="txt_id_denuncia" enable="false" value="<?php echo $pd->id_denuncia ?>" >
+				<input readonly name="txt_id_denuncia" type="number" enable="false" value="<?php echo $pd->id_denuncia ?>" >
 
 				<label>fase</label>
 					<select name="txt_id_fase">
 						<option value="<?php if(isset($pd->id_fase)){ echo $pd->id_fase; } ?>"><?php if(isset($pd->id_fase)){ echo $pd->fase; } ?></option>
-	<?php } ?>					
-
-	<?php foreach($fase as $f){ ?>
+	<?php } 
+						
+		if(isset($fase)){
+			foreach($fase as $f){ ?>
 							<option readonly value="<?php echo $f->id_fase ?>"><?php echo $f->fase ?> </option>
-	<?php } ?>
+	<?php }
+		} ?>
 					</select>
 
 					<label>Número do Processo</label>
@@ -62,15 +65,14 @@
 	<div class="processarServidorFormulario">
 	<!-- CONSULTA SERVIDOR PARA INCLUSÃO !-->
 	<?php //paramentros para pesquisa dos formulários de denuncia e processo
-			$tabela = 'servidor';
+/* 			$tabela = 'servidor';
 			$campo = 'nome_servidor';
 			$_SESSION['view'] = 'processo/processarServidor';
 			$retorno = 'processo';
-	?>
+ */	?>
 
 	<fieldset>
 		<legend>Consulta servidor para inclusão no processo</legend>
-
 	<table> 		
 			<tr>
 				<td>
@@ -91,9 +93,8 @@
 							<input type="hidden" name="campo" value="<?php echo $campo ?>">
 							<input type="hidden" name="view" value="<?php echo $view ?>">
 							<input type="hidden" name="retorno" value="<?php echo $retorno ?>">
-							<input type="hidden" name="tabela" value="<?php echo $tabela ?>">
-	<!-- 						<input type="hidden" name="processoFormulario" value="<?php //echo $processoFormulario ?>">
-	-->						<input type="submit" value="pesquisar">
+							<input type="hidden" name="tabela" value="<?php echo 'servidor' ?>">
+							<input type="submit" value="pesquisar">
 
 					</td>
 				</tr>
@@ -126,19 +127,17 @@
 					<td align="center"><?php echo $servidor->cpf;  ?></td>
 					<td><?php echo $servidor->matricula;  ?></td>
 					<td>
-		</div>
-						<div class="btn-editar">
+		<div class="btn-editar">
 
-		<input type="submit" value="Incluir servidor">
-		
+ 		<input type="submit" value="Incluir">
 		</td>
 		</tr>
+		</div>
 
 		<?php 
 				$_SESSION['id_servidor'] =  $servidor->id_servidor;  
 		}} ?>
 
-		</div>
 			</table>
 		</form>
 	</div> <!-- fim da div 3 -->
