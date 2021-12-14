@@ -1,6 +1,6 @@
 <?php
 namespace app\models;
-use app\core\Model;
+use app\core\Con;
 
 class Pesquisa_Model extends Model{
 
@@ -51,17 +51,30 @@ class Pesquisa_Model extends Model{
         return $totalRegistro;
     }
 
-    // Pegar os dados da tabela ocorrencia e disponibilizar para os Métodos Editar e Excluir
+    // Pegar os dados da tabela e disponibilizar para os Métodos Editar e Excluir
     public function getNumeroProcessoLimit($tabela, $tabela1, $campo, $parametro, $offset, $limit){
         $sql = "SELECT * FROM $tabela as t LEFT JOIN $tabela1 as t1 ON t.id_fase = t1.id_fase WHERE $campo LIKE '%$parametro%' LIMIT $offset, $limit";
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
+    
+    // Pegar os dados de uma só tabela
+    public function getNumeroProcessoLimitTwoTable($tabela, $tabela1, $campo, $parametro, $offset, $limit){
+        $sql = "SELECT * FROM $tabela as t LEFT JOIN $tabela1 as t1 ON t.id_fase = t1.id_fase WHERE $campo LIKE '%$parametro%' LIMIT $offset, $limit";
+        $qry = $this->db->query($sql);
+        return $qry->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+    public function getNumeroProcessoLimitOnTable($table, $campo, $parametro, $offset, $limit){
+        $sql = "SELECT * FROM $table WHERE $campo LIKE '%$parametro%' LIMIT $offset, $limit";
+        $qry = $this->db->query($sql);
+        return $qry->fetchAll(\PDO::FETCH_OBJ);
+    }
 
     public function getNumeroProcessoLimit2($campo, $parametro, $offset, $limit){
-       print_r($sql = "SELECT * FROM servidor  WHERE $campo LIKE '%$parametro%' LIMIT $offset, $limit");
-            $qry = $this->db->query($sql);
-            return $qry->fetchAll(\PDO::FETCH_OBJ);
+        $sql = "SELECT * FROM servidor  WHERE $campo LIKE '%$parametro%' LIMIT $offset, $limit";
+        $qry = $this->db->query($sql);
+        return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
 }    

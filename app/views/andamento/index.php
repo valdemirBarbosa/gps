@@ -131,10 +131,10 @@
 			<tr><td align="center" colspan="9">
 				
 			<?php
-					$numero_processo = $_SESSION['numero_processo'];
+					$numero_processo = isset($_SESSION['numero_processo']);
 
 					for($q=1; $q<=$totalPaginas; $q++):  
-						echo "<a href=".URL_BASE.'andamento/porProcesso/?p='.($q).'&numero_processo='.$numero_processo; ?> " > <?php echo "[".($q)."]" ?> </a> 
+						echo "<a href=".URL_BASE.'andamento/porProcesso/?p='.($q).'&numero_processo='.isset($numero_processo); ?> " > <?php echo "[".($q)."]" ?> </a> 
 
 		  <?php endfor; 
 		  ?>

@@ -60,19 +60,36 @@ class PesquisaController extends Controller{
      }
 
      public function ConsultaServidor(){
-        $parametrosPesquisa = $this->pegarDadosDoUsuario();
-        
-        if(isset($_POST['tabela']) && !empty(['valorPreenchidoUsuario'])){
-               $tabela = addslashes($_POST['tabela']);
-               $pesquisa = new Pesquisa_Model();
- 
-               $campo = $parametrosPesquisa[0];
-               $informacao = $parametrosPesquisa[1];
+/*         $parametrosPesquisa = $this->pegarDadosDoUsuario();
+ */
+          $_SESSION['limit'] = LIMITE_LISTA;
+          $limit = $_SESSION['limit'];
+          $offset = 0;
 
-               $dados["view"] = addslashes($_POST['view']);
-               $dados['dados'] = $pesquisa->PesquisaServidor($tabela, $campo, $informacao);
-               $this->load("template", $dados);
-          }
+          $tabela = $_POST['tabela'];
+          $_SESSION['tabela'] = $tabela;
+          
+          $dadosTabela = new Pesquisa_Model();
+          $totalRegistros = $this->contarRegistro();
+          $_SESSION['totalRegistros'] = $totalRegistros;
+
+          $totalPaginas = ceil($totalRegistros / $limit);
+          $totalPaginas = ceil($totalPaginas);
+          $_SESSION['totalPaginas'] = $totalPaginas;
+          $dados['paginaAtual'] = 1;
+
+          $offset = ($dados['paginaAtual'] * $limit) - $limit;
+          
+          $dado = $this->pegarDadosDoUsuario();     
+          $campo = $dado[0];
+          $parametro = $dado[1];
+
+          $dados['dados'] = $dadosTabela->getNumeroProcessoLimitOnTable($tabela, $campo, $parametro, $offset, $limit);
+
+          $_SESSION['view'] = $_POST['view'];
+          $dados["view"] = $_POST['view'];
+          $this->load("template", $dados);
+
      }
 
 //Pega a opção de campo do select do usuário - campo opção e valor do campos
@@ -133,15 +150,15 @@ public function porParametro(){
      $offset = ($dados['paginaAtual'] * $limit) - $limit;
      
      $dados = $this->pegarDadosDoUsuario();     
-/*      $tabela = $dados[2];
- */  $campo = $dados[0];
+     $campo = $dados[0];
      $parametro = $dados[1];
 
-     $dados['processo'] = $dadosTabela->getNumeroProcessoLimit($tabela, $tabela1, $campo, $parametro, $offset, $limit);
+     $dados['processo'] = $dadosTabela->getNumeroProcessoLimitTwoTable($tabela, $tabela1, $campo, $parametro, $offset, $limit);
 
      $_SESSION['view'] = $_POST['view'];
      $dados["view"] = $_POST['view'];
      $this->load("template", $dados);
+     session_destroy();
 }
 
 public function porParametroLink(){
@@ -159,15 +176,17 @@ public function porParametroLink(){
      $offset = ($dados['paginaAtual'] * $limit) - $limit;
      
           $tabela = $_SESSION['tabela'];
-          $tabela1 = $_SESSION['tabela1'];
+          $tabela1 = isset($_SESSION['tabela1']);
           
           $campo = $_SESSION['campo'];
           $parametro = $_SESSION['parametro'];
 
-/*      $dados['processo'] = $dadosTabela->getNumeroProcessoLimit1($tabela, $tabela1, $campo, $parametro, $offset, $limit);
- */
-
-          $dados['processo'] = $dadosTabela->getNumeroProcessoLimit1($tabela, $tabela1, $campo, $parametro, $offset, $limit);
+          if(isset($tabela1) && !empty($tabela1)){
+              
+               $dados['processo'] = $dadosTabela->getNumeroProcessoLimitTwoTable($tabela, $tabela1, $campo, $parametro, $offset, $limit);
+          }else{
+               $dados['dados'] = $dadosTabela->getNumeroProcessoLimitOnTable($tabela, $campo, $parametro, $offset, $limit);
+          }
 
           $dados["view"] = $_SESSION['view'];
           $this->load("template", $dados);

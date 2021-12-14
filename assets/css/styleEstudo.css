@@ -366,6 +366,17 @@ span{
           margin-right: 10px;
           vertical-align: var(--bs-table-active-color);
     }
+
+    table.paginacao{
+        border-collapse:separate;
+        width: 95%;
+        margin-left: 30px;
+        margin-right: 10px;
+        vertical-align:auto;
+        background-color: cadetblue;
+
+    }
+
       
       th, td {
           text-align: left;

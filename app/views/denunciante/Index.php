@@ -1,3 +1,13 @@
+<?php
+	if(!isset($_SESSION)){
+	session_start();
+	}
+
+	$tabela = 'denunciante';
+	$view = 'denunciante/index';
+?>
+
+
 <div class="base-home">
 	<h1 class="titulo-pagina">Lista de Denunciantes</h1>
 </div>

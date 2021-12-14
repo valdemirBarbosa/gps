@@ -12,23 +12,21 @@
 
 		$tabela = 'servidor';
 		$view =  'servidor/index';
+		$_SESSION['view'] = $view; 
 ?>
 <div class="frmConsulta">  
 	<form method="POST" action="<?php echo URL_BASE . 'Pesquisa/ConsultaServidor'; ?>" >
 	
 	<label>Pesquisa</label>
 		<select name="pesquisa" class="select">
-<!-- 				<option value="1">Número do documento</option>
-				<option value="2">Número do Processo</option>
- -->				<option value="3">Nome</option>
-				<option value="4">CPF</option>
+			<option value="3">Nome</option>
+			<option value="4">CPF</option>
 		</select>
 	
 		<input class="pesquisa" type="text" autofocus name="valorPreenchidoUsuario">
 		<input type="hidden" name="view" value="<?php echo $view ?>">
 		<input type="hidden" name="retorno" value="<?php echo $retorno ?>">
 		<input type="hidden" name="tabela" value="<?php echo $tabela ?>">
-		
 		<input type="submit" value="pesquisar">
 	</form>
 </div>
@@ -79,21 +77,19 @@
 			<div class="btn-inc">
 				<a href="<?php echo URL_BASE . "servidor/novo" ?>" >INCLUIR </a>
 			</div>
+			</table>
 
-			<br/><br/><br/>
-			<tr><td align="center" colspan="9">
-			<?php
+		<table class="paginacao">
+		<tr><td>
+		<?php
 				$totalPaginas = $_SESSION['totalPaginas'];
-
 
 				for($q=1; $q<=$totalPaginas; $q++):  
 					echo "<a href=".URL_BASE.'pesquisa/porParametroLink/?p='.($q); ?> > <?php echo "[".($q)."]" ?> </a> 
-<?php
-			   endfor;
-		     ?>
-			</fieldset>
-				</td>
+		<?php
+			endfor;
+		 ?>
+		</td></tr>
+		</fieldset>
 	</table>
 </div>
-</body>
-</html>
