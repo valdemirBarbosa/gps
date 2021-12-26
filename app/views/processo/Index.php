@@ -10,8 +10,10 @@
 
 <?php //paramentros para pesquisa dos formulários de denuncia e processo
 		$tabela = 'processo';
+		$tabela1 = 'fase';
  		$view = 'processo/Index';
 		$retorno = 'processo';
+		
 ?>
 <div class="frmConsulta">  
 	<form method="POST" action="<?php echo URL_BASE . 'Pesquisa/porParametro'; ?>" >
@@ -31,6 +33,7 @@
 						<input type="hidden" name="view" value="<?php echo $view ?>">
 						<input type="hidden" name="retorno" value="<?php echo $retorno ?>">
 						<input type="hidden" name="tabela" value='<?php echo $tabela ?>'>
+						<input type="hidden" name="tabela1" value='<?php echo $tabela1 ?>'>
 						<input type="submit" value="pesquisar">
 				</td>
 			</tr>
@@ -152,7 +155,6 @@
 	<?php
 				if(isset($totalPaginas)){
 					$totalPaginas = $_SESSION['totalPaginas'];
-					
 
 				for($q=1; $q<=$totalPaginas; $q++):  
 					echo "<a href=".URL_BASE.'pesquisa/porParametroLink/?p='.($q); ?> > <?php echo "[".($q)."]" ?> </a> 

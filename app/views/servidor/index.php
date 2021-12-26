@@ -13,6 +13,7 @@
 		$tabela = 'servidor';
 		$view =  'servidor/index';
 		$_SESSION['view'] = $view; 
+		$_SESSION['tabela'] = $tabela; 
 ?>
 <div class="frmConsulta">  
 	<form method="POST" action="<?php echo URL_BASE . 'Pesquisa/ConsultaServidor'; ?>" >
@@ -82,12 +83,15 @@
 		<table class="paginacao">
 		<tr><td>
 		<?php
+
 				$totalPaginas = $_SESSION['totalPaginas'];
 
 				for($q=1; $q<=$totalPaginas; $q++):  
-					echo "<a href=".URL_BASE.'pesquisa/porParametroLink/?p='.($q); ?> > <?php echo "[".($q)."]" ?> </a> 
+					echo "<a href=".URL_BASE.'pesquisa/LinkServidor/?p='.($q); ?> > <?php echo "[".($q)."]" ?> </a> 
 		<?php
 			endfor;
+/* 		}
+ */
 		 ?>
 		</td></tr>
 		</fieldset>

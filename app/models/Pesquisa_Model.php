@@ -1,6 +1,6 @@
 <?php
 namespace app\models;
-use app\core\Con;
+use app\core\Model;
 
 class Pesquisa_Model extends Model{
 
@@ -34,6 +34,11 @@ class Pesquisa_Model extends Model{
         return $sql->fetchAll(\PDO::FETCH_OBJ);
     }
 
+    public function PesquisaServidorLink($tabela, $campo, $parametro, $offset, $limit){
+        $sql = "SELECT * FROM $tabela  WHERE  $campo LIKE '%$parametro%' LIMIT $offset, $limit";
+        $sql = $this->db->query($sql);
+        return $sql->fetchAll(\PDO::FETCH_OBJ);
+    }
 
     public function PesquisaProcesso($tabela, $campo, $informacao){
         $sql = "SELECT * FROM $tabela as p LEFT JOIN denuncia as d ON p.id_denuncia = d.id_denuncia LEFT JOIN fase as f ON p.id_fase = f.id_fase WHERE $campo=:parametro";
@@ -42,10 +47,17 @@ class Pesquisa_Model extends Model{
         $sql->execute();
         return $sql->fetchAll(\PDO::FETCH_OBJ);
     }
+
+    public function PesquisaProcessos($tabela, $tabela1, $campo, $campo1, $parametro, $offset, $limit){
+        $sql = "SELECT * FROM $tabela as t LEFT JOIN $tabeça1 as t1 ON t.id_fase = t1.id_fase WHERE $campo=:campo AND $campo LIKE '%$campo1%' LIMIT $offset, $limit";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":campo", $campo);
+        $sql->execute();
+        return $sql->fetchAll(\PDO::FETCH_OBJ);
+    }
     
     public function contaRegistro($tabela, $campo, $parametro){
-       $sql = "SELECT * FROM $tabela WHERE $campo LIKE  '%$parametro%'";
-
+        $sql = "SELECT * FROM $tabela WHERE $campo LIKE  '%$parametro%'";
         $sql = $this->db->query($sql);
         $totalRegistro = $sql->rowCount();
         return $totalRegistro;
@@ -58,17 +70,19 @@ class Pesquisa_Model extends Model{
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
     
-    // Pegar os dados de uma só tabela
-    public function getNumeroProcessoLimitTwoTable($tabela, $tabela1, $campo, $parametro, $offset, $limit){
-        $sql = "SELECT * FROM $tabela as t LEFT JOIN $tabela1 as t1 ON t.id_fase = t1.id_fase WHERE $campo LIKE '%$parametro%' LIMIT $offset, $limit";
+    // Pegar os dados de duas tabelas
+    public function getNumeroProcessoLimitTwoTable($tabela, $tabela1, $campo, $parametro, $tipoFase, $offset, $limit){
+        $sql = "SELECT * FROM $tabela as t LEFT JOIN $tabela1 as t1 ON t.id_fase = t1.id_fase WHERE  t1.fase =  '$tipoFase' AND  $campo LIKE '%$parametro%' LIMIT $offset, $limit";
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
     public function getNumeroProcessoLimitOnTable($table, $campo, $parametro, $offset, $limit){
-        $sql = "SELECT * FROM $table WHERE $campo LIKE '%$parametro%' LIMIT $offset, $limit";
-        $qry = $this->db->query($sql);
-        return $qry->fetchAll(\PDO::FETCH_OBJ);
+        if(isset($campo) && !empty($campo)){
+            $sql = "SELECT * FROM $table WHERE $campo LIKE '%$parametro%' LIMIT $offset, $limit";
+            $qry = $this->db->query($sql);
+            return $qry->fetchAll(\PDO::FETCH_OBJ); 
+        }    
     }
 
     public function getNumeroProcessoLimit2($campo, $parametro, $offset, $limit){

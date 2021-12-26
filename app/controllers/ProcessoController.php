@@ -8,6 +8,10 @@ use app\models\Denunciado_Model;
 use app\models\Denunciante_Model;
 use app\models\Processo_Model;
 
+if(!isset($_SESSION)){
+     session_start();
+}
+
 class ProcessoController extends Controller{
     
   public function index(){
@@ -21,6 +25,8 @@ class ProcessoController extends Controller{
    public function pp(){ //Seleciona de Processo tudo que for Processo Preliminar
         $processo = new Processo_Model();
         $parametro = "PROCESSO PRELIMIAR";
+        $_SESSION['tabela'] = $parametro;
+        $_SESSION['fase'] = $parametro;
         $dados["fase"] = $parametro;
         $dados["processo"] = $processo->ProcessoFase($parametro);
         $dados["view"] = "processo/Index";
@@ -31,6 +37,8 @@ class ProcessoController extends Controller{
    public function sin(){ //Seleciona de Processo tudo que for Sindicância
         $processo = new Processo_Model();
         $parametro = "SINDICANCIA";
+        $_SESSION['tabela'] = $parametro;
+        $_SESSION['fase'] = $parametro;
         $dados["fase"] = $parametro;
         $dados["processo"] = $processo->ProcessoFase($parametro);
         $dados["view"] = "processo/Index";
@@ -41,6 +49,8 @@ class ProcessoController extends Controller{
    public function pad(){ //Seleciona de Processo tudo que for PAD - PROCESSO ADMINISTRATIVO
         $processo = new Processo_Model();
         $parametro = "PAD";
+        $_SESSION['tabela'] = $parametro;
+        $_SESSION['fase'] = $parametro;
         $dados["fase"] = $parametro;
         $dados["processo"] = $processo->ProcessoFase($parametro);
         $dados["view"] = "processo/Index";

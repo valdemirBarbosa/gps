@@ -8,8 +8,8 @@ class ServidorController extends Controller{
 
   public function index(){
         $servidores = new Servidor_Model();
-        $dados["dados"] = $servidores->lista();
-        $dados["view"] = "servidor/index";
+         $dados["dados"] = $servidores->lista();
+         $dados["view"] = "servidor/index";
         $this->load("template",$dados);
    } 
 

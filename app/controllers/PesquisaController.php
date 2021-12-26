@@ -7,6 +7,8 @@ use app\models\Denunciante_Model;
 use app\models\TipoDocumento_Model;
 use app\models\Pesquisa_Model;
 use app\models\Servidor_Model;
+use app\models\Processo_Controller;
+
 
 	if(!isset($_SESSION)){
      	session_start();
@@ -60,12 +62,10 @@ class PesquisaController extends Controller{
      }
 
      public function ConsultaServidor(){
-/*         $parametrosPesquisa = $this->pegarDadosDoUsuario();
- */
           $_SESSION['limit'] = LIMITE_LISTA;
           $limit = $_SESSION['limit'];
           $offset = 0;
-
+          
           $tabela = $_POST['tabela'];
           $_SESSION['tabela'] = $tabela;
           
@@ -73,7 +73,7 @@ class PesquisaController extends Controller{
           $totalRegistros = $this->contarRegistro();
           $_SESSION['totalRegistros'] = $totalRegistros;
 
-          $totalPaginas = ceil($totalRegistros / $limit);
+          $totalPaginas = ceil($_SESSION['totalRegistros'] / $limit);
           $totalPaginas = ceil($totalPaginas);
           $_SESSION['totalPaginas'] = $totalPaginas;
           $dados['paginaAtual'] = 1;
@@ -82,8 +82,10 @@ class PesquisaController extends Controller{
           
           $dado = $this->pegarDadosDoUsuario();     
           $campo = $dado[0];
+          $_SESSION['campo'] = $campo;
           $parametro = $dado[1];
-
+          $_SESSION['parametro'] = $parametro;
+          
           $dados['dados'] = $dadosTabela->getNumeroProcessoLimitOnTable($tabela, $campo, $parametro, $offset, $limit);
 
           $_SESSION['view'] = $_POST['view'];
@@ -134,10 +136,27 @@ public function porParametro(){
 
      $tabela = $_POST['tabela'];
      $_SESSION['tabela'] = $tabela;
-     
-     $tabela1 = "fase";
+     $dados = $this->pegarDadosDoUsuario();     
+     $campo = $dados[0];
+     $parametro = $dados[1];
+
+//pasrei aquii vendo por que não está vindo os dados do parametro     
+  
+$_SESSION['campo'] = $campo;
+     $tipoFase = $_SESSION['fase'];
+     if(isset($tipoFase) == 'pp'){
+          $_SESSION['tipoFase'] = "processo preliminar";
+
+          if(isset($tipoFase) == "sin"){
+               $_SESSION['tipoFase'] =  "sindicancia";
+      
+               if(isset($tipoFase) == "pad"){
+                    $_SESSION['tipoFase'] = "pad";
+      }
+
+      $tabela1 = addslashes($_POST['tabela1']);
      $_SESSION['tabela1'] = $tabela1;
-     
+    
      $dadosTabela = new Pesquisa_Model();
      $totalRegistros = $this->contarRegistro();
      $_SESSION['totalRegistros'] = $totalRegistros;
@@ -148,23 +167,68 @@ public function porParametro(){
      $dados['paginaAtual'] = 1;
 
      $offset = ($dados['paginaAtual'] * $limit) - $limit;
-     
-     $dados = $this->pegarDadosDoUsuario();     
-     $campo = $dados[0];
-     $parametro = $dados[1];
 
-     $dados['processo'] = $dadosTabela->getNumeroProcessoLimitTwoTable($tabela, $tabela1, $campo, $parametro, $offset, $limit);
-
+     $dados['processo'] = $dadosTabela->getNumeroProcessoLimitTwoTable($tabela, $tabela1, $campo, $parametro, $tipoFase, $offset, $limit);
      $_SESSION['view'] = $_POST['view'];
      $dados["view"] = $_POST['view'];
      $this->load("template", $dados);
-     session_destroy();
+     }
+     }
 }
 
 public function porParametroLink(){
    if($_GET['p']){
      $dados['paginaAtual'] = $_GET['p'];
-     $_SESSION['limit'] = LIMITE_LISTA;
+     $limit = $_SESSION['limit'];
+     $offset = 0;
+
+     $dadosTabela = new Pesquisa_Model();
+     $totalRegistros = $_SESSION['totalRegistros'];
+     $totalPaginas = $_SESSION['totalPaginas'];
+//     $totalP = $_SESSION['totalPaginas'] = $totalPaginas;
+
+     $offset = ($dados['paginaAtual'] * $limit) - $limit;
+
+     
+          $tabela1 =isset($_POST['tabela1']);
+          $_SESSION['tabela1'] = $tabela1;
+
+          $tipoFase = "";
+          $tipoFase = isset($_SESSION['tipoFase']);
+          $parametro = "";
+          $parametro = isset($_SESSION['parametro']);
+          $campo = $_SESSION['campo'];
+
+          switch($tipoFase){
+          case 1:
+               $dados['dados'] = $dadosTabela->getNumeroProcessoLimitTwoTable($tabela, $tabela1, $campo, $campo1, $parametro, $offset, $limit);
+               break;
+
+               case 2:
+                    $dados['dados'] = $dadosTabela->getNumeroProcessoLimitTwoTable($tabela, $tabela1, $campo, $campo1, $parametro, $offset, $limit);
+                    break;
+
+                    case 2:
+                         $dados['dados'] = $dadosTabela->getNumeroProcessoLimitTwoTable($tabela, $tabela1, $campo, $campo1, $parametro, $offset, $limit);
+                         break;
+               }
+               
+          if(isset($_SESSION['tabela'])){
+               $tabela = $_SESSION['tabela'];
+               $dados['dados'] = $dadosTabela->PesquisaServidorLink($tabela, $campo, $parametro, $offset, $limit);
+          }else{
+                    echo "Não encontrou tabela servidor";
+               }
+               
+
+          $dados["view"] = $_SESSION['view'];
+          $this->load("template", $dados);
+     }
+}
+
+public function LinkServidor(){
+   if($_GET['p']){
+     $dados['paginaAtual'] = $_GET['p'];
      $limit = $_SESSION['limit'];
      $offset = 0;
 
@@ -174,44 +238,45 @@ public function porParametroLink(){
      $totalP = $_SESSION['totalPaginas'] = $totalPaginas;
 
      $offset = ($dados['paginaAtual'] * $limit) - $limit;
+
      
-          $tabela = $_SESSION['tabela'];
-          $tabela1 = isset($_SESSION['tabela1']);
-          
-          $campo = $_SESSION['campo'];
+          $tabela1 =isset($_POST['tabela1']);
+          $_SESSION['tabela1'] = $tabela1;
+
           $parametro = $_SESSION['parametro'];
+          $campo = $_SESSION['campo'];
 
-          if(isset($tabela1) && !empty($tabela1)){
-              
-               $dados['processo'] = $dadosTabela->getNumeroProcessoLimitTwoTable($tabela, $tabela1, $campo, $parametro, $offset, $limit);
-          }else{
-               $dados['dados'] = $dadosTabela->getNumeroProcessoLimitOnTable($tabela, $campo, $parametro, $offset, $limit);
-          }
-
+          $tabela = $_SESSION['tabela'];
+          $dados['dados'] = $dadosTabela->PesquisaServidorLink($tabela, $campo, $parametro, $offset, $limit);
+               
           $dados["view"] = $_SESSION['view'];
           $this->load("template", $dados);
+     }
 }
-}
+
 public function contarRegistro(){
      if(isset($_POST['valorPreenchidoUsuario']) || $_GET['p']){
           $registros = new Pesquisa_Model();
 
           if(isset($_POST['tabela']) && !empty('tabela')){
-
                $tabela = $_SESSION['tabela'];
+               $tabela1 =  isset($_SESSION['tabela1']);
                $parametrosPesquisa = $this->pegarDadosDoUsuario();
+               
                $campo = $parametrosPesquisa[0];
                $parametro = $parametrosPesquisa[1];
+          }
 
-               $totalRegistro = $registros->contaRegistro($tabela, $campo, $parametro);
-               $_SESSION['parametro'] = $parametro;
-               $totalRegistro;
-     }else{
-          $totalRegistro = $registros->contarOcorrencia();
+               if($tabela == 'servidor'){
+                    $totalRegistro = $registros->contaRegistro($tabela, $campo, $parametro);
+               }else{
+                    $totalRegistro = $registros->contaRegistro($tabela, $campo, $parametro);
+                    $_SESSION['parametro'] = $parametro;
+               }
+
+               return $totalRegistro;
+}
      }
-     return $totalRegistro;
-}
-}
 
      public function Error($msg){
           $msger = new MensageiroController();
