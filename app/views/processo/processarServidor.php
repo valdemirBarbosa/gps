@@ -65,11 +65,11 @@
 	<div class="processarServidorFormulario">
 	<!-- CONSULTA SERVIDOR PARA INCLUSÃO !-->
 	<?php //paramentros para pesquisa dos formulários de denuncia e processo
-/* 			$tabela = 'servidor';
+ 			$tabela = 'servidor';
 			$campo = 'nome_servidor';
 			$_SESSION['view'] = 'processo/processarServidor';
 			$retorno = 'processo';
- */	?>
+ 	?>
 
 	<fieldset>
 		<legend>Consulta servidor para inclusão no processo</legend>
@@ -127,9 +127,9 @@
 					<td align="center"><?php echo $servidor->cpf;  ?></td>
 					<td><?php echo $servidor->matricula;  ?></td>
 					<td>
-		<div class="btn-editar">
-
- 		<input type="submit" value="Incluir">
+		<div class="">
+	 		<input type="submit" value="Incluir">
+			 <a href="<?php echo URL_BASE ."processo/index/" ?>" >Fechar</a>
 		</td>
 		</tr>
 		</div>
