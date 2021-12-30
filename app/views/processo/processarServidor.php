@@ -107,13 +107,13 @@
 
 <div class="div3">
 
-	<form class="form2" method="POST" action="<?php echo URL_BASE . 'Processar/incluir' ?>" >
-			<table>
+	<form method="POST" action="<?php echo URL_BASE . 'Processar/incluir' ?>" >
+			<table class="tabServidor">
 			<?php
 				if(isset($processando)){ ?>
 				<tr>
 					<th width="5%" align="center">Id_servidor</th>
-					<th width="25%" align="left">Nome do servidor</th>
+					<th width="25%" align="center">Nome do servidor</th>
 					<th width="5%" align="center">Cpf</th>
 					<th width="5%" align="center">Matricula</th>
 					<th width="10%" align="center">Ação</th>
@@ -123,20 +123,21 @@
 				<tr>
 
 					<td align="center"><?php echo $servidor->id_servidor  ?></td>
+					<?php $_SESSION['id_servidor'] = $servidor->id_servidor ?>
 					<td><?php echo $servidor->nome_servidor;  ?></td>
 					<td align="center"><?php echo $servidor->cpf;  ?></td>
 					<td><?php echo $servidor->matricula;  ?></td>
 					<td>
 		<div class="">
-	 		<input type="submit" value="Incluir">
-			 <a href="<?php echo URL_BASE ."processo/index/" ?>" >Fechar</a>
+	 		<input type="submit" value="Incluir" >
+			 <a href="<?php echo URL_BASE ."processo/RetProcessar/" ?>" >Fechar</a>
 		</td>
 		</tr>
 		</div>
 
 		<?php 
-				$_SESSION['id_servidor'] =  $servidor->id_servidor;  
-		}} ?>
+		}
+		} ?>
 
 			</table>
 		</form>

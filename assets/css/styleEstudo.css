@@ -340,7 +340,7 @@ span{
   text-transform:uppercase;
 }
 
-.tema .cor{
+.tema.cor{
   color:floralwhite;
   position:relative;
   top:-3px;
@@ -373,6 +373,12 @@ span{
         margin-left: 30px;
         margin-right: 10px;
         vertical-align:auto;
+        background-color: cadetblue;
+
+    }
+    table.tabServidor{
+        border-collapse:separate;
+        width: 80%;
         background-color: cadetblue;
 
     }
@@ -761,7 +767,7 @@ span{
     margin-left: 20px;
     margin-right: 10px;
     margin-top: 4px;
-    background-color:cadetblue;
+    background-color:LightSteelBlue;
 }
 
 .div2{
@@ -769,7 +775,7 @@ span{
     width: 1270px;
     margin-left: 20px;
     margin-right: 10px;
-    background-color: blue;
+    background-color: LightSteelBlue;
 }     
 
 .div2.processarServidorFormulario{
@@ -777,18 +783,17 @@ span{
 }
 
 .div3{
-    width: auto;
-    height: auto;
-    margin-left: 20px;
-    margin-right: 10px;
-    background-color: red;
+    width: 0px;
+    height: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    background-color: LightSteelBlue;
 }
 
-.div4{
-    width: 1270px;
-    height: 150px;
-    margin-left: 220px;
-    margin-top: 30px;
+ .div4{
+    margin-top: 10px;
+    background-color: LightSteelBlue;
+
 }
 
 .principal{
