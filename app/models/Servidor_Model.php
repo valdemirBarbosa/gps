@@ -22,9 +22,16 @@ class Servidor_Model  extends Model{
          $totalRegistro = $sql->rowCount();
          return $totalRegistro;
      }
+
+     public function contaRegistroServidor($id_processo){
+        $sql = "SELECT * FROM servidor WHERE id_processo = $id_processo";
+        $sql = $this->db->query($sql);
+        $totalRegistro = $sql->rowCount();
+        return $totalRegistro;
+     }
  
-    public function listaProcessados(){
-        $sql = "SELECT * FROM servidor as s INNER JOIN processo as p ON s.id_processo = p.id_processo ORDER BY id_servidor ASC LIMIT 5";
+    public function listaProcessados($id_servidor, $id_processo, $offset, $limit){
+        $sql = "SELECT * FROM servidor as s INNER JOIN processo as p ON s.id_processo = $id_processo AND p.id_processo = $id_processo ORDER BY id_servidor ASC LIMIT $offset, $limit";
         $sql = $this->db->query($sql);
         return $sql->fetchAll(\PDO::FETCH_OBJ);
     }
@@ -99,7 +106,11 @@ class Servidor_Model  extends Model{
         }
 
     public function IncluirServProcesso($id_servidor, $id_processo){
-        $sql = "UPDATE servidor SET id_processo = :id_processo  WHERE id_servidor = :id_servidor";
+        $sql = "UPDATE servidor SET id_processo = :id_processo WHERE id_servidor = :id_servidor";
+
+        /* print_r($sql);
+        exit;
+         */
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":id_servidor", $id_servidor);
         $sql->bindValue(":id_processo", $id_processo);

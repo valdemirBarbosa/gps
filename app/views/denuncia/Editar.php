@@ -14,22 +14,24 @@
 		</fieldset>
 		
 		<fieldset>
-		<label for="denuncianteLst" clas="denunciante">Denunciante</label>
-		<select clss="denunciante" name="denunciante" clas="denunciante">
-					<option><?php echo $denuncia->nome_denunciante ?>
-						<?php foreach($denunciante as $den){?>
-							<option value="<?php echo $den->id_denunciante ?>"> <?php echo $den->nome_denunciante ?>
-					</option>
-				<?php } ?>
-		</select>
+ 		<label class="denunciante">Denunciante</label>
+		<select name="id_denunciante" clas="tipo_documento">
+		<?php foreach($denunciante as $den){?>
+							<option value="<?php echo $den->id_denunciante  ?> ">
+							<?php echo $den->nome_denunciante. " - " .$den->id_denunciante  ?></option>
 
-		<label clas="tipo_document">tipo de documento</label>
-					<select nome="lst_tipo_documento" clas="tipo_documento">
+							<?php }  ?>	
+					</select>
+
+					<label clas="tipo_document">tipo de documento</label>
+					<select name="lst_tipo_doc" clas="tipo_documento">
 						<option><?php echo $denuncia->tipo_de_documento?></option>
 							<?php foreach($tipo_doc as $doc){?>
 							<option value="<?php $doc->id_tipo_documento   ?>">
-								<?php echo $doc->tipo_de_documento   ?> </option>
+							<?php echo $doc->tipo_de_documento   ?> </option>
 						<?php }  ?>	
+ 							<input type="hidden" name="id_tipo_documento">
+
 					</select>
 		</fieldset>
 

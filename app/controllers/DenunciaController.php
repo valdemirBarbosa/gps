@@ -71,7 +71,7 @@ class DenunciaController extends Controller{
 
         $denunciante = new Denunciante_Model();
         $dados['denunciante'] = $denunciante->lista();
-
+        
         $tiposDocumentos = new TipoDocumento_Model();
         $dados['tipo_doc'] = $tiposDocumentos->lista();
 
@@ -90,30 +90,28 @@ class DenunciaController extends Controller{
    public function Salvar(){
      $d = new Denuncia_Model();
      $id_denuncia = isset($_POST['txt_id']) ? strip_tags(filter_input(INPUT_POST, "txt_id")) : NULL;
+     
+     $denuncia = isset($_POST['txt_denuncia']) ? strip_tags(filter_input(INPUT_POST, "txt_denuncia")) : " ";
 
-     $denuncia = isset($_POST['txt_denuncia']) ? strip_tags(filter_input(INPUT_POST, "txt_denuncia")) : FALSE;
-
-     $id_denunciante = addslashes($_POST['lst_id_denunciante']) ? strip_tags(filter_input(INPUT_POST, "lst_id_denunciante")) : false;
-     if($id_denunciante == "Selecione o denunciante"){
-          header("Location:" . URL_BASE . "erro.html");
-     }
-
-     $tipo_documento = $_POST['lst_tipo_documento'];
+     $id_denunciante = $_POST['id_denunciante'];
+/*      $id_denunciante = isset($_POST['id_denunciante']) ? strip_tags(filter_input(INPUT_POST, "id_denunciante")) : 100;
+ */
+     $tipo_documento = isset($_POST['id_tipo_doc']) ? strip_tags(filter_input(INPUT_POST, "id_tipo_doc")) : 15;
 
      $numero_documento = $_POST['txt_numero_documento'];
 
-     $data_entrada = isset($_POST['txt_data_entrada']) ? strip_tags(filter_input(INPUT_POST, "txt_data_entrada")) : NULL;
+     $denunciados = isset($_POST['txt_denunciados']) ? strip_tags(filter_input(INPUT_POST, "txt_denunciados")) : " ";
+   
+     $data_entrada = isset($_POST['txt_data_entrada']) ? strip_tags(filter_input(INPUT_POST, "txt_data_entrada")) : " ";
 
-     $observacao = $_POST['txt_observacao'];
+     $observacao = $_POST['txt_observacao'] ? strip_tags(filter_input(INPUT_POST, "txt_obsevacao")) : " ";
 
+     $arrayDenuncia = array($id_denuncia, $denuncia, $id_denunciante, $denunciados, $tipo_documento, $numero_documento, $data_entrada, $observacao);
+  
+     if($id_denuncia != NULL){
+          $d->Editar($id_denuncia, $denuncia, $id_denunciante, $denunciados, $tipo_documento, $numero_documento, $data_entrada, $observacao);
 
-     if($id_denuncia){
-          $d->Editar($id_denuncia, $denuncia, $id_denunciante, $tipo_documento, $numero_documento, $data_entrada, $observacao);
-        
-    }else{
-
-
-          $d->Incluir($denuncia, $id_denunciante, $tipo_documento, $numero_documento, $data_entrada, $observacao);
+          $d->Incluir($id_denuncia, $denuncia, $id_denunciante, $denunciados, $tipo_documento, $numero_documento, $data_entrada, $observacao);
 
           echo "<script> Document.alert('Denúncia  já existe, não pode mais cadastrar'); </script> ";
      }

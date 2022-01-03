@@ -73,10 +73,7 @@ class Denuncia_Model extends Model{
           $qry = $this->db->query($sql);
           return $qry->fetchAll(\PDO::FETCH_OBJ);
 
-          //print_r($id_denuncia);
-          //exit;
           
-
           /*
         Não consegui incluir a variável no prepare
         $sql = $this->db->prepare($sql);
@@ -130,28 +127,26 @@ class Denuncia_Model extends Model{
             $sql->bindValue(":data_entrada", $data_entrada);
             $sql->bindValue(":observacao", $observacao);
             $sql->execute();
-            echo "<pre>";
-                print_r($sql);
-            echo "</pre>";
-
             return true;
          }else{
             return false;
          }
     }
 
-    public function Editar($id_denuncia, $denuncia, $id_denunciante, $tipo_documento, $numero_documento, $data_entrada, $observacao){
-        $sql = "UPDATE denuncia SET denuncia_fato = :denuncia, id_denunciante = :id_denunciante, tipo_documento = :tipo_documento, numero_documento = :numero_documento, data_entrada = :data_entrada, observacao = :observacao WHERE id_denuncia = :id_denuncia";
-
-            $sql = $this->db->prepare($sql);
-            $sql->bindValue(":denuncia", $denuncia);
-            $sql->bindValue(":id_denunciante", $id_denunciante);
-            $sql->bindValue(":tipo_documento", $tipo_documento);
-            $sql->bindValue(":numero_documento", $numero_documento);
-            $sql->bindValue(":data_entrada", $data_entrada);
-            $sql->bindValue(":observacao", $observacao);
-            $sql->bindValue(":id_denuncia", $id_denuncia);
-            $sql->execute();
+    public function Editar($id_denuncia, $denuncia, $id_denunciante, $denunciados, $tipo_documento, $numero_documento, $data_entrada, $observacao){
+        $sql = "UPDATE denuncia SET denuncia_fato = :denuncia, id_denunciante=:id_denunciante, denunciados=:denunciados, tipo_documento = :tipo_documento, numero_documento = :numero_documento, data_entrada = :data_entrada, observacao = :observacao WHERE id_denuncia = :id_denuncia";
+            
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":denuncia", $denuncia);
+        $sql->bindValue(":id_denunciante", $id_denunciante);
+        $sql->bindValue(":tipo_documento", $tipo_documento);
+        $sql->bindValue(":denunciados", $denunciados);
+        $sql->bindValue(":tipo_documento", $tipo_documento);
+        $sql->bindValue(":numero_documento", $numero_documento);
+        $sql->bindValue(":data_entrada", $data_entrada);
+        $sql->bindValue(":observacao", $observacao);
+        $sql->bindValue(":id_denuncia", $id_denuncia);
+        $sql->execute();
     }
 
     public function Deletar($id_denuncia){

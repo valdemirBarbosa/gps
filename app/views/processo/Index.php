@@ -117,7 +117,7 @@
 				</td>
 
 				<?php
-					if(isset($fase) && ($fase == "PAD")){		 
+					if(isset($_SESSION['fase']) && ($_SESSION['fase'] == "PAD")){		 
 						echo '<td>
 						<div class="btn-ocorrencia">'; 
 				?>

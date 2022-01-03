@@ -12,7 +12,6 @@ class Denunciante_Model  extends Model{
     public function lista(){    
         $sql = "SELECT * FROM denunciante";
         $qry = $this->db->query($sql);
-        
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 

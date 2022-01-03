@@ -5,6 +5,7 @@ use app\models\Denuncia_Model;
 use app\models\Processo_Model;
 use app\models\Pesquisa_Model;
 use app\models\Servidor_Model;
+use app\models\PesquisaController;
 
 if(session_start() == false){
      session_start();
@@ -151,15 +152,30 @@ public function porParametro(){
 
 //INCLUIR VIA UPDATE NA TABELA DE PROCESSO PELO ID_SERVIDOR
 public function incluir(){
+
      $id_servidor = $_SESSION['id_servidor'];
      $id_processo = $_SESSION['id_processo'];
 
-     $fase = $this->verificarFase($id_processo);
-
      $incluirServidor = new Servidor_Model();
-   
      $incluirServidor->IncluirServProcesso($id_servidor, $id_processo);
-     $dados['processado'] = $incluirServidor->listaProcessados($id_servidor, $id_processo);
+ 
+/*      print_r($id_servidor);
+     echo "<br/>";
+     print_r($id_processo);
+     exit;
+     $fase = $this->verificarFase($id_processo);
+*/     
+
+     $limit = 5; //Limte definido aqui esmo para mostrar os servidores processados
+     $totalRegistros = $this->contarRegistroServidor($id_processo);
+     $totalPaginas = ceil($totalRegistro) / $limit;
+//     $totalPaginas = ceil($totalPaginas);
+//     $_SESSION['totalPaginas'] = $totalPaginas;
+     $dados['paginaAtual'] = 1;
+     $offset = ($dados['paginaAtual'] * $limit) - $limit;
+
+     $listarProcessados = new Servidor_Model();
+     $dados['processado'] = $listarProcessados->listaProcessados($id_servidor, $id_processo, $offset, $limit);
      
      $processo = new Processo_Model();
      $dados['processo'] = $processo->getId($id_processo);
@@ -188,6 +204,12 @@ public function contarRegistro(){
      }
      return $totalRegistro;
 }
+}
+
+public function contarRegistroServidor($id_processo){
+     $registros = new Servidor_Model();
+     $totalRegistro = $registros->contaRegistroServidor($id_processo);
+     return $totalRegistro;
 }
 
      public function verificarFase($id_processo){

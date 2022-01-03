@@ -65,6 +65,12 @@ class ProcessoController extends Controller{
         $this->load("template", $dados);
    }
 
+   public function RetProcessar(){
+        $processo = new Processo_Model();
+        $dados["view"] = "processo/ProcessarServidor";
+        $this->load("template", $dados);
+   }
+
     public function getCodigos(){
         $denuncia = new Processo_Model();
         $dados["denunciaId"] = $denuncia->getIdDenuncia();
