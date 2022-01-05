@@ -17,12 +17,12 @@ use app\models\Processo_Controller;
 
 class PesquisaController extends Controller{
    public function index(){
-        /* $denuncias = new Denuncia_Model();
+        $denuncias = new Denuncia_Model();
         $denunciados = new Denuncia_Model();
 
-        $dados["denuncia"] = $denuncias->lista();
+        $dados["servidor"] = $servidor->lista();
         $this->load("template", $dados);
- */    }
+    }
 
 //Pesquisa para tabela de denúncia    
     public function ConsultaDenuncia(){
@@ -66,13 +66,25 @@ class PesquisaController extends Controller{
           $limit = $_SESSION['limit'];
           $offset = 0;
           
-          $tabela = $_POST['tabela'];
+          $tabela = 'servidor';
           $_SESSION['tabela'] = $tabela;
           
+          $tabela1 = 'denuncia';
+          $_SESSION['tabela1'] = $tabela1;
+          
+          $tabela2 = 'processo';
+          $_SESSION['tabela2'] = $tabela2;
+          
+          $tabela3 = 'fase';
+          $_SESSION['tabela3'] = $tabela3;
+
+          $tabela4 = 'denunciante';
+          $_SESSION['tabela4'] = $tabela4;
+
           $dadosTabela = new Pesquisa_Model();
           $totalRegistros = $this->contarRegistro();
           $_SESSION['totalRegistros'] = $totalRegistros;
-
+          
           $totalPaginas = ceil($_SESSION['totalRegistros'] / $limit);
           $totalPaginas = ceil($totalPaginas);
           $_SESSION['totalPaginas'] = $totalPaginas;
@@ -85,11 +97,12 @@ class PesquisaController extends Controller{
           $_SESSION['campo'] = $campo;
           $parametro = $dado[1];
           $_SESSION['parametro'] = $parametro;
-          
-          $dados['dados'] = $dadosTabela->getNumeroProcessoLimitOnTable($tabela, $campo, $parametro, $offset, $limit);
+          $alias = $dado[3];
+          $_SESSION['parametro'] = $parametro;
 
-          $_SESSION['view'] = $_POST['view'];
-          $dados["view"] = $_POST['view'];
+          $dadosTabela = new Servidor_Model();
+          $dados['servidor'] = $dadosTabela->servidorProcessos($tabela, $tabela1, $tabela2, $tabela3, $tabela4, $alias, $campo, $parametro, $offset, $limit);
+          $dados["view"] = "servidor/index";
           $this->load("template", $dados);
 
      }
@@ -103,28 +116,33 @@ class PesquisaController extends Controller{
                     case 1:
                          $campo = "numero_documento";
                          $valorRecebidoDoUsuario = $valorPreenchidoUsuario;
+                         $alias = "d"; //alias para a tabela denuncia, caso o campo de pesquisa seja da tabela denuncia
                          break;
                     case 2:
                          $campo = "numero_processo";
                          $valorRecebidoDoUsuario = $valorPreenchidoUsuario;
+                         $alias = "p"; //alias para a tabela processo, caso o campo de pesquisa seja da tabela processo
                          break;
                     case 3:
                          $campo = "nome_servidor";
                          $valorRecebidoDoUsuario = $valorPreenchidoUsuario;
+                         $alias = "s"; //alias para a tabela servidor, caso o campo de pesquisa seja da tabela servidor
                          break;
                     case 4:
                          $campo = "cpf";
                          $valorRecebidoDoUsuario = $valorPreenchidoUsuario;
+                         $alias = "s"; //alias para a tabela servidor, caso o campo de pesquisa seja da tabela servidor
                          break;
                     default:
-                         echo "Nenhuma opção escolhida e informada";
+                         echo "Nenhuma opção de pesquisa foi escolhida e informada";
                          break;
                     }
                     $tabela = $_POST['tabela'];
                     $_SESSION['tabela'] = $tabela;
                     $_SESSION['valorRecebidoDoUsuario'] = $valorRecebidoDoUsuario;
                     $_SESSION['campo'] = $campo;
-                    $dadosInformados = array($_SESSION['campo'], $_SESSION['valorRecebidoDoUsuario'], $_SESSION['tabela']);
+                    $_SESSION['alias'] = $alias;
+                    $dadosInformados = array($_SESSION['campo'], $_SESSION['valorRecebidoDoUsuario'], $_SESSION['tabela'], $_SESSION['alias']);
                     return $dadosInformados;
           }
      }
@@ -140,8 +158,6 @@ public function porParametro(){
      $campo = $dados[0];
      $parametro = $dados[1];
 
-//pasrei aquii vendo por que não está vindo os dados do parametro     
-  
 $_SESSION['campo'] = $campo;
      $tipoFase = $_SESSION['fase'];
      if(isset($tipoFase) == 'pp'){
@@ -154,7 +170,7 @@ $_SESSION['campo'] = $campo;
                     $_SESSION['tipoFase'] = "pad";
       }
 
-      $tabela1 = addslashes($_POST['tabela1']);
+     $tabela1 = $_POST['tabela1'];
      $_SESSION['tabela1'] = $tabela1;
     
      $dadosTabela = new Pesquisa_Model();
@@ -167,6 +183,9 @@ $_SESSION['campo'] = $campo;
      $dados['paginaAtual'] = 1;
 
      $offset = ($dados['paginaAtual'] * $limit) - $limit;
+
+      // Array usado pra teste - debug
+     $arraConsulta = array($tabela, $tabela1, $campo, $parametro, $tipoFase, $offset, $limit);
 
      $dados['processo'] = $dadosTabela->getNumeroProcessoLimitTwoTable($tabela, $tabela1, $campo, $parametro, $tipoFase, $offset, $limit);
      $_SESSION['view'] = $_POST['view'];
@@ -256,7 +275,6 @@ public function LinkServidor(){
 
 public function contarRegistro(){
      if(isset($_POST['valorPreenchidoUsuario']) || $_GET['p']){
-          $registros = new Pesquisa_Model();
 
           if(isset($_POST['tabela']) && !empty('tabela')){
                $tabela = $_SESSION['tabela'];
@@ -265,11 +283,31 @@ public function contarRegistro(){
                
                $campo = $parametrosPesquisa[0];
                $parametro = $parametrosPesquisa[1];
+               $alias = $parametrosPesquisa[3];
+
           }
 
                if($tabela == 'servidor'){
-                    $totalRegistro = $registros->contaRegistro($tabela, $campo, $parametro);
+                    $tabela = 'servidor';
+
+                    $_SESSION['tabela'] = $tabela;
+                    
+                    $tabela1 = 'denuncia';
+                    $_SESSION['tabela1'] = $tabela1;
+                    
+                    $tabela2 = 'processo';
+                    $_SESSION['tabela2'] = $tabela2;
+                    
+                    $tabela3 = 'fase';
+                    $_SESSION['tabela3'] = $tabela3;
+          
+                    $tabela4 = 'denunciante';
+                    $_SESSION['tabela4'] = $tabela4;
+
+                    $registros = new Servidor_Model();
+                    $totalRegistro = $registros->contaRegistroServidorProcesso($tabela, $tabela1, $tabela2, $tabela3, $tabela4, $alias, $campo, $parametro);
                }else{
+                    $registros = new Pesquisa_Model();
                     $totalRegistro = $registros->contaRegistro($tabela, $campo, $parametro);
                     $_SESSION['parametro'] = $parametro;
                }

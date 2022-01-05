@@ -57,7 +57,7 @@ class Pesquisa_Model extends Model{
     }
     
     public function contaRegistro($tabela, $campo, $parametro){
-        $sql = "SELECT * FROM $tabela WHERE $campo LIKE  '%$parametro%'";
+        $sql = "SELECT * FROM $tabela WHERE $campo LIKE '%$parametro%' ORDER BY $campo";
         $sql = $this->db->query($sql);
         $totalRegistro = $sql->rowCount();
         return $totalRegistro;
@@ -77,9 +77,9 @@ class Pesquisa_Model extends Model{
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
-    public function getNumeroProcessoLimitOnTable($table, $campo, $parametro, $offset, $limit){
+    public function getNumeroProcessoLimitOnTable($tabela, $campo, $parametro, $offset, $limit){
         if(isset($campo) && !empty($campo)){
-            $sql = "SELECT * FROM $table WHERE $campo LIKE '%$parametro%' LIMIT $offset, $limit";
+            $sql = "SELECT * FROM $tabela WHERE $campo LIKE '%$parametro%' LIMIT $offset, $limit";
             $qry = $this->db->query($sql);
             return $qry->fetchAll(\PDO::FETCH_OBJ); 
         }    

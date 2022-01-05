@@ -58,7 +58,7 @@ class AndamentoOcorrencia_Model extends Model{
     }
  
     public function getIdDenuncia(){
-        $sql = "SELECT * FROM denuncia as d INNER JOIN denunciante as den ON d.id_denunciante = den.id_denunciante";
+        $sql = "SELECT * FROM denuncia as d INNER JOIN denunciante as den ON d.id_denunciante = den.id_denunciante ORDER By id_denuncia ASC";
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }

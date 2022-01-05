@@ -4,12 +4,12 @@ namespace app\controllers;
 use app\core\Controller;
 use app\models\Servidor_Model;
 
-class ServidorController extends Controller{
+class ConsultaProcessoController extends Controller{
 
   public function index(){
         $servidores = new Servidor_Model();
-        $dados["dados"] = $servidores->lista();
-        $dados["view"] = "servidor/index";
+         $dados["dados"] = $servidores->lista();
+         $dados["view"] = "servidor/consultaProcesso";
         $this->load("template",$dados);
    } 
 

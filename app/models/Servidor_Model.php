@@ -15,6 +15,26 @@ class Servidor_Model  extends Model{
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
+    //funçção para pesquisar servidores em denuncias e processos
+    public function servidorProcessos($tabela, $tabela1, $tabela2, $tabela3, $tabela4, $alias, $campo, $parametro, $offset, $limit){
+        $sql = "SELECT * FROM $tabela as s
+                RIGHT JOIN $tabela1 as d ON s.id_denuncia = d.id_denuncia 
+                LEFT JOIN $tabela2 as p ON d.id_denuncia = p.id_denuncia
+                LEFT JOIN $tabela3 as f ON p.id_fase = f.id_fase
+                LEFT JOIN $tabela4 as den ON d.id_denunciante = den.id_denunciante
+                WHERE $alias.$campo LIKE '%$parametro%' 
+                ORDER BY s.nome_servidor ASC LIMIT $offset, $limit";
+        $qry = $this->db->query($sql);
+        return $qry->fetchAll(\PDO::FETCH_OBJ);
+       
+    }
+
+    public function denunciantes($id_denunciante){
+        $sql = "SELECT * FROM denunciantes WHERE id_denunciante = $id_denunciante";
+        $qry = $this->db->query($sql);
+        return $qry->fetchAll(\PDO::FETCH_OBJ);
+    }
+
     public function contaRegistro($tabela, $campo, $parametro){
         $sql = "SELECT * FROM servidor WHERE $campo LIKE  '%$parametro%'";
  
@@ -23,11 +43,16 @@ class Servidor_Model  extends Model{
          return $totalRegistro;
      }
 
-     public function contaRegistroServidor($id_processo){
-        $sql = "SELECT * FROM servidor WHERE id_processo = $id_processo";
-        $sql = $this->db->query($sql);
-        $totalRegistro = $sql->rowCount();
-        return $totalRegistro;
+     public function contaRegistroServidorProcesso($tabela, $tabela1, $tabela2, $tabela3, $tabela4, $alias, $campo, $parametro){
+        $sql = "SELECT * FROM $tabela as s
+                INNER JOIN $tabela1 as d ON s.id_denuncia = d.id_denuncia 
+                LEFT JOIN $tabela2 as p ON d.id_denuncia = p.id_denuncia
+                LEFT JOIN $tabela3 as f ON p.id_fase = f.id_fase
+                LEFT JOIN $tabela4 as den ON d.id_denunciante = den.id_denunciante
+                WHERE $alias.$campo LIKE '%$parametro%'";
+                $sql = $this->db->query($sql);
+                $totalRegistro = $sql->rowCount();
+                return $totalRegistro;
      }
  
     public function listaProcessados($id_servidor, $id_processo, $offset, $limit){

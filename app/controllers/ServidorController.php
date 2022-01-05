@@ -9,7 +9,15 @@ class ServidorController extends Controller{
   public function index(){
         $servidores = new Servidor_Model();
          $dados["dados"] = $servidores->lista();
+         $dados["totalPaginas"] = 0;
          $dados["view"] = "servidor/index";
+        $this->load("template",$dados);
+   } 
+
+   public function ConsultaServidor(){
+        $servidores = new Servidor_Model();
+         $dados["dados"] = $servidores->servidorProcessos();
+         $dados["view"] = "servidor/consultaProcesso";
         $this->load("template",$dados);
    } 
 

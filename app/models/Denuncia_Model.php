@@ -104,7 +104,7 @@ class Denuncia_Model extends Model{
 
     public function getDenuncia($id_denuncia){
         $ret = array();
-        $sql = "SELECT * FROM denuncia WHERE id_denuncia = :id";
+        $sql = "SELECT * FROM denuncia WHERE id_denuncia = :id ORDER BY id_denuncia = :id";
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":id", $id_denuncia);
         $sql->execute();
