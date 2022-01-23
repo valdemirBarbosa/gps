@@ -55,23 +55,75 @@ ul, li{list-style:none;}
       padding: 2%;
 }
 
-body{
-    width: 100%;
-    height: 100%;
-    background-color:azure;
+.container{
+    background-color: whitesmoke;
+    display: grid;
+    grid-template-columns: 1fr; /* Divide a DIV em duas colunas: A primeira com três frações do espaço total da tela e a segunda coluna com uma fração */
+    grid-template-rows: 10vh 40vh 10vh; /* Especifica a altura das 3 linhas: 1ª coluna com 20 Visão de Heigth; a segunda 70 VH e a termeira 20 VH  */
+    grid-template-areas: "header header" /* Pode ser qualquer nome porque será relacionado com teg que eu quero. especificado aqui linha 1 nas duas colunas */
+                         "main" /* Especificado aqui linha 2 na coluna 1 main e na coluna 2 o aside */
+                         "footer" /* Especificado aqui linha 3 nas duas colunas o footer */
+  
+}
+
+.pai{
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: 8vh;
+    grid-template-areas: 'filho1 filho2';
+}
+
+.filho1{
+    grid-area: filho1;
+}
+
+.filho1 input[type=text]{
+    width: 300px;
+}
+
+.filho2{
+    display: grid;
+    grid-area: filho2;
+    /* background-color:yellow; */
+}
+
+.container-conteudo{
+    background-color:whitesmoke;
 }
 
 header{
+    /*grid-column-start: 1;  Coluna da grid começa na linha divisória da coluna 1 */
+    /*grid-column-end: 3;   Coluna da grid termina na linha divisória da coluna  3*/
+    grid-area: header;
+
     width: 100%;
-    height: 70px;
+    height: 7%;
+    margin-bottom: 0.3%;
     background-color:#101010;
     box-shadow: 0px 5px 20px #000;
     padding: 10px;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-/*     justify-content: space-between;
- */
+}
+
+ main{
+    background-color:whitesmoke;
+    grid-area: main;
+    height: 90%;
+}
+.teste{
+    height: 500px;
+    width: 800px;
+
+}
+footer{
+    background-color:cadetblue;
+    grid-area: footer;
+    text-align: center;
+    font-family: sans-serif;
+    font-weight: bold;
+
 }
 
 h1{
@@ -81,28 +133,24 @@ h1{
 }
 
 .logo{
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 30px;
+    margin-top: 0px;
     border-radius: 10%;
-    background-color: #ccc;
-}
-
-ul{
-    list-style: none;
+    background-color:cornsilk;
 }
 
 .menu{
-    list-style: none;
     display: flex;
     flex-wrap: wrap;
     font-size: 20px;
     margin-left: 20px;
+    background-color: black;
 }
 
 .menu li a{
     color: #fff;
-    display: block;
-    text-decoration-style: nome;
+    display:flex ;
     margin-left: 20px;
 }
 
@@ -113,76 +161,59 @@ ul{
     border-radius: 10px;
     }
 
-.container{
-    max-width: 100%;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.container div{
-   /*  
-   flex: 1 1 300px;
-   flex: 1 //Este é o flex grow - cresce o elemento na tela  quando altera o tamanho da tela
-   flex: 1 1 //Este é o shrink - encolhe o tamanho do elemento na tela quando altera o tamanho da tela
-   flex: 1 1 300px //Este é o basis - Define o tamanho padrão para um elemento antes que o espaço remanescente do container seja distribuído
- */
- flex: 1 1 800px;
-}
-
- img{
-     width: 100%;
-     border-radius: 10px;
- }   
-
- 
-.imagem{
-    width: 700px;
-    height: 150px;
-    margin-top: 90px;
+.titulo-pagina{
+    font-weight: bolder;
+    font-size: 20px;
+    color:whitesmoke;
+    text-align: center;
+    margin-top: 0px;
 }
 
 .base-home{
     background-color:royalblue;
     width: 100%;
-    height: 5%;
-    margin-top: 1%;
+    height: 7%;
+    margin-top: 0%;
+    padding-top: 0.5%;
+}
+
+.imagem{
+    width: 80%;
+    height: 80%;
+    margin-top: auto;
 }
 
 li{
-    list-style: none;
     line-height: 30px;
     text-align:left;
-    color: white;
-
 }
 
 .menu li a{
   padding-left: 0px;
   color:#ddd;
+  display: flex;
+  flex: 1;
 
 }
 
 
 .menu li a:hover{
     background-color:royalblue;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 
-a:link{
-    text-decoration: none;
-}
 
-form{
+/* form{
     background-color:lightsteelblue;
-    width: 90%;
+    width: 70%;
     position: absolute;
     top:20%;
-    left: 100px;
+    left: 70px;
+    margin-bottom: 20px;
 }
-
-form.pesquisa{
+ */
+/* form.pesquisa{
     background-color: silver;
     width: 10px;
     height: 10px;
@@ -190,7 +221,7 @@ form.pesquisa{
     top:17%;
     left: 15%;
 }
-
+ */
 form.form2{
     background-color:blanchedalmond;
     width: 70%;
@@ -220,9 +251,8 @@ label, input{
 
 .base-lista{
     width: 100%;
-    margin-top: 2%;
-    background-color:;
     text-align: center;
+    background-color:lavender;
 }
 
 .base-lista2{
@@ -248,6 +278,7 @@ input.pesquisa{
 
 input[type="text"]{
     text-align: left;
+    color: blue;
 }
 
 input[type="date"]{
@@ -321,20 +352,10 @@ span{
     text-align: center;
 }
 
-.titulo-pagina{
-    font-weight: bolder;
-    font-size: 23px;
-    color:whitesmoke;
-    width: 100%;
-    text-align: center;
-    margin-left: 0px;
-    margin-top: 10px; 
-}
-
 .titulo{
   display:block;
-  padding:0px 0;
-  color:#323232;
+  padding:0px;
+  color:blanchedalmond;
   font-weight:inherit;
   font-size:1.4em;
   text-transform:uppercase;
@@ -349,7 +370,7 @@ span{
   text-transform:uppercase;
 
 }
-
+/* 
 .rodape{
     margin-top: 714px;
     width: 100%;
@@ -358,7 +379,7 @@ span{
     color:red;
     background-color:darkslategray;
 }
-
+ */
     table {
           border-collapse: collapse;
           width: 95%;
@@ -427,16 +448,15 @@ span{
 
 .btn-inc{
     width: 100px;
-    height: 40px;
-    float: left;
+    height: 28px;
+    margin-top: 5%;
     color: black;
-    border-radius: 10px;
     border-color:royalblue;
     border-style: solid;
-    padding-top: 8px;
+    padding-top: 4%;
     text-align: center;
+    font-weight: bold;
     box-shadow: 3px 6px #888888;
-    text-transform: uppercase;
 }
 
 .btn-voltar{
@@ -460,7 +480,7 @@ span{
     height: 45px;
     background-color:royalblue;
     border-color:white;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .btn-excluir{
@@ -523,8 +543,11 @@ span{
 }
 
 .img{
-    margin-left: 150px;
-    margin-top: 50px;
+    width: 30%;
+    height: 20%;
+    margin:auto;
+    margin-top: 15%;
+
 }
 
 .denuncia{
@@ -806,12 +829,71 @@ span{
 }
 
 .frmConsulta{
-    margin-top: 3%;
-    width: auto;
-    margin-left: 80px;
+    background-color:lightgrey;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "pesquisa" "incluir" "excluir";
+}
+
+.pesquisa{
+    grid-area: pesquisa;
+    background-color:red;
+
+}
+
+.incluir{
+    grid-area: incluir;
+    background-color:yellow;
+    text-align: center;
+    align-content: center;
+}
+
+.excluir{
+    grid-area: excluir;
+    background-color:green;
+    text-align: center;
+    align-content: center;
+}
+
+
+.frmConsulta input[type=text]{
+    width: 300px;
+}
+
+.frmConsulta input[type=submit]{
+    width: 150px;
 }
 
 .labelPesquisa{
     float: left;
 }
 
+
+@media only screen and (max-width: 800px){
+    .menu{
+        position:absolute;
+        margin-left: 0;
+        color:tomato;
+        width: 90%;
+        background-color:cadetblue;
+        font-size: 15px;
+    }
+
+    .logo{
+        width: 22px;
+        height: 22px;
+        border-radius: 5%;
+        background-color:cyan;
+        }
+               
+        .base-home{
+            background-color:royalblue;
+            width: 100%;
+            height: 9%;
+            margin-top: 0%;
+        }
+        
+        
+    }
+ 

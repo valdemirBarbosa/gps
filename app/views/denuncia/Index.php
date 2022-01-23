@@ -3,31 +3,42 @@
 	session_start();
 	}
 ?>
-
 <div class="base-home">
 	<h1 class="titulo-pagina">Lista de denúncias</h1>
-</div>
+</div> <!-- FIM base-home -->
+
+
 <?php //paramentros para pesquisa dos formulários de denuncia e processo
  		$tabela = 'denuncia';
  		$view = 'denuncia/index';
 		$retorno = 'denunciaRet';
 ?>
-<div class="frmconsulta">
-	<form method="POST" action="<?php echo URL_BASE . 'Pesquisa/ConsultaDenuncia'; ?>" >
-					<label>Pesquisa</label> 
-					<select name="pesquisa" class="select">
-						<option value="1">Número do documento</option>
-						<option value="2">Número do Processo</option>
-						<option value="3">Nome</option>
-						<option value="4">CPF</option>
-					</select>
-						<input class="pesquisa" type="text" autofocus name="valorPreenchidoUsuario">
-						<input type="hidden" name="view" value="<?php echo $view ?>">
-						<input type="hidden" name="retorno" value="<?php echo $retorno ?>">
-						<input type="hidden" name="tabela" value='<?php echo $tabela ?>'>
-						<input type="submit" value="pesquisar">
+
+<div class="pai">
+	<div class="filho1">
+		<form method="POST" action="<?php echo URL_BASE . 'Pesquisa/ConsultaDenuncia'; ?>" >
+		<input type="hidden" name="view" value="<?php echo $view ?>">
+		<input type="hidden" name="retorno" value="<?php echo $retorno ?>">
+		<input type="hidden" name="tabela" value='<?php echo $tabela ?>'>
+
+		<label>Pesquisa</label> 
+			<select name="pesquisa" class="select">
+				<option value="1">Número do documento</option>
+				<option value="2">Número do Processo</option>
+				<option value="3">Nome</option>
+				<option value="4">CPF</option>
+			</select>
+
+			<input type="text" autofocus name="valorPreenchidoUsuario"> 
+			<input type="submit" value="pesquisar">
+		</div>
+
+		<div class="filho2">
+			<a href="<?php echo URL_BASE . "denuncia/Novo" ?>" class="btn-inc">Incluir </a>
+		</div>
 	</form>
-</div>
+	</div> <!-- FIM DA DIV pai -->
+
 
 <div class="base-lista">
 		<table border="1" cellspacing="0" cellpadding="0">
@@ -40,7 +51,7 @@
 				<th width="7%">data de entrada</th>
 				<th width="20%">denunciados</th>
 				<th width="30%">documentos anexados</th>
-				<th width="10%" align="center" colspan="2">Ação</th>
+				<th width="10%" align="center" colspan="3">Ação</th>
 			</tr>
 	<?php
 	if(isset($dados)){ 
@@ -64,10 +75,17 @@
 	
 			 <td>
 			<div class="btn-editar"> 
+				<a href="<?php echo URL_BASE ."processo/novo/?id=".$den->id_denuncia ?>" >Processar</a>
+	  	      </div>	
+               </td>
+
+			 <td>
+			<div class="btn-editar"> 
 				<a href="<?php echo URL_BASE ."denuncia/Edit/".$den->id_denuncia ?>" >Editar</a>
 	  	      </div>	
                </td>
-		   <td>
+
+			   <td>
 			<div class="btn-excluir"> 
 				<a href="<?php echo URL_BASE ."denuncia/Excluir/".$den->id_denuncia ?>" >Excluir</a>
 				</div>
@@ -75,29 +93,23 @@
 		   </tr> 
 	<?php }
 	} ?>
-	</div>
+	</div> <!-- FIM DA DIV base-lista !-->
+	</div> <!-- FIM DA DIV container-conteudo -->
 
-	<!--Botões !-->
-	<div class="btn-inc">
-		<script> //Link para voltar à página anterior
-  			document.write('<a href="' + document.referrer + '">Voltar</a>');
- 		</script>
-	</div>			
+	</table>
 	
-	<div class="btn-inc">
-		<a href="<?php echo URL_BASE . "denuncia/Novo" ?>" >INCLUIR </a>
-	</div>
-
-</table>
-<?php
-				$totalPaginas = $_SESSION['totalPaginas'];
-
+		<table class="paginacao">
+		<tr><td>
+		<?php
+			if(isset($totalPaginas)){
 
 				for($q=1; $q<=$totalPaginas; $q++):  
-					echo "<a href=".URL_BASE.'pesquisa/porParametroLink/?p='.($q); ?> > <?php echo "[".($q)."]" ?> </a> 
-<?php
-			   endfor;
-		     ?>
+					echo "<a href=".URL_BASE.'Pesquisa/ConsultaDenuncia/?p='.($q); ?> > <?php echo "[".($q)."]" ?> </a> 
+		<?php
 
-</body>
-</html>
+endfor;
+}
+
+		 ?>
+		</td></tr>
+	</table>

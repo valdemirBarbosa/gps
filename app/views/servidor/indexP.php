@@ -45,39 +45,6 @@
 
 <div class="base-lista">
 
-<!-- Tabela de denuncias !-->
-<table width="100%" border="1" cellspacing="0" cellpadding="0">
-		  <thead>
-
-		  <!-- CABEÇALHO da denúncia !-->
-		  <tr>
-			<th align="left">Número doc Denuncia </th>
-			<th align="center">Data entrada </th>
-			<th align="center">Denunciante </th>
-			<th colspan="2" align="center">Narração da Denuncia </th>
-			<th colspan="2" align="center">Denunciados</th>
-
-		</tr>
-
-		<!-- DADOS da denúncia !-->
-		<?php	
-			if(isset($servidor) && count($servidor) > 0){
-				foreach($servidor as $s){  // loop na tabela denúncia
-					$id = isset($s->numero_documento);
-						if($id > 0){
-							echo "<tr>";
-							echo "<td>". $s->numero_documento ."</td>";
-							echo "<td>". $s->data_entrada ."</td>";
-							echo "<td>". $s->nome_denunciante ."</td>";
-							echo "<td colspan='2'>". $s->denuncia_fato ."</td>";
-							echo "<td colspan='2'>". $s->denunciados ."</td>";
-							echo "</tr>";
-						}
-					}
-				}?>
-</table>
-	<br/>
-
 <!-- Tabela de processos  !-->
 <table width="100%" border="1" cellspacing="0" cellpadding="0">
 
@@ -92,8 +59,7 @@
 		<?php	
 		if(isset($servidor) && count($servidor) > 0){
 			foreach($servidor as $s){  // loop na tabela processo
-				$id = isset($s->numero_processo);
-					if($id > 0){
+{
 						echo "<tr>";
 						echo"<td>". $s->numero_processo ."</td>";
 						echo"<td>". $s->fase ."</td>";
@@ -125,8 +91,7 @@
 		<?php	
 		if(isset($servidor) && count($servidor) > 0){
 			foreach($servidor as $s){  // loop na tabela processo
-				$id = isset($s->numero_processo);
-					if($id > 0){ ?>
+{ ?>
 						<tr class="cor1">
 						<td align="center"><?php echo $s->nome_servidor  ?></td>
 						<td align="center"><?php echo $s->cpf  ?></td>
@@ -156,7 +121,7 @@
 				$totalPaginas = $_SESSION['totalPaginas'];
 
 				for($q=1; $q<=$totalPaginas; $q++):  
-					echo "<a href=".URL_BASE.'pesquisa/LinkServidor/?p='.($q); ?> > <?php echo "[".($q)."]" ?> </a> 
+					echo "<a href=".URL_BASE.'pesquisa/ConsultaServidor/?p='.($q); ?> > <?php echo "[".($q)."]" ?> </a> 
 		<?php
 			endfor;
 /* 		}

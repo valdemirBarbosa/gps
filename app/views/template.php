@@ -8,10 +8,8 @@
  <link rel="stylesheet" href="<?php echo URL_BASE ."/assets/css/bootstrap.min.css" ?>" />
 !-->
 </head>
-<body>
-
-	<header>
-		<div class="logo"></div>
+<header>
+		<div class="logo">GPS</div>
 	<nav>
 	<ul class="menu">
 		<li><a href="<?php echo URL_BASE ?>" >Home</a></li>
@@ -24,15 +22,25 @@
 		<li><a href="<?php echo URL_BASE . "andamento/getAll" ?>">Andamentos</a></li>
 		<li><a href="<?php echo URL_BASE . "upload" ?>">Upload</a></li>
 	</ul> 
-</nav>		</header>
-	
-	<section class="container">
+	</nav>		
+</header>
 
-		<?php 
+
+	<main>
+
+<!-- 	<section class="container">
+ -->		<?php 
 			$this->load($view, $viewData, $viewData2);
 		?>
 
-	</section>
+<!-- 	</section>
+ -->	
+</main>
+
+<footer>
+	Sitema de Gerenciamento de Processos de Sindicância e Processo Administrativo
+<footer>
+
 </body>
 	<script type="text/javascript" src="<?php URL_BASE . "/assets/js/jquery-3.3.1.min.js" ?>"> </script>
 	<script type="text/javascript" src="<?php URL_BASE . "/assets/js/bootstrap.bundle.min.js" ?>"> </script>

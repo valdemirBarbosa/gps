@@ -92,8 +92,7 @@
 		<?php	
 		if(isset($servidor) && count($servidor) > 0){
 			foreach($servidor as $s){  // loop na tabela processo
-				$id = isset($s->numero_processo);
-					if($id > 0){
+{
 						echo "<tr>";
 						echo"<td>". $s->numero_processo ."</td>";
 						echo"<td>". $s->fase ."</td>";
@@ -125,8 +124,7 @@
 		<?php	
 		if(isset($servidor) && count($servidor) > 0){
 			foreach($servidor as $s){  // loop na tabela processo
-				$id = isset($s->numero_processo);
-					if($id > 0){ ?>
+{ ?>
 						<tr class="cor1">
 						<td align="center"><?php echo $s->nome_servidor  ?></td>
 						<td align="center"><?php echo $s->cpf  ?></td>
@@ -156,7 +154,7 @@
 				$totalPaginas = $_SESSION['totalPaginas'];
 
 				for($q=1; $q<=$totalPaginas; $q++):  
-					echo "<a href=".URL_BASE.'pesquisa/LinkServidor/?p='.($q); ?> > <?php echo "[".($q)."]" ?> </a> 
+					echo "<a href=".URL_BASE.'pesquisa/ConsultaServidor/?p='.($q); ?> > <?php echo "[".($q)."]" ?> </a> 
 		<?php
 			endfor;
 /* 		}

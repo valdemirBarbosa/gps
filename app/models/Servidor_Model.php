@@ -37,8 +37,14 @@ class Servidor_Model  extends Model{
 
     public function contaRegistro($tabela, $campo, $parametro){
         $sql = "SELECT * FROM servidor WHERE $campo LIKE  '%$parametro%'";
- 
          $sql = $this->db->query($sql);
+         $totalRegistro = $sql->rowCount();
+         return $totalRegistro;
+     }
+
+     public function contaRegistroServidor($id_processo){
+        $sql = "SELECT * FROM servidor as s INNER JOIN processo as p ON p.id_processo = s.id_processo WHERE s.id_processo =  $id_processo";
+        $sql = $this->db->query($sql);
          $totalRegistro = $sql->rowCount();
          return $totalRegistro;
      }

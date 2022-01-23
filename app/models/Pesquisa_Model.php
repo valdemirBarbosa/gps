@@ -20,12 +20,22 @@ class Pesquisa_Model extends Model{
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
+    public function ContarDenunciante($tabela, $campo, $informacao){
+        $sql = "SELECT * FROM $tabela WHERE $campo LIKE '%$informacao%'";
+        $qry = $this->db->query($sql);
+        return $qry->fetchAll(\PDO::FETCH_OBJ);
+    }
+
     public function PesquisaDenuncia($tabela, $campo, $informacao){
-        $sql = "SELECT * FROM $tabela as d LEFT JOIN denunciante as dc ON d.id_denunciante = dc.id_denunciante LEFT JOIN tipo_documento as t ON d.tipo_documento = t.id_tipo_documento WHERE $campo=:parametro";
-        $sql = $this->db->prepare($sql);
-        $sql->bindValue(":parametro", $informacao);
-        $sql->execute();
-        return $sql->fetchAll(\PDO::FETCH_OBJ);
+        $sql = "SELECT * FROM $tabela as d LEFT JOIN denunciante as dc ON d.id_denunciante = dc.id_denunciante LEFT JOIN tipo_documento as t ON d.tipo_documento = t.id_tipo_documento WHERE $campo LIKE '%$informacao%'";
+        $qry = $this->db->query($sql);
+        return $qry->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+    public function PesquisaDenunciante($tabela, $campo, $informacao, $offset, $limit){
+        $sql = "SELECT * FROM $tabela WHERE $campo LIKE '%$informacao%' LIMIT $offset, $limit";
+        $qry = $this->db->query($sql);
+        return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
     public function PesquisaServidor($tabela, $campo, $informacao){

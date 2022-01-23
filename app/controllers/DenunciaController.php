@@ -14,14 +14,6 @@ class DenunciaController extends Controller{
         $this->load("template", $dados);
     }
    
-    public function _Denuncia(){
-        $denuncias = new Denuncia_Model();
-
-        $dados["denuncia"] = $denuncias->getDenuncia($id_denuncia);
-        $dados["denunciado"] = $denunciados->DenunciadosTodos();
-        $dados["view"] = "denuncia/Index";
-        $this->load("template", $dados);
-    }
 
 //Não alterar mais este método. Já está funcionando corretamente
    public function Pesquisar(){
