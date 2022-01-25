@@ -5,17 +5,15 @@
 
 <div class="base-lista">
 	
-	<div>	
+	<div class="pai|">	
 		<!--Botões !-->
-	
-		<div class="btn-inc">
-				<script> //Link para voltar à página anterior
-					document.write('<a href="' + document.referrer + '">Voltar</a>');
-				</script>
-			</div>			
 			
-			<div class="btn-inc">
-				<a href="<?php echo URL_BASE . "ocorrencia/novo" ?>">INCLUIR</a>
+		<div class="filho1">
+		    
+		</div>
+		
+			<div class="filho2">
+				<a href="<?php echo URL_BASE . "ocorrencia/novo" ?>" class="btn-inc" >INCLUIR</a>
 			</div>
 				<br/><br/>
 

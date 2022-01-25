@@ -23,24 +23,24 @@
 		$_SESSION['view'] = $view; 
 		$_SESSION['tabela'] = $tabela; 
 ?>
-<div class="frmConsulta">  
-
-<!-- Formulário de pesquisa !--> 
-<form method="POST" action="<?php echo URL_BASE . 'Pesquisa/ConsultaServidor'; ?>" >
-	<label>Pesquisa</label>
-		<select name="pesquisa" class="select">
-			<option value="1">Número documento da denúncia</option>
-			<option value="2">NÚMERO DO PROCESSO</option>
-			<option value="3">Nome</option>
-			<option value="4">CPF</option>
-		</select>
-	
-		<input class="pesquisa" type="text" autofocus name="valorPreenchidoUsuario">
-		<input type="hidden" name="view" value="<?php echo $view ?>">
-		<input type="hidden" name="retorno" value="<?php echo $retorno ?>">
-		<input type="hidden" name="tabela" value="<?php echo $tabela ?>">
-		<input type="submit" value="pesquisar">
-	</form>
+<div class="pai">  
+	<div class="filho1">  
+		<form method="POST" action="<?php echo URL_BASE . 'Pesquisa/ConsultaServidor'; ?>" >
+				<label>Pesquisa</label>
+					<select name="pesquisa" class="select">
+						<option value="1">Número documento da denúncia</option>
+						<option value="2">NÚMERO DO PROCESSO</option>
+						<option value="3">Nome</option>
+						<option value="4">CPF</option>
+					</select>
+				
+					<input class="" type="text" autofocus name="valorPreenchidoUsuario">
+					<input type="hidden" name="view" value="<?php echo $view ?>">
+					<input type="hidden" name="retorno" value="<?php echo $retorno ?>">
+					<input type="hidden" name="tabela" value="<?php echo $tabela ?>">
+					<input type="submit" value="pesquisar">
+		</form>
+	</div>
 </div>
 
 <div class="base-lista">
@@ -152,15 +152,15 @@
 		<table class="paginacao">
 		<tr><td>
 		<?php
-
-				$totalPaginas = $_SESSION['totalPaginas'];
+			if(isset($totalPaginas)){
 
 				for($q=1; $q<=$totalPaginas; $q++):  
-					echo "<a href=".URL_BASE.'pesquisa/LinkServidor/?p='.($q); ?> > <?php echo "[".($q)."]" ?> </a> 
+					echo "<a href=".URL_BASE.'Pesquisa/ConsultaDenuncia/?p='.($q); ?> > <?php echo "[".($q)."]" ?> </a> 
 		<?php
-			endfor;
-/* 		}
- */
+
+endfor;
+}
+
 		 ?>
 		</td></tr>
 		</fieldset>

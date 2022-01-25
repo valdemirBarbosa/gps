@@ -29,9 +29,6 @@
 						<input type="submit" value="pesquisar">
 	</div>
 
-
-	
-
 	<div class="filho2">
 		<a href="<?php echo URL_BASE . "denunciante/Novo" ?>" class="btn-inc">Incluir </a>
 	</div> <!-- FIM DA DIV pai -->	

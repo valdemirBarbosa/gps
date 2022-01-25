@@ -147,17 +147,17 @@
 <?php
 		  if(isset($processado)){	 ?>
 
-	<table class="minhaTabela">
+	<table>
 		<thead>
 			<tr>
-				<th width="5%" align="center">Id_servidor</th>
-				<th width="25%" align="left">Nome do servidor</th>
-				<th width="5%" align="center">Cpf</th>
-				<th width="5%" align="center">Matricula</th>
-				<th width="10%" align="left">Vinculo</th>
-				<th width="15%" align="left">Secretaria</th>
-				<th width="15%" align="left">Unidade</th>
-				<th width="10%" colspan="2" align="center">Ação</th>
+				<th align="center">Id_servidor</th>
+				<th align="left">Nome do servidor</th>
+				<th align="center">Cpf</th>
+				<th align="center">Matricula</th>
+				<th align="left">Vinculo</th>
+				<th align="left">Secretaria</th>
+				<th align="left">Unidade</th>
+				<th colspan="2" align="center">Ação</th>
 			  </tr>
 		  </thead>
 
