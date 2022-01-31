@@ -7,6 +7,7 @@ use app\models\Denuncia_Model;
 use app\models\Denunciado_Model;
 use app\models\Denunciante_Model;
 use app\models\Processo_Model;
+use app\models\Servidor_Model;
 
 if(!isset($_SESSION)){
      session_start();
@@ -132,6 +133,9 @@ class ProcessoController extends Controller{
 
           $processo = new Processo_Model();
           $dados["processo"] = $processo->getId($id_processo);
+
+          $processado = new Servidor_Model();
+          $dados["processado"] = $processado->getServidorProcessado($id_processo);
           $dados["view"] = "processo/processarServidor";
           $this->load("template", $dados);
      }

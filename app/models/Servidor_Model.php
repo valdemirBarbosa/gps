@@ -62,7 +62,14 @@ class Servidor_Model  extends Model{
      }
  
     public function listaProcessados($id_servidor, $id_processo, $offset, $limit){
-        $sql = "SELECT * FROM servidor as s INNER JOIN processo as p ON s.id_processo = $id_processo AND p.id_processo = $id_processo ORDER BY id_servidor ASC LIMIT $offset, $limit";
+        $sql = "SELECT * FROM servidor as s INNER JOIN processo as p ON s.id_processo = p.id_processo AND p.id_processo = $id_processo ORDER BY id_servidor ASC LIMIT $offset, $limit";
+        $sql = $this->db->query($sql);
+        return $sql->fetchAll(\PDO::FETCH_OBJ);
+    }
+ 
+    //Serve para buscar servidor vinculado ao processo - [formulario de processar servidor] preenhe a tabela de servidor processado 
+    public function getServidorProcessado($id_processo){
+        $sql = "SELECT * FROM servidor as s INNER JOIN processo as p ON s.id_processo = p.id_processo AND s.id_processo = $id_processo";
         $sql = $this->db->query($sql);
         return $sql->fetchAll(\PDO::FETCH_OBJ);
     }
@@ -85,6 +92,16 @@ class Servidor_Model  extends Model{
         if($sql->rowCount() > 0){
             $ret = $sql->fetch(\PDO::FETCH_OBJ);
         }
+        return $ret;
+    }
+
+    //usado para carregar os servidores processadosjá  no momento da abertura do formulário
+    public function  ServidorProcessado($id_processo){
+        $sql = "SELECT * FROM servidor as s INNER JOIN processo as p ON s.id_processo =  :id";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":id", $id_processo);
+        $sql->execute();
+        $ret = $sql->fetch(\PDO::FETCH_OBJ);
         return $ret;
     }
     

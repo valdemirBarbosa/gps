@@ -67,7 +67,26 @@
 						</td>
 					</tr>	
 				<?php }}
-				?>									  
+				?>					
+				
+				</table>
+	
+				<table class="paginacao">
+				<tr><td>
+				<?php
+					if(isset($totalPaginas)){
+
+						for($q=1; $q<=$totalPaginas; $q++):  
+							echo "<a href=".URL_BASE.'Pesquisa/ConsultaDenunciante/?p='.($q); ?> > <?php echo "[".($q)."]" ?> </a> 
+				<?php
+
+			endfor;
+			}
+
+	 ?>
+	</td></tr>
+</table>
+		
 			</tbody>
 		</table>
 	</div>					

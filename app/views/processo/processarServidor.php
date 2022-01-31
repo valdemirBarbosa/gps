@@ -9,13 +9,6 @@
 
 <div class="div1">
 <form action="<?php echo URL_BASE ."Processo/Salvar" ?>" method="POST">
-		<!--Botões !-->
-		<div class="btn-inc">
-			<script> //Link para voltar à página anterior
-				document.write('<a href="' + document.referrer + '">Voltar</a>');
-			</script>
-		</div>	
-
 	<?php
 		if(isset($processo)){
 		foreach($processo as $pd){ 
@@ -44,7 +37,6 @@
 				<input class="txt_numero_processo" name="txt_numero_processo" type="number" placeholder="Insira o número do processo" value="<?php echo $pd->numero_processo ?>">
 		</fieldset>		
 
-		<table border="1"><tr><td colspan="5"><td></td> <td></td> <td></td> <td></td>
 		<fieldset>
 		<legend>informações do processo</legend>
 				
@@ -56,8 +48,6 @@
 					<input name="txt_data_encerramento" type="date" readonly value="<?php echo $pd->data_encerramento ?>">
 			<input type="hidden" name="id_processo" value="<?php echo $pd->id_processo ?>">
 		</fieldset>
-		</td></tr>
-		</table>
 	</form>
 </div> <!-- fim da div 1 -->
 
@@ -73,33 +63,19 @@
 
 	<fieldset>
 		<legend>Consulta servidor para inclusão no processo</legend>
-	<table> 		
-			<tr>
-				<td>
 				<form method="POST" action="<?php echo URL_BASE . 'Processar/porParametro' ?>" >
-				<tr>
-					<td>
 						<label>Campo de pesquisa</label>
 							<select name="pesquisa">
-	<!-- 							<option value="1">Número do documento</option>
-									<option value="2">Número do Processo</option>
-	-->							<option value="3">Nome</option>
+								<option value="3">Nome</option>
 									<option value="4">CPF</option>
 							</select>
-					</td>
-
-					<td>
-							<input type="text" autofocus name="valorPreenchidoUsuario">
+							<input type="text" autofocus name="valorPreenchidoUsuario" class="pesquisa">
 							<input type="hidden" name="campo" value="<?php echo $campo ?>">
 							<input type="hidden" name="view" value="<?php echo $view ?>">
 							<input type="hidden" name="retorno" value="<?php echo $retorno ?>">
 							<input type="hidden" name="tabela" value="<?php echo 'servidor' ?>">
 							<input type="submit" value="pesquisar">
-
-					</td>
-				</tr>
-		</table>
-		</fieldset>
+	</fieldset>	
 	</form>
 </div>
 
@@ -150,14 +126,14 @@
 	<table>
 		<thead>
 			<tr>
-				<th align="center">Id_servidor</th>
-				<th align="left">Nome do servidor</th>
-				<th align="center">Cpf</th>
-				<th align="center">Matricula</th>
-				<th align="left">Vinculo</th>
-				<th align="left">Secretaria</th>
-				<th align="left">Unidade</th>
-				<th colspan="2" align="center">Ação</th>
+				<th width="5%" align="center">Id_servidor</th>
+				<th width="25%" align="left">Nome do servidor</th>
+				<th width="5%" align="center">Cpf</th>
+				<th width="5%" align="center">Matricula</th>
+				<th width="10%" align="left">Vinculo</th>
+				<th width="15%" align="left">Secretaria</th>
+				<th width="15%" align="left">Unidade</th>
+				<th width="10%" colspan="2" align="center">Ação</th>
 			  </tr>
 		  </thead>
 
@@ -183,7 +159,8 @@
 					</div>
 				</td>
 			 </tr>	
- <?php }}
+ <?php }
+ }
   ?>									  
 		  </tbody>
 	</table>

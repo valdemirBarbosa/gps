@@ -38,7 +38,7 @@ class ServidorController extends Controller{
      $dados["servidor"] = $servidores->getservidor($id_servidor);
      $servidores->Deletar($id_servidor);
      $this->load("template",$dados);
-     header("Location:" . URL_BASE . "servidor");
+     header("Location:" . URL_BASE . "processo/processarServidor");
 
 }
 

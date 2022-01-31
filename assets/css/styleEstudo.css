@@ -46,85 +46,59 @@ ul, li{list-style:none;}
 	font-weight:normal;
 	font-style:normal;
 }
-.base-home{
-    background-color:darkslategray;
-    width: 100%;
-    height: 7%;
-    margin-top: 0%;
-    padding-top: 0.7%;
-}
-.titulo-pagina{
-    font-weight: bolder;
-    font-size: 20px;
-    color:white;
-    text-align: center;
-    margin-top: 0px;
+
+.base-topo{
+      background-color:darkslategray;
+      float: left;
+      width: 100%;
+      height: 10%;
+      padding: 2%;
 }
 
 .container{
-    background-color: whitesmoke;
+    background-color:cadetblue;
     display: grid;
     grid-template-columns: 1fr; /* Divide a DIV em duas colunas: A primeira com três frações do espaço total da tela e a segunda coluna com uma fração */
-    grid-template-rows: 10vh 40vh 10vh; /* Especifica a altura das 3 linhas: 1ª coluna com 20 Visão de Heigth; a segunda 70 VH e a termeira 20 VH  */
+    grid-template-rows: 10vh 60vh 20vh; /* Especifica a altura das 3 linhas: 1ª coluna com 20 Visão de Heigth; a segunda 70 VH e a termeira 20 VH  */
     grid-template-areas: "header header" /* Pode ser qualquer nome porque será relacionado com teg que eu quero. especificado aqui linha 1 nas duas colunas */
-                         "main" /* Especificado aqui linha 2 na coluna 1 main e na coluna 2 o aside */
-                         "footer" /* Especificado aqui linha 3 nas duas colunas o footer */
+                         "main   aside" /* Especificado aqui linha 2 na coluna 1 main e na coluna 2 o aside */
+                         "footer footer" /* Especificado aqui linha 3 nas duas colunas o footer */
   
 }
 
-.pai{
-    display: grid;
-    grid-template-columns: auto auto;
-    grid-template-rows: 8vh;
-    grid-template-areas: 'filho1 filho2';
-}
-
-.filho1{
-    grid-area: filho1;
-}
-
-.filho1 input[type=text]{
-    width: 300px;
-}
-
-.filho2{
-    display: grid;
-    grid-area: filho2;
-    margin-left: 30%;
-
-}
-
 header{
+    background-color:black;
     /*grid-column-start: 1;  Coluna da grid começa na linha divisória da coluna 1 */
     /*grid-column-end: 3;   Coluna da grid termina na linha divisória da coluna  3*/
     grid-area: header;
 
-    width: 100%;
+
+    /*     width: 100%;
     height: 7%;
-    margin-bottom: 0.3%;
+    margin-bottom: 0.5%;
     background-color:#101010;
     box-shadow: 0px 5px 20px #000;
     padding: 10px;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-}
+ */}
 
  main{
-    background-color:whitesmoke;
+    background-color: blue;
     grid-area: main;
-    height: 90%;
 }
 
+
+aside{
+    background-color: green;
+    grid-area: aside;
+}
+ 
 footer{
-    background-color:darkslategray;
+    background-color: red;
     grid-area: footer;
-    text-align: center;
-    font-family: sans-serif;
-    font-weight: bold;
-    color: thistle;
-    position: relative;
-    float: inline-end;
+
 }
 
 h1{
@@ -158,19 +132,32 @@ h1{
 .menu li a:hover{
     background-color:blue;
     color: wheat;
-    padding: 2px 5px 3px 5px;
+    padding: 5px 10px 5px 10px;
     border-radius: 10px;
     }
 
-
-.div-titulo{
-    background-color:royalblue;
+/* .container{
+    
     width: 100%;
-    height: 7%;
-    margin-top: 0%;
-    padding-top: 0.5%;
+    margin: 0px;
+    display: flex;
+    flex-wrap: wrap;
+}
+ */
+.titulo-pagina{
+    font-weight: bolder;
+    font-size: 20px;
+    color:whitesmoke;
+    text-align: center;
 }
 
+/* .base-home{
+    background-color:royalblue;
+    width: 100%;
+    height: 9%;
+    margin-top: 0%;
+}
+ */ 
 .imagem{
     width: 80%;
     height: 80%;
@@ -193,21 +180,20 @@ li{
 
 .menu li a:hover{
     background-color:royalblue;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 
 
-/* form{
+form{
     background-color:lightsteelblue;
-    width: 70%;
+    width: 90%;
     position: absolute;
     top:20%;
-    left: 70px;
-    margin-bottom: 20px;
+    left: 100px;
 }
- */
-/* form.pesquisa{
+
+form.pesquisa{
     background-color: silver;
     width: 10px;
     height: 10px;
@@ -215,7 +201,7 @@ li{
     top:17%;
     left: 15%;
 }
- */
+
 form.form2{
     background-color:blanchedalmond;
     width: 70%;
@@ -230,7 +216,7 @@ textarea{
 }
 
 label, input{
-    border-radius: 0%;
+    border-radius: 2%;
     background-color:lightcyan;
     margin: 5px;
     padding: 5px;
@@ -245,8 +231,8 @@ label, input{
 
 .base-lista{
     width: 100%;
+    margin-top: 2%;
     text-align: center;
-    background-color:lavender;
 }
 
 .base-lista2{
@@ -272,7 +258,6 @@ input.pesquisa{
 
 input[type="text"]{
     text-align: left;
-    color: blue;
 }
 
 input[type="date"]{
@@ -291,14 +276,14 @@ input[type="date"]{
 
 fieldset{
     border-color:black;
-    margin-left: 3%;
-    margin-top: 1%;
+    margin-left: 50px;
+    margin-top: 15px;
     width: 90%;
 }
 
 legend{
     color:black;
-    font-size: 16px;
+    font-size: 20px;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
 }
@@ -348,8 +333,8 @@ span{
 
 .titulo{
   display:block;
-  padding:0px;
-  color:blanchedalmond;
+  padding:0px 0;
+  color:#323232;
   font-weight:inherit;
   font-size:1.4em;
   text-transform:uppercase;
@@ -364,7 +349,7 @@ span{
   text-transform:uppercase;
 
 }
-/* 
+
 .rodape{
     margin-top: 714px;
     width: 100%;
@@ -373,12 +358,13 @@ span{
     color:red;
     background-color:darkslategray;
 }
- */
+
     table {
           border-collapse: collapse;
           width: 95%;
           margin-left: 30px;
           margin-right: 10px;
+          vertical-align: var(--bs-table-active-color);
     }
 
     table.paginacao{
@@ -403,7 +389,7 @@ span{
           padding: 2px;
 }
       tr:nth-child(even){background-color:#ddd}
-      tr:hover {background-color:lightblue; color:mediumblue;}
+      tr:hover {background-color:lightblue; color:mediumblue;  font-size: 12px;}
       th{background-color:darkslategray; color: whitesmoke;}
 
 .btn{
@@ -441,15 +427,16 @@ span{
 
 .btn-inc{
     width: 100px;
-    height: 28px;
-    margin-top: 5%;
+    height: 40px;
+    float: left;
     color: black;
+    border-radius: 10px;
     border-color:royalblue;
     border-style: solid;
-    padding-top: 3%;
+    padding-top: 8px;
     text-align: center;
-    font-weight: bold;
     box-shadow: 3px 6px #888888;
+    text-transform: uppercase;
 }
 
 .btn-voltar{
@@ -470,10 +457,10 @@ span{
 .btn-inc:hover{
     color:white;
     width: 100px;
-    height: 30px;
+    height: 45px;
     background-color:royalblue;
     border-color:white;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .btn-excluir{
@@ -490,8 +477,8 @@ span{
 }
 
 .btn-excluir:hover{
-    width: 80px;
-    height: 30px;
+    width: 85px;
+    height: 40px;
     background-color:greenyellow;
     border-color:red;
     color:white;
@@ -507,12 +494,14 @@ span{
     padding-top: 2px;
     text-align: center;
     text-transform: uppercase;
+    box-shadow: 3px 6px #888888;
+
 }
 
 
 .btn-editar:hover{
-    width: 83px;
-    height: 33px;
+    width: 85px;
+    height: 40px;
     background-color:lightslategray;
     border-color:darkgreen;
     color:white;
@@ -534,11 +523,8 @@ span{
 }
 
 .img{
-    width: 30%;
-    height: 20%;
-    margin:auto;
-    margin-top: 15%;
-
+    margin-left: 150px;
+    margin-top: 50px;
 }
 
 .denuncia{
@@ -644,6 +630,7 @@ span{
 }
 
 .tabela_ocorrencia{
+   
     margin-left: 20px;
     margin-right: 15px;
     margin-top: 20px;
@@ -689,7 +676,7 @@ span{
 }
 
 .btn-portaria:hover{
-    height: 35px;
+    height: 40px;
     background-color:khaki;
     color:lightgreen;
 }
@@ -708,7 +695,7 @@ span{
 }
 
 .btn-ocorrencia:hover{
-    height: 35px;
+    height: 50px;
     background-color:whitesmoke;
     color:yellow;
 }
@@ -775,14 +762,19 @@ span{
 }
 
 .div1{
-    width: 100%;
-    height: 26%;
+    width: 1270px;
+    height: 200px;
+    margin-left: 20px;
+    margin-right: 10px;
+    margin-top: 4px;
     background-color:LightSteelBlue;
 }
 
 .div2{
-    width: 100%;
-    height: 14%;
+    margin-top: 1px;
+    width: 1270px;
+    margin-left: 20px;
+    margin-right: 10px;
     background-color: LightSteelBlue;
 }     
 
@@ -791,16 +783,16 @@ span{
 }
 
 .div3{
-    width: 100%;
+    width: 0px;
     height: 0px;
-    margin-left: 40px;
+    margin-left: 0px;
+    margin-right: 0px;
     background-color: LightSteelBlue;
 }
 
  .div4{
     margin-top: 10px;
     background-color: LightSteelBlue;
-    width: 100%;
 
 }
 
@@ -814,42 +806,21 @@ span{
 }
 
 .frmConsulta{
-    background-color:lightgrey;
+    height: 1000px;
+    display: flex;
+    background-color: red;
+    margin-top: 2%;
+    margin-left: 100px;
 }
 
-.pesquisa{
-    grid-area: pesquisa;
-
-
-}
-
-.incluir{
-    grid-area: incluir;
-    background-color:yellow;
-    text-align: center;
-    align-content: center;
-}
-
-.excluir{
-    grid-area: excluir;
-    background-color:green;
-    text-align: center;
-    align-content: center;
-}
-
-
-.frmConsulta input[type=text]{
-    width: 300px;
-}
-
-.frmConsulta input[type=submit]{
-    width: 150px;
+.frmConsulta.input{
+    font-size: 50px;
+    color: red;
 }
 
 .labelPesquisa{
     float: left;
 }
-
 
 @media only screen and (max-width: 800px){
     .menu{
@@ -874,25 +845,7 @@ span{
             height: 9%;
             margin-top: 0%;
         }
-
         
-        @media only screen and (max-height: 500px){
-            footer{
-                grid-area: footer;
-                display: grid;
-                grid-row-end: auto;
-                font-family: sans-serif;
-                color:white;
-                position: absolute;
-                background-color:black;
-            }
         
-            table tr td{
-                display:block;
-                background-color: #101010;
-                color: green;
-
-        }
     }
-}
  

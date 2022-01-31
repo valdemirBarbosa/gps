@@ -36,7 +36,8 @@ class PesquisaController extends Controller{
      }
 
       $parametrosPesquisa = $this->pegarDadosDoUsuario(); // Pega os dados do usuário no filtro de pesquisa do formulário de denúncia
-        if(isset($_POST['tabela']) && !empty(['valorPreenchidoUsuario'])){ //Verifica se foi preenchido o campo de pesquisa
+      $limit = LIMITE_LISTA;    
+      if(isset($_POST['tabela']) && !empty(['valorPreenchidoUsuario'])){ //Verifica se foi preenchido o campo de pesquisa
                $tabela = addslashes($_POST['tabela']);
                $_SESSION['tabela'] = $tabela;
                
@@ -48,17 +49,23 @@ class PesquisaController extends Controller{
 
                $informacao = $parametrosPesquisa[1];
                $_SESSION['informarcao'] = $informacao;
+
+               
         }
 
                $pesquisa = new Pesquisa_Model(); // Cria instancia do classe Pesquisa Model 
-               $dados['dados'] = $pesquisa->PesquisaDenuncia($tabela, $campo, $informacao); // Pesquisa simples, mas com dados solicitados pelo usuario
+               $dados['paginacao'] = $pesquisa->PesquisaDenunciaContar($tabela, $campo, $informacao); // Pesquisa simples, mas com dados solicitados pelo usuario
                $dados["view"] = $_SESSION['view'];
-               $qtdeRegistros = count($dados['dados']); // Recebe a contagem de registros pela consulta acima
+               $qtdeRegistros = count($dados['paginacao']); // Recebe a contagem de registros pela consulta acima
                $paginacao = $this->paginar($qtdeRegistros, $paginaAtual); //vai pra função pagina com já com algumas informações
                $offset = $paginacao[0];
                $totalPaginas = $paginacao[2];
                $dados['totalPaginas'] = $totalPaginas;
+               $dados['dados'] = $pesquisa->PesquisaDenuncia($tabela, $campo, $informacao, $offset, $limit); // Pesquisa simples, mas com dados solicitados pelo usuario
+                                  
                $this->load("template", $dados);
+
+               
   }
 
   public function ConsultaDenunciaLink(){
@@ -120,7 +127,7 @@ public function ConsultaDenunciante(){
                $dados["view"] = $_SESSION['view'];
                $qtdeRegistros = count($dados['p']); // Recebe a contagem de registros pela consulta acima
                $paginacao = $this->paginar($qtdeRegistros, $paginaAtual); //vai pra função pagina com já com algumas informações
-               $offset = 0;
+               $offset = $paginacao[0];
                $totalPaginas = $paginacao[2];
                $dados['dados'] = $pesquisa->PesquisaDenunciante($tabela, $campo, $informacao, $offset, $limit); // Pesquisa simples, mas com dados solicitados pelo usuario
                $dados['totalPaginas'] = $totalPaginas;
@@ -136,7 +143,6 @@ public function ConsultaDenunciante(){
                $pesquisa = new Pesquisa_Model();
      
                $dados["view"] = addslashes($_POST['view']);
-               $retornoDados = addslashes($_POST['retorno']);
                
                $campo = $parametrosPesquisa[0];
                $informacao = $parametrosPesquisa[1];

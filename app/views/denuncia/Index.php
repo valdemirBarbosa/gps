@@ -11,7 +11,7 @@
 <?php //paramentros para pesquisa dos formulários de denuncia e processo
  		$tabela = 'denuncia';
  		$view = 'denuncia/index';
-		$retorno = 'denunciaRet';
+//		$retorno = 'denunciaRet';
 ?>
 
 <div class="pai">
