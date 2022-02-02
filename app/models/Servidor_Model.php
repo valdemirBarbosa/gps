@@ -68,8 +68,8 @@ class Servidor_Model  extends Model{
     }
  
     //Serve para buscar servidor vinculado ao processo - [formulario de processar servidor] preenhe a tabela de servidor processado 
-    public function getServidorProcessado($id_processo){
-        $sql = "SELECT * FROM servidor as s INNER JOIN processo as p ON s.id_processo = p.id_processo AND s.id_processo = $id_processo";
+    public function getServidorProcessado($id_processo, $offset, $limit){
+        $sql = "SELECT * FROM servidor as s INNER JOIN processo as p ON s.id_processo = p.id_processo AND s.id_processo = $id_processo LIMIT $offset, $limit";
         $sql = $this->db->query($sql);
         return $sql->fetchAll(\PDO::FETCH_OBJ);
     }
@@ -210,6 +210,24 @@ class Servidor_Model  extends Model{
             return false;
         }
     }
+
+    public function Paginar($qtdeRegistros, $paginaAtual){
+     $_SESSION['limit'] = LIMITE_LISTA;
+     $limit = $_SESSION['limit'];
+     $offset = 0;
+
+     $dados['paginaAtual'] = $paginaAtual;
+
+     $totalRegistros = $qtdeRegistros;
+     $totalPaginas = ceil($totalRegistros / $limit);
+
+     $offset = ($dados['paginaAtual'] * $limit) - $limit;
+
+     $paginacao = array($offset, $limit, $totalPaginas);
+
+     return $paginacao;
+
+}
 
 
 }

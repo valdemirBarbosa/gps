@@ -8,6 +8,8 @@ use app\models\Denunciado_Model;
 use app\models\Denunciante_Model;
 use app\models\Processo_Model;
 use app\models\Servidor_Model;
+use app\models\Pesquisa_Model;
+use app\models\PesquisaControler;
 
 if(!isset($_SESSION)){
      session_start();
@@ -127,15 +129,58 @@ class ProcessoController extends Controller{
           $this->load("template", $dados);
      }
 
-     public function Processar($id_processo){
+     public function Processar(){
+          $limit = LIMITE_LISTA;
+
+       
+          if($_GET['p']){
+               echo "<br/> Pagina atual ".$paginaAtual = $_GET['p'];
+               echo "<br/> campo ".$campo = $_SESSION['campo'];
+               echo "<br/> informação ".$informacao = ""; 
+               echo "<br/> tabela ".$tabela = $_SESSION['tabela'];
+               echo "<br/> id processo ".$id_processo = $_SESSION['id'];
+               exit;
+
+          }else{
+               $paginaAtual = 1;
+          }
+     
+          $id_processo = $_GET['id'];
+          $_SESSION['id'] = $id_processo;
+
+          if(empty($campo) && empty($informacao)){
+               $campo = 'id_processo';
+               $informacao = "";
+          }else{
+               $campo = $_SESSION['campo'];
+               $informacao = " ";
+          }
+
+          
           $fase = new Processo_Model();
           $dados["fase"] = $fase->faseLista();
 
           $processo = new Processo_Model();
-          $dados["processo"] = $processo->getId($id_processo);
+          $id = $dados["processo"] = $processo->getId($id_processo);
 
           $processado = new Servidor_Model();
-          $dados["processado"] = $processado->getServidorProcessado($id_processo);
+          $tabela = "servidor";
+          $campo = "id_processo";
+          $informacao = $id_processo;
+
+
+          $pesquisa = new Pesquisa_Model(); // Cria instancia do classe Pesquisa Model 
+          $dados['paginacao'] = $pesquisa->PesquisaProcessadosContar($tabela, $campo, $informacao); // Pesquisa simples, mas com dados solicitados pelo usuario
+          $dados["view"] = "processo/processarServidor";
+          $qtdeRegistros = count($dados['paginacao']); // Recebe a contagem de registros pela consulta acima
+          $paginacao = $this->paginar($qtdeRegistros, $paginaAtual); //vai pra função pagina com já com algumas informações
+         echo $offset = $paginaAtual;
+          
+         $totalPaginas = $paginacao[2];
+          $dados['totalPaginas'] = $totalPaginas;
+
+          $dados["processado"] = $processado->getServidorProcessado($id_processo, $offset, $limit);
+       
           $dados["view"] = "processo/processarServidor";
           $this->load("template", $dados);
      }
@@ -164,5 +209,21 @@ class ProcessoController extends Controller{
      $this->load("template", $dados);
 }
 
+     public function Paginar($qtdeRegistros, $paginaAtual){
+          $_SESSION['limit'] = LIMITE_LISTA;
+          $limit = $_SESSION['limit'];
+          $offset = 0;
+
+          $dados['paginaAtual'] = $paginaAtual;
+
+          $totalRegistros = $qtdeRegistros;
+          $totalPaginas = ceil($totalRegistros / $limit);
+
+          $offset = ($dados['paginaAtual'] * $limit) - $limit;
+
+          $paginacao = array($offset, $limit, $totalPaginas);
+
+          return $paginacao;
+     }
 }
 

@@ -22,7 +22,7 @@
 		<input type="hidden" name="tabela" value='<?php echo $tabela ?>'>
 
 		<label>Pesquisa</label> 
-			<select name="pesquisa" class="select">
+			<select name="pesquisa">
 				<option value="1">Número do documento</option>
 				<option value="2">Número do Processo</option>
 				<option value="3">Nome</option>
@@ -90,26 +90,23 @@
 				<a href="<?php echo URL_BASE ."denuncia/Excluir/".$den->id_denuncia ?>" >Excluir</a>
 				</div>
 			</td>
-		   </tr> 
+		   </tr>
+	 
 	<?php }
 	} ?>
 	</div> <!-- FIM DA DIV base-lista !-->
 	</div> <!-- FIM DA DIV container-conteudo -->
-
 	</table>
-	
-		<table class="paginacao">
-		<tr><td>
-		<?php
-			if(isset($totalPaginas)){
+	<div class="paginacao">
+				<?php
+					if(isset($totalPaginas)){
 
-				for($q=1; $q<=$totalPaginas; $q++):  
-					echo "<a href=".URL_BASE.'Pesquisa/ConsultaDenuncia/?p='.($q); ?> > <?php echo "[".($q)."]" ?> </a> 
-		<?php
+						for($q=1; $q<=$totalPaginas; $q++):  
+							echo "<a href=".URL_BASE.'Pesquisa/ConsultaDenuncia/?p='.($q); ?> > <?php echo "[".($q)."]" ?> </a> 
+				<?php
 
-endfor;
-}
+						endfor;
+					}
 
-		 ?>
-		</td></tr>
-	</table>
+				?>
+	</div>

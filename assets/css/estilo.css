@@ -850,6 +850,16 @@ span{
     float: left;
 }
 
+.paginacao{
+    background-color:lightcyan;
+    color: yellow;
+    margin-left: 3%;
+    margin-right: 3%;
+    text-align: left;
+}
+.paginacao:hover{
+    background-color:lightsteelblue;
+}
 
 @media only screen and (max-width: 800px){
     .menu{

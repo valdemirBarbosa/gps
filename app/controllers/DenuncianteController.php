@@ -8,7 +8,6 @@ class DenuncianteController extends Controller{
     
    public function index(){
         $denunciantes = new Denunciante_Model();
-
         $dados["denunciante"] = $denunciantes->lista();
         $dados["view"] = "denunciante/Index";
         $this->load("template", $dados);

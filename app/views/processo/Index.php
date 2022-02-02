@@ -119,7 +119,7 @@
 							echo '<td>
 							<div class="btn-ocorrencia">'; 
 					?>
-						<a href="<?php echo URL_BASE ."Processo/Processar/".$pd->id_processo ?>">Processar</a>
+						<a href="<?php echo URL_BASE ."Processo/Processar/?id=".$pd->id_processo ?>">Processar</a>
 							</div>
 							</td>
 					<?php

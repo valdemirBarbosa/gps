@@ -15,7 +15,7 @@ class Denunciante_Model  extends Model{
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
-    public function  getDenunciante($id_denunciante){
+    public function getDenunciante($id_denunciante){
         $ret = array();
         $sql = "SELECT * FROM denunciante WHERE id_denunciante = :id";
         $sql = $this->db->prepare($sql);

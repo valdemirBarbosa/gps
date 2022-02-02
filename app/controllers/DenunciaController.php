@@ -8,7 +8,6 @@ use app\models\TipoDocumento_Model;
 class DenunciaController extends Controller{
    public function index(){
         $denuncias = new Denuncia_Model();
-
         $dados["dados"] = $denuncias->lista();
         $dados["view"] = "denuncia/Index";
         $this->load("template", $dados);

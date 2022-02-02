@@ -25,6 +25,12 @@ class Pesquisa_Model extends Model{
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
+    
+    public function PesquisaProcessadosContar($tabela, $campo, $informacao){
+        $sql = "SELECT * FROM $tabela WHERE $campo LIKE '%$informacao%'";
+        $qry = $this->db->query($sql);
+        return $qry->fetchAll(\PDO::FETCH_OBJ);
+    }
 
     public function PesquisaDenunciaContar($tabela, $campo, $informacao){ //conta quantidade de registro da consulta
         if($campo = "nome_servidor"){
@@ -65,7 +71,6 @@ class Pesquisa_Model extends Model{
     public function PesquisaDenunciante($tabela, $campo, $informacao, $offset, $limit){
         $sql = "SELECT * FROM $tabela WHERE $campo LIKE '%$informacao%' LIMIT $offset, $limit";
         $qry = $this->db->query($sql);
-        print_r($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
 
     }

@@ -165,4 +165,19 @@
 		  </tbody>
 	</table>
 
-</div> <!-- fim da div 4 -->
+
+<div class="paginacao">
+				<?php
+					if(isset($totalPaginas)){
+
+						for($q=1; $q<=$totalPaginas; $q++):  
+							echo "<a href=".URL_BASE."processo/Processar/?id=".$pd->id_processo."&?p=".$q.">". $q ?> </a> 
+<!-- 							echo "<a href=".URL_BASE."processo/Processar/?p=".$q."&?id=".$pd->id_processo.">". $q ?> </a> 
+ -->				<?php
+
+						endfor;
+					}
+
+				?>
+	</div>
+	</div> <!-- fim da div 4 -->
