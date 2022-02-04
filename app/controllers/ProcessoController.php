@@ -133,18 +133,14 @@ class ProcessoController extends Controller{
           $limit = LIMITE_LISTA;
 
        
-          if($_GET['p']){
-               echo "<br/> Pagina atual ".$paginaAtual = $_GET['p'];
-               echo "<br/> campo ".$campo = $_SESSION['campo'];
-               echo "<br/> informação ".$informacao = ""; 
-               echo "<br/> tabela ".$tabela = $_SESSION['tabela'];
-               echo "<br/> id processo ".$id_processo = $_SESSION['id'];
-               exit;
-
+          if(isset($_GET['p']) && !empty($_GET['p'])){
+               $paginaAtual = $_GET['p'];
+               $tabela = $_SESSION['tabela'];
           }else{
                $paginaAtual = 1;
           }
      
+          
           $id_processo = $_GET['id'];
           $_SESSION['id'] = $id_processo;
 
@@ -174,7 +170,7 @@ class ProcessoController extends Controller{
           $dados["view"] = "processo/processarServidor";
           $qtdeRegistros = count($dados['paginacao']); // Recebe a contagem de registros pela consulta acima
           $paginacao = $this->paginar($qtdeRegistros, $paginaAtual); //vai pra função pagina com já com algumas informações
-         echo $offset = $paginaAtual;
+          $offset = $paginaAtual;
           
          $totalPaginas = $paginacao[2];
           $dados['totalPaginas'] = $totalPaginas;

@@ -23,7 +23,7 @@
 
 				<label>fase</label>
 					<select name="txt_id_fase">
-						<option value="<?php if(isset($pd->id_fase)){ echo $pd->id_fase; } ?>"><?php if(isset($pd->id_fase)){ echo $pd->fase; } ?></option>
+						<option disable value="<?php if(isset($pd->id_fase)){ echo $pd->id_fase; } ?>"><?php if(isset($pd->id_fase)){ echo $pd->fase; } ?></option>
 	<?php } 
 						
 		if(isset($fase)){
@@ -63,7 +63,7 @@
 
 	<fieldset>
 		<legend>Consulta servidor para inclusão no processo</legend>
-				<form method="POST" action="<?php echo URL_BASE . 'Processar/porParametro' ?>" >
+				<form class="consulta" method="POST" action="<?php echo URL_BASE . 'Processar/porParametro' ?>" >
 						<label>Campo de pesquisa</label>
 							<select name="pesquisa">
 								<option value="3">Nome</option>
@@ -171,7 +171,7 @@
 					if(isset($totalPaginas)){
 
 						for($q=1; $q<=$totalPaginas; $q++):  
-							echo "<a href=".URL_BASE."processo/Processar/?id=".$pd->id_processo."&?p=".$q.">". $q ?> </a> 
+							echo "<a href=".URL_BASE."processo/Processar/?id=".$pd->id_processo."&p=".$q.">". $q ?> </a> 
 <!-- 							echo "<a href=".URL_BASE."processo/Processar/?p=".$q."&?id=".$pd->id_processo.">". $q ?> </a> 
  -->				<?php
 

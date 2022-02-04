@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models;
 use app\core\Model;
 
@@ -15,16 +14,16 @@ class Servidor_Model  extends Model{
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
-    //funçção para pesquisar servidores em denuncias e processos
+    //função para pesquisar denuncias para a view servidor 1/3 consultas para o formulário de consulta de servidor com denuncia ou processo
     public function servidorProcessos($tabela, $tabela1, $tabela2, $tabela3, $tabela4, $alias, $campo, $parametro, $offset, $limit){
-        $sql = "SELECT * FROM $tabela as s
-                RIGHT JOIN $tabela1 as d ON s.id_denuncia = d.id_denuncia 
-                LEFT JOIN $tabela2 as p ON d.id_denuncia = p.id_denuncia
+        $sql = "SELECT * FROM $tabela1 as d
+                LEFT JOIN $tabela2 as p ON d.id_denuncia  = p.id_denuncia
                 LEFT JOIN $tabela3 as f ON p.id_fase = f.id_fase
                 LEFT JOIN $tabela4 as den ON d.id_denunciante = den.id_denunciante
+                LEFT JOIN $tabela as s ON p.id_processo = s.id_processo
                 WHERE $alias.$campo LIKE '%$parametro%' 
-                ORDER BY s.nome_servidor ASC LIMIT $offset, $limit";
-        $qry = $this->db->query($sql);
+                ORDER BY $alias.$campo ASC LIMIT $offset, $limit";
+         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
        
     }

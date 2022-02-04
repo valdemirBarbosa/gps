@@ -193,6 +193,13 @@ public function ConsultaDenunciante(){
 
           $dadosTabela = new Servidor_Model();
           $dados['servidor'] = $dadosTabela->servidorProcessos($tabela, $tabela1, $tabela2, $tabela3, $tabela4, $alias, $campo, $parametro, $offset, $limit);
+          
+/*           echo "<pre>";
+               print_r($d);
+          echo "</pre>";
+          exit;
+ */
+          
           $dados["view"] = "servidor/index";
           $this->load("template", $dados);
 

@@ -776,14 +776,15 @@ span{
 
 .div1{
     width: 100%;
-    height: 26%;
-    background-color:LightSteelBlue;
+    height: 22%;
+    background-color: whitesmoke;
 }
 
 .div2{
     width: 100%;
-    height: 14%;
-    background-color: LightSteelBlue;
+    margin-top: 1%;
+    height: 10%;
+    background-color: whitesmoke;
 }     
 
 .div2.processarServidorFormulario{
@@ -792,20 +793,25 @@ span{
 
 .div3{
     width: 100%;
+    margin-top: 2%;
     height: 0px;
     margin-left: 40px;
-    background-color: LightSteelBlue;
+    background-color: whitesmoke;
 }
 
  .div4{
     margin-top: 10px;
-    background-color: LightSteelBlue;
+    background-color: whitesmoke;
     width: 100%;
 
 }
 
 .principal{
     margin-top: 50px;
+}
+
+.consulta{
+    background-color:beige;
 }
 
 .fim{
@@ -852,7 +858,6 @@ span{
 
 .paginacao{
     background-color:lightcyan;
-    color: yellow;
     margin-left: 3%;
     margin-right: 3%;
     text-align: left;
