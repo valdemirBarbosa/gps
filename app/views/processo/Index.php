@@ -35,7 +35,7 @@
 </div>
 
 	<div class="filho2">
-			<a href="<?php //echo URL_BASE . "processo/novo" ?>" class="btn-inc" >INCLUIR </a>
+			<a href="<?php echo URL_BASE . "processo/novo" ?>" class="btn-inc" >INCLUIR </a>
 	</div>
 </form>
 

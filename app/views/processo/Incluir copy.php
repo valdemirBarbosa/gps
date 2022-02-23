@@ -6,35 +6,25 @@
 
 <fieldset>
 	<legend><h4>id - identificadores </h4></legend>
-	<br/>
-<br/>
-<br/>
+		<label>Id da denuncia</label>
+		<select autofocus name="txt_id_denuncia">
+			<option><?php echo "Selecione uma denúncia existente" ?></option>
 
-
-	<label>Id da denuncia</label>
-			<?php
-				if(isset($_GET['id'])){?>
-					<label><?php echo $_GET['id'] ?> </label>
-				<?php } ?> 
-		
+			<?php foreach($denunciaId as $den){?>
+			<option value="<?php echo $den->id_denuncia?>">
+				<?php echo $den->id_denuncia." / ".$den->denuncia_fato; }?>
+			</option>
+		</select>
+	
 		<label class="faseLbl">Fase</label>
-		<?php
-				if(isset($_GET['f'])){?>
-					<label>
-						<?php
-							$fase = $_GET['f'];
-							if($fase == 1)
-								echo "Processo Preliminar";
-								if($fase == 2)
-									echo "Sindicância";
-									if($fase == 3)
-										echo "Processo Prelimiar";
-				} ?> 
-					</label>
+		<select class="faselst" name="txt_id_fase" class="fase">
+			<option>FASE DO PROCESSO	
+				<?php foreach($fase as $f){?>
+					<option value="<?php echo $f->id_fase ?>"> <?php echo $f->fase ?>
+			</option>
+		<?php } ?>
+		</select>
 
-					<br/>
-					<br/>
-					<br/>
 	<div class="num_processo">
 		<label>Número do Processo</label>
 		<input name="txt_numero_processo" type="number" placeholder="Insira o número do processo">

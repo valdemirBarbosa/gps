@@ -4,6 +4,7 @@ use app\core\Controller;
 use app\models\Denuncia_Model;
 use app\models\Denunciante_Model;
 use app\models\TipoDocumento_Model;
+use app\functions\percorrerPost;
 
 class DenunciaController extends Controller{
    public function index(){
@@ -79,34 +80,42 @@ class DenunciaController extends Controller{
 }
  
    public function Salvar(){
+
      $d = new Denuncia_Model();
      $id_denuncia = isset($_POST['txt_id']) ? strip_tags(filter_input(INPUT_POST, "txt_id")) : NULL;
      
      $denuncia = isset($_POST['txt_denuncia']) ? strip_tags(filter_input(INPUT_POST, "txt_denuncia")) : " ";
 
-     $id_denunciante = $_POST['id_denunciante'];
-/*      $id_denunciante = isset($_POST['id_denunciante']) ? strip_tags(filter_input(INPUT_POST, "id_denunciante")) : 100;
- */
+     $id_denunciante = $_POST['lst_id_denunciante'];
      $tipo_documento = isset($_POST['id_tipo_doc']) ? strip_tags(filter_input(INPUT_POST, "id_tipo_doc")) : 15;
-
      $numero_documento = $_POST['txt_numero_documento'];
-
      $denunciados = isset($_POST['txt_denunciados']) ? strip_tags(filter_input(INPUT_POST, "txt_denunciados")) : " ";
-   
      $data_entrada = isset($_POST['txt_data_entrada']) ? strip_tags(filter_input(INPUT_POST, "txt_data_entrada")) : " ";
-
      $observacao = $_POST['txt_observacao'] ? strip_tags(filter_input(INPUT_POST, "txt_obsevacao")) : " ";
+     $doc_anexo = $_POST["txt_documentos_anexados"];
+     $anexo = " ";
+     $user = 1;
 
-     $arrayDenuncia = array($id_denuncia, $denuncia, $id_denunciante, $denunciados, $tipo_documento, $numero_documento, $data_entrada, $observacao);
-  
      if($id_denuncia != NULL){
-          $d->Editar($id_denuncia, $denuncia, $id_denunciante, $denunciados, $tipo_documento, $numero_documento, $data_entrada, $observacao);
-
-          $d->Incluir($id_denuncia, $denuncia, $id_denunciante, $denunciados, $tipo_documento, $numero_documento, $data_entrada, $observacao);
-
+          $d->Editar(denuncia, $id_denunciante, $tipo_documento, $numero_documento, $data_entrada, $denunciados, $observacao, doc_anexo, $anexo, $user);
           echo "<script> Document.alert('Denúncia  já existe, não pode mais cadastrar'); </script> ";
      }
-          header("Location:" . URL_BASE . "denuncia/lista");
+
+          if($d->Incluir($denuncia, $id_denunciante, $tipo_documento, $numero_documento, $data_entrada, $denunciados, $observacao, $doc_anexo, $anexo, $user)){
+               echo "Incluído com sucesso";
+               header("Location:" . URL_BASE . "denuncia/lista");
+          }else{
+               $msg = "Já existe o mesmo tipo de documento ({$tipo_documento}) e com o mesmo número {($numero_documento)}";
+               $this->Error($msg);
+          }
+
      }
+
+     public function Error($msg){
+          $msger = new MensageiroController();
+          $dados = $msg;
+          $dados = $msger->Error($msg);
+      }
+          
 }
 

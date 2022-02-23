@@ -12,16 +12,16 @@
 		    
 		</div>
 		
-			<div class="filho2">
+<!-- 			<div class="filho2">
 				<a href="<?php echo URL_BASE . "ocorrencia/novo" ?>" class="btn-inc" >INCLUIR</a>
 			</div>
-				<br/><br/>
+ -->				<br/><br/>
 
 	<table width="100%" border="1" cellspacing="0" cellpadding="0">
 		  <thead class="thead">
 				<th width="10%">Número Processo</th>
-				<th width="10%">Tipo</td>
-				<th>Data Elaboração </th>
+<!-- 				<th width="10%">Tipo</td>  //tirado temporariamente provavelmente não será util, se for reativarei
+ -->				<th>Data Elaboração </th>
 				<th>Data Publicação</th>
 				<th width="25%">Veículo</th>
 				<th width="25%">Prazo</th>
@@ -36,13 +36,34 @@
 	?>
 			<tr>
 				<td><?php echo $port->numero_processo ?></td>
-				<td><?php echo $port->tipo ?></td>
-				<td><input class="data" type="date" readonly value="<?php  echo $port->data_elaboracao  ?>" ></td>
+<!-- 				<td><?php //echo $port->tipo ?></td>  tirado temporariamente provavelmente não será util, se for reativarei
+ -->				<td><input class="data" type="date" readonly value="<?php  echo $port->data_elaboracao  ?>" ></td>
 				<td><input class="data" type="date" readonly value="<?php echo $port->data_publicacao  ?>"> </td>
 				<td><?php echo $port->veiculo ?></td>
-				<td id="prazo"><?php echo $port->prazo ?></td>
+				<td id="prazo"><?php echo $port->prazo." dias" ?></td>
 				<td><input id="dataFinal" class="data" type="date" readonly value="<?php echo $port->data_final ?>"> </td>
-				<td><?php echo $port->dias_a_vencer ?></td>
+				<td><?php 
+						$prazo = $port->dias_a_vencer;
+
+						if($prazo < -1){
+							echo $prazo." dias pra vencer ";
+						}
+
+						if($prazo == -1){
+							echo "<div class='prazo'> ".$prazo." vencendo amanhã </div>";
+						}
+
+						if($prazo == 0){
+								echo "<div class='prazo'> ".$prazo." dias. Vencendo hoje </div>";
+						}
+						if($prazo == 1){
+							echo $prazo." dia pra vencer ";
+						}
+						if($prazo >10){
+								echo $prazo." dias vencidos ";
+						}
+						?>
+				</td>
 
 				<td>
 				<div class="btn-editar"> 

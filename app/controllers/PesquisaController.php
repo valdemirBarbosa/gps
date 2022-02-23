@@ -72,8 +72,6 @@ class PesquisaController extends Controller{
           $dados['paginaAtual'] = $_GET['p'];
           $limit = $_SESSION['limit'];
           $offset = 0;
-     echo "chegei no p";
-     exit;
 
           $dadosTabela = new Pesquisa_Model();
           $totalRegistros = $_SESSION['totalRegistros'];

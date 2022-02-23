@@ -9,7 +9,7 @@ class Portaria_Model extends Model{
     }
 
     public function lista(){
-        $sql = "SELECT * FROM portaria";
+        $sql = "SELECT * FROM portaria ORDER BY data_final DESC";
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
@@ -44,6 +44,16 @@ class Portaria_Model extends Model{
             $sql = "SELECT * FROM portaria WHERE id_portaria =:id";
             $sql = $this->db->prepare($sql);
             $sql->bindValue(':id', $id_portaria);
+            $sql->execute();
+            return $sql->fetchAll(\PDO::FETCH_OBJ);
+
+    }      
+
+    public function updateDia($idPortaria, $dia){
+            $sql = "UPDATE portaria SET dias_a_vencer =:dia WHERE id_portaria =:id";
+            $sql = $this->db->prepare($sql);
+            $sql->bindValue(':id', $idPortaria);
+            $sql->bindValue(':dia', $dia);
             $sql->execute();
             return $sql->fetchAll(\PDO::FETCH_OBJ);
 

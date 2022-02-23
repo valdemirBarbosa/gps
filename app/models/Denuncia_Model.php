@@ -26,62 +26,32 @@ class Denuncia_Model extends Model{
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
-    public function incluir($denuncia, $id_denunciante, $tipo_documento, $numero_documento, $data_entrada, $observacao){
-            $sql = "INSERT INTO denuncia SET denuncia_fato = :denuncia, id_denunciante = :id_denunciante, tipo_documento = :tipo, numero_documento = :numero, data_entrada = :data_entrada, observacao = :observacao"; 
-            $sql = $this->db->prepare($sql);
-            $sql->bindValue(":id_denunciante", $id_denunciante);
-            $sql->bindValue(":denuncia", $denuncia);
-            $sql->bindValue(":tipo", $tipo_documento);
-            $sql->bindValue(":numero", $numero_documento);
-            $sql->bindValue(":data_entrada", $data_entrada);
-            $sql->bindValue(":observacao", $observacao);
-            $sql->execute();
-
-           
-    }
 
     public function Denuncias($id_denuncia){
         $ret = array();
             $sql = "SELECT * FROM denuncia WHERE id_denuncia = ".$id_denuncia;
             $qry = $this->db->query($sql);
             return $qry->fetchAll(\PDO::FETCH_OBJ);
-//          $sql->bindValue(':id', $id_denuncia);
-//          $sql->execute();
     }      
 
 
     public function Denunciados($id_denuncia){
-          //$ret = array();
           $sql = "SELECT d.id_denuncia, d.denuncia_fato, d.id_denunciante, d.tipo_documento, d.numero_documento, d.data_entrada, d.observacao, d.data_digitacao, dnc.id_denunciado, dnc.id_denuncia, dnc.id_servidor, dnc.nome_provisorio, dnc.observacao, dnc.anexo, dnc.data_digitacao, s.id_servidor, s.nome_servidor, s.cpf, s.matricula, s.vinculo, s.secretaria, s.unidade, s.observacao, s.anexo, dc.id_denunciante, dc.nome_denunciante, dc.observacao 
           FROM denuncia as d
           LEFT JOIN denunciado as dnc ON d.id_denuncia = dnc.id_denuncia LEFT JOIN denunciante as dc ON d.id_denunciante = dc.id_denunciante LEFT JOIN servidor_func as s ON dnc.id_servidor = s.id_servidor where d.id_denuncia = ".$id_denuncia;
           $qry = $this->db->query($sql);
           return $qry->fetchAll(\PDO::FETCH_OBJ);
-      
-/*
-        Não consegui incluir a variável no prepare
-        $sql = $this->db->prepare($sql);
-        $sql->bindValue(':id', $id_denuncia);
-        $sql->execute();
-*/
     }
+
     public function DenunciadosTodos(){
-          //$ret = array();
           $sql = "SELECT p.id_pad, p.id_denuncia, p.id_pp_sindicancia, p.numero_processo, p.data_instrucao, p.ocorrencia, p.observacao, p.anexo, dnc.id_denunciado, dnc.id_pad, dnc.id_servidor, dnc.observacao, dnc.anexo, dnc.data_digitacao, s.id_servidor, s.nome_servidor, s.cpf, s.matricula, s.vinculo, s.secretaria, s.unidade, s.observacao, s.anexo 
           FROM pad as p
           LEFT JOIN denunciado as dnc ON p.id_pad = dnc.id_pad LEFT JOIN servidor_func as s ON dnc.id_servidor = s.id_servidor";
           $qry = $this->db->query($sql);
           return $qry->fetchAll(\PDO::FETCH_OBJ);
-
-          
-          /*
-        Não consegui incluir a variável no prepare
-        $sql = $this->db->prepare($sql);
-        $sql->bindValue(':id', $id_denuncia);
-        $sql->execute();
-*/
     }
-       public function  getEditar($id_denuncia){
+
+    public function  getEditar($id_denuncia){
         $ret = array();
         $sql = "SELECT * FROM denuncia as d 
         INNER JOIN 
@@ -115,22 +85,36 @@ class Denuncia_Model extends Model{
         return $ret;
     }
 
-    public function Inserir($denuncia,  $id_denunciante, $tipo_documento, $numero_documento, $data_entrada, $observacao){
-        $sql = "INSERT INTO denuncia SET denuncia_fato = :denuncia, id_denunciante = :id_denunciante, tipo_documento = :tipo_documento, numero_documento = :numero_documento, data_entrada = :data_entrada, observacao = :observacao";
-    
-        if($this->ExisteDenuncia($id_denunciante, $numero_documento) == false){
-            $sql = $this->db->prepare($sql);
-            $sql->bindValue(":denuncia", $denuncia);
-            $sql->bindValue(":id_denunciante", $id_denunciante);
-            $sql->bindValue(":tipo_documento", $tipo_documento);
-            $sql->bindValue(":numero_documento", $numero_documento);
-            $sql->bindValue(":data_entrada", $data_entrada);
-            $sql->bindValue(":observacao", $observacao);
-            $sql->execute();
-            return true;
-         }else{
-            return false;
-         }
+    public function Incluir($denuncia,  $id_denunciante, $tipo_documento, $numero_documento, $data_entrada, $denunciados, $observacao, $doc_anexo, $anexo, $user){
+ /*        try {
+            $sql = "INSERT INTO denuncia SET denuncia_fato = $denuncia, id_denunciante = $id_denunciante, tipo_documento = $tipo_documento, numero_documento = $numero_documento, data_entrada = $data_entrada, observacao = $observacao, denunciados = $denunciados, documentos_anexados = $doc_anexo"; 
+  */           
+          $sql = "INSERT INTO denuncia SET denuncia_fato =:denuncias, id_denunciante =:id_denunciante, tipo_documento =:tipo_documento, numero_documento = :numero_documento, data_entrada = :data_entrada, denunciados = :denunciados, documentos_anexados = :doc_anexo, observacao = :observacao";
+/*          $this->db->query($sql);
+        } catch (PDOException $th) {
+            echo "erro ao incluir ".$this->getMessage();
+        }
+ */
+
+          if($this->ExisteDenuncia($numero_documento, $tipo_documento) == false){
+            try {
+                $sql = $this->db->prepare($sql);
+                $sql->bindValue(":denuncias", $denuncia);
+                $sql->bindValue(":id_denunciante", $id_denunciante);
+                $sql->bindValue(":tipo_documento", $tipo_documento);
+                $sql->bindValue(":numero_documento", $numero_documento);
+                $sql->bindValue(":data_entrada", $data_entrada);
+                $sql->bindValue(":denunciados", $denunciados);
+                $sql->bindValue(":doc_anexo", $doc_anexo);
+                $sql->bindValue(":observacao", $observacao);
+                $sql->execute();
+  
+                return true;
+
+            } catch (PDOException $th) {
+                echo "erro ao incluir ".$th->getMessage();
+            }
+        }
     }
 
     public function Editar($id_denuncia, $denuncia, $id_denunciante, $denunciados, $tipo_documento, $numero_documento, $data_entrada, $observacao){
@@ -177,7 +161,6 @@ class Denuncia_Model extends Model{
         $sql = $this->db->prepare($sql);
         $sql->bindValue(':id', $id);
         $sql->execute();
-        
         if($sql->rowCount() > 0){
             return true;
         }else{
@@ -185,11 +168,11 @@ class Denuncia_Model extends Model{
         }
     }
 
-    private function ExisteDenuncia($id_denunciante, $numero_documento){
-        $sql = "SELECT * FROM denuncia WHERE id_denunciaNte = :denunciante AND numero_documento = :num_doc";
+    private function ExisteDenuncia($numero_documento, $tipo_documento){
+        $sql = "SELECT * FROM denuncia WHERE numero_documento = :num_doc AND tipo_documento = :tipo_doc";
         $sql = $this->db->prepare($sql);
-        $sql->bindValue(':denunciante', $id_denunciante);
         $sql->bindValue(':num_doc', $numero_documento);
+        $sql->bindValue(':tipo_doc', $tipo_documento);
         
         $sql->execute();
         

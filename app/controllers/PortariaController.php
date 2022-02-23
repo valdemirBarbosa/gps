@@ -5,16 +5,33 @@ use app\models\Portaria_Model;
 use app\models\Denunciado_Model;
 use app\models\Denunciante_Model;
 use app\models\Processo_Model;
-
+use app\functions\CalcularDatas;
 
 class PortariaController extends Controller{
    public function index(){
         $portarias = new Portaria_Model();
+        $this->atualizarPrazo();
+       
         $dados["portaria"] = $portarias->lista();
         $dados["view"] = "portaria/Index";
         $this->load("template", $dados);
-    }
+     }
 
+     public function atualizarPrazo(){
+          $portarias = new Portaria_Model();
+          $data = $dados["portaria"] = $portarias->lista();
+
+          $dias = new CalcularDatas();
+          foreach($data as $d){
+            $data = $d->data_final;
+            $idPortaria = $d->id_portaria;
+            $dia = $dias->calcularDia($data);
+  
+            $atulizarDia = new Portaria_Model();
+            $diaAtualizado = $atulizarDia->updateDia($idPortaria, $dia);
+          }
+     }
+  
    public function Novo(){
           $dados["view"] = "portaria/Incluir";
           $this->load("template", $dados);
@@ -89,26 +106,19 @@ class PortariaController extends Controller{
 }
 
    public function Salvar(){
-     $p = new Portaria_Model();
-     
      $id_portaria = isset($_POST['txt_id_portaria']) ? strip_tags(filter_input(INPUT_POST, "txt_id_portaria")) : NULL;
-
      $id_processo = isset($_POST['txt_id_processo']) ? strip_tags(filter_input(INPUT_POST, "txt_id_processo")) : NULL;
-          
      $numero_processo = isset($_POST['txt_numero_processo']) ? strip_tags(filter_input(INPUT_POST, "txt_numero_processo")) : NULL;
-     
+
+/*      tirado temporariamente provavelmente não será util, se for reativarei
      $tipo = isset($_POST['txt_tipo']) ? strip_tags(filter_input(INPUT_POST, "txt_tipo")) : NULL;
+ */     
 
      $numero = addslashes($_POST['txt_numero']) ? strip_tags(filter_input(INPUT_POST, "txt_numero")) : NULL;
-
      $data_elaboracao = addslashes($_POST['txt_data_elaboracao']);
-
-     $conteudo = isset($_POST['txt_conteudo']);
-
+     $conteudo = $_POST['txt_conteudo'];
      $data_publicacao = addslashes($_POST['txt_data_publicacao']);
-
      $veiculo = addslashes($_POST['txt_veículo']);
-
      $prazo = isset($_POST['txt_prazo']) ? strip_tags(filter_input(INPUT_POST, "txt_prazo")) : NULL;          
 
      //executa a função de cálculo - soma de datas
@@ -121,23 +131,23 @@ class PortariaController extends Controller{
         
 //     $status = $this->status($data_final);
      $data_realizada = isset($_POST['txt_data_realizada']) ? $_POST['txt_data_realizada'] : NULL;
-
-
      $prazo_atendido = isset($_POST['txt_prazo_atendido']) ? strip_tags(filter_input(INPUT_POST, "txt_prazo_atendido")) : NULL;
-
      $observacao = isset($_POST['txt_observacao']) ? strip_tags(filter_input(INPUT_POST, "txt_observacao")) : NULL;
-
      $anexo = isset($_POST['txt_anexo']) ? strip_tags(filter_input(INPUT_POST, "txt_anexo")) : NULL;
-
      $user = isset($_POST['txt_user']) ? strip_tags(filter_input(INPUT_POST, "txt_user")) : NULL;
-   
+
+     $p = new Portaria_Model();
+     
      if($id_portaria){
           $comando = "UPDATE";
           $tabela = "portaria";
           $filtro = " WHERE id_portaria =:id_portaria";
 
-          $p->InsertEditar($comando, $tabela, $filtro, $comando,  $id_portaria, $id_processo, $numero_processo, $numero, $tipo,$data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
-      
+          $p->InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_processo, $numero_processo, $numero, $tipo,$data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
+//          $p = array($comando, $tabela, $filtro, $comando,  $id_portaria, $id_processo, $numero_processo, $numero, $tipo,$data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
+/*            print_r($p);
+          exit;
+ */
     }else{
          
           $id_portaria = NULL;

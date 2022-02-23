@@ -16,9 +16,10 @@
 		</fieldset>		
 		<fieldset>
  			<legend>Informações da Portaria</legend>
-				<label>Tipo</label>
-					<input autofocus name="txt_tipo" type="text" placeholder="tipo da portaria" value="<?php echo $port->tipo ?>">
 
+<!-- 	            <label>Tipo</label> //tirado temporariamente provavelmente não será util, se for reativarei
+					<input autofocus name="txt_tipo" type="text" placeholder="tipo da portaria" value="<?php echo $port->tipo ?>">
+ -->
 				<label>Número</label>
 					<input name="txt_numero" type="number" placeholder="Insira o  Número da Portaria" value="<?php echo $port->numero ?>">
 				
