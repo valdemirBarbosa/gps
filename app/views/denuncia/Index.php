@@ -26,7 +26,7 @@
 				<option value="1">Número do documento</option>
 				<option value="2">Número do Processo</option>
 				<option value="3">Nome</option>
-				<option value="4">CPF</option>
+				<option hidden value="4">CPF</option> <!-- Ocultado pois na tabela denuncia não há cpf -->
 			</select>
 
 			<input type="text" autofocus name="valorPreenchidoUsuario"> 

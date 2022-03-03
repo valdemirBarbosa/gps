@@ -9,8 +9,8 @@ use app\functions\percorrerPost;
 class DenunciaController extends Controller{
    public function index(){
         $denuncias = new Denuncia_Model();
-        $dados["dados"] = $denuncias->lista();
-        $dados["view"] = "denuncia/Index";
+/*         $dados["dados"] = $denuncias->lista();
+ */        $dados["view"] = "denuncia/Index";
         $this->load("template", $dados);
     }
    

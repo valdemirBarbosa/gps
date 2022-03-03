@@ -878,6 +878,32 @@ span{
     font-size: 14px;
 }
 
+.cabecalhoForm{
+    display: grid;
+    grid-template-columns: 2f 2f 1f;
+    grid-template-areas: "id_denuncia faseLabel fase";
+    background-color:bisque;
+}
+
+.id_denuncia{
+    display: grid;
+    grid-area: id_denuncia;
+    background-color:blue;
+}
+
+.faseLabel{
+    display: grid;
+    grid-area: faseLabel;
+    background-color:red;
+}
+
+.fase{
+    display: grid;
+    grid-area: fase;
+    background-color:rgba(255, 255, 0, 0.555);
+}
+
+
 @media only screen and (max-width: 800px){
     .menu{
         position:absolute;

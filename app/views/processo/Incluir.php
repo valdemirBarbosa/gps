@@ -10,28 +10,37 @@
 <br/>
 <br/>
 
+	<div class="cabecalhoForm">
 
-	<label>Id da denuncia</label>
-			<?php
-				if(isset($_GET['id'])){?>
-					<label><?php echo $_GET['id'] ?> </label>
+	<!-- início da classe css id_denuncia  -->
+		<div class="id_denuncia">  		
+				<?php
+					if(isset($_GET['id'])){?>
+ 						<?php echo "Identificador da denúncia: ".$_GET['id'] ?> 
 				<?php } ?> 
-		
-		<label class="faseLbl">Fase</label>
-		<?php
-				if(isset($_GET['f'])){?>
-					<label>
-						<?php
-							$fase = $_GET['f'];
-							if($fase == 1)
-								echo "Processo Preliminar";
-								if($fase == 2)
-									echo "Sindicância";
-									if($fase == 3)
-										echo "Processo Prelimiar";
-				} ?> 
-					</label>
+		</div> <!-- Fim da classe css id_denuncia  -->		
 
+	<!-- início da classe css faseLabel  -->
+		<div class="faseLabel"> 				
+ 					<label>Fase</label>
+		</div> <!-- Fim da classe css faseLabel  -->
+
+	<!-- início da classe css fase  -->
+		<div class="fase">
+ 					<?php
+							if(isset($_GET['f'])){ //f de fase  ?>
+									<?php
+										$fase = $_GET['f'];
+										if($fase == 1)
+											echo "Processo Preliminar";
+											if($fase == 2)
+												echo "Sindicância";
+												if($fase == 3)
+													echo "PAD";
+							} ?> 
+		</div><!-- fim da classe css fase  -->
+
+	</div>
 					<br/>
 					<br/>
 					<br/>
