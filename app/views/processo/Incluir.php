@@ -21,12 +21,13 @@
 		</div> <!-- Fim da classe css id_denuncia  -->		
 
 	<!-- início da classe css faseLabel  -->
-		<div class="faseLabel"> 				
- 					<label>Fase</label>
-		</div> <!-- Fim da classe css faseLabel  -->
+<!-- 		<div class="faseLabel"> 				
+ --> 					
+		 <!-- Fim da classe css faseLabel  -->
 
 	<!-- início da classe css fase  -->
 		<div class="fase">
+			Fase
  					<?php
 							if(isset($_GET['f'])){ //f de fase  ?>
 									<?php

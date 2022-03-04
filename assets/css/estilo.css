@@ -880,8 +880,9 @@ span{
 
 .cabecalhoForm{
     display: grid;
-    grid-template-columns: 2f 2f 1f;
-    grid-template-areas: "id_denuncia faseLabel fase";
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 4vh;
+    grid-template-areas: "id_denuncia fase";
     background-color:bisque;
 }
 
@@ -889,12 +890,6 @@ span{
     display: grid;
     grid-area: id_denuncia;
     background-color:blue;
-}
-
-.faseLabel{
-    display: grid;
-    grid-area: faseLabel;
-    background-color:red;
 }
 
 .fase{
