@@ -27,27 +27,28 @@
 
 	<!-- início da classe css fase  -->
 		<div class="fase">
-			Fase
- 					<?php
-							if(isset($_GET['f'])){ //f de fase  ?>
-									<?php
-										$fase = $_GET['f'];
-										if($fase == 1)
-											echo "Processo Preliminar";
-											if($fase == 2)
-												echo "Sindicância";
-												if($fase == 3)
-													echo "PAD";
-							} ?> 
+ 
 		</div><!-- fim da classe css fase  -->
 
 	</div>
-					<br/>
-					<br/>
-					<br/>
+			<br/>
+			<label for="">Incluindo no: </label>
+ 			<?php
+			 $fase = 0;
+				if(isset($_GET['f'])){ //f de fase  ?>
+					<?php
+						$fase = $_GET['f'];
+						if($fase == 1)
+							echo "PROCESSO PRELIMINAR";
+							if($fase == 2)
+								echo "SINDICANCIA";
+								if($fase == 3)
+									echo "PAD";
+				} ?>
+			<br/>
 	<div class="num_processo">
 		<label>Número do Processo</label>
-		<input name="txt_numero_processo" type="number" placeholder="Insira o número do processo">
+		<input autofocus name="txt_numero_processo" type="number" placeholder="Insira o número do processo">
 	
 		<label>Data de Instauração</label>
 		<input name="txt_data_instauracao" type="date" >
@@ -58,17 +59,14 @@
 		<label id="obs">observação</label> 
 	</div>
 	
-	<textarea rows="4" cols="95" name="txt_observacao" class="txtArea"> 
+	<textarea rows="3" cols="95" name="txt_observacao" class="txtArea"> 
 	</textarea>		
 
-	<div class="dtEncerramento">
-		<label>Data de Enceramento</label>
-		<input name="txt_data_encerramento" type="date" >
-	</div>
-
+	<br/>
 	<label class="lblAnexo">Anexo</label>
 	<input class="btnAnexo" name="txt_anexo" type="file" >
-
+	
+	<br/>
 		<input type="submit" value="Cadastrar" class="btn">
 		<input type="reset" name="Reset" id="button" value="Limpar" class="btn_limpar">
 	</form>

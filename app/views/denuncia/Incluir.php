@@ -29,7 +29,7 @@
 	</td>
 	<td>	
 		<label class="tipo_document">tipo de documento</label>
-			<select name="lst_tipo_documento" class="tipo_documento">
+			<select name="id_tipo_doc" class="tipo_documento">
 				<option>Selecione o tipo de documento</option>
 					<?php foreach($documento as $doc){?>
 					<option value="<?php echo $doc->id_tipo_documento  ?>">

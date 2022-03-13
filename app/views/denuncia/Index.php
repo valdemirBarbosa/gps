@@ -44,13 +44,15 @@
 		<table border="1" cellspacing="0" cellpadding="0">
 		  <thead>
 			<tr>
-				<th hidden align="center"> id</th>
+				<th align="center"> id</th>
 				<th>Número documento</th>
 				<th width="10%">Tipo documento</th>
+				<th width="10%">Denunciante</th>
 				<th width="30%">Narração da denúncia</th>
 				<th width="7%">Data de entrada</th>
 				<th width="30%">Denunciados</th>
 				<th width="30%">Documentos anexados</th>
+				<th width="30%">observação</th>
 				<th width="10%" align="center" colspan="2">Nesta denúncia</th>
 				<th width="10%" align="center" colspan="3">Incluir Processo</th>
 			</tr>
@@ -59,9 +61,10 @@
 	foreach($dados as $den){
 	?>
 		<tr>
-		   <td hidden align="center"><?php echo $den->id_denuncia  ?> </td>
+		   <td align="center"><?php echo $den->id_denuncia  ?> </td>
 		   <td align="center"><?php echo $den->numero_documento  ?></td> 
 		   <td align="center"><?php echo $den->tipo_de_documento ?> </td>
+		   <td align="center"><?php echo $den->nome_denunciante ?> </td>
 		   <td><?php echo $den->denuncia_fato  ?> </td>
 	<?php $dt_entrada = explode("-",$den->data_entrada);
 	   $dia = $dt_entrada[2];
@@ -73,6 +76,8 @@
 			 <td><?php echo $den->denunciados ?> </td>
 	
 			 <td><?php echo $den->documentos_anexados ?> </td>
+
+			 <td><?php echo $den->observacao ?> </td>
 	
 			 <td>
 			<div class="btn-editar"> 

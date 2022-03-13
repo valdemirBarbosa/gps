@@ -881,21 +881,20 @@ span{
 .cabecalhoForm{
     display: grid;
     grid-template-columns: 1fr 4fr;
-    grid-template-rows: 4vh;
     grid-template-areas: "id_denuncia fase";
-    background-color:bisque;
+    background-color:#888888;
+    
 }
 
 .id_denuncia{
     display: grid;
     grid-area: id_denuncia;
-    background-color:blue;
+    height: 20px;
 }
 
 .fase{
     display: grid;
     grid-area: fase;
-    background-color:rgba(255, 255, 0, 0.555);
 }
 
 

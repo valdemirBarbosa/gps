@@ -15,23 +15,19 @@
 		
 		<fieldset>
  		<label class="denunciante">Denunciante</label>
-		<select name="id_denunciante" clas="tipo_documento">
-		<?php foreach($denunciante as $den){?>
-							<option value="<?php echo $den->id_denunciante  ?> ">
-							<?php echo $den->nome_denunciante. " - " .$den->id_denunciante  ?></option>
+		<select name="lst_id_denunciante">
+				<option> <?php echo $denuncia->nome_denunciante. " - " .$denuncia->id_denunciante  ?></option>
+				<?php foreach($denunciante as $den){?>
+					<option value="<?php echo $den->id_denunciante  ?> "> <?php echo $den->nome_denunciante. " - " .$den->id_denunciante  ?></option>
+				<?php }  ?>	
+		</select>
 
-							<?php }  ?>	
-					</select>
-
-					<label clas="tipo_document">tipo de documento</label>
-					<select name="lst_tipo_doc" clas="tipo_documento">
-						<option><?php echo $denuncia->tipo_de_documento?></option>
+					<label>tipo de documento</label>
+					<select name="id_tipo_doc">
+						<option> <?php echo $denuncia->tipo_de_documento ?> </option>
 							<?php foreach($tipo_doc as $doc){?>
-							<option value="<?php $doc->id_tipo_documento   ?>">
-							<?php echo $doc->tipo_de_documento   ?> </option>
+						<option value="<?php echo $doc->id_tipo_documento ?>"> <?php echo $doc->tipo_de_documento ?> </option>
 						<?php }  ?>	
- 							<input type="hidden" name="id_tipo_documento">
-
 					</select>
 		</fieldset>
 
@@ -45,8 +41,13 @@
 				</fieldset>					
 			<fieldset>
 				<label>Denunciados</label>
-				<textarea rows="2" cols="110"  clas="areaDenuncia" name="txt_denunciados">
-							<?php echo $denuncia->denunciados ?> 
+				<textarea rows="2" cols="110"  name="txt_denunciados">
+						<?php echo $denuncia->denunciados ?> 
+				</textarea> <br/>
+
+				<label>Documentos anexados</label>
+				<textarea rows="2" cols="102"  clas="areaDenuncia" name="txt_documentos_anexados">
+							<?php echo $denuncia->documentos_anexados ?> 
 				</textarea> 
 					
 					<br/>
