@@ -257,57 +257,72 @@ public function pegarDadosDoUsuario(){
                     $_SESSION['tabela'] = $tabela;
                     $_SESSION['chave'] = $chave;
                     $dadosInformados = array($_SESSION['campo'], $_SESSION['valorRecebidoDoUsuario'], $_SESSION['tabela'], $_SESSION['alias'], $_SESSION['tabela'], $_SESSION['chave']);
+/*                     $dadosInformados = array("campo"=>$_SESSION['campo'], "valorRecebidoUsuario"=>$_SESSION['valorRecebidoDoUsuario'], "tabela"=>$_SESSION['tabela'], "alias"=>$_SESSION['alias'], "tabela 2"=>$_SESSION['tabela'], "chave"=>$_SESSION['chave']);
+                   
+                   echo "<pre>";
+                      print_r($dadosInformados);
+                   echo "</pre>";
+
+                    exit;
+ */
                     return $dadosInformados;
           }
      }
     // paginar consulta
-public function porParametro(){
-     $_SESSION['limit'] = LIMITE_LISTA;
-     $limit = $_SESSION['limit'];
-     $offset = 0;
+     public function porParametro(){
+          $_SESSION['limit'] = LIMITE_LISTA;
+          $limit = $_SESSION['limit'];
+          $offset = 0;
 
-     $tabela = $_POST['tabela'];
-     $_SESSION['tabela'] = $tabela;
-     $dados = $this->pegarDadosDoUsuario();     
-     $campo = $dados[0];
-     $parametro = $dados[1];
+          $tabela = $_POST['tabela'];
+          $_SESSION['tabela'] = $tabela;
+          $dados = $this->pegarDadosDoUsuario();     
+          $campo = $dados[0];
+          $parametro = $dados[1];
+          
+          $_SESSION['campo'] = $campo;
 
-$_SESSION['campo'] = $campo;
-     $tipoFase = $_SESSION['fase'];
-     if(isset($tipoFase) == 'pp'){
-          $_SESSION['tipoFase'] = "processo preliminar";
+          if(isset($_SESSION['id_fase'])){
+             $tpFase = $_SESSION['id_fase'];
+             
+                switch($tpFase){
+                    case "1":
+                         $tipoFase = 1;
+                         break;
+                    case "2":
+                         $tipoFase = 2;
+                         break;
+                    case "3":
+                         $tipoFase = 3;
+                         break;
+                    default:
+                         echo "Nenhuma opção de pesquisa foi escolhida e informada";
+                         break;
+                    }
+               }
 
-          if(isset($tipoFase) == "sin"){
-               $_SESSION['tipoFase'] =  "sindicancia";
-      
-               if(isset($tipoFase) == "pad"){
-                    $_SESSION['tipoFase'] = "pad";
-      }
+          $tabela1 = $_POST['tabela1'];
+          $_SESSION['tabela1'] = $tabela1;
+     
+          $dadosTabela = new Pesquisa_Model();
+          $totalRegistros = $this->contarRegistro();
+          $_SESSION['totalRegistros'] = $totalRegistros;
 
-     $tabela1 = $_POST['tabela1'];
-     $_SESSION['tabela1'] = $tabela1;
-    
-     $dadosTabela = new Pesquisa_Model();
-     $totalRegistros = $this->contarRegistro();
-     $_SESSION['totalRegistros'] = $totalRegistros;
+          $totalPaginas = ceil($totalRegistros / $limit);
+          $totalPaginas = ceil($totalPaginas);
+          $_SESSION['totalPaginas'] = $totalPaginas;
+          $dados['paginaAtual'] = 1;
 
-     $totalPaginas = ceil($totalRegistros / $limit);
-     $totalPaginas = ceil($totalPaginas);
-     $_SESSION['totalPaginas'] = $totalPaginas;
-     $dados['paginaAtual'] = 1;
+          $offset = ($dados['paginaAtual'] * $limit) - $limit;
 
-     $offset = ($dados['paginaAtual'] * $limit) - $limit;
+          // Array usado pra teste - debug
+          //$arraConsulta = array($tabela, $tabela1, $campo, $parametro, $tipoFase, $offset, $limit);
 
-      // Array usado pra teste - debug
-     $arraConsulta = array($tabela, $tabela1, $campo, $parametro, $tipoFase, $offset, $limit);
-
-     $dados['processo'] = $dadosTabela->getNumeroProcessoLimitTwoTable($tabela, $tabela1, $campo, $parametro, $tipoFase, $offset, $limit);
-     $_SESSION['view'] = $_POST['view'];
-     $dados["view"] = $_POST['view'];
-     $this->load("template", $dados);
+          $dados['processo'] = $dadosTabela->getNumeroProcessoLimitTwoTable($tabela, $tabela1, $campo, $parametro, $tipoFase, $offset, $limit);
+          $_SESSION['view'] = $_POST['view'];
+          $dados["view"] = $_POST['view'];
+          $this->load("template", $dados);
      }
-     }
-}
 
 public function Paginar($qtdeRegistros, $paginaAtual){
      $_SESSION['limit'] = LIMITE_LISTA;
@@ -345,7 +360,7 @@ public function porParametroLink(){
           $_SESSION['tabela1'] = $tabela1;
 
           $tipoFase = "";
-          $tipoFase = isset($_SESSION['tipoFase']);
+          $tipoFase = $_SESSION['tipoFase'];
           $parametro = "";
           $parametro = isset($_SESSION['parametro']);
           $campo = $_SESSION['campo'];

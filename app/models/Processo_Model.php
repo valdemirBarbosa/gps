@@ -91,15 +91,14 @@ class Processo_Model extends Model{
     }
 
 //Inserir dados na tabela de sindicância
-    public function Incluir($id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $data_encerramento, $anexo,  $user){
-        $sql = "INSERT INTO processo SET id_denuncia = :id_denuncia, id_fase = :id_fase, numero_processo = :numero_processo, data_instauracao =:data_instauracao, observacao = :observacao, data_encerramento =:data_encerramento, anexo =:anexo, user =:user"; 
+    public function Incluir($id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $anexo, $user){
+        $sql = "INSERT INTO processo SET id_denuncia = :id_denuncia, id_fase = :id_fase, numero_processo = :numero_processo, data_instauracao =:data_instauracao, observacao = :observacao, anexo =:anexo, user =:user"; 
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":id_denuncia", $id_denuncia);
         $sql->bindValue(":id_fase", $id_fase);
         $sql->bindValue(":numero_processo", $numero_processo);
         $sql->bindValue(":data_instauracao", $data_instauracao);
         $sql->bindValue(":observacao", $observacao);
-        $sql->bindValue(":data_encerramento", $data_encerramento);
         $sql->bindValue(":anexo", $anexo);
         $sql->bindValue(":user", $user);
         $sql->execute();

@@ -93,7 +93,7 @@
 
 			<td>
 			<div class="btn-editar"> 
-				<a href="<?php echo URL_BASE ."processo/novo/?f=1&id=".$den->id_denuncia ?>" >Preliminar</a>
+				<a href="<?php echo URL_BASE ."processo/novo/?f=1&id=".$den->id_denuncia ?>">Preliminar</a>
 	  	      </div>	
                </td>
 

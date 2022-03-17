@@ -16,14 +16,13 @@
 		<div class="id_denuncia">  		
 				<?php
 					if(isset($_GET['id'])){?>
- 						<?php echo "Identificador da denúncia: ".$_GET['id'] ?> 
-				<?php } ?> 
-		</div> <!-- Fim da classe css id_denuncia  -->		
+ 						<?php 
+						 	$id = addslashes($_GET['id']);
+							echo "Identificador da denúncia: ".$id ?> 
+						<input name="txt_id_denuncia" type="number" hidden value="<?php echo $id ?>">
+					<?php } ?> 
 
-	<!-- início da classe css faseLabel  -->
-<!-- 		<div class="faseLabel"> 				
- --> 					
-		 <!-- Fim da classe css faseLabel  -->
+		</div> <!-- Fim da classe css id_denuncia  -->		
 
 	<!-- início da classe css fase  -->
 		<div class="fase">
@@ -36,15 +35,16 @@
  			<?php
 			 $fase = 0;
 				if(isset($_GET['f'])){ //f de fase  ?>
+					<input hidden name="txt_id_fase" value="<?php echo $_GET['f'] ?>">
 					<?php
-						$fase = $_GET['f'];
-						if($fase == 1)
-							echo "PROCESSO PRELIMINAR";
-							if($fase == 2)
-								echo "SINDICANCIA";
-								if($fase == 3)
-									echo "PAD";
-				} ?>
+							$fase = $_GET['f'];
+							if($fase == 1)
+								echo "PROCESSO PRELIMINAR";
+								if($fase == 2)
+									echo "SINDICANCIA";
+									if($fase == 3)
+										echo "PAD";
+					}?>
 			<br/>
 	<div class="num_processo">
 		<label>Número do Processo</label>

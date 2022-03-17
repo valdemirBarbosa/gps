@@ -62,7 +62,9 @@
 				<tr>
 					<td align="center"><?php echo $_SESSION['id_processo'] = $pd->id_processo; ?></td>
 					<td align="center"><?php echo $pd->id_denuncia ?> </td>
-					<td align="center"><?php echo $pd->fase  ?> </td>
+					<td hidden><?php echo $_SESSION['id_fase'] = $pd->id_fase ?> </td>
+					<td align="center"><?php echo $pd->fase;
+					  ?> </td>
 					<td align="center"><?php echo $pd->numero_processo ?> </td>
 					<td align="center"> <?php $data = new DateTime($pd->data_instauracao);
 						if($data > "01/01/1900"){

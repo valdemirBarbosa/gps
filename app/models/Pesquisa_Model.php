@@ -119,7 +119,13 @@ class Pesquisa_Model extends Model{
     
     // Pegar os dados de duas tabelas
     public function getNumeroProcessoLimitTwoTable($tabela, $tabela1, $campo, $parametro, $tipoFase, $offset, $limit){
-        $sql = "SELECT * FROM $tabela as t LEFT JOIN $tabela1 as t1 ON t.id_fase = t1.id_fase WHERE  t1.fase =  '$tipoFase' AND  $campo LIKE '%$parametro%' LIMIT $offset, $limit";
+
+        $sql = "SELECT * FROM $tabela as t LEFT JOIN $tabela1 as t1 ON t.id_fase = t1.id_fase WHERE  t.id_fase =  '$tipoFase' AND  t.$campo LIKE '%$parametro%' LIMIT $offset, $limit";
+
+/*         $arr = array($tabela, $tabela1, $campo, $parametro, $tipoFase, $offset, $limit);
+        print_r($sql);
+        exit;
+ */                
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }

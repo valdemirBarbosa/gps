@@ -92,7 +92,7 @@ class ProcessoController extends Controller{
           $numero_processo = addslashes($_POST['txt_numero_processo']);
           $data_instauracao = addslashes($_POST['txt_data_instauracao']);
           $observacao = addslashes($_POST['txt_observacao']);
-          $data_encerramento = $_POST['txt_data_encerramento'];
+          $data_encerramento = isset($_POST['txt_data_encerramento']) ? addslashes($_POST['txt_id_fase']) : "0000/00/00";
           $anexo = "";
           $user = 1;
 
@@ -101,7 +101,14 @@ class ProcessoController extends Controller{
           $processo->Editar($id_processo, $id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $data_encerramento, $anexo, $user);
 
      }else{
-          $processo->Incluir($id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $data_encerramento, $anexo, $user);
+/*           $ar = array($id_processo, $id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $data_encerramento, $anexo, $user);
+          echo "<pre>";
+            print_r($ar);
+          echo "</pre>";
+
+            exit;
+ */
+          $processo->Incluir($id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $anexo, $user);
 
      }
           header("Location:" . URL_BASE . "processo/lista");
