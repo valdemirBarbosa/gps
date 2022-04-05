@@ -11,19 +11,6 @@
 <div class="frmConsulta">  
 <form method="GET" action="<?php echo URL_BASE . 'Andamento/porProcesso/'; ?>" >
 
-<!-- 
-		Botões
-		<div class="btn-inc">
-				<script> //Link para voltar à página anterior
-					document.write('<a href="' + document.referrer + '">Voltar</a>');
-				</script>
-			</div>			
-			
-			<div class="btn-inc">
-				<a href="<?php //echo URL_BASE . "ocorrencia/novo" ?>">INCLUIR</a>
-			</div>
-
- -->			
 <label>Pesquisa por número do processo</label>
 		<input type="number" autofocus name="numero_processo">
 		<input type="submit" value="pesquisar">

@@ -36,7 +36,7 @@
 					<br/>
 	
 				<label>Conteúdo</label>
-					<textarea name="txt_conteudo" rows="4" cols="127" placeholder="redação da portaria">
+					<textarea name="txt_conteudo" rows="3" cols="140" placeholder="redação da portaria">
 				</textarea> 
 	
 				<label>observação</label>

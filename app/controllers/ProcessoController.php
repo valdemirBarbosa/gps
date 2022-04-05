@@ -10,6 +10,7 @@ use app\models\Processo_Model;
 use app\models\Servidor_Model;
 use app\models\Pesquisa_Model;
 use app\models\PesquisaControler;
+use app\Controllers\UploadController;
 
 if(!isset($_SESSION)){
      session_start();
@@ -27,11 +28,13 @@ class ProcessoController extends Controller{
 
    public function pp(){ //Seleciona de Processo tudo que for Processo Preliminar
         $processo = new Processo_Model();
-        $parametro = "PROCESSO PRELIMIAR";
-        $_SESSION['tabela'] = $parametro;
+        $parametro = 1;
+        $_SESSION['tipoFase'] = $parametro;
+
+     /*    $_SESSION['tabela'] = $parametro;
         $_SESSION['fase'] = $parametro;
         $dados["fase"] = $parametro;
-        $dados["processo"] = $processo->ProcessoFase($parametro);
+ */     $dados["processo"] = $processo->ProcessoFase($parametro);
         $dados["view"] = "processo/Index";
                   
         $this->load("template", $dados);
@@ -39,25 +42,28 @@ class ProcessoController extends Controller{
 
    public function sin(){ //Seleciona de Processo tudo que for Sindicância
         $processo = new Processo_Model();
-        $parametro = "SINDICANCIA";
-        $_SESSION['tabela'] = $parametro;
+        $parametro = 2;
+        $_SESSION['tipoFase'] = $parametro;
+   /*      $_SESSION['tabela'] = $parametro;
         $_SESSION['fase'] = $parametro;
         $dados["fase"] = $parametro;
-        $dados["processo"] = $processo->ProcessoFase($parametro);
+ */     $dados["processo"] = $processo->ProcessoFase($parametro);
         $dados["view"] = "processo/Index";
-        
+
         $this->load("template", $dados);
    }
 
    public function pad(){ //Seleciona de Processo tudo que for PAD - PROCESSO ADMINISTRATIVO
         $processo = new Processo_Model();
-        $parametro = "PAD";
-        $_SESSION['tabela'] = $parametro;
+        $parametro = 3;
+        $_SESSION['tipoFase'] = $parametro;
+
+    /*     $_SESSION['tabela'] = $parametro;
         $_SESSION['fase'] = $parametro;
         $dados["fase"] = $parametro;
-        $dados["processo"] = $processo->ProcessoFase($parametro);
+ */     $dados["processo"] = $processo->ProcessoFase($parametro);
         $dados["view"] = "processo/Index";
-        
+
         $this->load("template", $dados);
    }
   
@@ -85,33 +91,66 @@ class ProcessoController extends Controller{
 //Função para salvar e direcionar ou para Editar ou para Incluir 
     public function Salvar(){
           $processo = new Processo_Model();
-
           $id_processo = isset($_POST['txt_id_processo']) ? addslashes($_POST['txt_id_processo']) : NULL;
+          $_SESSION['id'] = $id_processo; //vai ficar no session a chave id, pois lá na denúncia será id 
+
           $id_denuncia = addslashes($_POST['txt_id_denuncia']) ? addslashes($_POST['txt_id_denuncia']) : NULL;
+
           $id_fase = isset($_POST['txt_id_fase']) ? addslashes($_POST['txt_id_fase']) : NULL;
+          $_SESSION['id_fase'] = $id_fase;
+
           $numero_processo = addslashes($_POST['txt_numero_processo']);
           $data_instauracao = addslashes($_POST['txt_data_instauracao']);
           $observacao = addslashes($_POST['txt_observacao']);
+
+          //dados para upload de arquivo
+          $descricao = addslashes($_POST['descricaoArquivo']) ? addslashes($_POST['descricaoArquivo']) : "";
+          $_SESSION['descricao'] = $descricao; //session usada para o upload do arquivo 
+          $data_inclusao = $_POST['data_inclusao'] ? $_POST['data_inclusao'] : NULL;
+          $d = $_SESSION['data_inclusao'] = $data_inclusao; //session usada para o upload do arquivo 
+/*        A data de encerramento ficará só pra mudança de fase e para finalização do processo
           $data_encerramento = isset($_POST['txt_data_encerramento']) ? addslashes($_POST['txt_id_fase']) : "0000/00/00";
-          $anexo = "";
+ */          $anexo = "";
           $user = 1;
+         
+          //upload - anexar arquivo
+          if($arquivo = $_FILES['arquivo']){
+               if(isset($arquivo['tmp_name']) && empty($arquivo['tmp_name']) == false){
+                       $arquivo = $_FILES['arquivo'];
+                       $caminho = strtoupper('C:/xampp/htdocs/uploads/');
+               }
+          }
+               if($arquivo = $_FILES['arquivo']){
+                         $_SESSION['id'] = $id_processo;
+                         $_SESSION['id_faseUpload'] = $id_fase;
+                         $upload = new UploadController();
+                         $upload->recebedor(); 
+                    }else{
+                         echo "Problema para guardar arquivo ";
+                         exit;
+                    }
+          
 
 //Verifica se será postado o "id" se sim será Edição, senão inclusão
      if($id_processo){
-          $processo->Editar($id_processo, $id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $data_encerramento, $anexo, $user);
+          $processo->Editar($id_processo, $id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $data_encerramento, $anexo, $user, $descricao);
 
      }else{
-/*           $ar = array($id_processo, $id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $data_encerramento, $anexo, $user);
+/*           $ar = array($id_processo, $id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $data_encerramento, $anexo, $user, $descricao);
           echo "<pre>";
             print_r($ar);
           echo "</pre>";
 
             exit;
  */
-          $processo->Incluir($id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $anexo, $user);
+          $processo->Incluir($id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $anexo, $user, $descricao);
 
      }
-          header("Location:" . URL_BASE . "processo/lista");
+          if($_POST['view']){
+               header("Location:" . URL_BASE . $_POST['view']);
+          }else{
+               header("Location:" . URL_BASE . "processo/lista");
+          }
    }
 
 //Incluir novo processo de sindicância

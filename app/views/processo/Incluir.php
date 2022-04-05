@@ -2,14 +2,16 @@
 	<h1 class="titulo-pagina"><span class="cor">Incluir </span>Processo</h1>
 </div>
 
-<form action="<?php echo URL_BASE ."Processo/Salvar" ?>" method="POST">
+<form enctype="multipart/form-data" action="<?php echo URL_BASE ."Processo/Salvar" ?>" method="POST">
 
 <fieldset>
 	<legend><h4>id - identificadores </h4></legend>
 	<br/>
 <br/>
 <br/>
-
+<? 
+	$view = "denuncia/index";
+?>
 	<div class="cabecalhoForm">
 
 	<!-- início da classe css id_denuncia  -->
@@ -18,9 +20,11 @@
 					if(isset($_GET['id'])){?>
  						<?php 
 						 	$id = addslashes($_GET['id']);
-							echo "Identificador da denúncia: ".$id ?> 
+							echo "Identificador da denúncia: ".$id; ?> 
 						<input name="txt_id_denuncia" type="number" hidden value="<?php echo $id ?>">
+
 					<?php } ?> 
+						 <input name='view' hidden type='text' value="<?php echo $view ?>" >
 
 		</div> <!-- Fim da classe css id_denuncia  -->		
 
@@ -57,16 +61,22 @@
 
 	<div class="obs">
 		<label id="obs">observação</label> 
-	</div>
-	
-	<textarea rows="3" cols="95" name="txt_observacao" class="txtArea"> 
+			<textarea rows="2" cols="95" name="txt_observacao" class="txtArea"> 
 	</textarea>		
 
-	<br/>
-	<label class="lblAnexo">Anexo</label>
-	<input class="btnAnexo" name="txt_anexo" type="file" >
-	
-	<br/>
+	</div>
+<!-- 
+		Anexo somente na ediçaõ do processo
+		<label class="lblAnexo">Anexo</label>
+		<input class="btnAnexo" name="arquivo" type="file"> <br/>
+
+		<label class="descricao">Descricao</label>
+		<input type="text" name="descricaoArquivo" required><br/><br/>
+
+		<label class="data inclusão">Descricao</label>
+		<input type="date" name="data_inclusao" required><br/><br/>
+	<br/> -->
+
 		<input type="submit" value="Cadastrar" class="btn">
 		<input type="reset" name="Reset" id="button" value="Limpar" class="btn_limpar">
 	</form>

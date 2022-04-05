@@ -13,13 +13,10 @@
         $view = "upload/index"; 
     ?>
        <input type="file" name="arquivo"><br/><br/>
-       <input class="btn-inc" type="submit" name="ENVIAR">
+       <input type="text" name="descricao" required><br/><br/>
+       <input type="submit" name="ENVIAR">
        <input type="hidden" name="view" value="<?php echo $view ?>">
 
-       <!--Botões !-->
-				<script> //Link para voltar à página anterior
-					document.write('<a href="' + document.referrer + '">Voltar</a>');
-				</script>
 
 
     </form>

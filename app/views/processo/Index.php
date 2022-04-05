@@ -34,10 +34,10 @@
 				<input type="submit" value="pesquisar">
 </div>
 
-	<div class="filho2">
+<!-- 	<div class="filho2">
 			<a href="<?php echo URL_BASE . "processo/novo" ?>" class="btn-inc" >INCLUIR </a>
 	</div>
-</form>
+ --></form>
 
 </div>
 
@@ -61,10 +61,13 @@
 		?>
 				<tr>
 					<td align="center"><?php echo $_SESSION['id_processo'] = $pd->id_processo; ?></td>
+					<?php  $_SESSION['id'] = $pd->id_processo; ?>
 					<td align="center"><?php echo $pd->id_denuncia ?> </td>
 					<td hidden><?php echo $_SESSION['id_fase'] = $pd->id_fase ?> </td>
 					<td align="center"><?php echo $pd->fase;
 					  ?> </td>
+  					<?php  $_SESSION['id_fase'] = $pd->id_fase; ?>
+
 					<td align="center"><?php echo $pd->numero_processo ?> </td>
 					<td align="center"> <?php $data = new DateTime($pd->data_instauracao);
 						if($data > "01/01/1900"){
@@ -103,12 +106,12 @@
 						</div>				
 					</td>
 	
-					<td>
+<!-- 					<td>
 					<div class="btn-ocorrencia"> 
-						<a href="<?php echo URL_BASE ."Vincular/Ocorrencia/".$pd->id_processo ?>" >Ocorrência</a>
+						<a href="<?php //echo URL_BASE ."Vincular/Ocorrencia/".$pd->id_processo ?>" >Ocorrência</a>
 					</div>
 					</td>
-					
+ -->					
 					
 					<td>
 					<div class="btn-editar">
@@ -116,27 +119,33 @@
 						</div>
 					</td>
 
-					<?php
-						if(isset($_SESSION['fase']) && ($_SESSION['fase'] == "PAD")){		 
-							echo '<td>
-							<div class="btn-ocorrencia">'; 
-					?>
-						<a href="<?php echo URL_BASE ."Processo/Processar/?id=".$pd->id_processo ?>">Processar</a>
-							</div>
+				 	<?php
+						if(isset($_SESSION['tipoFase']) && ($_SESSION['tipoFase'] == 3)){		 
+						?>
+							<td> 
+							      <div class="btn-ocorrencia">
+								  <a href='<? echo URL_BASE."Vincular/Ocorrencia/".$pd->id_processo ?>'>Ocorrencia</a> 
 							</td>
+							
+							<td> 
+							      <div class="btn-ocorrencia">
+								  <a href="<? echo URL_BASE."Processo/Processar/?id=".$pd->id_processo ?>">Processar</a>
+							</td>
+					
 					<?php
 						}else{
+
 							echo '<td></td>';
 						}
 					?>
-
+ 
 					<td> 
 					<div class="btn-excluir">
 						<a href="<?php echo URL_BASE ."Processo/Excluir/".$pd->id_processo ?>" >Excluir</a>
 					</div>
 					</td>
 				</tr> 
-				<?php } ?>
+				<?php  	} // chave de fim do foreach da tabela ?>
 			
 				<!--Botões !-->
 <!-- 				<div class="btn-inc">

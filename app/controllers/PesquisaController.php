@@ -9,7 +9,6 @@ use app\models\Pesquisa_Model;
 use app\models\Servidor_Model;
 use app\models\Processo_Controller;
 
-
 	if(!isset($_SESSION)){
      	session_start();
 	}
@@ -274,6 +273,8 @@ public function pegarDadosDoUsuario(){
           $limit = $_SESSION['limit'];
           $offset = 0;
 
+          $tipoFase = $_SESSION['tipoFase'];
+
           $tabela = $_POST['tabela'];
           $_SESSION['tabela'] = $tabela;
           $dados = $this->pegarDadosDoUsuario();     
@@ -282,8 +283,8 @@ public function pegarDadosDoUsuario(){
           
           $_SESSION['campo'] = $campo;
 
-          if(isset($_SESSION['id_fase'])){
-             $tpFase = $_SESSION['id_fase'];
+          if(isset($_SESSION['tipoFase'])){
+             $tpFase = $_SESSION['tipoFase'];
              
                 switch($tpFase){
                     case "1":
@@ -326,7 +327,7 @@ public function pegarDadosDoUsuario(){
 
 public function Paginar($qtdeRegistros, $paginaAtual){
      $_SESSION['limit'] = LIMITE_LISTA;
-     $limit = $_SESSION['limit'];
+     $limit = $_SESSION['limit'];  
      $offset = 0;
 
      $dados['paginaAtual'] = $paginaAtual;

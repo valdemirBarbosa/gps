@@ -2,7 +2,7 @@
 	<h1 class="titulo-pagina">Alterar dados do Processo </h1>
 </div>
 
-<form action="<?php echo URL_BASE ."Processo/Salvar" ?>" method="POST">
+<form enctype="multipart/form-data" action="<?php echo URL_BASE ."Processo/Salvar" ?>" method="POST">
 <?php foreach($processo as $pd){ ?>
 	<fieldset>
 		<legend><h4>Códigos</h4></legend>	
@@ -33,18 +33,31 @@
 		<label>Data de Instauração</label>
             <input name="txt_data_instauracao" type="date" value="<?php echo $pd->data_instauracao ?>">
    
+<!--	A data de encerramento ficará só pra mudança de fase e para finalização do processo
         <label>Data de Encerramento</label>
 		<input name="txt_data_encerramento" type="date" readonly value="<?php echo $pd->data_encerramento ?>">
 		<input type="hidden" name="id_processo" value="<?php echo $pd->id_processo ?>">	
-
+ -->
 		<br/>
 		<label>Observação</label>
-			<input class="" size="125px" name="observacao" type="text" placeholder="Insira o número do processo" value="<?php echo $pd->observacao ?>">
+			<input class="" size="125px" name="txt_observacao" type="text" placeholder="Insira o número do processo" value="<?php echo $pd->observacao ?>">
 
 	</fieldset>
+	
+	<fieldset>
+	<legend>Anexar arquivos</legend>
+		<input type="file" name="arquivo"><br/><br/>
+		<input type="hidden" name="view" value="<?php echo $view ?>">
+		<label for="descricaoArquivo"></label>
+       	<input type="text" name="descricaoArquivo">
+		<label for="data_inclusao"></label>
+       	<input type="date" name="data_inclusao">
 
+	</fieldset>
+	
+		
 	</td></tr>
-
+	<fieldset>
 	<br/>
 				<!--Botões !-->
 	<div class="btn">
@@ -54,6 +67,6 @@
 	</div>	
 
 		<input type="submit" value="Salvar" class="btn">
-		
+	</fieldset>
 	</table>
 </form>
