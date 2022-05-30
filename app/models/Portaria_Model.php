@@ -14,7 +14,7 @@ class Portaria_Model extends Model{
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
-    public function Incluir($id_fase, $numero_processo, $tipo, $numero, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $data_realizada, $prazo_atendido, $observacao, $anexo, $user){
+    public function Incluir($id_fase, $numero_processo, $numero, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $data_realizada, $prazo_atendido, $observacao, $anexo, $user){
         $numeroProcesso = $numero_processo;
         $tabela = "portaria";
 
@@ -68,9 +68,9 @@ class Portaria_Model extends Model{
         return $sql->fetchAll(\PDO::FETCH_OBJ);
     }
 
-    public function InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_processo, $numero_processo,  $numero, $tipo,$data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user){
+    public function InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_processo, $numero_processo,  $numero, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user){
 
-        $sql = $comando." ".$tabela." SET id_portaria =:id_portaria, id_processo =:id_processo, numero_processo =:numero_processo, numero =:numero, tipo =:tipo, data_elaboracao =:data_elaboracao, conteudo =:conteudo, data_publicacao =:data_publicacao, veiculo =:veiculo, prazo =:prazo, data_final =:data_final, dias_a_vencer =:dias_a_vencer, data_realizada =:data_realizada, prazo_atendido =:prazo_atendido, observacao =:observacao, anexo =:anexo, user =:user
+        $sql = $comando." ".$tabela." SET id_portaria =:id_portaria, id_processo =:id_processo, numero_processo =:numero_processo, numero =:numero, data_elaboracao =:data_elaboracao, conteudo =:conteudo, data_publicacao =:data_publicacao, veiculo =:veiculo, prazo =:prazo, data_final =:data_final, dias_a_vencer =:dias_a_vencer, data_realizada =:data_realizada, prazo_atendido =:prazo_atendido, observacao =:observacao, anexo =:anexo, user =:user
         ".$filtro;
     
         $sql = $this->db->prepare($sql);
@@ -78,7 +78,6 @@ class Portaria_Model extends Model{
         $sql->bindValue(":id_processo", $id_processo); 
         $sql->bindValue(":numero_processo", $numero_processo);
         $sql->bindValue(":numero", $numero);
-        $sql->bindValue(":tipo", $tipo);
         $sql->bindValue(":data_elaboracao", $data_elaboracao);
         $sql->bindValue(":conteudo", $conteudo);
         $sql->bindValue(":data_publicacao", $data_publicacao);

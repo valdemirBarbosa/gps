@@ -111,7 +111,7 @@ class Denuncia_Model extends Model{
     }
 
     public function Editar($id_denuncia, $denuncia, $id_denunciante, $tipo_documento, $numero_documento, $denunciados, $data_entrada, $observacao, $doc_anexo){
-        $sql = "UPDATE denuncia SET denuncia_fato = :denuncias, id_denunciante = :id_denunciante, tipo_documento = :tipo_documento, numero_documento = :numero_documento, denunciados = :denunciados, data_entrada = :data_entrada, observacao = :observacao, documentos_anexados = :doc WHERE id_denuncia = :id_denuncia";
+        $sql = "UPDATE denuncia SET denuncia_fato = :denuncias, id_denunciante = :id_denunciante, tipo_documento =:tipo_documento, numero_documento = :numero_documento, denunciados = :denunciados, data_entrada = :data_entrada, observacao = :observacao, documentos_anexados = :doc WHERE id_denuncia = :id_denuncia";
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":denuncias", $denuncia);
         $sql->bindValue(":id_denunciante", $id_denunciante); 

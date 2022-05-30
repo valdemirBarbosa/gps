@@ -65,12 +65,13 @@ class Ocorrencia_Model extends Model{
     }
  
 //Inserir dados na tabela de ocorrência
-    public function Incluir($id_processo, $numero_processo, $data_ocorrencia, $ocorrencia, $observacao, $anexo, $user){
-        $sql = "INSERT INTO ocorrencia SET id_processo =:id_processo, numero_processo =:numero_processo, data_ocorrencia =:data_ocorrencia, ocorrencia =:ocorrencia, observacao =:observacao, anexo =:anexo, user =:user"; 
-
+    public function Incluir($id_processo, $numero_processo, $id_servico, $data_ocorrencia, $ocorrencia, $observacao, $anexo, $user){
+        $sql = "INSERT INTO ocorrencia SET id_processo =:id_processo, numero_processo =:numero_processo, id_servico =:id_servico, data_ocorrencia =:data_ocorrencia, ocorrencia =:ocorrencia, observacao =:observacao, anexo =:anexo, user =:user"; 
+        
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":id_processo", $id_processo);
         $sql->bindValue(":numero_processo", $numero_processo);
+        $sql->bindValue(":id_servico", $id_servico);
         $sql->bindValue(":data_ocorrencia", $data_ocorrencia);
         $sql->bindValue(":ocorrencia", $ocorrencia);
         $sql->bindValue(":observacao", $observacao);
@@ -93,6 +94,9 @@ class Ocorrencia_Model extends Model{
         $sql->bindValue(":anexo", $anexo);
         $sql->bindValue(":user", $user);
         $sql->execute();
+
+
+
     }
 
     public function Deletar($id){

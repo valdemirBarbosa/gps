@@ -1,9 +1,10 @@
 <div class="base-home">
-	<h1 class="titulo-pagina">Alterar dados do Processo </h1>
+	<h1 class="titulo-pagina">Alterar dados do Processo e Anexar arquivos</h1>
 </div>
 
 <form enctype="multipart/form-data" action="<?php echo URL_BASE ."Processo/Salvar" ?>" method="POST">
-<?php foreach($processo as $pd){ ?>
+<?php foreach($processo as $pd){ $_SESSION['id_processo'] = $pd->id_processo; 
+?>
 	<fieldset>
 		<legend><h4>Códigos</h4></legend>	
 			<label>Id do Processo</label>
@@ -38,26 +39,83 @@
 		<input name="txt_data_encerramento" type="date" readonly value="<?php echo $pd->data_encerramento ?>">
 		<input type="hidden" name="id_processo" value="<?php echo $pd->id_processo ?>">	
  -->
-		<br/>
 		<label>Observação</label>
-			<input class="" size="125px" name="txt_observacao" type="text" placeholder="Insira o número do processo" value="<?php echo $pd->observacao ?>">
+			<input class="" size="100px" name="txt_observacao" type="text" placeholder="Insira o número do processo" value="<?php echo $pd->observacao ?>">
 
 	</fieldset>
 	
 	<fieldset>
-	<legend>Anexar arquivos</legend>
-		<input type="file" name="arquivo"><br/><br/>
-		<input type="hidden" name="view" value="<?php echo $view ?>">
-		<label for="descricaoArquivo"></label>
-       	<input type="text" name="descricaoArquivo">
-		<label for="data_inclusao"></label>
-       	<input type="date" name="data_inclusao">
+	<legend>Upload de arquivos</legend>
+
+			<div class="anexoPai">
+			<div class="anexoFilho1">
+				<input type="file" name="arquivo">
+				<input type="hidden" name="view" value="<?php echo $view ?>">
+			</div>
+			
+			<div class="anexoFilho2">
+				<label for="descricao">descrição do arquivo</label>
+				<input type="text" size="50" name="descricao">
+			</div>
+			
+			<div class="anexoFilho3">
+				<label for="data_inclusao">data inclusão</label>
+				<input type="text" name="data_inclusao" value="<?php echo date('d-m-Y'); ?>">
+				<input type="hidden" name="view" value="<?php echo "processo/Edit/".$pd->id_processo ?>" >
+			</div>
+		</div>
 
 	</fieldset>
 	
+	<fieldset>
+		<legend>Arquivos anexados</legend>
+		<table>
+			<tr>
+				<th>id</th>
+				<th>id do processo</th>
+				<th>arquivo</th>
+				<th>informações sobre</th>
+				<th>data inclusão</th>
+				<th>acao</th>
+			</tr>
+
+			<?php foreach($anexo as $a){?>
+			<tr>
+				<td><?php echo $a->id_upload?> </td>
+				<td><?php echo $a->id_processo?> </td>
+				<td><?php echo $a->arquivo?> </td>
+				<td><?php echo $a->descricao?> </td>
+				<td><?php echo $a->data_inclusao?> </td>
+				<?php
+					$caminho = $a->caminho;
+					$arquivo = $a->arquivo;
+				?>
+	
+				<td> <!-- DOWNLOAD DE ARQUIVOS  !-->
+					<a href="<?php echo URL_BASE . 'downloads/?path='.$caminho.'&file='.$arquivo ?>"> baixar </a>
+					
+				</td>
+			</tr>
+			<?php } ?>
+		</table>
+	</fieldset>
 		
-	</td></tr>
-	<fieldset>
+		<br/>
+			<div class="paginacao">		
+			<?php
+				if(isset($totalPaginas)){?>
+						<?php
+							for($q=1; $q<=$totalPaginas; $q++):  
+								echo "<a href=".URL_BASE."processo/Edit/".$pd->id_processo."?p=".$q.">". $q ?> </a> 
+						<?php
+							endfor;
+						?>
+						<?php
+							}
+						?>
+			</div>
+	<br/>
+	<br/>
 	<br/>
 				<!--Botões !-->
 	<div class="btn">
@@ -67,6 +125,5 @@
 	</div>	
 
 		<input type="submit" value="Salvar" class="btn">
-	</fieldset>
 	</table>
 </form>

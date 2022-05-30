@@ -2,10 +2,9 @@
 namespace app\controllers;
 use app\core\Controller;
 use app\models\Portaria_Model;
-use app\models\Denunciado_Model;
-use app\models\Denunciante_Model;
 use app\models\Processo_Model;
 use app\functions\CalcularDatas;
+use app\models\Ocorrencia_Model;
 
 class PortariaController extends Controller{
    public function index(){
@@ -134,8 +133,9 @@ class PortariaController extends Controller{
      $prazo_atendido = isset($_POST['txt_prazo_atendido']) ? strip_tags(filter_input(INPUT_POST, "txt_prazo_atendido")) : NULL;
      $observacao = isset($_POST['txt_observacao']) ? strip_tags(filter_input(INPUT_POST, "txt_observacao")) : NULL;
      $anexo = isset($_POST['txt_anexo']) ? strip_tags(filter_input(INPUT_POST, "txt_anexo")) : NULL;
-     $user = isset($_POST['txt_user']) ? strip_tags(filter_input(INPUT_POST, "txt_user")) : NULL;
-
+     $user = 777;
+     $tipo = "Não usado";
+     
      $p = new Portaria_Model();
      
      if($id_portaria){
@@ -143,7 +143,7 @@ class PortariaController extends Controller{
           $tabela = "portaria";
           $filtro = " WHERE id_portaria =:id_portaria";
 
-          $p->InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_processo, $numero_processo, $numero, $tipo,$data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
+          $p->InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_processo, $numero_processo, $numero, $tipo, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
 //          $p = array($comando, $tabela, $filtro, $comando,  $id_portaria, $id_processo, $numero_processo, $numero, $tipo,$data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
 /*            print_r($p);
           exit;
@@ -155,15 +155,20 @@ class PortariaController extends Controller{
           $tabela = "portaria";
           $filtro = "";
 
-          $p->InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_processo, $numero_processo,  $numero, $tipo,$data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
+          $p->InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_processo, $numero_processo,  $numero, $tipo, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
+          
+               //INCLUIR OCORRÊNCIA DE LANÇAMENTO DE PORTARIA NOS ANDAMENTOS	
+               $id_servico = 2;
+               $data_ocorrencia = date('Y/m/d');
+               $ocorrencia = "Inclusão da portaria nº ".$numero;
+               $user = 9199;
+          
+               $incluirNaOcorrencia = new Ocorrencia_Model();
+               $incluirNaOcorrencia->Incluir($id_processo, $numero_processo, $id_servico, $data_ocorrencia, $ocorrencia, $observacao, $anexo, $user);
 
-     
-/*           $arr = array($comando, $tabela, $filtro, $id_portaria, $id_processo, $numero_processo,  $numero, $tipo,$data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
- */ 
    
           echo "<script> Document.alert('Denúncia  já existe, não pode mais cadastrar'); </script> ";
      }
           header("Location:" . URL_BASE . "portaria/lista");
      }
 }
-

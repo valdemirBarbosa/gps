@@ -75,6 +75,14 @@ class Processo_Model extends Model{
         return $sql->fetchAll(\PDO::FETCH_OBJ);
     }
 
+    public function getIdRet($id_processo){
+        $sql = "SELECT * FROM processo as p INNER JOIN servidor as s ON p.id_servidor = s.id_servidor WHERE id_processo =:id";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":id", $id_processo);
+        $sql->execute();
+        return $sql->fetchAll(\PDO::FETCH_OBJ);
+    }
+
     //Usado para pegar número de processo para recuperar os dados do processo para formulario de Portaria - inclusão 
     public function getIdProcesso($id_processo){
         $sql = "SELECT * FROM processo WHERE id_processo =:id";

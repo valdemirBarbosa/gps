@@ -3,14 +3,13 @@
 namespace app\controllers;
 
 use app\core\Controller;
-use app\models\Denuncia_Model;
-use app\models\Denunciado_Model;
-use app\models\Denunciante_Model;
 use app\models\Processo_Model;
-use app\models\Servidor_Model;
 use app\models\Pesquisa_Model;
+use app\models\Processado_Model;
+use app\models\Upload_Model;
 use app\models\PesquisaControler;
 use app\Controllers\UploadController;
+use app\models\Ocorrencia_Model;
 
 if(!isset($_SESSION)){
      session_start();
@@ -104,52 +103,59 @@ class ProcessoController extends Controller{
           $observacao = addslashes($_POST['txt_observacao']);
 
           //dados para upload de arquivo
-          $descricao = addslashes($_POST['descricaoArquivo']) ? addslashes($_POST['descricaoArquivo']) : "";
+          $descricao = addslashes($_POST['descricao']) ? addslashes($_POST['descricao']) : "";
           $_SESSION['descricao'] = $descricao; //session usada para o upload do arquivo 
           $data_inclusao = $_POST['data_inclusao'] ? $_POST['data_inclusao'] : NULL;
           $d = $_SESSION['data_inclusao'] = $data_inclusao; //session usada para o upload do arquivo 
 /*        A data de encerramento ficará só pra mudança de fase e para finalização do processo
           $data_encerramento = isset($_POST['txt_data_encerramento']) ? addslashes($_POST['txt_id_fase']) : "0000/00/00";
- */          $anexo = "";
+ */       $anexo = "";
           $user = 1;
          
+          
           //upload - anexar arquivo
           if($arquivo = $_FILES['arquivo']){
                if(isset($arquivo['tmp_name']) && empty($arquivo['tmp_name']) == false){
                        $arquivo = $_FILES['arquivo'];
-                       $caminho = strtoupper('C:/xampp/htdocs/uploads/');
                }
           }
-               if($arquivo = $_FILES['arquivo']){
-                         $_SESSION['id'] = $id_processo;
-                         $_SESSION['id_faseUpload'] = $id_fase;
-                         $upload = new UploadController();
-                         $upload->recebedor(); 
-                    }else{
-                         echo "Problema para guardar arquivo ";
-                         exit;
-                    }
+          if($arquivo = $_FILES['arquivo']){
+               $_SESSION['id'] = $id_processo;
+               $_SESSION['id_faseUpload'] = $id_fase;
+               $upload = new UploadController();
+               $upload->recebedor(); 
+
+               //INCLUIR OCORRÊNCIA DE ANEXAR ARQUIVO NOS ANDAMENTOS	
+               $id_servico = 3;
+               $data_ocorrencia = date('Y/m/d');
+               $ocorrencia = "Inclusão de arquivo em anexo, nome do arquivo ".$descricao;
+               $user = 1;
+
+               $listaArquivos = new Upload_Model();
+               $dados["anexo"] = $listaArquivos->upLoaded($id_processo);
           
+               $incluirNaOcorrencia = new Ocorrencia_Model();
+               $incluirNaOcorrencia->Incluir($id_processo, $numero_processo, $id_servico, $data_ocorrencia, $ocorrencia, $observacao, $anexo, $user);
+
+          }else{
+             echo "Problema para guardar arquivo ";
+             exit;
+          }      
 
 //Verifica se será postado o "id" se sim será Edição, senão inclusão
      if($id_processo){
-          $processo->Editar($id_processo, $id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $data_encerramento, $anexo, $user, $descricao);
+          $processo->Editar($id_processo, $id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $anexo, $user, $descricao);
 
      }else{
-/*           $ar = array($id_processo, $id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $data_encerramento, $anexo, $user, $descricao);
-          echo "<pre>";
-            print_r($ar);
-          echo "</pre>";
-
-            exit;
- */
           $processo->Incluir($id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $anexo, $user, $descricao);
 
      }
           if($_POST['view']){
-               header("Location:" . URL_BASE . $_POST['view']);
+                header("Location:" . URL_BASE . $_POST['view']);
+
           }else{
-               header("Location:" . URL_BASE . "processo/lista");
+               echo "sem post view";
+               exit;
           }
    }
 
@@ -172,11 +178,60 @@ class ProcessoController extends Controller{
           $processo = new Processo_Model();
           $dados["processo"] = $processo->getId($id_processo);
           $dados["view"] = "processo/Editar";
+
+          $arquivosEpaginas['anexo'] = $this->paginarListArq($id_processo);
+          
+          $dados['totalPaginas'] = $arquivosEpaginas['anexo'][0];
+          $dados['anexo'] = $arquivosEpaginas['anexo'][1];
+
+          $tp = $arquivosEpaginas['anexo'][1];
+          
+          $arquivos = new Processo_Model();
+          //$listaArquivos = $arquivos-> 
+
           $this->load("template", $dados);
+
+
+         // $this->load("template", $dados);
+          //Paginar e trazer os dados tabela de arquivo anexo - upload
      }
 
-     public function Processar(){
+     public function paginarListArq($id_processo){
+
+/*           $id_processo  = $_SESSION['id_processo'];
+ */
+          if(isset($_GET['p']) && !empty($_GET['p'])){
+               $paginaAtual = addslashes($_GET['p']);
+          }else{
+               $paginaAtual = 1;
+          }
+
+          //conta quantidade de registro encaminhado para o model
+          $anexo = new Upload_Model();
+          $qtdeRegistros = count($anexo->upLoaded($id_processo));
+          
+          
+          $paginacao = $this->paginar($qtdeRegistros, $paginaAtual);
+          $totalPaginas = $paginacao[2];
+          
+          $offset = $paginacao[0];
+
           $limit = LIMITE_LISTA;
+
+          $anexo = $anexo->upLoadedLimit($id_processo, $offset, $limit);
+
+          $ret = array($totalPaginas, $anexo);
+
+          return $ret;
+
+     }
+
+     public function Processar($id_processo){
+          $limit = 10;
+          
+          if(isset($_GET['id']) && !empty($_GET['id'])){
+               $id_processo = $_GET['id'];
+          }
 
        
           if(isset($_GET['p']) && !empty($_GET['p'])){
@@ -185,11 +240,7 @@ class ProcessoController extends Controller{
           }else{
                $paginaAtual = 1;
           }
-     
-          
-          $id_processo = $_GET['id'];
-          $_SESSION['id'] = $id_processo;
-
+    
           if(empty($campo) && empty($informacao)){
                $campo = 'id_processo';
                $informacao = "";
@@ -203,20 +254,22 @@ class ProcessoController extends Controller{
           $dados["fase"] = $fase->faseLista();
 
           $processo = new Processo_Model();
+
+          // Incluído na sessão para quando clicar no botão fechar da pesquisa de servidores não dá erro 
+          //$id_processo = $_SESSION['id_processo']; 
           $id = $dados["processo"] = $processo->getId($id_processo);
 
-          $processado = new Servidor_Model();
-          $tabela = "servidor";
+          $processado = new Processado_Model();
+          $tabela = "processados";
           $campo = "id_processo";
           $informacao = $id_processo;
 
-
           $pesquisa = new Pesquisa_Model(); // Cria instancia do classe Pesquisa Model 
-          $dados['paginacao'] = $pesquisa->PesquisaProcessadosContar($tabela, $campo, $informacao); // Pesquisa simples, mas com dados solicitados pelo usuario
+          $dados['paginacao'] = $pesquisa->PesquisaProcessadosContar($tabela, $campo, $informacao, $limit); // Pesquisa simples, mas com dados solicitados pelo usuario
           $dados["view"] = "processo/processarServidor";
           $qtdeRegistros = count($dados['paginacao']); // Recebe a contagem de registros pela consulta acima
           $paginacao = $this->paginar($qtdeRegistros, $paginaAtual); //vai pra função pagina com já com algumas informações
-          $offset = $paginaAtual;
+          $offset = ($paginaAtual * $limit) - $limit;
           
          $totalPaginas = $paginacao[2];
           $dados['totalPaginas'] = $totalPaginas;

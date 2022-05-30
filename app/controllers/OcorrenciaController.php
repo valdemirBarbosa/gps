@@ -32,27 +32,30 @@ class OcorrenciaController extends Controller{
           $id_ocorrencia = isset($_POST['txt_id_ocorrencia']) ? strip_tags(filter_input(INPUT_POST, "txt_id_ocorrencia")) : NULL;
           $id_processo = isset($_POST['txt_id_processo']) && $_POST['txt_id_processo'] > 0? strip_tags(filter_input(INPUT_POST, "txt_id_processo")) : $msg = "Dever ser >0";
           $numero_processo = isset($_POST['txt_numero_processo']) && $_POST['txt_numero_processo'] > 0 ?  strip_tags(filter_input(INPUT_POST, "txt_numero_processo")) : $msg = "Número do Processo dever ser >0";
-
-/*           echo "<pre>";
-          print_r($numero_processo);
-          echo "<pre>";
-          exit;
- */
           $data_ocorrencia =$_POST['txt_data_ocorrencia'];
           $ocorrencia = isset($_POST['txt_ocorrencia']) ? strip_tags(filter_input(INPUT_POST, "txt_ocorrencia")) : NULL;
           $observacao = isset($_POST['txt_observacao']) ? strip_tags(filter_input(INPUT_POST, "txt_observacao")) : NULL;
           $anexo = "sem anexo";
           $user = 1;
           $data_digitacao = NULL;
+          $servico = 1;
 
           //Verifica se será postado o "id" se sim será Edição, senão inclusão
           if($id_ocorrencia){
                $ocorre->Editar($id_ocorrencia, $id_processo, $numero_processo, $data_ocorrencia, $ocorrencia, $observacao, $anexo, $user);
           }else{
-               $ocorre->Incluir($id_processo, $numero_processo, $data_ocorrencia, $ocorrencia, $observacao, $anexo, $user);
-                  echo "<script> Document.alert('Denúncia  já existe, não pode mais cadastrar'); </script> ";
+               $ocorre->Incluir($id_processo, $numero_processo, $servico, $data_ocorrencia, $ocorrencia, $observacao, $anexo, $user);
+               
+               $oc = array($id_processo, $numero_processo, $servico, $data_ocorrencia, $ocorrencia, $observacao, $anexo, $user);
+
+/*                echo "<pre>";
+                    print_r($oc);
+               echo "</pre>";
+               exit;
+ */
+
                }
-               header("Location:" . URL_BASE . "ocorrencia/index");
+               header("Location:" . URL_BASE . "ocorrencia/IncluirOcorrenciaVincProc/".$id_processo."&".$numero_processo);
           }
 
 
@@ -70,9 +73,9 @@ class OcorrenciaController extends Controller{
      }
 
      //Pega pelo id_processo o id e o número de processo pra vincular ao formulário de inclusão de ocorrência
-     public function IncluirOcorrenciaVincProc($numero_processo){
+     public function IncluirOcorrenciaVincProc($id_processo){
           $processo = new Processo_Model();
-          $dados["processo"] = $processo->getNumProcesso($numero_processo);
+          $dados["processo"] = $processo->getId($id_processo);
           $dados["view"] = "ocorrencia/Incluir";
           $this->load("template", $dados);
      }
@@ -88,7 +91,7 @@ class OcorrenciaController extends Controller{
           $ocorrencia = new Ocorrencia_Model();
           $dados["ocorrencia"] = $ocorrencia->getId($id_ocorrencia);
           $ocorrencia->Deletar($id_ocorrencia);
-          header("Location:" . URL_BASE . "ocorrencia");
+          header("Location:" . URL_BASE . "andamento");
   }
 
   // Estudar mais sobre o extrac pra pegar a variável e fazer a restrição no id_processo

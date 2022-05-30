@@ -5,6 +5,9 @@ use app\models\Denuncia_Model;
 use app\models\Denunciante_Model;
 use app\models\TipoDocumento_Model;
 use app\functions\percorrerPost;
+use app\Controllers\UploadController;
+use app\Controllers\UploadAuxController;
+
 
 class DenunciaController extends Controller{
    public function index(){
@@ -35,20 +38,20 @@ class DenunciaController extends Controller{
      $this->load("template", $dados);
      }
     
-   public function denunciados(){
+/*    public function denunciados(){
           $denuncias = new Denuncia_Model();
           $dados["denunciado"] = $denuncias->DenunciadosTodos();
           $dados["view"] = "denuncia/Indexis";
           $this->load("template", $dados);
      }
-        
-    public function adicionarDenunciado(){
+ */        
+/*     public function adicionarDenunciado(){
         $denuncia = new Denuncia_Model();
         $dados["denunciado"] = $denuncia->adicionar($id_denunciado);
         //$dados["view"] = "denuncia/Editar";
         //$this->load("template", $dados);
    } 
-
+ */
    public function vincularDenunciadoDenuncia($id_denuncia){
        $denuncias = new Denuncia_Model();
        $dados["denuncia"] = $denuncias->getDenuncia($id_denuncia);
@@ -84,6 +87,7 @@ class DenunciaController extends Controller{
      $id_denuncia = isset($_POST['txt_id']) ? strip_tags(filter_input(INPUT_POST, "txt_id")) : NULL;
      $denuncia = isset($_POST['txt_denuncia']) ? strip_tags(filter_input(INPUT_POST, "txt_denuncia")) : " ";
      $id_denunciante = $_POST['lst_id_denunciante'];
+     
      $tipo_documento = $_POST['id_tipo_doc'];
      $numero_documento = $_POST['txt_numero_documento'];
      $denunciados = $_POST['txt_denunciados'];
@@ -93,9 +97,15 @@ class DenunciaController extends Controller{
      $anexo = " ";
      $user = 1;
     
-
      if($id_denuncia != NULL){
            $d->Editar($id_denuncia, $denuncia, $id_denunciante, $tipo_documento, $numero_documento, $denunciados, $data_entrada, $observacao, $doc_anexo);
+
+          $upload = new UploadAuxController();
+          $upload->AuxiliarUpload();
+
+          $dados["view"] = "denuncia/Index";
+          $this->load("template", $dados);
+     
            echo "<script> Document.alert('Denúncia  já existe, não pode mais cadastrar') </script>";
      }elseif($d->Incluir($denuncia, $id_denunciante, $tipo_documento, $numero_documento, $denunciados, $data_entrada, $observacao, $doc_anexo, $anexo, $user)){
                echo "Incluído com sucesso";

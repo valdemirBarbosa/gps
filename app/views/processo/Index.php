@@ -52,11 +52,11 @@
 					<th align="center" width="10%">Data de Instauração </th>
 					<th width="10%">Data de encerramento</th>
 					<th width="25%">Observação</th>
-					<th align="center" colspan="6">Ação</th>
+					<th align="center" colspan="7">Ação</th>
 				</tr>
 			</thead>
 		<?php 
-		
+			if(isset($processo)){		
 			foreach($processo as $pd){
 		?>
 				<tr>
@@ -106,13 +106,12 @@
 						</div>				
 					</td>
 	
-<!-- 					<td>
+<!--  					<td>
 					<div class="btn-ocorrencia"> 
 						<a href="<?php //echo URL_BASE ."Vincular/Ocorrencia/".$pd->id_processo ?>" >Ocorrência</a>
 					</div>
 					</td>
  -->					
-					
 					<td>
 					<div class="btn-editar">
 						<a href="<?php echo URL_BASE ."Processo/Edit/".$pd->id_processo ?>" >Editar</a>
@@ -124,12 +123,12 @@
 						?>
 							<td> 
 							      <div class="btn-ocorrencia">
-								  <a href='<? echo URL_BASE."Vincular/Ocorrencia/".$pd->id_processo ?>'>Ocorrencia</a> 
+								  <a href="<?php echo URL_BASE."Ocorrencia/IncluirOcorrenciaVincProc/".$pd->id_processo ?>">Ocorrencia</a> 
 							</td>
 							
 							<td> 
 							      <div class="btn-ocorrencia">
-								  <a href="<? echo URL_BASE."Processo/Processar/?id=".$pd->id_processo ?>">Processar</a>
+								  <a href="<?php echo URL_BASE ."Processo/Processar/".$pd->id_processo ?>" >Processar</a>
 							</td>
 					
 					<?php
@@ -145,7 +144,7 @@
 					</div>
 					</td>
 				</tr> 
-				<?php  	} // chave de fim do foreach da tabela ?>
+				<?php  	}} // chave de fim do foreach da tabela ?>
 			
 				<!--Botões !-->
 <!-- 				<div class="btn-inc">

@@ -111,7 +111,7 @@ class FaseController extends Controller{
         $verificar = new Fase_Model();
 
         if($verificar->EvitarDuplicidadeFase($numero_processo, $id_fase) == false){
-            return true;
+            return $id_fase;
        }else{
             $msg =  "O processo já passou por essa fase, verifique por favor.: ".$id_fase;
             $this->Error($msg);

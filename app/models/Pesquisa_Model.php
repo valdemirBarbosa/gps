@@ -26,8 +26,8 @@ class Pesquisa_Model extends Model{
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
     
-    public function PesquisaProcessadosContar($tabela, $campo, $informacao){
-        $sql = "SELECT * FROM $tabela WHERE $campo LIKE '%$informacao%'";
+    public function PesquisaProcessadosContar($tabela, $campo, $informacao, $limit){
+        $sql = "SELECT * FROM $tabela WHERE $campo LIKE '%$informacao%' LIMIT $limit";
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
@@ -129,6 +129,7 @@ class Pesquisa_Model extends Model{
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
+
 
     public function getNumeroProcessoLimitOnTable($tabela, $campo, $parametro, $offset, $limit){
         if(isset($campo) && !empty($campo)){

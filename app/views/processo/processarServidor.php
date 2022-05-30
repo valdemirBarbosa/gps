@@ -2,13 +2,13 @@
 		<h1 class="titulo-pagina">Processar servidor</h1>
 	</div>
 	<?php
-			if(isset($_SESSION['id_processo']) == false){
-				session_start(); 
+		if(!isset($_SESSION)){
+			session_start();
 			}
 	?>
 
 <div class="div1">
-<form action="<?php echo URL_BASE ."Processo/Salvar" ?>" method="POST">
+<form id="formDadosProcesso" action="<?php echo URL_BASE ."Processo/Salvar" ?>" method="POST">
 	<?php
 		if(isset($processo)){
 		foreach($processo as $pd){ 
@@ -17,9 +17,14 @@
 			<fieldset>
 			<legend><h4>Códigos</h4></legend>	
 				<label>Id do Processo</label>
-					<input id="txt_id" readonly name="txt_id_processo" enable="false" value="<?php echo $pd->id_processo ?>" >
-				<label>Id da denuncia</label>
+					<input id="txt_id" readonly name="txt_id_processo" enable="false" 
+					value="<?php
+								$_SESSION['id_processo'] = $pd->id_processo; 
+								echo $pd->id_processo ?>">
+
+<label>Id da denuncia</label>
 				<input readonly name="txt_id_denuncia" type="number" enable="false" value="<?php echo $pd->id_denuncia ?>" >
+				<input type="hidden" name="view" value="view" >
 
 				<label>fase</label>
 					<select name="txt_id_fase">
@@ -28,7 +33,9 @@
 						
 		if(isset($fase)){
 			foreach($fase as $f){ ?>
-							<option readonly value="<?php echo $f->id_fase ?>"><?php echo $f->fase ?> </option>
+							<option readonly value="<?php echo $f->id_fase ?>"><?php 
+							$_SESSION['fase'] = $f->id_fase;
+							echo $f->fase ?> </option>
 	<?php }
 		} ?>
 					</select>
@@ -60,7 +67,7 @@
 			$_SESSION['view'] = 'processo/processarServidor';
 			$retorno = 'processo';
  	?>
-
+	<br><br>
 	<fieldset>
 		<legend>Consulta servidor para inclusão no processo</legend>
 				<form class="consulta" method="POST" action="<?php echo URL_BASE . 'Processar/porParametro' ?>" >
@@ -69,7 +76,7 @@
 								<option value="3">Nome</option>
 									<option value="4">CPF</option>
 							</select>
-							<input type="text" autofocus name="valorPreenchidoUsuario" class="pesquisa">
+							<input type="text" autofocus name="valorPreenchidoUsuario" required class="pesquisa">
 							<input type="hidden" name="campo" value="<?php echo $campo ?>">
 							<input type="hidden" name="view" value="<?php echo $view ?>">
 							<input type="hidden" name="retorno" value="<?php echo $retorno ?>">
@@ -105,8 +112,9 @@
 					<td><?php echo $servidor->matricula;  ?></td>
 					<td>
 		<div class="">
-	 		<input type="submit" value="Incluir" >
-			 <a href="<?php echo URL_BASE ."processo/RetProcessar/" ?>" >Fechar</a>
+<!-- 	 		<input type="submit" value="Incluir" >
+ -->			 <a href="<?php echo URL_BASE ."Processar/incluir/?id=".$servidor->id_servidor?>" >Incluir</a>
+				 <a href="<?php echo URL_BASE ."Processo/Processar/" ?>" >Fechar</a>
 		</td>
 		</tr>
 		</div>
@@ -126,6 +134,7 @@
 	<table>
 		<thead>
 			<tr>
+				<th width="5%" align="center">Id_processado</th>
 				<th width="5%" align="center">Id_servidor</th>
 				<th width="25%" align="left">Nome do servidor</th>
 				<th width="5%" align="center">Cpf</th>
@@ -141,6 +150,7 @@
   <?php
 		   foreach($processado as $servidor){   ?>
 				<tr class="cor1">
+				<td align="center"><?php echo $servidor->id_processado  ?></td>
 				<td align="center"><?php echo $servidor->id_servidor  ?></td>
 				<td align="center"><?php echo $servidor->nome_servidor  ?></td>
 				<td align="center"><?php echo $servidor->cpf  ?></td>
@@ -155,7 +165,7 @@
 				</td>
 				<td align="center">
 					<div class="btn-excluir">
-						<a href="<?php echo URL_BASE ."servidor/Excluir/".$servidor->id_servidor ?>" >excluir</a>
+						<a href="<?php echo URL_BASE ."processar/DelProcessado/".$servidor->id_processado ?>" >excluir</a>
 					</div>
 				</td>
 			 </tr>	
@@ -170,13 +180,17 @@
 				<?php
 					if(isset($totalPaginas)){
 
-						for($q=1; $q<=$totalPaginas; $q++):  
-							echo "<a href=".URL_BASE."processo/Processar/?id=".$pd->id_processo."&p=".$q.">". $q ?> </a> 
-<!-- 							echo "<a href=".URL_BASE."processo/Processar/?p=".$q."&?id=".$pd->id_processo.">". $q ?> </a> 
- -->				<?php
+						if(isset($processo)){
+							foreach($processo as $pd){ 
+								}  
+							for($q=1; $q<=$totalPaginas; $q++):  
+								echo "<a href=".URL_BASE."processo/Processar/".$pd->id_processo."?p=".$q.">". $q ?> </a> 
+	<!-- 							echo "<a href=".URL_BASE."processo/Processar/?p=".$q."&?id=".$pd->id_processo.">". $q ?> </a> 
+	-->				<?php
 
 						endfor;
 					}
+				}
 
 				?>
 	</div>

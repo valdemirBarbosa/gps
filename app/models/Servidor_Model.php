@@ -18,9 +18,9 @@ class Servidor_Model  extends Model{
     public function servidorProcessos($tabela, $tabela1, $tabela2, $tabela3, $tabela4, $alias, $campo, $parametro, $offset, $limit){
         $sql = "SELECT * FROM $tabela1 as d
                 LEFT JOIN $tabela2 as p ON d.id_denuncia  = p.id_denuncia
-                LEFT JOIN $tabela3 as f ON p.id_fase = f.id_fase
+                INNER JOIN $tabela3 as f ON p.id_fase = f.id_fase
                 LEFT JOIN $tabela4 as den ON d.id_denunciante = den.id_denunciante
-                LEFT JOIN $tabela as s ON p.id_processo = s.id_processo
+                RIGHT JOIN $tabela as s ON p.id_processo = s.id_processo
                 WHERE $alias.$campo LIKE '%$parametro%' 
                 ORDER BY $alias.$campo ASC LIMIT $offset, $limit";
          $qry = $this->db->query($sql);
@@ -48,6 +48,14 @@ class Servidor_Model  extends Model{
          return $totalRegistro;
      }
 
+     public function contaRegistroServidorProcessado($id_processo){
+        $sql = "SELECT * FROM processados as p INNER JOIN servidor as s ON p.id_servidor = s.id_servidor WHERE p.id_processo =  $id_processo";
+        
+        $sql = $this->db->query($sql);
+         $totalRegistro = $sql->rowCount();
+         return $totalRegistro;
+     }
+
      public function contaRegistroServidorProcesso($tabela, $tabela1, $tabela2, $tabela3, $tabela4, $alias, $campo, $parametro){
         $sql = "SELECT * FROM $tabela as s
                 INNER JOIN $tabela1 as d ON s.id_denuncia = d.id_denuncia 
@@ -60,15 +68,15 @@ class Servidor_Model  extends Model{
                 return $totalRegistro;
      }
  
-    public function listaProcessados($id_servidor, $id_processo, $offset, $limit){
-        $sql = "SELECT * FROM servidor as s INNER JOIN processo as p ON s.id_processo = p.id_processo AND p.id_processo = $id_processo ORDER BY id_servidor ASC LIMIT $offset, $limit";
+    public function listaProcessados($id_processo, $offset, $limit){
+        $sql = "SELECT * FROM processados as p INNER JOIN servidor as s ON p.id_servidor = s.id_servidor WHERE p.id_processo = $id_processo LIMIT $offset, $limit";
         $sql = $this->db->query($sql);
         return $sql->fetchAll(\PDO::FETCH_OBJ);
     }
  
     //Serve para buscar servidor vinculado ao processo - [formulario de processar servidor] preenhe a tabela de servidor processado 
     public function getServidorProcessado($id_processo, $offset, $limit){
-        $sql = "SELECT * FROM servidor as s INNER JOIN processo as p ON s.id_processo = p.id_processo AND s.id_processo = $id_processo LIMIT $offset, $limit";
+        $sql = "SELECT * FROM servidor as s INNER JOIN processados as p ON s.id_servidor = p.id_servidor WHERE p.id_processo = $id_processo LIMIT $offset, $limit";
         $sql = $this->db->query($sql);
         return $sql->fetchAll(\PDO::FETCH_OBJ);
     }
@@ -153,11 +161,7 @@ class Servidor_Model  extends Model{
         }
 
     public function IncluirServProcesso($id_servidor, $id_processo){
-        $sql = "UPDATE servidor SET id_processo = :id_processo WHERE id_servidor = :id_servidor";
-
-        /* print_r($sql);
-        exit;
-         */
+        $sql = "INSERT INTO processados SET id_servidor = :id_servidor, id_processo = :id_processo";
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":id_servidor", $id_servidor);
         $sql->bindValue(":id_processo", $id_processo);

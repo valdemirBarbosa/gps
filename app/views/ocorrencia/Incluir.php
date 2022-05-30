@@ -9,11 +9,11 @@
 <?php
 ?>
 		<label>Id Processo</label>
-		<input name="txt_id_processo" type="number" value="<?php foreach($vincularProcessoOcorrencia as $vp){}
+		<input name="txt_id_processo" type="number" value="<?php foreach($processo as $vp){}
 							echo $vp->id_processo; ?>">
 
 		<label>Número do Processo</label>
-		<input name="txt_numero_processo" type="number" value="<?php foreach($vincularProcessoOcorrencia as $vp){
+		<input name="txt_numero_processo" type="number" value="<?php foreach($processo as $vp){
 							echo $vp->numero_processo; } ?>" >
 	</legend>
 	</fieldset>

@@ -18,8 +18,10 @@ class PesquisaController extends Controller{
    public function index(){
         $denuncias = new Denuncia_Model();
         $denunciados = new Denuncia_Model();
+        $servidor = new Servidor_Model();
 
         $dados["servidor"] = $servidor->lista();
+        $dados["view"] = "Processo/processarServidor";
         $this->load("template", $dados);
     }
 
@@ -67,7 +69,7 @@ class PesquisaController extends Controller{
                
   }
 
-  public function ConsultaDenunciaLink(){
+/*   public function ConsultaDenunciaLink(){
           $dados['paginaAtual'] = $_GET['p'];
           $limit = $_SESSION['limit'];
           $offset = 0;
@@ -89,7 +91,7 @@ class PesquisaController extends Controller{
           $this->load("template", $dados);
      
   }
-
+ */
 //Pesquisa para tabela de denunciante    
 public function ConsultaDenunciante(){
      $limit = LIMITE_LISTA;

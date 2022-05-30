@@ -25,22 +25,24 @@ public function recebedor(){
       
         if(isset($arquivo['tmp_name']) && empty($arquivo['tmp_name']) == false){
                 $arquivo = $_FILES['arquivo'];
-                $caminho = strtoupper('C:/xampp/htdocs/uploads/');
+                $arquivoDb = $_FILES['arquivo']['name'];
+
+                $caminho = 'c:/xampp/htdocs/gps/uploads/';
                         
                 $extensao = $this->getExtensao($arquivo);
                 $nomeDoArquivo =  array_values($arquivo)[0].md5(time().rand(0,99));
-                $nomeDoArquivo =  array_values($arquivo)[0];
-                $arquivoUpload = $caminho.$nomeDoArquivo; // dados do arquivo para o banco de dados.
+                $nomeArquivo =  array_values($arquivo)[0];
+                $arquivoUpload = $nomeArquivo; // dados do arquivo para o banco de dados.
             
                 $dados['arq'] = [$arquivo];
-                move_uploaded_file($arquivo['tmp_name'], 'C:/xampp/htdocs/uploads/'.$nomeDoArquivo.$extensao);
+                move_uploaded_file($arquivo['tmp_name'], $caminho.$arquivoUpload);
 
                 $id_faseUpload = $_SESSION['id_faseUpload'];
                 $id_processo = $_SESSION['id'];
-                $descricao = $_SESSION['descricao'];
+                $descricao = isset($_SESSION['descricao']) ? $_SESSION['descricao'] : "padrão";
                 $data_inclusao = $_POST['data_inclusao'];
-
-                $this->incluirArquivo($id_processo, $id_faseUpload, $arquivoUpload, $descricao, $data_inclusao); //
+    
+                $this->incluirArquivo($id_processo, $id_faseUpload, $caminho, $arquivoDb, $extensao, $descricao, $data_inclusao); 
 
                 $dados["view"] = "processo/index";
                 $this->load("template", $dados);
@@ -66,22 +68,23 @@ public function recebedor(){
             return $retorno;
     }
 
-    public function incluirArquivo($id_processo, $id_faseUpload, $arquivoUpload, $descricao, $data_inclusao){
-        $id = $id_processo;
-        $id_faseUpload = $id_faseUpload;
-        $arquivo = $arquivoUpload;
+    public function incluirArquivo($id_processo, $id_faseUpload, $caminho, $arquivoDb, $extensao, $descricao, $data_inclusao){
 
         $upload = new Upload_Model();
-        $upload->inserir($id_processo, $id_faseUpload, $arquivo, $descricao, $data_inclusao);
+        $upload->inserir($id_processo, $id_faseUpload, $caminho, $arquivoDb, $extensao, $descricao, $data_inclusao);
 
        
     }
-    private function dadosArquivo($arquivo){    
-        $nome = array_values($aq)[0];
-        $tipo = array_values($aq)[1];
-        $tamanho = array_values($aq)[4];
-        $dadosDoArquivo[] = array($nome, $tipo, $tamanho);
-        return $dadosDoArquivo;
+   
+    //apresentar os arquivos baixados de acordo com o parâmetro id  --> serve para o processo editar
+    public function ArquivoAnexado($id_processo){
+        $anexo = new Upload_Model();
+        $dados['anexo'] = $anexo->upLoaded($id_processo);
+/*         print_r($dados);
+        exit;
+ */      
+        $dados['view'] = "processo/Editar";
+        $this->load("template", $dados);
     }
 
     public function Error($msg){

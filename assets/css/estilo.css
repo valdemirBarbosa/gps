@@ -46,6 +46,7 @@ ul, li{list-style:none;}
 	font-weight:normal;
 	font-style:normal;
 }
+
 .base-home{
     background-color:darkslategray;
     width: 100%;
@@ -53,6 +54,7 @@ ul, li{list-style:none;}
     margin-top: 0%;
     padding-top: 0.7%;
 }
+
 .titulo-pagina{
     font-weight: bolder;
     font-size: 20px;
@@ -98,7 +100,6 @@ header{
     /*grid-column-start: 1;  Coluna da grid começa na linha divisória da coluna 1 */
     /*grid-column-end: 3;   Coluna da grid termina na linha divisória da coluna  3*/
     grid-area: header;
-
     width: 100%;
     height: 7%;
     margin-bottom: 0.3%;
@@ -196,8 +197,6 @@ li{
     font-size: 16px;
 }
 
-
-
 /* form{
     background-color:lightsteelblue;
     width: 70%;
@@ -216,7 +215,8 @@ li{
     left: 15%;
 }
  */
-form.form2{
+
+ form.form2{
     background-color:blanchedalmond;
     width: 70%;
     height: auto;
@@ -267,7 +267,6 @@ input.pesquisa{
     width: 500px;
     text-align: center;
     padding: 2px;
-
 }
 
 input[type="text"]{
@@ -359,10 +358,9 @@ span{
   color:floralwhite;
   position:relative;
   top:-3px;
-    font-weight:inherit;
+  font-weight:inherit;
   font-size:1.4em;
   text-transform:uppercase;
-
 }
 /* 
 .rodape{
@@ -388,8 +386,8 @@ span{
         margin-right: 10px;
         vertical-align:auto;
         background-color: cadetblue;
-
     }
+
     table.tabServidor{
         border-collapse:separate;
         width: 80%;
@@ -397,11 +395,10 @@ span{
 
     }
 
-      
-      th, td {
+    th, td {
           text-align: left;
           padding: 2px;
-}
+    }
       tr:nth-child(even){background-color:#ddd}
       tr:hover {background-color:lightblue; color:mediumblue;}
       th{background-color:darkslategray; color: whitesmoke;}
@@ -486,7 +483,6 @@ span{
     text-align: center;
     text-transform: uppercase;
     box-shadow: 3px 6px #888888;
-
 }
 
 .btn-excluir:hover{
@@ -509,7 +505,6 @@ span{
     text-transform: uppercase;
 }
 
-
 .btn-editar:hover{
     width: 83px;
     height: 33px;
@@ -521,7 +516,7 @@ span{
 
 .txt-obs{
   display:block;
-    float: left;
+  float: left;
   padding:10px;
   border-radius:09px;
   -webkit-border-radius:9px;
@@ -538,13 +533,11 @@ span{
     height: 20%;
     margin:auto;
     margin-top: 15%;
-
 }
 
 .denuncia{
     margin-top: 4px;
 }
-
 
 .msg{
     margin-top: 100px;
@@ -623,7 +616,6 @@ span{
     text-align: center;
     text-transform: uppercase;
     box-shadow: 3px 6px #888888;
-
 }
 
 .btn_limpar_denuncia{
@@ -662,17 +654,14 @@ span{
     height: 40px;
     margin-left: 200px;
     background-color: red;
-
 }
 
 .txt_ocorrencia{
     width: 690px;
-
 }
 
 .txt_observacao{
     width: 780px;
-
 }
 
 .btn-portaria{
@@ -685,7 +674,6 @@ span{
     text-align: center;
     text-transform: uppercase;
     box-shadow: 3px 6px #888888;
-
 }
 
 .btn-portaria:hover{
@@ -704,7 +692,6 @@ span{
     text-align: center;
     text-transform: uppercase;
     box-shadow: 3px 6px #888888;
-
 }
 
 .btn-ocorrencia:hover{
@@ -725,7 +712,6 @@ span{
     width: 1000px;
     background-color: #DBE06C;
     box-shadow: 3px 6px #888888;
-
 }
 
 .erros{
@@ -776,15 +762,19 @@ span{
 
 .div1{
     width: 100%;
-    height: 22%;
-    background-color: whitesmoke;
+    height: 30%;
+    background-color:azure;
+    position: absolute;
+    z-index: 3;
 }
 
 .div2{
     width: 100%;
-    margin-top: 1%;
+    margin-top: 12%;
     height: 10%;
-    background-color: whitesmoke;
+    background-color:azure;
+    position: relative;
+    z-index: 10;
 }     
 
 .div2.processarServidorFormulario{
@@ -793,17 +783,18 @@ span{
 
 .div3{
     width: 100%;
-    margin-top: 2%;
+    margin-top: 3%;
     height: 0px;
     margin-left: 40px;
-    background-color: whitesmoke;
+    position: absolute;
+    z-index: 1;
+    background-color: darkgrey;
 }
 
  .div4{
-    margin-top: 10px;
+    margin-top: 5%;
     background-color: whitesmoke;
     width: 100%;
-
 }
 
 .principal{
@@ -825,8 +816,6 @@ span{
 
 .pesquisa{
     grid-area: pesquisa;
-
-
 }
 
 .incluir{
@@ -857,13 +846,20 @@ span{
 }
 
 .paginacao{
-    background-color:lightcyan;
-    margin-left: 3%;
-    margin-right: 3%;
-    text-align: left;
+    background-color:rgb(193, 224, 224);
+    text-align: center;
 }
+
+.paginaAnterior{
+    float: left;
+}
+
+.proximaPagina{
+    float: right;
+}
+
 .paginacao:hover{
-    background-color:lightsteelblue;
+    background-color:#DBE06C;
 }
 
 .prazo{
@@ -897,6 +893,36 @@ span{
     grid-area: fase;
 }
 
+.anexoPai{
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+    grid-template-rows: 8vh;
+    grid-template-areas: 'filho1 filho2 filho3';
+    background-color:white;
+
+}
+
+.anexoFilho1{
+    display: grid;
+    grid-area: filho1;
+    background-color: white;
+}
+
+.anexoFilho2{
+    display: grid;
+    grid-area: filho2;
+    background-color: white;
+
+}
+
+.anexoFilho3{
+    display: grid;
+    grid-area: filho3;
+    background-color: white;
+
+}
+
+
 
 @media only screen and (max-width: 800px){
     .menu{
@@ -921,9 +947,10 @@ span{
             height: 9%;
             margin-top: 0%;
         }
+    }
 
         
-        @media only screen and (max-height: 500px){
+    @media only screen and (max-height: 500px){
             footer{
                 grid-area: footer;
                 display: grid;
@@ -938,8 +965,7 @@ span{
                 display:block;
                 background-color: #101010;
                 color: green;
-
+           }
         }
-    }
-}
- 
+    
+     
