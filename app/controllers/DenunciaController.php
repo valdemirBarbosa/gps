@@ -7,7 +7,7 @@ use app\models\TipoDocumento_Model;
 use app\functions\percorrerPost;
 use app\Controllers\UploadController;
 use app\Controllers\UploadAuxController;
-
+use DateTime;
 
 class DenunciaController extends Controller{
    public function index(){
@@ -85,6 +85,7 @@ class DenunciaController extends Controller{
 
      $d = new Denuncia_Model();
      $id_denuncia = isset($_POST['txt_id']) ? strip_tags(filter_input(INPUT_POST, "txt_id")) : NULL;
+     $_SESSION['id_denuncia'] = $id_denuncia;
      $denuncia = isset($_POST['txt_denuncia']) ? strip_tags(filter_input(INPUT_POST, "txt_denuncia")) : " ";
      $id_denunciante = $_POST['lst_id_denunciante'];
      
@@ -92,6 +93,15 @@ class DenunciaController extends Controller{
      $numero_documento = $_POST['txt_numero_documento'];
      $denunciados = $_POST['txt_denunciados'];
      $data_entrada = isset($_POST['txt_data_entrada']) ? strip_tags(filter_input(INPUT_POST, "txt_data_entrada")) : " ";
+
+     //tratamento da data de anexação para o banco de dados
+     $data_inclusao = isset($_POST['data_inclusao']) ? strip_tags(filter_input(INPUT_POST, "data_inclusao")) : date("Y-m-d");
+     $data_inclusao = new DateTime($data_inclusao);
+     $data_inclusao = $data_inclusao->format('Y-m-d');
+     $_SESSION['data_inclusao'] = $data_inclusao;
+
+
+
      $observacao = $_POST['txt_observacao'];
      $doc_anexo = $_POST["txt_documentos_anexados"];
      $anexo = " ";
@@ -99,12 +109,10 @@ class DenunciaController extends Controller{
     
      if($id_denuncia != NULL){
            $d->Editar($id_denuncia, $denuncia, $id_denunciante, $tipo_documento, $numero_documento, $denunciados, $data_entrada, $observacao, $doc_anexo);
-
+          
           $upload = new UploadAuxController();
           $upload->AuxiliarUpload();
 
-          $dados["view"] = "denuncia/Index";
-          $this->load("template", $dados);
      
            echo "<script> Document.alert('Denúncia  já existe, não pode mais cadastrar') </script>";
      }elseif($d->Incluir($denuncia, $id_denunciante, $tipo_documento, $numero_documento, $denunciados, $data_entrada, $observacao, $doc_anexo, $anexo, $user)){

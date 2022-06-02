@@ -3,6 +3,10 @@
 </div>
 
 <form enctype="multipart/form-data" action="<?php echo URL_BASE ."Processo/Salvar" ?>" method="POST">
+<?php
+	$view = "processo/index";
+?>
+
 <?php foreach($processo as $pd){ $_SESSION['id_processo'] = $pd->id_processo; 
 ?>
 	<fieldset>

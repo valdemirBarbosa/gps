@@ -3,6 +3,11 @@
 	</div>
 
   <form enctype="multipart/form-data" action="<?php echo URL_BASE ."denuncia/Salvar" ?>" method="POST">
+
+  	<?php
+	  	$view = "denuncia/Index";
+		$_SESSION['view'] = $view;
+	?>
 		<fieldset>
 		<legend><h4>DENÚNCIA</h4></legend>
 			<label>id denuncia</label>
@@ -74,8 +79,8 @@
 			
 			<div class="anexoFilho3">
 				<label for="data_inclusao">data inclusão</label>
-				<input type="text" name="data_inclusao" value="<?php echo date('d-m-Y'); ?>">
-				<input type="hidden" name="view" value="<?php echo "denuncia/Edit/".$denuncia->id_denuncia ?>">
+				<input type="text" name="data_inclusao" value="<?php echo date('d-m-Y H:m:s'); ?>">
+				<!-- <input type="hidden" name="view" value="<?php //echo "denuncia/Edit/".$denuncia->id_denuncia ?>"> -->
 			</div>
 		</div>
 
@@ -94,10 +99,13 @@
 			</tr>
 			
 			<?php if(isset($anexo)){
+				print_r($anexo);
+				exit;
+				
 					foreach($anexo as $a){?>
 			<tr>
 				<td><?php echo $a->id_upload?> </td>
-				<td><?php echo $a->id_processo?> </td>
+				<td><?php echo $a->id_denuncia?> </td>
 				<td><?php echo $a->arquivo?> </td>
 				<td><?php echo $a->descricao?> </td>
 				<td><?php echo $a->data_inclusao?> </td> <br><br><br>

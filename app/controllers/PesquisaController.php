@@ -275,8 +275,6 @@ public function pegarDadosDoUsuario(){
           $limit = $_SESSION['limit'];
           $offset = 0;
 
-          $tipoFase = $_SESSION['tipoFase'];
-
           $tabela = $_POST['tabela'];
           $_SESSION['tabela'] = $tabela;
           $dados = $this->pegarDadosDoUsuario();     

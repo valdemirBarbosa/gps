@@ -37,16 +37,21 @@ public function recebedor(){
                 $dados['arq'] = [$arquivo];
                 move_uploaded_file($arquivo['tmp_name'], $caminho.$arquivoUpload);
 
-                $id_faseUpload = $_SESSION['id_faseUpload'];
-                $id_processo = $_SESSION['id'];
+            //tratamento dos parâmtros para denuncia ou para processo 
+                $data_inclusao = isset($_SESSION['data_inclusao']) ? $_SESSION['data_inclusao'] : "00/00/0000"; 
+                $id_faseUpload = isset($_SESSION['id_faseUpload']) ? $_SESSION['id_faseUpload'] : 0;
+                $id_processo = isset($_SESSION['id']) ? $_SESSION['id'] : 0;
+                $id_denuncia = isset($_SESSION['id_denuncia']) ? $_SESSION['id_denuncia'] : 0; 
+
                 $descricao = isset($_SESSION['descricao']) ? $_SESSION['descricao'] : "padrão";
-                $data_inclusao = $_POST['data_inclusao'];
-    
-                $this->incluirArquivo($id_processo, $id_faseUpload, $caminho, $arquivoDb, $extensao, $descricao, $data_inclusao); 
-
-                $dados["view"] = "processo/index";
+                                
+                
+                $this->incluirArquivo($id_denuncia, $id_processo, $id_faseUpload, $caminho, $arquivoDb, $extensao, $descricao, $data_inclusao); 
+ 
+                $dados['view'] = $view;
                 $this->load("template", $dados);
-
+          
+         
             }else{
                 $msg = "Não foi dessa vez, tente novamente";
                 $this->Error($msg);
@@ -68,10 +73,10 @@ public function recebedor(){
             return $retorno;
     }
 
-    public function incluirArquivo($id_processo, $id_faseUpload, $caminho, $arquivoDb, $extensao, $descricao, $data_inclusao){
+    public function incluirArquivo($id_denuncia, $id_processo, $id_faseUpload, $caminho, $arquivoDb, $extensao, $descricao, $data_inclusao){
 
         $upload = new Upload_Model();
-        $upload->inserir($id_processo, $id_faseUpload, $caminho, $arquivoDb, $extensao, $descricao, $data_inclusao);
+        $upload->inserir($id_denuncia, $id_processo, $id_faseUpload, $caminho, $arquivoDb, $extensao, $descricao, $data_inclusao);
 
        
     }
@@ -80,10 +85,11 @@ public function recebedor(){
     public function ArquivoAnexado($id_processo){
         $anexo = new Upload_Model();
         $dados['anexo'] = $anexo->upLoaded($id_processo);
-/*         print_r($dados);
-        exit;
- */      
-        $dados['view'] = "processo/Editar";
+
+        if(isset($_POST['view'])){
+            $view = $_POST['view']; //pega o arquivo onde vai ser renderizado
+        }
+        $dados['view'] = $view;
         $this->load("template", $dados);
     }
 
