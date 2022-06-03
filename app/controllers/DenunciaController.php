@@ -4,6 +4,7 @@ use app\core\Controller;
 use app\models\Denuncia_Model;
 use app\models\Denunciante_Model;
 use app\models\TipoDocumento_Model;
+use app\models\Upload_Model;
 use app\functions\percorrerPost;
 use app\Controllers\UploadController;
 use app\Controllers\UploadAuxController;
@@ -100,17 +101,21 @@ class DenunciaController extends Controller{
      $data_inclusao = $data_inclusao->format('Y-m-d');
      $_SESSION['data_inclusao'] = $data_inclusao;
 
-
-
      $observacao = $_POST['txt_observacao'];
      $doc_anexo = $_POST["txt_documentos_anexados"];
      $anexo = " ";
      $user = 1;
-    
+
+          
      if($id_denuncia != NULL){
            $d->Editar($id_denuncia, $denuncia, $id_denunciante, $tipo_documento, $numero_documento, $denunciados, $data_entrada, $observacao, $doc_anexo);
-          
-          $upload = new UploadAuxController();
+
+           $listaArquivos = new Upload_Model();
+           $id_processo = 0;
+           $dados["anexo"] = $listaArquivos->upLoaded($id_denuncia, $id_processo);
+
+
+           $upload = new UploadAuxController();
           $upload->AuxiliarUpload();
 
      

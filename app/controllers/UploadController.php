@@ -89,6 +89,19 @@ public function recebedor(){
         if(isset($_POST['view'])){
             $view = $_POST['view']; //pega o arquivo onde vai ser renderizado
         }
+        
+        $dados['view'] = $view;
+        $this->load("template", $dados);
+    }
+
+    public function ArquivoAnexadoDenuncia($id_denuncia){
+        $anexo = new Upload_Model();
+        $dados['anexo'] = $anexo->upLoadedDenuncia($id_denuncia);
+
+        if(isset($_POST['view'])){
+            $view = $_POST['view']; //pega o arquivo onde vai ser renderizado
+        }
+
         $dados['view'] = $view;
         $this->load("template", $dados);
     }

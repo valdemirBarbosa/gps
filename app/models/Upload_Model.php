@@ -44,16 +44,25 @@ class Upload_Model extends Model{
     }
 
     public function upLoaded($id_processo){
-        $sql = "SELECT * FROM upload as u INNER JOIN processo as p ON u.id_processo = p.id_processo WHERE p.id_processo = $id_processo";
-        $sql = $this->db->query($sql);
-        return $sql->fetchAll(\PDO::FETCH_OBJ);
+        $sql = "SELECT * FROM upload as u 
+                INNER JOIN processo as p 
+                ON u.id_processo = p.id_processo 
+                WHERE p.id_processo = $id_processo";
+
+                $sql = $this->db->query($sql);
+                return $sql->fetchAll(\PDO::FETCH_OBJ);
+    } 
+    
+    public function upLoadedDenuncia($id_denuncia){
+        $sql = "SELECT * FROM upload as u 
+                INNER JOIN denuncia as d 
+                ON u.id_denuncia = d.id_denuncia 
+                WHERE u.id_denuncia = $id_denuncia";
+               
+                $sql = $this->db->query($sql);
+                return $sql->fetchAll(\PDO::FETCH_OBJ);
     } 
 
-    public function upLoadedDen($id_denuncia){
-        $sql = "SELECT * FROM upload as u INNER JOIN denuncia as d ON u.id_denuncia = d.id_denuncia WHERE d.id_denuncia = $id_denuncia";
-        $sql = $this->db->query($sql);
-        return $sql->fetchAll(\PDO::FETCH_OBJ);
-    } 
 
     public function upLoadedLimit($id_processo, $offset, $limit){
         $sql = "SELECT * FROM upload as u INNER JOIN processo as p ON u.id_processo = p.id_processo WHERE u.id_processo = $id_processo LIMIT $offset, $limit";

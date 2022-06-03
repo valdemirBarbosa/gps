@@ -132,7 +132,7 @@ class ProcessoController extends Controller{
                $user = 1;
 
                $listaArquivos = new Upload_Model();
-               $dados["anexo"] = $listaArquivos->upLoaded($id_processo);
+               $dados["anexo"] = $listaArquivos->upLoaded($id_denuncia, $id_processo);
           
                $incluirNaOcorrencia = new Ocorrencia_Model();
                $incluirNaOcorrencia->Incluir($id_processo, $numero_processo, $id_servico, $data_ocorrencia, $ocorrencia, $observacao, $anexo, $user);
@@ -207,8 +207,9 @@ class ProcessoController extends Controller{
           }
 
           //conta quantidade de registro encaminhado para o model
+          $id_denuncia = 0;
           $anexo = new Upload_Model();
-          $qtdeRegistros = count($anexo->upLoaded($id_processo));
+          $qtdeRegistros = count($anexo->upLoaded($id_denuncia, $id_processo));
           
           
           $paginacao = $this->paginar($qtdeRegistros, $paginaAtual);

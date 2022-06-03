@@ -83,7 +83,6 @@
 				<!-- <input type="hidden" name="view" value="<?php //echo "denuncia/Edit/".$denuncia->id_denuncia ?>"> -->
 			</div>
 		</div>
-
 	</fieldset>
 	
 	<fieldset>

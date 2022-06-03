@@ -35,15 +35,14 @@ class UploadAuxController extends Controller{
                     $anexo = isset($anexo) ? $_POST['anexo'] : "";
                     $numero = isset($numero_processo) ? $_POST['numero_processo'] : $_POST['txt_numero_documento'];
 
+                    $listaArquivos = new Upload_Model();
+                    $dados["anexo"] = $listaArquivos->upLoadedDenuncia($id_denuncia);
+
                     $id_fase = isset($id_fase) ? $id_fase : 0;
 
                     $upload = new UploadController();
                     $upload->recebedor(); 
 
-                    
-                    $lista = $this->ArquivoAnexado($id_denuncia);
-                    print_r($lista);
-                    exit;
 
 
                     //INCLUIR OCORRÊNCIA DE ANEXAR ARQUIVO NOS ANDAMENTOS	
