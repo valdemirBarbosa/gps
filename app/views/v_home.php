@@ -5,5 +5,4 @@
  <div class="img">
 	<img class="imagem" src="<?php echo URL_BASE ."assets\img\logoMaio2021_2.JPG" ?>" alt="Logomarca da Prefeitura Municipal de Várzea Grande" width="400" height="200">	
 </div>
-</div>
 

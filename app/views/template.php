@@ -21,7 +21,6 @@
 		<li><a href="<?php echo URL_BASE . "processo/pad" ?>" >PAD</a></li>
 		<li><a href="<?php echo URL_BASE . "andamento/getAll" ?>">Andamentos</a></li>
 		<li><a href="<?php echo URL_BASE . "portaria/" ?>">Portaria</a></li>
-		<li><a href="<?php echo URL_BASE . "upload" ?>">Upload</a></li>
 	</ul> 
 	</nav>		
 </header>

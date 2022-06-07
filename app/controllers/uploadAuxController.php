@@ -37,7 +37,6 @@ class UploadAuxController extends Controller{
 
                     $listaArquivos = new Upload_Model();
                     $dados["anexo"] = $listaArquivos->upLoadedDenuncia($id_denuncia);
-
                     $id_fase = isset($id_fase) ? $id_fase : 0;
 
                     $upload = new UploadController();

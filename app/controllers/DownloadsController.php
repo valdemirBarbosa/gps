@@ -8,7 +8,7 @@ class DownloadsController extends Controller{
     if ($handle = opendir($_GET['path'])) {
       while (false !== ($entry = readdir($handle))) {
           if ($entry != "." && $entry != "..") {
-              echo "<a href='download.php?file=".$entry."'>".$entry."</a>\n";
+              //echo "<a href='".$entry."'>".$entry."</a>\n";
           }
       }
       closedir($handle);

@@ -64,6 +64,9 @@ class DenunciaController extends Controller{
         $denuncias = new Denuncia_Model();
         $dados["denuncia"] = $denuncias->getEditar($id_denuncia);
 
+        $lista = new Upload_Model();
+        $dados['anexo'] = $lista->upLoadedDenuncia($id_denuncia);
+        
         $denunciante = new Denunciante_Model();
         $dados['denunciante'] = $denunciante->lista();
         
@@ -89,7 +92,6 @@ class DenunciaController extends Controller{
      $_SESSION['id_denuncia'] = $id_denuncia;
      $denuncia = isset($_POST['txt_denuncia']) ? strip_tags(filter_input(INPUT_POST, "txt_denuncia")) : " ";
      $id_denunciante = $_POST['lst_id_denunciante'];
-     
      $tipo_documento = $_POST['id_tipo_doc'];
      $numero_documento = $_POST['txt_numero_documento'];
      $denunciados = $_POST['txt_denunciados'];
@@ -114,9 +116,8 @@ class DenunciaController extends Controller{
            $id_processo = 0;
            $dados["anexo"] = $listaArquivos->upLoaded($id_denuncia, $id_processo);
 
-
            $upload = new UploadAuxController();
-          $upload->AuxiliarUpload();
+           $upload->AuxiliarUpload();
 
      
            echo "<script> Document.alert('Denúncia  já existe, não pode mais cadastrar') </script>";
@@ -127,10 +128,8 @@ class DenunciaController extends Controller{
                $msg = "Já existe o mesmo tipo de documento ({$tipo_documento}) e com o mesmo número {($numero_documento)}";
                $this->Error($msg);
           }
-          header("Location:" . URL_BASE . "denuncia/lista");
-
-
-     }
+              header("Location:" . URL_BASE . "denuncia/lista");
+         }
 
      public function Error($msg){
           $msger = new MensageiroController();

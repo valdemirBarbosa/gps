@@ -9,16 +9,16 @@
 		$_SESSION['view'] = $view;
 	?>
 		<fieldset>
-		<legend><h4>DENÚNCIA</h4></legend>
-			<label>id denuncia</label>
-				<input id="txt_id" name="txt_id" value="<?php echo $denuncia->id_denuncia ?>" >
+		<legend><h2>DENÚNCIA</h2></legend>
+			<label>id: <?php echo $denuncia->id_denuncia ?></label>
+                        <input name="txt_id" type="hidden" value="<?php echo $denuncia->id_denuncia ?> ">
 
 			<label>Naração dos fatos da denúncia</label>
-		      	<textarea rows="2" cols="90" clas="denuncia" name="txt_denuncia"> <?php echo $denuncia->denuncia_fato ?>
-				</textarea>
-		</fieldset>
-	
-		<fieldset>
+		      	<textarea autofocus rows="1" cols="100" clas="denuncia" name="txt_denuncia"> 
+                            <?php echo $denuncia->denuncia_fato ?>
+			</textarea>
+                        <br><br>
+                        
  		<label class="denunciante">Denunciante</label>
 		 <select name="lst_id_denunciante">
 				<option value="<?php echo $denuncia->id_denunciante ?>"> <?php echo $denuncia->nome_denunciante. " - " .$denuncia->id_denunciante  ?></option>
@@ -26,8 +26,7 @@
  					<option value="<?php $den->id_denunciante  ?> "> <?php  echo $den->nome_denunciante. " - " .$den->id_denunciante  ?></option>
 				<?php }  ?>	
 		</select>
-
-					<label>tipo de documento</label>
+		<label>tipo de documento</label>
 					<select name="id_tipo_doc">
 						<option value="<?php echo $denuncia->id_tipo_documento ?>"> <?php echo $denuncia->tipo_de_documento ?> </option>
 							<?php foreach($tipo_doc as $doc){?>
@@ -43,8 +42,7 @@
 				<label for="dataMask">data de entrada</label>
 					<input id="dataMask" name="txt_data_entrada" value="<?php echo $denuncia->data_entrada?>" type="date" required>
 
-				</fieldset>					
-			<fieldset>
+                            <br>
 				<label>Denunciados</label>
 				<textarea rows="1" cols="110"  name="txt_denunciados">
 						<?php echo $denuncia->denunciados ?> 
@@ -65,24 +63,23 @@
 			
 	<fieldset>
 	<legend>Upload de arquivos</legend>
+            <div class="anexoPai">
+                <div class="anexoFilho1">
+                    <input type="file" name="arquivo">
+                    <input type="hidden" name="view" value="<?php echo $view ?>">
+                </div>
 
-			<div class="anexoPai">
-			<div class="anexoFilho1">
-				<input type="file" name="arquivo">
-				<input type="hidden" name="view" value="<?php echo $view ?>">
-			</div>
-			
-			<div class="anexoFilho2">
-				<label for="descricao">descrição do arquivo</label>
-				<input type="text" size="50" name="descricao">
-			</div>
-			
-			<div class="anexoFilho3">
-				<label for="data_inclusao">data inclusão</label>
-				<input type="text" name="data_inclusao" value="<?php echo date('d-m-Y H:m:s'); ?>">
-				<!-- <input type="hidden" name="view" value="<?php //echo "denuncia/Edit/".$denuncia->id_denuncia ?>"> -->
-			</div>
-		</div>
+                <div class="anexoFilho2">
+                    <label for="descricao">descrição do arquivo</label>
+                    <input type="text" size="50" name="descricao">
+                </div>
+
+                <div class="anexoFilho3">
+                    <label for="data_inclusao">data inclusão</label>
+                    <input type="text" name="data_inclusao" value="<?php echo date('d-m-Y H:m:s'); ?>">
+                    <!-- <input type="hidden" name="view" value="<?php //echo "denuncia/Edit/".$denuncia->id_denuncia  ?>"> -->
+                </div>
+            </div>
 	</fieldset>
 	
 	<fieldset>
@@ -98,16 +95,13 @@
 			</tr>
 			
 			<?php if(isset($anexo)){
-				print_r($anexo);
-				exit;
-				
-					foreach($anexo as $a){?>
+				foreach($anexo as $a){?>
 			<tr>
 				<td><?php echo $a->id_upload?> </td>
 				<td><?php echo $a->id_denuncia?> </td>
 				<td><?php echo $a->arquivo?> </td>
 				<td><?php echo $a->descricao?> </td>
-				<td><?php echo $a->data_inclusao?> </td> <br><br><br>
+				<td><?php echo $a->data_inclusao?> </td> 
 				<?php
 					$caminho = $a->caminho;
 					$arquivo = $a->arquivo;
@@ -115,7 +109,7 @@
 	
 				<td> <!-- DOWNLOAD DE ARQUIVOS  !-->
 					<a href="<?php echo URL_BASE . 'downloads/?path='.$caminho.'&file='.$arquivo ?>"> baixar </a>
-					
+				
 				</td>
 			</tr>
 			<?php } }?>
