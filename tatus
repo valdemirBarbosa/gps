@@ -1,0 +1,534 @@
+[33mcommit 20fab6c65f8bfca40a855269516a867781d5510d[m[33m ([m[1;36mHEAD -> [m[1;32mprincipal[m[33m)[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Tue Jun 7 18:40:16 2022 -0400
+
+    07-06-2022. Funcionando Upload e Download e ajustado a tela do form denuncia
+
+[33mcommit 33ce50a55a03a67cc3ddc972cf41faf649982a99[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Tue Jun 7 18:40:04 2022 -0400
+
+    07-06-2022. Funcionando Upload e Download e ajustado a tela do form denuncia
+
+[33mcommit 08847bbe10bc630f16dce4579eb0122970eb3705[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Fri Jun 3 18:15:06 2022 -0400
+
+    Ainda tentando mostrar os arquivos já feitos upload no form denuncia
+
+[33mcommit b465bba8ddb1b78e8f2ea5bb3da55b89b876e582[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Thu Jun 2 18:11:14 2022 -0400
+
+    Terminando o upload da denuncia
+
+[33mcommit 5e22b2d1d6a53d8bba07be9efd14f877c440ee65[m[33m ([m[1;31morigin/principal[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Mon May 30 06:29:48 2022 -0300
+
+    30-05-2022
+
+[33mcommit 33c0e468462217d56cb7cb15a45f59d264ff1f18[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Tue Apr 5 06:41:16 2022 -0300
+
+    05-04-2022
+
+[33mcommit 9ad4396fee8d773e223015e370a39a8672cc306c[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Tue Mar 29 06:23:53 2022 -0300
+
+    Inclusão de Processo incluído. Upload funcionando na inclusão de Processo - 29-03-2022
+
+[33mcommit 6defbddbe00c5bd227a00311926cad69b84d045a[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Thu Mar 17 07:32:20 2022 -0300
+
+    17-03-2022
+
+[33mcommit ebc04a1501e448019a76af83a18d287a0106dc46[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Sun Mar 13 05:03:53 2022 -0300
+
+    13-03-2022
+
+[33mcommit 55b518836bc863aa1a4b7572304f77189dac4eaa[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Fri Mar 4 07:27:06 2022 -0300
+
+    04-03-2022
+
+[33mcommit 8e9ff9a3e3468778d1140521d0eaaa627bd389d2[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Thu Mar 3 07:32:13 2022 -0300
+
+    fazendo o formulário de inclusão a partir do index da denuncia
+
+[33mcommit f66aee0c5f056f5a9f10e5c46f1d905ca610bedb[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Wed Feb 23 07:26:39 2022 -0300
+
+    Incluindo botão de inclusão de processo preliminar, sindicância e PAD no INDEX da denúncia para facilitar e não precisar digitar códigos na inclusão de novos processos - parte 1
+
+[33mcommit 2cb6b01efd94a7c34694c3cde5e93fbad0c5bcbd[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Fri Feb 4 08:48:01 2022 -0300
+
+    04-02-2022
+
+[33mcommit f8065fc2529c768910926f0fe8f98ea86356328f[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Wed Feb 2 08:42:03 2022 -0300
+
+    02-02-2022
+
+[33mcommit a4e3b23fb015b541c0ee0675029c97da4d061942[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Mon Jan 31 07:39:36 2022 -0300
+
+    31-01-2022
+
+[33mcommit e908b9f489c11c446fff892f831677980d442819[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Tue Jan 25 08:40:43 2022 -0300
+
+    25-01-2022
+
+[33mcommit 0bbb84652efa9a5f78183a9a3cbb6c778d5a569c[m
+Merge: 87c946f cdf61cf
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Sun Jan 23 19:55:44 2022 -0300
+
+    CSS com GRID 23-01-2022
+
+[33mcommit 87c946f625730130a98b0582ca5a209e6328b4f8[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Tue Jan 4 23:39:35 2022 -0300
+
+    04-01-2022
+
+[33mcommit c285bb3e1b7ea7c4e49eee8bf2350d7fd1340a84[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Mon Jan 3 15:13:08 2022 -0300
+
+    Corrigido UPDATE do formulario de denuncia
+
+[33mcommit cdf61cfd4a22859c3c32b538c0f8ac0ccbed0f24[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Thu Dec 30 08:17:58 2021 -0300
+
+    Com formulario de processar servidor em andamento
+
+[33mcommit f1c8dd699eae00e207f0d54cb64fbb78d10fc80d[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Mon Dec 27 08:26:47 2021 -0300
+
+    27-12-2021 - paginação ok
+
+[33mcommit 159cd0e4c4b236df0d9f748e16beb019b7a8eca3[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Sun Dec 26 12:13:38 2021 -0300
+
+    Paginções funcionando
+
+[33mcommit ac76761d25b6a024fed4d9a819078b9937edac7e[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Tue Dec 14 00:30:12 2021 -0300
+
+    14-12-2021
+
+[33mcommit 9df35dfa3cc7841b5a599eaa48f1c6cc300a43ca[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Mon Dec 13 07:29:11 2021 -0300
+
+    13-12-2021 gps
+
+[33mcommit f943bfb252ed5f841d8ab46c4d986b5b8109a72c[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Mon Dec 6 23:51:54 2021 -0300
+
+    paginação continua a saga
+
+[33mcommit b5459611c2552d3aae5f4faf5447f94bbaaaf4dd[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Mon Dec 6 07:17:54 2021 -0300
+
+    tabs com paaginação, funcionando
+
+[33mcommit 87cd0d377fde54dfa2f75ae04384b4c012cd6cbf[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Thu Dec 2 09:20:15 2021 -0300
+
+    02-12-2021 - paginação servidor funcionando falta pros outros forms
+
+[33mcommit 3dec177bbe1fc5ac6bca196d194fc0a97ec1b37f[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Mon Nov 29 23:57:35 2021 -0300
+
+    optimizando paginação. pagina servidor ok
+
+[33mcommit 934929be4378a99d43d42a0fd16e79880fea402b[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Tue Nov 23 08:37:56 2021 -0300
+
+    corrigindo paginacao do servidor-index
+
+[33mcommit 5a5387e1ab657acf06263328e387e202b114b15f[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Tue Nov 16 07:09:18 2021 -0300
+
+    Novo laiout 16-11-2021
+
+[33mcommit a44bf64f089d27b8e0c604d84c6e33589bfe030f[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Wed Nov 10 07:06:04 2021 -0300
+
+    10-11-2021
+
+[33mcommit 1f3b2e0d9bdf8fb875341573b531a35ef72b193d[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Tue Nov 9 06:42:08 2021 -0300
+
+    09-11-2021
+
+[33mcommit d8f5ccac935c663e22d5729123512a050b55e201[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Mon Nov 8 09:36:35 2021 -0300
+
+    08-11-2021
+
+[33mcommit 88c6291bb32b49f3c4c6240f60a5835433219841[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Sun Nov 7 14:33:30 2021 -0300
+
+    07-11-2021
+
+[33mcommit bf40a7e85dc4a91fce483a9807c23f1018598cd5[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Fri Nov 5 09:22:28 2021 -0300
+
+    05-11-2021 - programando processamento do servidor
+
+[33mcommit 479b5eb9c3fa2d59ef657a219765b094886c4584[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Thu Nov 4 09:20:17 2021 -0300
+
+    04-11-2021
+
+[33mcommit 79efe1c15562d9d5b4f71779a3defa4e14b4626e[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Wed Nov 3 08:57:29 2021 -0300
+
+    trabalhando no processamento do servidor
+
+[33mcommit 778bf4867cd4eebfed16251f61c80054211186aa[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Tue Nov 2 10:09:34 2021 -0300
+
+    Incluído botão voltar e criando formulario para processar servidor
+
+[33mcommit 3b2e75cb291c1cc1bd1621e2ffd7f383525f6872[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Sun Oct 31 12:15:13 2021 -0300
+
+    Após conserto do computador - refeito vários arquivos
+
+[33mcommit 2f32155332ea95777ea5aed547299df7021b9615[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Tue Oct 12 11:55:51 2021 -0300
+
+    o mais pronto até agora
+
+[33mcommit 93fa27b2aaf4ec07e48c5aedb2db404a561dc613[m
+Author: valdemir <val.b.silva7@gmail.com>
+Date:   Wed Sep 22 00:18:29 2021 -0300
+
+    Restaurando o que já tinha sido feito
+
+[33mcommit 8fcdb5b32a102179a7994b7f93031502c4711250[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Fri Aug 27 07:37:55 2021 -0400
+
+    Paginação funcionando e corrigido CSS nos formulários
+
+[33mcommit 8605c534cdd400bcee0de1f6ca78259c87f84afc[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Tue Aug 24 22:21:03 2021 -0400
+
+    Paginação funcionando - por processo
+
+[33mcommit 9c5aea0fdfa49be6504dbd1a7e54a3e90e17993d[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Mon Aug 23 08:21:30 2021 -0400
+
+    Funcionando paginação com pesquisa, faltam ajustes
+
+[33mcommit c45a8fe9c07387686e1406fa446dbff3968782e4[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Tue Aug 10 16:37:05 2021 -0400
+
+    tentato fazer paginação MVC 2
+
+[33mcommit e04098ae3b765689327d0de8a12fa0704df61a7f[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Tue Aug 10 16:35:42 2021 -0400
+
+    tentato fazer paginação MVC 2
+
+[33mcommit f5767d3bc56c402407141651c57b43589417df3b[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Tue Aug 10 06:56:21 2021 -0400
+
+    Tentanto fazer a paginação no andamento
+
+[33mcommit 31aebd675ab4316ae5c32c9dd3de126697efe799[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Mon Aug 9 07:23:59 2021 -0400
+
+    configuramndo paginação
+
+[33mcommit 00ad682067a0472993219166ce574b403e78c83e[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Sun Aug 8 08:51:37 2021 -0400
+
+    Corrigido Upload
+
+[33mcommit c62c200d641449f1047018d0c089f2708d8433af[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Sun Aug 8 07:31:44 2021 -0400
+
+    corrigido css tela principal
+
+[33mcommit dc5becaad0c57b90e273177fde2d462f60793927[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Thu Aug 5 17:25:35 2021 -0400
+
+    Incluindo paginação
+
+[33mcommit 473e3fd7393217c6b9670d7fd6980fd5fd03f23b[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Tue Aug 3 07:22:07 2021 -0400
+
+    incluído função para restringir fases
+
+[33mcommit 9079f25647a4f5340cbd831c647e22c4360a3bf7[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Mon Aug 2 07:57:21 2021 -0400
+
+    pronto as restrições da data das fases
+
+[33mcommit c340ab5eb6f3f6503ea6f77f59d2d1fe8f3a012a[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Fri Jul 23 18:01:15 2021 -0400
+
+    incluído upload e Incluindo trâmite
+
+[33mcommit be7f42dd767f486ba8d032ed4f2a78fb87889dc4[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Fri Jul 23 07:34:04 2021 -0400
+
+    Conclusão do upload
+
+[33mcommit 5cb1e7199903cd2b24a05054ed11efa26b0d4d5e[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Thu Jul 22 18:01:55 2021 -0400
+
+    do computador do serviço. corrigido vinculação e corrindo o de ocorrência
+
+[33mcommit 92bc5fc2e46bd42e2b42d7d686057163f8faa60b[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Wed Jul 21 07:58:17 2021 -0400
+
+    corrigindo o formulario de portaria inclusão
+
+[33mcommit 2a6f9e3e217974e7435026e52a4b029fd68e9578[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Tue Jul 20 23:34:23 2021 -0400
+
+    vinculando formularios
+
+[33mcommit 4e43c2255488311e45ae413ef3ab456bc9861b40[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Tue Jul 20 07:22:14 2021 -0400
+
+    corrigido formulario de inclusao de ocorrencia. pegando os codigos
+
+[33mcommit 9d70cebc3cd0d2a0f8e2267410ff4292b56b9731[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Mon Jul 19 23:08:52 2021 -0400
+
+    Corrigindo portaria
+
+[33mcommit f0094f4c91a9bab6460e43429345b726740c29c1[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Mon Jul 19 06:02:30 2021 -0400
+
+    BD
+
+[33mcommit 76e53003fcc305d442135cddefe659756545b2a3[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Mon Jul 19 05:49:22 2021 -0400
+
+    Formularios aclopados. Processo e ocorrencia
+
+[33mcommit be4f4f07071f63cbe1d56e0cb0238002d1c7d22c[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Sat Jul 17 10:06:20 2021 -0400
+
+    Processo aclopado a ocorrencia funcionando
+
+[33mcommit 937627e7f27224f18c7f8300a1cf65a8b0edca90[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Thu Jul 15 23:20:07 2021 -0400
+
+    Adicionando o script de banco
+
+[33mcommit 14594697d32faa06909e9407900b24645eccaa9b[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Thu Jul 15 23:16:47 2021 -0400
+
+    Começando a vincular os formulários
+
+[33mcommit 0ccc4c2c14b2ba143e3c17adf179fb281d1fe282[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Thu Jul 15 01:21:27 2021 -0400
+
+    madrugada
+
+[33mcommit 4c69e34df6bd9543cc05a27ecc209ce4d2911826[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Wed Jul 14 18:43:41 2021 -0400
+
+    alterando de varias tabelas para uma tabela de processos vinculada a fase
+
+[33mcommit 361c2ec516f584774f8a5e9bb6469533e8a85314[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Fri Jul 9 07:25:01 2021 -0400
+
+    Atualizando formularios de inclusões
+
+[33mcommit 05cb5bf35a7ebf30e62e81fcc8f2e4dcfcdbadcb[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Wed Jul 7 07:35:28 2021 -0400
+
+    Corrigir BD
+
+[33mcommit 749e1e5f6cb0c579a2f71353ac0e9ad25ce3da9f[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Sat Jul 3 19:42:44 2021 -0400
+
+    Antes de desmenbrar pp_sindicancia para pp e sindicancia
+
+[33mcommit df3f15c930e55d31abb4724cef0d7d4e8ffa2693[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Wed Jun 30 07:28:03 2021 -0400
+
+    atualizando portaria
+
+[33mcommit 0e1fb4bde484161bc49547e6c4a25acf8295eb6b[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Mon Jun 28 07:50:56 2021 -0400
+
+    Já com alguns forms de portaria
+
+[33mcommit 7d93f918ca2603c7a9e8ff00d71671db4d3b6845[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Sun Jun 27 01:28:10 2021 -0400
+
+    tudo funcionando
+
+[33mcommit 94c31734d5609d563677f778aa5370b4b1f9cf0f[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Fri Jun 25 07:46:48 2021 -0400
+
+    Iniciado as formatações e funcionalidades dos forms de inclusão
+
+[33mcommit e1a9619dd272f65eefefe4da785413e97821ae3c[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Thu Jun 24 07:50:09 2021 -0400
+
+    atualizações
+
+[33mcommit 26260da57ffccf746c8c60f55e206548c4f60d3b[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Wed Jun 23 07:57:49 2021 -0400
+
+    correções nos formularios de editar
+
+[33mcommit bdf310d434ba9409cabec0d9ce55bc43ec9a9ecd[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Tue Jun 22 23:13:30 2021 -0400
+
+    corrigido layout formularios
+
+[33mcommit df8e36efe49915d0b202001137ddde47c55cd954[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Mon Jun 21 23:32:40 2021 -0400
+
+    Todos os Index corrigidos com CSS
+
+[33mcommit 58258e2f90d4073ac2e18cee537c4be6ea2cfe72[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Mon Jun 21 07:28:01 2021 -0400
+
+    21/06/2021
+
+[33mcommit fdd109c3645b90d37ed1bc0191c8915609182486[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Fri Jun 18 08:21:55 2021 -0400
+
+    90% do DB pronto 80% dos forms prontos - atualizado BD
+
+[33mcommit 8be8e12baf7257d9b629ccc45176745f15bca109[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Fri Jun 18 08:20:10 2021 -0400
+
+    90% do DB pronto 80% dos forms prontos
+
+[33mcommit c8a6b4003107e39be5b65271eac96b766946f4d0[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Wed Jun 16 08:41:36 2021 -0400
+
+    criado pad
+
+[33mcommit 23244b28c54149030071bdb017308ce5e9e0be7d[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Tue Jun 15 08:11:50 2021 -0400
+
+    Atualização 15/06/2021 BD e códigos
+
+[33mcommit aadf7c2db3d337c43fc15b5ed0de900f937dd733[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Mon Jun 14 11:37:33 2021 -0400
+
+    Atualização e BD
+
+[33mcommit ea51ff02e4c3d7a8888f68e686a221f70ab61dd9[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Fri Jun 11 07:35:25 2021 -0400
+
+    atualizando
+
+[33mcommit 2f06fbf995167ec63aa0fdcbf756476f6384063b[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Tue Jun 8 07:22:46 2021 -0400
+
+    incluido o BD e alterados formulários
+
+[33mcommit 98aa10bc4ae396ded2be119d2515aad35e37b5bb[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Sun Jun 6 17:49:44 2021 -0400
+
+    formulario com subtabela corrigod o sql
+
+[33mcommit 96555f1f7fdf89761aae109a8a0ca4edfaf92ce5[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Sun Jun 6 12:09:37 2021 -0400
+
+    Consulta em formulário e subtabela funcionando, mas falta resolver sql que dá erro depois da consulta (????)
+
+[33mcommit 1bdcf056332e93f1b507cff338930da14a2e695c[m
+Author: valdemirBarbosa <val.b.silva7@gmail.com>
+Date:   Thu Jun 3 19:43:57 2021 -0400
+
+    Criado subtabela denunciado vinculado à tabela denuncia, mas precisando melhoar

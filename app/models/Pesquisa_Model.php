@@ -50,7 +50,7 @@ class Pesquisa_Model extends Model{
             LEFT JOIN tipo_documento as t ON 
             d.tipo_documento = t.id_tipo_documento 
             WHERE d.denunciados LIKE '%$parametro%' 
-            ORDER BY d.denunciados ASC  
+            ORDER BY d.denunciados DESC  
             LIMIT $offset, $limit";
         }else{
             $sql =  $sql = "SELECT * FROM $tabela as d 
