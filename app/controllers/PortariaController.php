@@ -9,11 +9,20 @@ use app\models\Ocorrencia_Model;
 class PortariaController extends Controller{
    public function index(){
         $portarias = new Portaria_Model();
+        
         $this->atualizarPrazo();
-       
-        $dados["portaria"] = $portarias->lista();
+        
+        $prazo = 5;
+        
+        $portarias = new Portaria_Model();
+        $dados["portaria"] = $portarias->FiltrarLista($prazo);
         $dados["view"] = "portaria/Index";
         $this->load("template", $dados);
+     }
+
+     public function filtrarPrazo($prazo){
+          
+          
      }
 
      public function atualizarPrazo(){
@@ -28,6 +37,7 @@ class PortariaController extends Controller{
   
             $atulizarDia = new Portaria_Model();
             $diaAtualizado = $atulizarDia->updateDia($idPortaria, $dia);
+            return $diaAtualizado;
           }
      }
   

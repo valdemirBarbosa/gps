@@ -13,6 +13,13 @@ class Portaria_Model extends Model{
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
+    
+    public function FiltrarLista($prazo){
+        $sql = "SELECT * FROM portaria WHERE prazo = $prazo ORDER BY data_final DESC";
+        $sql = $this->db->query($sql);
+        return $sql->fetchAll(\PDO::FETCH_OBJ);
+        
+    }
 
     public function Incluir($id_fase, $numero_processo, $numero, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $data_realizada, $prazo_atendido, $observacao, $anexo, $user){
         $numeroProcesso = $numero_processo;
