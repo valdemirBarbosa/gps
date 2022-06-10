@@ -71,7 +71,7 @@
 	   $mes = $dt_entrada[1];
 	   $ano = $dt_entrada[0];
 	?>
-	         <td align="center"><?php echo $dia."/".$mes."/".$ano  ?> </td> 
+	         <td align="cente   r"><?php echo $dia."/".$mes."/".$ano  ?> </td> 
 		
 			 <td><?php echo $den->denunciados ?> </td>
 	
@@ -109,8 +109,26 @@
 	  	      </div>	
                </td>
 
-
+               <?php 
+                if(isset($denunciados)){
+                    foreach($denunciados as $d){?>
+                        <tr>
+                            <th>id</th>
+                            <th>nome</th>
+                            <th>cpf</th>
+                        </tr>
+                        <tr>
+                            <td><?php echo $d->id_denunciados ?></td>
+                            <td colspan="2"><?php echo $d->nome ?></td>
+                            <td><?php echo $d->cpf ?></td>
+                        </tr>
+                <?php    
+                    }
+               }?>
 		   </tr>
+                   <tr>
+                       <td></td>
+                   </tr>
 	<?php }
 	} ?>
 	</div> <!-- FIM DA DIV base-lista !-->

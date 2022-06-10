@@ -15,11 +15,20 @@ class Portaria_Model extends Model{
     }
     
     public function FiltrarLista($prazo){
-        $sql = "SELECT * FROM portaria WHERE prazo = $prazo ORDER BY data_final DESC";
-        $sql = $this->db->query($sql);
-        return $sql->fetchAll(\PDO::FETCH_OBJ);
-        
+        $sql = "SELECT * FROM portaria WHERE prazo >0 AND prazo <= :prazo ORDER BY prazo DESC";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":prazo", $prazo);
+        $sql->execute();
+        return $sql->fetchAll(\PDO::FETCH_OBJ);        
     }
+    /*
+    public function SelectNumero($numero_portaria){
+        $sql = "SELECT * FROM portaria WHERE numero =:num";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(':num', $numero_portaria);
+        $sql->execute();
+        return $sql->fetchAll(\PDO::FETCH_OBJ);
+    }*/
 
     public function Incluir($id_fase, $numero_processo, $numero, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $data_realizada, $prazo_atendido, $observacao, $anexo, $user){
         $numeroProcesso = $numero_processo;
@@ -74,6 +83,8 @@ class Portaria_Model extends Model{
         $sql->execute();
         return $sql->fetchAll(\PDO::FETCH_OBJ);
     }
+    
+    
 
     public function InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_processo, $numero_processo,  $numero, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user){
 

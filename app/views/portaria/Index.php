@@ -4,14 +4,31 @@
 <script type="text/javascript" src="<?php URL_BASE . "/assets/js/funcoes.js" ?>"> </script>
 
 <div class="base-lista">
-	
-	<div class="pai|">	
+
+    <form name="prazoVencimento" method="POST">
+        <?php 
+            $qtde = isset($portaria) ? $portaria : 0;
+                foreach($portaria as $port){
+                    $prazo = $port->prazo;
+                }
+                echo "Quantidade de portaria com vencimento escolhido ". count($qtde) ?>
+        
+            <br>
+            <br>
+            <label id="prazo">Informe. Vencimento em até 
+            <input type="number" autofocus name="prazo" value="<?php echo ":" . $prazo ?>">
+            <label>dias</label>
+            <input type="submit" value="pesquisar">
+            <br><label> <?php echo "Prao igual ou menor a: ". $_POST['prazo'] . " dias" ?> </label>          
+        
+    </form>
+	<div class="pai">	
 		<!--Botões !-->
 			
 		<div class="filho1">
 		    
 		</div>
-		
+
 <!-- 			<div class="filho2">
 				<a href="<?php echo URL_BASE . "ocorrencia/novo" ?>" class="btn-inc" >INCLUIR</a>
 			</div>
@@ -21,7 +38,8 @@
 		  <thead class="thead">
 				<th width="10%">Número Processo</th>
 <!-- 				<th width="10%">Tipo</td>  //tirado temporariamente provavelmente não será util, se for reativarei
- -->				<th>Data Elaboração </th>
+ -->				<th>Número da portaria</th>
+ 				<th>Data Elaboração </th>
 				<th>Data Publicação</th>
 				<th width="25%">Veículo</th>
 				<th width="25%">Prazo</th>
@@ -35,6 +53,7 @@
 	  foreach($portaria as $port){
 	?>
 			<tr>
+				<td><?php echo $port->numero?></td>
 				<td><?php echo $port->numero_processo ?></td>
 <!-- 				<td><?php //echo $port->tipo ?></td>  tirado temporariamente provavelmente não será util, se for reativarei
  -->				<td><input class="data" type="date" readonly value="<?php  echo $port->data_elaboracao  ?>" ></td>

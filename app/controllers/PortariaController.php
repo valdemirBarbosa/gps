@@ -11,10 +11,8 @@ class PortariaController extends Controller{
         $portarias = new Portaria_Model();
         
         $this->atualizarPrazo();
-        
-        $prazo = 5;
-        
         $portarias = new Portaria_Model();
+        $prazo = isset($_POST['prazo']) ? addslashes($_POST['prazo']) : 5;
         $dados["portaria"] = $portarias->FiltrarLista($prazo);
         $dados["view"] = "portaria/Index";
         $this->load("template", $dados);

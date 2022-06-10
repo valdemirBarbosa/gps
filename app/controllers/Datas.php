@@ -1,5 +1,6 @@
 <?php
  namespace app\core\Controller;
+ use DateTime;
 
 // calcula data para encontrar o prazo final 
 public function calcularData($data_final, $data_publicacao){
