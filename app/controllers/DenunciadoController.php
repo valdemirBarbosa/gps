@@ -3,6 +3,7 @@ namespace app\controllers;
 
 use app\core\Controller;
 use app\models\Denunciado_Model;
+use app\models\Denuncia_Model;
 
 class DenunciadoController extends Controller{
     
@@ -13,7 +14,13 @@ class DenunciadoController extends Controller{
         $this->load("template", $dados);
    } 
 
-   public function novo(){
+   public function novo($id_denuncia){
+     $denuncia = new Denuncia_Model();
+     $dados['denuncia'] = $denuncia->Denuncias($id_denuncia);
+
+     $denunciados = new Denunciado_Model();
+     $dados['denunciado'] = $denunciados->getDenunciado($id_denuncia);
+
         $dados["view"] = "denunciado/Incluir";
         $this->load("template", $dados);
    }

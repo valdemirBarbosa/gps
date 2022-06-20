@@ -17,8 +17,7 @@ p{line-height:1.2em; font-size:1em; letter-spacing:0; color:#263238;}
 a {text-decoration:none; color:#444;}
 input,textarea, select {background:#EEEEEE;  text-transform: uppercase;}
 input[type=image]{border:0;}
-input[type=date], select{padding:2px}
-select{height: 35px;}
+input[type=date], select{padding:1px}
 ul, li{list-style:none;}
 
 @font-face {
@@ -226,7 +225,7 @@ li{
 }
 
 textarea{
-    padding: 2%;
+    padding: 1.5%;
 }
 
 label, input{
@@ -495,8 +494,13 @@ span{
     font-size: 15px;
 }
 
+.DenunciadoServidorFormulario{
+    position:relative;
+    
+}
+
 .btn-editar{
-    width: 80px;
+    width: auto;
     height: 30px;
     color:blue;
     border-radius: 5px;
@@ -507,7 +511,7 @@ span{
 }
 
 .btn-editar:hover{
-    width: 83px;
+    width: auto;
     height: 33px;
     background-color:lightslategray;
     border-color:darkgreen;
@@ -894,12 +898,29 @@ span{
     grid-area: fase;
 }
 
+.paiDenuncia{
+    display: grid;
+    grid-template-columns: 55% 45%;
+    grid-template-areas: 'filho1Denuncia filho2Denuncia';
+}
+
+.filho1Denuncia{
+    display: grid;
+    grid-area: filho1Denuncia;
+
+}
+
+.filho2Denuncia{
+   display: grid;
+   grid-area: filho2Denuncia;
+}
+
+
 .anexoPai{
     display: grid;
     grid-template-columns: 30% 40% 30%;
     grid-template-areas: 'filho1 filho2 filho3';
     background-color:white;
-
 }
 
 .anexoFilho1{
@@ -924,6 +945,18 @@ span{
     margin-bottom: 5px;
 }
 
+.optionDenunciante{
+    width: 600px;
+}
+
+.BarraDerolagem{
+    width: 600px;
+    height: 80px;
+    margin-top: 10px;
+    margin-left: 100px;
+    background-color:bisque;
+    overflow:scroll;
+}
 
 
 @media only screen and (max-width: 800px){

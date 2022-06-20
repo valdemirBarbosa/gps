@@ -13,6 +13,7 @@ class Denuncia_Model extends Model{
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
+
       
     public function Documentos(){
         $sql = "SELECT * FROM tipo_documento";
@@ -28,28 +29,11 @@ class Denuncia_Model extends Model{
 
 
     public function Denuncias($id_denuncia){
-        $ret = array();
             $sql = "SELECT * FROM denuncia WHERE id_denuncia = ".$id_denuncia;
             $qry = $this->db->query($sql);
             return $qry->fetchAll(\PDO::FETCH_OBJ);
     }      
 
-
-    public function Denunciados($id_denuncia){
-          $sql = "SELECT d.id_denuncia, d.denuncia_fato, d.id_denunciante, d.tipo_documento, d.numero_documento, d.data_entrada, d.observacao, d.data_digitacao, dnc.id_denunciado, dnc.id_denuncia, dnc.id_servidor, dnc.nome_provisorio, dnc.observacao, dnc.anexo, dnc.data_digitacao, s.id_servidor, s.nome_servidor, s.cpf, s.matricula, s.vinculo, s.secretaria, s.unidade, s.observacao, s.anexo, dc.id_denunciante, dc.nome_denunciante, dc.observacao 
-          FROM denuncia as d
-          LEFT JOIN denunciado as dnc ON d.id_denuncia = dnc.id_denuncia LEFT JOIN denunciante as dc ON d.id_denunciante = dc.id_denunciante LEFT JOIN servidor_func as s ON dnc.id_servidor = s.id_servidor where d.id_denuncia = ".$id_denuncia;
-          $qry = $this->db->query($sql);
-          return $qry->fetchAll(\PDO::FETCH_OBJ);
-    }
-
-    public function DenunciadosTodos(){
-          $sql = "SELECT p.id_pad, p.id_denuncia, p.id_pp_sindicancia, p.numero_processo, p.data_instrucao, p.ocorrencia, p.observacao, p.anexo, dnc.id_denunciado, dnc.id_pad, dnc.id_servidor, dnc.observacao, dnc.anexo, dnc.data_digitacao, s.id_servidor, s.nome_servidor, s.cpf, s.matricula, s.vinculo, s.secretaria, s.unidade, s.observacao, s.anexo 
-          FROM pad as p
-          LEFT JOIN denunciado as dnc ON p.id_pad = dnc.id_pad LEFT JOIN servidor_func as s ON dnc.id_servidor = s.id_servidor";
-          $qry = $this->db->query($sql);
-          return $qry->fetchAll(\PDO::FETCH_OBJ);
-    }
 
     public function  getEditar($id_denuncia){
         $ret = array();
@@ -73,16 +57,9 @@ class Denuncia_Model extends Model{
     }
 
     public function getDenuncia($id_denuncia){
-        $ret = array();
-        $sql = "SELECT * FROM denuncia WHERE id_denuncia = :id ORDER BY id_denuncia = :id";
-        $sql = $this->db->prepare($sql);
-        $sql->bindValue(":id", $id_denuncia);
-        $sql->execute();
-
-        if($sql->rowCount() > 0){
-            $ret = $sql->fetch(\PDO::FETCH_OBJ);
-        }
-        return $ret;
+        $sql = "SELECT * FROM denuncia WHERE id_denuncia = $id_denuncia";
+        $qry = $this->db->query($sql);
+        return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
         public function Incluir($denuncia, $id_denunciante, $tipo_documento, $numero_documento, $denunciados, $data_entrada, $observacao, $doc_anexo, $anexo, $user){

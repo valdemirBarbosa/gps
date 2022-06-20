@@ -50,10 +50,8 @@
 				<th width="10%">Denunciante</th>
 				<th width="30%">Narração da denúncia</th>
 				<th width="7%">Data de entrada</th>
-				<th width="30%">Denunciados</th>
-				<th width="30%">Documentos anexados</th>
-				<th width="30%">observação</th>
-				<th width="10%" align="center" colspan="2">Nesta denúncia</th>
+				<th width="20%">Documentos anexados</th>
+				<th width="10%" align="center" colspan="3">Nesta denúncia</th>
 				<th width="10%" align="center" colspan="3">Incluir Processo</th>
 			</tr>
 	<?php
@@ -66,49 +64,67 @@
 		   <td align="center"><?php echo $den->tipo_de_documento ?> </td>
 		   <td align="center"><?php echo $den->nome_denunciante ?> </td>
 		   <td><?php echo $den->denuncia_fato  ?> </td>
-	<?php $dt_entrada = explode("-",$den->data_entrada);
-	   $dia = $dt_entrada[2];
-	   $mes = $dt_entrada[1];
-	   $ano = $dt_entrada[0];
-	?>
-	         <td align="cente   r"><?php echo $dia."/".$mes."/".$ano  ?> </td> 
+				<?php 
+					$dt_entrada = explode("-",$den->data_entrada);
+					$dia = $dt_entrada[2];
+					$mes = $dt_entrada[1];
+					$ano = $dt_entrada[0];
+				?>
+            <td align="cente   r"><?php echo $dia."/".$mes."/".$ano  ?> </td> 
 		
-			 <td><?php echo $den->denunciados ?> </td>
-	
-			 <td><?php echo $den->documentos_anexados ?> </td>
+	 		<td><?php echo $den->documentos_anexados ?> </td>
 
-			 <td><?php echo $den->observacao ?> </td>
-	
-			 <td>
-			<div class="btn-editar"> 
-				<a href="<?php echo URL_BASE ."denuncia/Edit/".$den->id_denuncia ?>" >Editar</a>
+			<td>
+  				<div  class="btn-editar"> 
+ 				<a href="<?php echo URL_BASE ."denunciado/Novo/".$den->id_denuncia ?>" >denunciados</a>
+				</div>
+			</td>
+			
+			<td>
+			  <div class="btn-editar"> 
+					<a href="<?php echo URL_BASE ."denuncia/Edit/".$den->id_denuncia ?>" >Editar</a>
 	  	      </div>	
-               </td>
-
-			   <td>
-			<div class="btn-excluir"> 
-				<a href="<?php echo URL_BASE ."denuncia/Excluir/".$den->id_denuncia ?>" >Excluir</a>
+			</td>
+			
+			<td>
+				<div class="btn-excluir"> 
+					<a href="<?php echo URL_BASE ."denuncia/Excluir/".$den->id_denuncia ?>" >Excluir</a>
 				</div>
 			</td>
 
 			<td>
-			<div class="btn-editar"> 
-				<a href="<?php echo URL_BASE ."processo/novo/?f=1&id=".$den->id_denuncia ?>">Preliminar</a>
-	  	      </div>	
-               </td>
+				<div class="btn-editar"> 
+					<a href="<?php echo URL_BASE ."processo/novo/?f=1&id=".$den->id_denuncia ?>">Preliminar</a>
+	  	      	</div>	
+            </td>
 
-			   <td>
-			<div class="btn-editar"> 
-				<a href="<?php echo URL_BASE ."processo/novo/?f=2&id=".$den->id_denuncia ?>" >Sindicância</a>
-	  	      </div>	
-               </td>
+			<td>
+				<div class="btn-editar"> 
+					<a href="<?php echo URL_BASE ."processo/novo/?f=2&id=".$den->id_denuncia ?>" >Sindicância</a>
+				</div>	
+            </td>
 
-			   <td>
-			<div class="btn-editar"> 
-				<a href="<?php echo URL_BASE ."processo/novo/?f=3&id=".$den->id_denuncia ?>" >PAD</a>
-	  	      </div>	
-               </td>
+			<td>
+				<div class="btn-editar"> 
+					<a href="<?php echo URL_BASE ."processo/novo/?f=3&id=".$den->id_denuncia ?>" >PAD</a>
+	  	      	</div>	
+            </td>
+	</tr>
 
+				<!-- ver tabela aqui -->
+				<tr>
+                    <td colspan="13">
+				<?php	
+					if(isset($dados)){
+							foreach($dados as $den){?>
+								<a href="<?php echo URL_BASE ."denunciar/ConsultaDenunciados/?id_denuncia".$den->id_denuncia; 	}?>" >denunciados</a>
+					</td>
+                   </tr>
+
+
+			<?php } }
+		}
+	?>
                <?php 
                 if(isset($denunciados)){
                     foreach($denunciados as $d){?>
@@ -122,15 +138,9 @@
                             <td colspan="2"><?php echo $d->nome ?></td>
                             <td><?php echo $d->cpf ?></td>
                         </tr>
-                <?php    
-                    }
-               }?>
-		   </tr>
-                   <tr>
-                       <td></td>
-                   </tr>
-	<?php }
-	} ?>
+					<?php  } 
+				}?>
+				
 	</div> <!-- FIM DA DIV base-lista !-->
 	</div> <!-- FIM DA DIV container-conteudo -->
 	</table>
@@ -144,6 +154,7 @@
 
 						endfor;
 					}
+					
 
 				?>
 	</div>

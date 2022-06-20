@@ -1,38 +1,65 @@
-<?php
-	if(!isset($_SESSION)){
-		session_start();
-	}
-?>
-<div class="base-home">
-			<h1 class="titulo"><span class="cor">Novo</span> cadastro</h1>
-		<div>	
-		
-				<table>
-					<tr>
-						<th>id</th>
-						<th>Número do documento</th>
-						<th>Narração da denúncia</th>
-						<th>Data de entrada</th>
-					</tr>
+	<div class="base-home">
+		<h1 class="titulo-pagina">Incluir servidor na denúncia</h1>
+	</div>
+	<?php
+		if(!isset($_SESSION)){
+			session_start();
+			}
+	?>
 
-					<?php 
-					if(isset($denuncia)){
-					 foreach($denuncia as $d){
+<div class="div1">
+<form id="formDadosProcesso" action="<?php echo URL_BASE ."Denuncia/Salvar" ?>" method="POST">
+	<?php
+		if(isset($processo)){
+		foreach($processo as $pd){ 
+			}  
+			?>
+			<fieldset>
+			<legend><h4>Códigos</h4></legend>	
+				<label>Id do Processo</label>
+					<input id="txt_id" readonly name="txt_id_processo" enable="false" 
+					value="<?php
+								$_SESSION['id_processo'] = $pd->id_processo; 
+								echo $pd->id_processo ?>">
+
+<label>Id da denuncia</label>
+				<input readonly name="txt_id_denuncia" type="number" enable="false" value="<?php echo $pd->id_denuncia ?>" >
+				<input type="hidden" name="view" value="view" >
+
+				<label>fase</label>
+					<select name="txt_id_fase">
+						<option disable value="<?php if(isset($pd->id_fase)){ echo $pd->id_fase; } ?>"><?php if(isset($pd->id_fase)){ echo $pd->fase; } ?></option>
+	<?php } 
 						
-						?>
-					<tr>
-						<td size="5%"><?php echo $d->id_denuncia ?> </td>
-						<?php $_SESSION['id_denuncia'] = isset($d->id_denuncia) ? $d->id_denuncia : 0 ?>
-						<td size="5%"><?php echo $d->numero_documento ?> </td>
-						<td size="55%"><?php echo $d->denuncia_fato ?> </td>
-						<td size="5%"><?php echo $d->data_entrada ?> </td>
-					</tr>
-					<?php } ?>
-				</table>	
-			<?php } ?>
-	
+		if(isset($fase)){
+			foreach($fase as $f){ ?>
+							<option readonly value="<?php echo $f->id_fase ?>"><?php 
+							$_SESSION['fase'] = $f->id_fase;
+							echo $f->fase ?> </option>
+	<?php }
+		} ?>
+					</select>
 
-	<div class="DenunciadoServidorFormulario">
+					<label>Número do Processo</label>
+				<input class="txt_numero_processo" name="txt_numero_processo" type="number" placeholder="Insira o número do processo" value="<?php echo $pd->numero_processo ?>">
+		</fieldset>		
+
+		<fieldset>
+		<legend>informações do processo</legend>
+				
+			<label>Data de Instauração</label>
+				<input name="txt_data_instauracao" type="date" value="<?php echo $pd->data_instauracao ?>">
+				<input class="" name="observacao" type="text" placeholder="Insira o número do processo" value="<?php echo $pd->observacao ?>">
+		
+				<label>Data de Encerramento</label>
+					<input name="txt_data_encerramento" type="date" readonly value="<?php echo $pd->data_encerramento ?>">
+			<input type="hidden" name="id_processo" value="<?php echo $pd->id_processo ?>">
+		</fieldset>
+	</form>
+</div> <!-- fim da div 1 -->
+
+<div class="div2">
+	<div class="processarServidorFormulario">
 	<!-- CONSULTA SERVIDOR PARA INCLUSÃO !-->
 	<?php //paramentros para pesquisa dos formulários de denuncia e processo
  			$tabela = 'servidor';
@@ -42,8 +69,8 @@
  	?>
 	<br><br>
 	<fieldset>
-		<legend>Consulta servidor para inclusão na denuncia</legend>
-				<form class="consulta" method="POST" action="<?php echo URL_BASE . 'Denunciar/ConsultaServidor' ?>" >
+		<legend>Consulta servidor para inclusão no processo</legend>
+				<form class="consulta" method="POST" action="<?php echo URL_BASE . 'Processar/porParametro' ?>" >
 						<label>Campo de pesquisa</label>
 							<select name="pesquisa">
 								<option value="3">Nome</option>
@@ -63,10 +90,10 @@
 
 <div class="div3">
 
-	<form method="POST" action="<?php echo URL_BASE . 'Denunciados/incluir' ?>" >
+	<form method="POST" action="<?php echo URL_BASE . 'Processar/incluir' ?>" >
 			<table class="tabServidor">
 			<?php
-				if(isset($servidor)){ ?>
+				if(isset($processando)){ ?>
 				<tr>
 					<th width="5%" align="center">Id_servidor</th>
 					<th width="25%" align="center">Nome do servidor</th>
@@ -75,7 +102,7 @@
 					<th width="10%" align="center">Ação</th>
 				</tr>
 				<?php
-					foreach($servidor as $servidor){ ?>  
+					foreach($processando as $servidor){ ?>  
 				<tr>
 
 					<td align="center"><?php echo $servidor->id_servidor  ?></td>
@@ -85,9 +112,8 @@
 					<td><?php echo $servidor->matricula;  ?></td>
 					<td>
 		<div class="">
-
-		<!-- 	 		<input type="submit" value="Incluir" >
- -->			 <a href="<?php echo URL_BASE ."Denunciar/incluir/?id_servidor=".$servidor->id_servidor?>" >Incluir</a>
+<!-- 	 		<input type="submit" value="Incluir" >
+ -->			 <a href="<?php echo URL_BASE ."Processar/incluir/?id=".$servidor->id_servidor?>" >Incluir</a>
 				 <a href="<?php echo URL_BASE ."Processo/Processar/" ?>" >Fechar</a>
 		</td>
 		</tr>
@@ -103,12 +129,12 @@
 
 <div class="div4">
 <?php
-		  if(isset($denunciado)){	 ?>
+		  if(isset($processado)){	 ?>
 
 	<table>
 		<thead>
 			<tr>
-				<th width="5%" align="center">Id_Denunciado</th>
+				<th width="5%" align="center">Id_processado</th>
 				<th width="5%" align="center">Id_servidor</th>
 				<th width="25%" align="left">Nome do servidor</th>
 				<th width="5%" align="center">Cpf</th>
@@ -122,9 +148,9 @@
 
 		  <tbody>
   <?php
-		   foreach($denunciado as $servidor){   ?>
+		   foreach($processado as $servidor){   ?>
 				<tr class="cor1">
-				<td align="center"><?php echo $servidor->id_denunciado  ?></td>
+				<td align="center"><?php echo $servidor->id_processado  ?></td>
 				<td align="center"><?php echo $servidor->id_servidor  ?></td>
 				<td align="center"><?php echo $servidor->nome_servidor  ?></td>
 				<td align="center"><?php echo $servidor->cpf  ?></td>
@@ -169,44 +195,3 @@
 				?>
 	</div>
 	</div> <!-- fim da div 4 -->
-
-
-	<!-- 		<form action="<?php echo URL_BASE ."denunciado/Salvar" ?>" method="POST">
-				<label>id_denuncia</label>
-					<input name="txt_id_denuncia" type="number" 
-					value="<?php echo "$denuncia->id_denuncia" ?>">
-	
-				<label>nome</label>
-					<input name="txt_nome" required autofocus  type="text" 	placeholder="Insira o nome do denunciado">
-
-				<label>cpf</label>
-					<input name="txt_cpf" required type="text" placeholder="Insira o cpf">
-
-				<div class="col">
-					<label>matricula</label>
-					<input name="txt_matricula" value="" type="number" placeholder="Insira a matrícula">
-				</div>	
-				
-				<div class="col">
-					<label>vinculo</label>
-					<input name="txt_vinculo" value="" type="text" placeholder="Vínculo empregatício">
-				</div>
-
-				<div class="col">
-					<label>secretaria</label>
-					<input name="txt_secretaria" value="" type="text" placeholder="secretaria">
-				</div>	
-				
-				<div class="col">
-					<label>unidade</label>
-					<input name="txt_unidade" value="" type="text" placeholder="Insira a unidade de lotação">
-				</div>
-				
-				<input type="hidden" name="acao" value="Cadastrar">
-				<input type="hidden" name="id" value="">
-				<input type="submit" value="Cadastrar" class="btn">
-				<input type="reset" name="Reset" id="button" value="Limpar" class="btn limpar">
-			</form>
- -->		</div>	
-</div>	
-	
