@@ -519,6 +519,18 @@ span{
     font-size: 18px;
 }
 
+.btn-denunciar{
+    width: 190px;
+    background-color:white;
+    height: 30px;
+    border-color: blue;
+    color:crimson;
+    border-radius: 5px;
+    border-style: solid;
+    padding-top: 2px;
+    text-align: center;
+}
+
 .txt-obs{
   display:block;
   float: left;

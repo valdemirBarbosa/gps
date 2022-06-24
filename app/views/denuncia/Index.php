@@ -51,18 +51,21 @@
 				<th width="30%">Narração da denúncia</th>
 				<th width="7%">Data de entrada</th>
 				<th width="20%">Documentos anexados</th>
-				<th width="10%" align="center" colspan="3">Nesta denúncia</th>
-				<th width="10%" align="center" colspan="3">Incluir Processo</th>
+				<th width="20%">denunciados</th>
+				<th width="10%" align="center" colspan="3">Ações</th>
 			</tr>
 	<?php
 	if(isset($dados)){ 
 	foreach($dados as $den){
+
 	?>
 		<tr>
 		   <td align="center"><?php echo $den->id_denuncia  ?> </td>
 		   <td align="center"><?php echo $den->numero_documento  ?></td> 
 		   <td align="center"><?php echo $den->tipo_de_documento ?> </td>
 		   <td align="center"><?php echo $den->nome_denunciante ?> </td>
+		   <td align="center"><?php echo $den->denunciados ?> </td>
+
 		   <td><?php echo $den->denuncia_fato  ?> </td>
 				<?php 
 					$dt_entrada = explode("-",$den->data_entrada);
@@ -70,16 +73,10 @@
 					$mes = $dt_entrada[1];
 					$ano = $dt_entrada[0];
 				?>
-            <td align="cente   r"><?php echo $dia."/".$mes."/".$ano  ?> </td> 
+            <td align="center"><?php echo $dia."/".$mes."/".$ano  ?> </td> 
 		
 	 		<td><?php echo $den->documentos_anexados ?> </td>
 
-			<td>
-  				<div  class="btn-editar"> 
- 				<a href="<?php echo URL_BASE ."denunciado/Novo/".$den->id_denuncia ?>" >denunciados</a>
-				</div>
-			</td>
-			
 			<td>
 			  <div class="btn-editar"> 
 					<a href="<?php echo URL_BASE ."denuncia/Edit/".$den->id_denuncia ?>" >Editar</a>
@@ -93,52 +90,14 @@
 			</td>
 
 			<td>
-				<div class="btn-editar"> 
-					<a href="<?php echo URL_BASE ."processo/novo/?f=1&id=".$den->id_denuncia ?>">Preliminar</a>
-	  	      	</div>	
-            </td>
+  				<div  class="btn-denunciar"> 
+ 				<a href="<?php echo URL_BASE ."denunciado/Novo/".$den->id_denuncia ?>" >Ver/Incluir Denunciados</a>
+				</div>
+			</td>
 
-			<td>
-				<div class="btn-editar"> 
-					<a href="<?php echo URL_BASE ."processo/novo/?f=2&id=".$den->id_denuncia ?>" >Sindicância</a>
-				</div>	
-            </td>
+		</tr>
 
-			<td>
-				<div class="btn-editar"> 
-					<a href="<?php echo URL_BASE ."processo/novo/?f=3&id=".$den->id_denuncia ?>" >PAD</a>
-	  	      	</div>	
-            </td>
-	</tr>
-
-				<!-- ver tabela aqui -->
-				<tr>
-                    <td colspan="13">
-				<?php	
-					if(isset($dados)){
-							foreach($dados as $den){?>
-								<a href="<?php echo URL_BASE ."denunciar/ConsultaDenunciados/?id_denuncia".$den->id_denuncia; 	}?>" >denunciados</a>
-					</td>
-                   </tr>
-
-
-			<?php } }
-		}
-	?>
-               <?php 
-                if(isset($denunciados)){
-                    foreach($denunciados as $d){?>
-                        <tr>
-                            <th>id</th>
-                            <th>nome</th>
-                            <th>cpf</th>
-                        </tr>
-                        <tr>
-                            <td><?php echo $d->id_denunciados ?></td>
-                            <td colspan="2"><?php echo $d->nome ?></td>
-                            <td><?php echo $d->cpf ?></td>
-                        </tr>
-					<?php  } 
+							<?php  } 
 				}?>
 				
 	</div> <!-- FIM DA DIV base-lista !-->

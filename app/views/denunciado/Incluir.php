@@ -11,6 +11,7 @@
 					<tr>
 						<th>id</th>
 						<th>Número do documento</th>
+						<th>tipo documento</th>
 						<th>Narração da denúncia</th>
 						<th>Data de entrada</th>
 					</tr>
@@ -18,14 +19,29 @@
 					<?php 
 					if(isset($denuncia)){
 					 foreach($denuncia as $d){
-						
+
 						?>
 					<tr>
 						<td size="5%"><?php echo $d->id_denuncia ?> </td>
 						<?php $_SESSION['id_denuncia'] = isset($d->id_denuncia) ? $d->id_denuncia : 0 ?>
 						<td size="5%"><?php echo $d->numero_documento ?> </td>
+						<td size="5%"><?php echo $d->tipo_documento ?> </td>
 						<td size="55%"><?php echo $d->denuncia_fato ?> </td>
 						<td size="5%"><?php echo $d->data_entrada ?> </td>
+					</tr>
+					 </table>
+
+					<table> 
+					<tr>
+						<th>denunciados</th>
+						<th>denunciante</th>
+						<th>observacao</th>
+					</tr>
+						<td><?php echo $d->denunciados ?> </td>
+						<td><?php echo $d->id_denunciante ?> </td>
+						<td><?php echo $d->observacao ?> </td>
+					<tr>
+
 					</tr>
 					<?php } ?>
 				</table>	
@@ -58,11 +74,9 @@
 	</fieldset>	
 	</form>
 </div>
-
 </div> <!-- fim da div 2 -->
 
 <div class="div3">
-
 	<form method="POST" action="<?php echo URL_BASE . 'Denunciados/incluir' ?>" >
 			<table class="tabServidor">
 			<?php
@@ -105,18 +119,18 @@
 <?php
 		  if(isset($denunciado)){	 ?>
 
-	<table>
+	<table border="1">
 		<thead>
 			<tr>
-				<th width="5%" align="center">Id_Denunciado</th>
-				<th width="5%" align="center">Id_servidor</th>
+				<th width="5%" align="center">Id</th>
+				<th width="5%" align="center">Id serv</th>
 				<th width="25%" align="left">Nome do servidor</th>
 				<th width="5%" align="center">Cpf</th>
 				<th width="5%" align="center">Matricula</th>
 				<th width="10%" align="left">Vinculo</th>
 				<th width="15%" align="left">Secretaria</th>
 				<th width="15%" align="left">Unidade</th>
-				<th width="10%" colspan="2" align="center">Ação</th>
+				<th width="10%" colspan="5" align="center">Ação</th>
 			  </tr>
 		  </thead>
 
@@ -142,13 +156,33 @@
 						<a href="<?php echo URL_BASE ."processar/DelProcessado/".$servidor->id_processado ?>" >excluir</a>
 					</div>
 				</td>
-			 </tr>	
+
+
+			<!-- botões de inclusão dos denunciados em uma das fases do processo  -->
+				<td>
+					<div class="btn-editar"> 
+						<a href="<?php echo URL_BASE ."processo/novo/?f=1&id=".$d->id_denuncia ?>">Preliminar</a>
+					</div>	
+				</td>
+
+				<td>
+					<div class="btn-editar"> 
+						<a href="<?php echo URL_BASE ."processo/novo/?f=2&id=".$d->id_denuncia ?>" >Sindicância</a>
+					</div>	
+				</td>
+
+				<td>
+					<div class="btn-editar"> 
+						<a href="<?php echo URL_BASE ."processo/novo/?f=3&id=".$d->id_denuncia ?>" >PAD</a>
+					</div>	
+				</td>
+
+			</tr>	
  <?php }
  }
   ?>									  
 		  </tbody>
 	</table>
-
 
 <div class="paginacao">
 				<?php

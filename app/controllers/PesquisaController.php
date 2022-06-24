@@ -122,13 +122,13 @@ public function ConsultaDenunciante(){
                $pesquisa = new Pesquisa_Model(); // Cria instancia do classe Pesquisa Model 
 
                
-               $dados['p'] = $pesquisa->ContarDenunciante($tabela, $campo, $informacao); // Pesquisa simples, mas com dados solicitados pelo usuario
+               $dados['p'] = $pesquisa->ContarDenunciae($tabela, $campo, $informacao); // Pesquisa simples, mas com dados solicitados pelo usuario
                $dados["view"] = $_SESSION['view'];
                $qtdeRegistros = count($dados['p']); // Recebe a contagem de registros pela consulta acima
                $paginacao = $this->paginar($qtdeRegistros, $paginaAtual); //vai pra função pagina com já com algumas informações
                $offset = $paginacao[0];
                $totalPaginas = $paginacao[2];
-               $dados['dados'] = $pesquisa->PesquisaDenunciante($tabela, $campo, $informacao, $offset, $limit); // Pesquisa simples, mas com dados solicitados pelo usuario
+               $dados['dados'] = $pesquisa->PesquisaDenuncia($tabela, $campo, $informacao, $offset, $limit); // Pesquisa simples, mas com dados solicitados pelo usuario
                $dados['totalPaginas'] = $totalPaginas;
                $this->load("template", $dados);
   }

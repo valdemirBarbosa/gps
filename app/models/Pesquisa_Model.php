@@ -44,27 +44,25 @@ class Pesquisa_Model extends Model{
 
     public function PesquisaDenuncia($tabela, $campo, $parametro, $offset, $limit){
         if($campo == "nome_servidor"){
-            $sql =  $sql = "SELECT * FROM $tabela as d 
-            LEFT JOIN denunciante as 
-            dc ON d.id_denunciante = dc.id_denunciante 
-            LEFT JOIN tipo_documento as t ON 
-            d.tipo_documento = t.id_tipo_documento 
-            WHERE d.denunciados LIKE '%$parametro%' 
-            ORDER BY d.denunciados DESC  
+            $sql = "SELECT * FROM $tabela as d 
+            INNER JOIN denunciante as de
+            ON de.id_denunciante = d.id_denunciante
+            INNER JOIN tipo_documento as t
+            ON t.id_tipo_documento = d.tipo_documento
+            WHERE denunciados LIKE '%$parametro%' 
             LIMIT $offset, $limit";
         }else{
-            $sql =  $sql = "SELECT * FROM $tabela as d 
-            LEFT JOIN denunciante as dc 
-            ON d.id_denunciante = dc.id_denunciante 
-            LEFT JOIN tipo_documento as t 
-            ON d.tipo_documento = t.id_tipo_documento 
-            WHERE  $campo LIKE '%$parametro%' 
-            ORDER BY d.denunciados ASC  
+            $sql = "SELECT * FROM $tabela as d 
+            INNER JOIN denunciante as de
+            ON de.id_denunciante = d.id_denunciante
+            INNER JOIN tipo_documento as t
+            ON t.id_tipo_documento = d.tipo_documento
+            WHERE $campo LIKE '%$parametro%'
             LIMIT $offset, $limit";
+
         }
-        
             $sql = $this->db->query($sql);
-        return $sql->fetchAll(\PDO::FETCH_OBJ);
+            return $sql->fetchAll(\PDO::FETCH_OBJ);
     }
 
 
