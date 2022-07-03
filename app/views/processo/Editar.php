@@ -36,7 +36,7 @@
     <legend>informações do processo</legend>
 			
 		<label>Data de Instauração</label>
-            <input name="txt_data_instauracao" type="date" value="<?php echo $pd->data_instauracao ?>">
+            <input name="data_instauracao" type="date" value="<?php echo $pd->data_instauracao ?>">
    
 <!--	A data de encerramento ficará só pra mudança de fase e para finalização do processo
         <label>Data de Encerramento</label>

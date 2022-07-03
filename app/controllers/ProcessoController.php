@@ -9,6 +9,7 @@ use app\models\Processado_Model;
 use app\models\Upload_Model;
 use app\models\PesquisaControler;
 use app\Controllers\UploadController;
+use app\Controllers\MensageiroController;
 use app\models\Ocorrencia_Model;
 
 if(!isset($_SESSION)){
@@ -92,33 +93,29 @@ class ProcessoController extends Controller{
           $processo = new Processo_Model();
           $id_processo = isset($_POST['txt_id_processo']) ? addslashes($_POST['txt_id_processo']) : NULL;
           $_SESSION['id'] = $id_processo; //vai ficar no session a chave id, pois lá na denúncia será id 
-
           $id_denuncia = addslashes($_POST['txt_id_denuncia']) ? addslashes($_POST['txt_id_denuncia']) : NULL;
-
+          
+          //sessão veio da inclusão do servidor num processo. Pagina: denunciado/Novo/
+          $id_denunciado = $_SESSION['id_denunciado'];           
           $id_fase = isset($_POST['txt_id_fase']) ? addslashes($_POST['txt_id_fase']) : NULL;
-          $_SESSION['id_fase'] = $id_fase;
-
           $numero_processo = addslashes($_POST['txt_numero_processo']);
-          $data_instauracao = addslashes($_POST['txt_data_instauracao']);
-          $observacao = addslashes($_POST['txt_observacao']);
+          $data_instauracao = isset($_POST['data_instauracao']) ? $_POST['data_instauracao'] : "";
+          $observacao = isset($_POST['txt_observacao']) ? addslashes($_POST['txt_observacao']) : "";
 
           //dados para upload de arquivo
-          $descricao = addslashes($_POST['descricao']) ? addslashes($_POST['descricao']) : "";
+          $descricao = isset($_POST['descricao']) ? addslashes($_POST['descricao']) : "";
           $_SESSION['descricao'] = $descricao; //session usada para o upload do arquivo 
-          $data_inclusao = $_POST['data_inclusao'] ? $_POST['data_inclusao'] : NULL;
+          $data_inclusao = isset($_POST['data_inclusao']) ? addslashes($_POST['data_inclusao']) : "";
           $d = $_SESSION['data_inclusao'] = $data_inclusao; //session usada para o upload do arquivo 
-/*        A data de encerramento ficará só pra mudança de fase e para finalização do processo
-          $data_encerramento = isset($_POST['txt_data_encerramento']) ? addslashes($_POST['txt_id_fase']) : "0000/00/00";
- */       $anexo = "";
+          $anexo = "";
           $user = 1;
          
-          
           //upload - anexar arquivo
-          if($arquivo = $_FILES['arquivo']){
+          if($arquivo = isset($_FILES['arquivo'])){
                if(isset($arquivo['tmp_name']) && empty($arquivo['tmp_name']) == false){
                        $arquivo = $_FILES['arquivo'];
                }
-          }
+          
           if($arquivo = $_FILES['arquivo']){
                $_SESSION['id'] = $id_processo;
                $_SESSION['id_faseUpload'] = $id_fase;
@@ -140,18 +137,27 @@ class ProcessoController extends Controller{
           }else{
              echo "Problema para guardar arquivo ";
              exit;
-          }      
+          }
+     }      
 
 //Verifica se será postado o "id" se sim será Edição, senão inclusão
      if($id_processo){
-          $processo->Editar($id_processo, $id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $anexo, $user, $descricao);
+          $processo->Editar($id_processo, $id_denunciado, $id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $anexo, $user, $descricao);
+
 
      }else{
-          $processo->Incluir($id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $anexo, $user, $descricao);
+          if($processo->Incluir($id_denunciado, $id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $anexo, $user) == false){
+          }else{
+               $msg = "Processo nº.: ". $numero_processo ." já está cadastrado";
+               $this->Error($msg);
+               exit;
 
+          }
+       
      }
           if($_POST['view']){
-                header("Location:" . URL_BASE . $_POST['view']);
+
+               header("Location:" . URL_BASE . $_POST['view']);
 
           }else{
                echo "sem post view";
@@ -321,5 +327,12 @@ class ProcessoController extends Controller{
 
           return $paginacao;
      }
+
+     public function Error($msg){
+          $msger = new MensageiroController();
+          $dados = $msg;
+          $dados = $msger->Error($msg);
+      }
+  
 }
 

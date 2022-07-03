@@ -27,6 +27,7 @@
 				<!-- <option value="2">Número do Processo</option> !-->
 				<option value="3">Nome</option>
 				<option hidden value="4">CPF</option> <!-- Ocultado pois na tabela denuncia não há cpf -->
+				<option type="number" value="6">Id da denúncia</option>
 			</select>
 
 			<input type="text" autofocus name="valorPreenchidoUsuario"> 
@@ -49,6 +50,7 @@
 				<th width="10%">Tipo documento</th>
 				<th width="10%">Denunciante</th>
 				<th width="30%">Narração da denúncia</th>
+				<th width="30%">Denunciados</th>
 				<th width="7%">Data de entrada</th>
 				<th width="20%">Documentos anexados</th>
 				<th width="20%">denunciados</th>
@@ -64,9 +66,9 @@
 		   <td align="center"><?php echo $den->numero_documento  ?></td> 
 		   <td align="center"><?php echo $den->tipo_de_documento ?> </td>
 		   <td align="center"><?php echo $den->nome_denunciante ?> </td>
+		   <td><?php echo $den->denuncia_fato  ?> </td>
 		   <td align="center"><?php echo $den->denunciados ?> </td>
 
-		   <td><?php echo $den->denuncia_fato  ?> </td>
 				<?php 
 					$dt_entrada = explode("-",$den->data_entrada);
 					$dia = $dt_entrada[2];

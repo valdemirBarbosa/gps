@@ -36,9 +36,9 @@
 
 	<table width="100%" border="1" cellspacing="0" cellpadding="0">
 		  <thead class="thead">
-				<th width="10%">Número Processo</th>
+				<th width="10%">Número da portaria</th>
 <!-- 				<th width="10%">Tipo</td>  //tirado temporariamente provavelmente não será util, se for reativarei
- -->				<th>Número da portaria</th>
+ -->				<th>Número Processo</th>
  				<th>Data Elaboração </th>
 				<th>Data Publicação</th>
 				<th width="25%">Veículo</th>

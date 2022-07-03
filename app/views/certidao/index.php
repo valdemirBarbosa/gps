@@ -5,7 +5,7 @@
 ?>
 
 <div class="base-home">
-	<h1 class="titulo-pagina"> Consulta servidor 
+	<h1 class="titulo-pagina">certidão - Consulta servidor 
 		<?php  
 			$qtde = 0;
 			if(isset($servidor) && count($servidor) > 0){
@@ -17,15 +17,9 @@
 		?></h1>
 </div>
 
-<?php //paramentros para pesquisa dos formulários de denuncia e processo
-		$tabela = 'servidor';
-		$view =  'servidor/index';
-		$_SESSION['view'] = $view; 
-		$_SESSION['tabela'] = $tabela; 
-?>
 <div class="pai">  
 	<div class="filho1">  
-		<form method="POST" action="<?php echo URL_BASE . 'Pesquisa/ConsultaServidor'; ?>" >
+		<form method="POST" action="<?php echo URL_BASE . 'Certidao/cnp'; ?>" >
 				<label>Pesquisa</label>
 					<select name="pesquisa" class="select">
 						<option value="1">Número documento da denúncia</option>
@@ -35,9 +29,6 @@
 					</select>
 				
 					<input class="" type="text" autofocus name="valorPreenchidoUsuario">
-					<input type="hidden" name="view" value="<?php echo $view ?>">
-					<input type="hidden" name="retorno" value="<?php echo $retorno ?>">
-					<input type="hidden" name="tabela" value="<?php echo $tabela ?>">
 					<input type="submit" value="pesquisar">
 		</form>
 	</div>
@@ -61,8 +52,8 @@
 
 		<!-- DADOS da denúncia !-->
 		<?php	
-			if(isset($servidor) && count($servidor) > 0){
-				foreach($servidor as $s){  // loop na tabela denúncia
+			if(isset($dados) && count($servidor) > 0){
+				foreach($dados as $s){  // loop na tabela denúncia
 					$id = isset($s->numero_documento);
 						if($id > 0){
 							echo "<tr>";

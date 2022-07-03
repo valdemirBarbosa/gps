@@ -2,26 +2,21 @@
 namespace app\models;
 use app\core\Model;
 
-class Pesquisa_Model extends Model{
+class Certidao_Model extends Model{
 
     public function __construct() {
         parent::__construct();
     }
 
-    public function lista(){
-        $sql = "SELECT * FROM denuncia as d LEFT JOIN denunciante as den ON d.id_denunciante = den.id_denunciante LEFT JOIN tipo_documento as t ON d.tipo_documento = t.id_tipo_documento";
-        $qry = $this->db->query($sql);
-        return $qry->fetchAll(\PDO::FETCH_OBJ);
-    }
 
-    public function contarOcorrencia(){
-        $sql = "SELECT * FROM servidor";
-        $qry = $this->db->query($sql);
-        return $qry->fetchAll(\PDO::FETCH_OBJ);
-    }
+    public function certidao($campo, $informacao){
+        $sql = "SELECT * FROM servidor as s
+                INNER JOIN  denunciados as d
+                ON s.id_servidor = d.id_servidor 
+                LEFT JOIN processo as p
+                ON d.id_denunciado = p.id_denunciado
+                WHERE $campo LIKE '%$informacao%'";
 
-    public function ContarDenunciante($tabela, $campo, $informacao){
-        $sql = "SELECT * FROM $tabela WHERE $campo LIKE '%$informacao%'";
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }

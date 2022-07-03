@@ -56,7 +56,7 @@
 			$_SESSION['view'] = 'processo/processarServidor';
 			$retorno = 'processo';
  	?>
-	<br><br>
+
 	<fieldset>
 		<legend>Consulta servidor para inclusão na denuncia</legend>
 				<form class="consulta" method="POST" action="<?php echo URL_BASE . 'Denunciar/ConsultaServidor' ?>" >
@@ -73,49 +73,49 @@
 							<input type="submit" value="pesquisar">
 	</fieldset>	
 	</form>
-</div>
-</div> <!-- fim da div 2 -->
+</div> <!-- "DenunciadoServidorFormulario -->
+</div> <!-- fim da div home -->
 
 <div class="div3">
 	<form method="POST" action="<?php echo URL_BASE . 'Denunciados/incluir' ?>" >
-			<table class="tabServidor">
-			<?php
-				if(isset($servidor)){ ?>
-				<tr>
-					<th width="5%" align="center">Id_servidor</th>
-					<th width="25%" align="center">Nome do servidor</th>
-					<th width="5%" align="center">Cpf</th>
-					<th width="5%" align="center">Matricula</th>
-					<th width="10%" align="center">Ação</th>
-				</tr>
+				<table class="tabServidor">
 				<?php
-					foreach($servidor as $servidor){ ?>  
-				<tr>
+					if(isset($servidor)){ ?>
+					<tr>
+						<th width="5%" align="center">Id_servidor</th>
+						<th width="25%" align="center">Nome do servidor</th>
+						<th width="5%" align="center">Cpf</th>
+						<th width="5%" align="center">Matricula</th>
+						<th width="10%" align="center">Ação</th>
+					</tr>
+					<?php
+						foreach($servidor as $servidor){ ?>  
+					<tr>
 
-					<td align="center"><?php echo $servidor->id_servidor  ?></td>
-					<?php $_SESSION['id_servidor'] = $servidor->id_servidor ?>
-					<td><?php echo $servidor->nome_servidor;  ?></td>
-					<td align="center"><?php echo $servidor->cpf;  ?></td>
-					<td><?php echo $servidor->matricula;  ?></td>
-					<td>
-		<div class="">
+						<td align="center"><?php echo $servidor->id_servidor  ?></td>
+						<?php $_SESSION['id_servidor'] = $servidor->id_servidor ?>
+						<td><?php echo $servidor->nome_servidor;  ?></td>
+						<td align="center"><?php echo $servidor->cpf;  ?></td>
+						<td><?php echo $servidor->matricula;  ?></td>
+						<td>
+			<div class="">
 
-		<!-- 	 		<input type="submit" value="Incluir" >
- -->			 <a href="<?php echo URL_BASE ."Denunciar/incluir/?id_servidor=".$servidor->id_servidor?>" >Incluir</a>
-				 <a href="<?php echo URL_BASE ."Processo/Processar/" ?>" >Fechar</a>
-		</td>
-		</tr>
-		</div>
+			<!-- 	 		<input type="submit" value="Incluir" >
+	-->			 <a href="<?php echo URL_BASE ."Denunciar/incluir/?id_servidor=".$servidor->id_servidor?>" >Incluir</a>
+				<a href="<?php echo URL_BASE ."Denunciado/Novo/".$_SESSION['id_denuncia'] ?>" >Fechar</a>
+			</td>
+			</tr>
+			</div>
 
-		<?php 
-		}
-		} ?>
+			<?php 
+			}
+			} ?>
 
-			</table>
+				</table>
 		</form>
 	</div> <!-- fim da div 3 -->
 
-<div class="div4">
+<div class="c">
 <?php
 		  if(isset($denunciado)){	 ?>
 
@@ -136,8 +136,11 @@
 
 		  <tbody>
   <?php
-		   foreach($denunciado as $servidor){   ?>
-				<tr class="cor1">
+		   foreach($denunciado as $servidor){   
+			 $_SESSION['id_denunciado'] = $servidor->id_denunciado; 
+			?>
+
+			<tr class="cor1">
 				<td align="center"><?php echo $servidor->id_denunciado  ?></td>
 				<td align="center"><?php echo $servidor->id_servidor  ?></td>
 				<td align="center"><?php echo $servidor->nome_servidor  ?></td>
@@ -161,7 +164,7 @@
 			<!-- botões de inclusão dos denunciados em uma das fases do processo  -->
 				<td>
 					<div class="btn-editar"> 
-						<a href="<?php echo URL_BASE ."processo/novo/?f=1&id=".$d->id_denuncia ?>">Preliminar</a>
+						<a href="<?php echo URL_BASE ."processo/novo/?f=1&id=".$d->id_denuncia?>">Preliminar</a>
 					</div>	
 				</td>
 

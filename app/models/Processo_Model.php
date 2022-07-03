@@ -1,7 +1,7 @@
 <?php
 namespace app\models;
 use app\core\Model;
-
+use app\Controllers\MensageiroController;
 class Processo_Model extends Model{
 
     public function __construct() {
@@ -99,25 +99,43 @@ class Processo_Model extends Model{
     }
 
 //Inserir dados na tabela de sindicância
-    public function Incluir($id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $anexo, $user){
-        $sql = "INSERT INTO processo SET id_denuncia = :id_denuncia, id_fase = :id_fase, numero_processo = :numero_processo, data_instauracao =:data_instauracao, observacao = :observacao, anexo =:anexo, user =:user"; 
-        $sql = $this->db->prepare($sql);
-        $sql->bindValue(":id_denuncia", $id_denuncia);
-        $sql->bindValue(":id_fase", $id_fase);
-        $sql->bindValue(":numero_processo", $numero_processo);
-        $sql->bindValue(":data_instauracao", $data_instauracao);
-        $sql->bindValue(":observacao", $observacao);
-        $sql->bindValue(":anexo", $anexo);
-        $sql->bindValue(":user", $user);
-        $sql->execute();
+
+    public function Incluir($id_denunciado, $id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $anexo, $user){
+        if($this->VerSeExisteProcesso($id_denuncia, $numero_processo, $id_denunciado) == false){
+            $sql = "INSERT INTO processo SET id_denunciado = :id_denunciado, id_denuncia = :id_denuncia, id_fase = :id_fase, numero_processo = :numero_processo, data_instauracao =:data_instauracao, observacao = :observacao, anexo =:anexo, user =:user"; 
+            $sql = $this->db->prepare($sql);
+            $sql->bindValue(":id_denunciado", $id_denunciado);
+            $sql->bindValue(":id_denuncia", $id_denuncia);
+            $sql->bindValue(":id_fase", $id_fase);
+            $sql->bindValue(":numero_processo", $numero_processo);
+            $sql->bindValue(":data_instauracao", $data_instauracao);
+            $sql->bindValue(":observacao", $observacao);
+            $sql->bindValue(":anexo", $anexo);
+            $sql->bindValue(":user", $user);
+            $sql->execute();
+        }else{
+            $ret = $this->VerSeExisteProcesso($id_denuncia, $numero_processo, $id_denunciado);
+            return $ret;
+        }
     }
 
+    private function VerSeExisteProcesso($id_denuncia, $numero_processo, $id_denunciado){
+      $sql = "SELECT p.numero_processo, d.id_denuncia, s.nome_servidor FROM processo as p 
+                    INNER JOIN denunciados as d ON p.id_denuncia = d.id_denuncia
+                    INNER JOIN servidor as s ON d.id_servidor = s.id_servidor
+                    WHERE p.numero_processo = $numero_processo";
+        $sql = $this->db->query($sql);
+        return $sql->fetchAll();
+
+    } 
+
 //Editar, alterar dados na tabela de sindicância
-    public function Editar($id_processo, $id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $data_encerramento, $anexo, $user){
-        $sql = "UPDATE processo SET id_denuncia = :id_denuncia, id_fase = :id_fase, numero_processo = :numero_processo, data_instauracao = :data_instauracao, observacao = :observacao, data_encerramento =:data_encerramento, anexo = :anexo, user = :user WHERE id_processo = :id"; 
+    public function Editar($id_processo, $id_denunciado, $id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $data_encerramento, $anexo, $user){
+        $sql = "UPDATE processo SET id_denunciado = :id_denunciado, id_denuncia = :id_denuncia, id_fase = :id_fase, numero_processo = :numero_processo, data_instauracao = :data_instauracao, observacao = :observacao, data_encerramento =:data_encerramento, anexo = :anexo, user = :user WHERE id_processo = :id"; 
 
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":id", $id_processo);
+        $sql->bindValue(":id_denunciado", $id_denunciado);
         $sql->bindValue(":id_denuncia", $id_denuncia);
         $sql->bindValue(":id_fase", $id_fase);
         $sql->bindValue(":numero_processo", $numero_processo);
@@ -145,4 +163,10 @@ class Processo_Model extends Model{
             $sql->execute();
     }
 
+
+    public function Error($msg){
+        $msger = new MensageiroController();
+        $dados = $msg;
+        $dados = $msger->Error($msg);
+    }
 }

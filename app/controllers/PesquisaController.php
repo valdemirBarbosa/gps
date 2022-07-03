@@ -50,7 +50,6 @@ class PesquisaController extends Controller{
 
                $informacao = $parametrosPesquisa[1];
                $_SESSION['informarcao'] = $informacao;
-
                
         }
 
@@ -68,6 +67,7 @@ class PesquisaController extends Controller{
 
                
   }
+
 
 /*   public function ConsultaDenunciaLink(){
           $dados['paginaAtual'] = $_GET['p'];
@@ -122,13 +122,13 @@ public function ConsultaDenunciante(){
                $pesquisa = new Pesquisa_Model(); // Cria instancia do classe Pesquisa Model 
 
                
-               $dados['p'] = $pesquisa->ContarDenunciae($tabela, $campo, $informacao); // Pesquisa simples, mas com dados solicitados pelo usuario
+               $dados['p'] = $pesquisa->ContarDenunciante($tabela, $campo, $informacao); // Pesquisa simples, mas com dados solicitados pelo usuario
                $dados["view"] = $_SESSION['view'];
                $qtdeRegistros = count($dados['p']); // Recebe a contagem de registros pela consulta acima
                $paginacao = $this->paginar($qtdeRegistros, $paginaAtual); //vai pra função pagina com já com algumas informações
                $offset = $paginacao[0];
                $totalPaginas = $paginacao[2];
-               $dados['dados'] = $pesquisa->PesquisaDenuncia($tabela, $campo, $informacao, $offset, $limit); // Pesquisa simples, mas com dados solicitados pelo usuario
+               $dados['dados'] = $pesquisa->PesquisaDenunciante($tabela, $campo, $informacao, $offset, $limit); // Pesquisa simples, mas com dados solicitados pelo usuario
                $dados['totalPaginas'] = $totalPaginas;
                $this->load("template", $dados);
   }
@@ -245,12 +245,20 @@ public function pegarDadosDoUsuario(){
                          $tabela = "denunciante"; 
                          $chave = "id_denunciante";
                          break;
+                    case 6:
+                         $campo = "id_denuncia";
+                         $valorRecebidoDoUsuario = $valorPreenchidoUsuario;
+                         $alias = "d"; //alias para a tabela denuncia, caso o campo de pesquisa seja da tabela denuncia
+                         $tabela = "denuncia"; 
+                         $chave = "id_denuncia";
+                         break;
+                       
                     default:
                          echo "Nenhuma opção de pesquisa foi escolhida e informada";
                          break;
                     }
 
-                    $tabela = $_POST['tabela'];
+                    $tabela = isset($_POST['tabela']);
                     $_SESSION['tabela'] = $tabela;
                     $_SESSION['valorRecebidoDoUsuario'] = $valorRecebidoDoUsuario;
                     $_SESSION['campo'] = $campo;

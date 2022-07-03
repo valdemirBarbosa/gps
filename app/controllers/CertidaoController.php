@@ -3,18 +3,39 @@ namespace app\controllers;
 
 use app\core\Controller;
 use app\models\Servidor_Model;
+use app\models\Certidao_Model;
+use app\Controllers\PesquisaController;
 
-class ServidorController extends Controller{
+class CertidaoController extends Controller{
 
      public function index(){
-          $servidores = new Servidor_Model();
-           $dados["dados"] = $servidores->lista();
-           $dados["totalPaginas"] = 0;
-           $dados["view"] = "servidor/index";
+          $dados["view"] = "certidao/index";
           $this->load("template",$dados);
      } 
   
-  
+   //consulta servidor para cnp - certidão negativa ou positiva
+  public function cnp(){
+              
+     $pesquisar = new PesquisaController();
+     $parametrosPesquisa = $pesquisar->pegarDadosDoUsuario(); // Pega os dados do usuário no filtro de pesquisa do formulário de denúncia
+
+     if(isset($_POST['valorPreenchidoUsuario']) && !empty(['valorPreenchidoUsuario'])){ //Verifica se foi preenchido o campo de pesquisa
+              $campo = $parametrosPesquisa[0];
+              $_SESSION['campo'] = $campo;
+
+              $informacao = $parametrosPesquisa[1];
+              $_SESSION['informarcao'] = $informacao;
+              
+       }
+
+              $pesquisa = new Certidao_Model(); // Cria instancia do classe Pesquisa Model 
+              $dados["view"] = "certidao/index";
+              $dados['dados'] = $pesquisa->certidao($campo, $informacao); // Pesquisa simples, mas com dados solicitados pelo usuario
+                                 
+              $this->load("template", $dados);
+
+              
+ }
    public function ConsultaServidor(){
         $servidores = new Servidor_Model();
          $dados["dados"] = $servidores->servidorProcessos();

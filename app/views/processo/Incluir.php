@@ -15,12 +15,12 @@
 	<div class="cabecalhoForm">
 
 	<!-- início da classe css id_denuncia  -->
-		<div class="id_denuncia">  		
+		<div class="">  		
 				<?php
 					if(isset($_GET['id'])){?>
  						<?php 
 						 	$id = addslashes($_GET['id']);
-							echo "Identificador da denúncia: ".$id; ?> 
+							echo "<span class='spanTitulo'>Identificador da denúncia: $id</span>"; ?> 
 						<input name="txt_id_denuncia" type="number" hidden value="<?php echo $id ?>">
 
 					<?php } ?> 
@@ -35,7 +35,7 @@
 
 	</div>
 			<br/>
-			<label for="">Incluindo no: </label>
+			<label for=""><div class="txtProcessoNovo"> INCLUÍNDO NO: </label>
  			<?php
 			 $fase = 0;
 				if(isset($_GET['f'])){ //f de fase  ?>
@@ -47,37 +47,34 @@
 								if($fase == 2)
 									echo "SINDICANCIA";
 									if($fase == 3)
-										echo "PAD";
-					}?>
+										echo "PROCESSO ADMINISTRATIVO";
+					}?></div>
 			<br/>
-	<div class="num_processo">
+	</fieldset>
+		
+	<fieldset>
+		<div class="num_processo">
 		<label>Número do Processo</label>
 		<input autofocus name="txt_numero_processo" type="number" placeholder="Insira o número do processo">
 	
 		<label>Data de Instauração</label>
-		<input name="txt_data_instauracao" type="date" >
+		<input required name="data_instauracao" type="date" >
 	</div>		
 
 
 	<div class="obs">
 		<label id="obs">observação</label> 
-			<textarea rows="2" cols="95" name="txt_observacao" class="txtArea"> 
+			<textarea rows="1" cols="110" name="txt_observacao" class="txtArea"> 
 	</textarea>		
 
 	</div>
-<!-- 
-		Anexo somente na ediçaõ do processo
-		<label class="lblAnexo">Anexo</label>
-		<input class="btnAnexo" name="arquivo" type="file"> <br/>
 
-		<label class="descricao">Descricao</label>
-		<input type="text" name="descricaoArquivo" required><br/><br/>
+</form>
+	<br/>
+	<br/>
+	<br/>
+		<div class="centralizaBotão">
+			<input type="submit" value="Cadastrar" class="btn">
+		</div>
 
-		<label class="data inclusão">Descricao</label>
-		<input type="date" name="data_inclusao" required><br/><br/>
-	<br/> -->
-
-		<input type="submit" value="Cadastrar" class="btn">
-		<input type="reset" name="Reset" id="button" value="Limpar" class="btn_limpar">
-	</form>
 </fieldset>

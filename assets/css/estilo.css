@@ -336,14 +336,6 @@ span{
     color: green;
 }
 
-.span{
-    font-size: 20px;
-    font-weight: bolder;
-    color:gainsboro;
-    padding-left: 200px;
-    text-align: center;
-}
-
 .titulo{
   display:block;
   padding:0px;
@@ -800,16 +792,12 @@ span{
 
 .div3{
     width: 100%;
-    margin-top: 3%;
-    height: 0px;
-    margin-left: 40px;
-    position: absolute;
-    z-index: 1;
+    margin-left: 10px;
     background-color: darkgrey;
 }
 
  .div4{
-    margin-top: 5%;
+    margin-top: 10%;
     background-color: whitesmoke;
     width: 100%;
 }
@@ -818,9 +806,18 @@ span{
     margin-top: 50px;
 }
 
+.txtProcessoNovo{/* serve para o formuulário de inclusão de processo que indica que tipo de processo está sendo incluido */
+    font-family: 'Courier New', Courier, monospace;
+    color:blue;
+    background-color: #DBE06C;
+    margin-left: 30px;
+    width: 400px;
+}
+
 .consulta{
     background-color:beige;
 }
+
 
 .fim{
     height: 50px;
@@ -893,10 +890,20 @@ span{
 
 .cabecalhoForm{
     display: grid;
+    font-family: 'Courier New', Courier, monospace;
+    color:blue;
+    margin-left: 30px;
     grid-template-columns: 1fr 4fr;
     grid-template-areas: "id_denuncia fase";
-    background-color:#888888;
-    
+}
+
+span.spanTitulo{
+ background-color:chartreuse;
+ border-radius: 10%;
+ width: 400px;
+ font-size: 20px;
+ display: inline-block;   
+
 }
 
 .id_denuncia{
@@ -970,6 +977,11 @@ span{
     overflow:scroll;
 }
 
+
+.centralizaBotão{ /* Centraliza botão (a princípio usado no formulário inclusão de processo */
+    background-color:red;
+    margin-left: 570px;;
+}
 
 @media only screen and (max-width: 800px){
     .menu{
