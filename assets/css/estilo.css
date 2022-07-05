@@ -814,6 +814,29 @@ span{
     width: 400px;
 }
 
+.btn-msg-erro{
+    height: 28px;
+    margin-top: 30px;
+    height: 40px;
+    align-items: center;
+    color: blue;
+    font-size: 22px;
+    border-color:royalblue;
+    border-style: solid;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 3px 6px #888888;
+
+}
+
+.txtNomeProcessado{/* serve para o formuulário de inclusão de processo com o nome do denunciado que  está sendo processado */
+    font-family: 'Courier New', Courier, monospace;
+    color:white;
+    margin-left: 30px;
+    background-color:black;
+    width: 800px;
+}
+
 .consulta{
     background-color:beige;
 }

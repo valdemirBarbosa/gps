@@ -123,7 +123,19 @@ class Processo_Model extends Model{
       $sql = "SELECT p.numero_processo, d.id_denuncia, s.nome_servidor FROM processo as p 
                     INNER JOIN denunciados as d ON p.id_denuncia = d.id_denuncia
                     INNER JOIN servidor as s ON d.id_servidor = s.id_servidor
-                    WHERE p.numero_processo = $numero_processo";
+                    WHERE p.numero_processo = $numero_processo AND d.id_denunciado = $id_denunciado";
+        $sql = $this->db->query($sql);
+        return $sql->fetchAll();
+
+    } 
+
+    //Pegar todos os dados de - verificar se existe processo (acima) para encaminhar para o controller exibir os dados já incluídos, 
+    //caso exista número de processo e id do denunciado já cadastrado no processo
+    public function retornoJaExiste($id_denuncia, $numero_processo, $id_denunciado){
+      $sql = "SELECT p.numero_processo, d.id_denuncia, s.nome_servidor FROM processo as p 
+                    INNER JOIN denunciados as d ON p.id_denuncia = d.id_denuncia
+                    INNER JOIN servidor as s ON d.id_servidor = s.id_servidor
+                    WHERE p.numero_processo = $numero_processo AND d.id_denunciado = $id_denunciado";
         $sql = $this->db->query($sql);
         return $sql->fetchAll();
 

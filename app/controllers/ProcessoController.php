@@ -144,14 +144,12 @@ class ProcessoController extends Controller{
      if($id_processo){
           $processo->Editar($id_processo, $id_denunciado, $id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $anexo, $user, $descricao);
 
-
      }else{
           if($processo->Incluir($id_denunciado, $id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $anexo, $user) == false){
           }else{
-               $msg = "Processo nº.: ". $numero_processo ." já está cadastrado";
+               $ret = $processo->retornoJaExiste($id_denuncia, $numero_processo, $id_denunciado);
+               $msg = "Processo nº.: ". $ret[0][0] ." já está cadastrado para o(a) denunciado(a): ". $ret[0][2];
                $this->Error($msg);
-               exit;
-
           }
        
      }

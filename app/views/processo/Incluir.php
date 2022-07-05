@@ -34,8 +34,7 @@
 		</div><!-- fim da classe css fase  -->
 
 	</div>
-			<br/>
-			<label for=""><div class="txtProcessoNovo"> INCLUÍNDO NO: </label>
+			<label for=""><div class="txtProcessoNovo"> INCLUINDO  </label>
  			<?php
 			 $fase = 0;
 				if(isset($_GET['f'])){ //f de fase  ?>
@@ -43,20 +42,27 @@
 					<?php
 							$fase = $_GET['f'];
 							if($fase == 1)
-								echo "PROCESSO PRELIMINAR";
+								echo "NO: PROCESSO PRELIMINAR";
 								if($fase == 2)
-									echo "SINDICANCIA";
+									echo "NA SINDICANCIA";
 									if($fase == 3)
-										echo "PROCESSO ADMINISTRATIVO";
+										echo "NO PROCESSO ADMINISTRATIVO";
 					}?></div>
-			<br/>
+		</div>
+
+<!-- 		<label><div class="txtNomeProcessado"> NOME DO PROCESSADO:  </label>
+ 			<?php
+				//echo $_SESSION['servidor'];
+				//session_destroy
+			?></div>
+ -->
 	</fieldset>
 		
 	<fieldset>
 		<div class="num_processo">
 		<label>Número do Processo</label>
 		<input autofocus name="txt_numero_processo" type="number" placeholder="Insira o número do processo">
-	
+
 		<label>Data de Instauração</label>
 		<input required name="data_instauracao" type="date" >
 	</div>		

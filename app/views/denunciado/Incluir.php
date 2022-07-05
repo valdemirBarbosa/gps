@@ -160,10 +160,10 @@
 					</div>
 				</td>
 
-
+				
 			<!-- botões de inclusão dos denunciados em uma das fases do processo  -->
 				<td>
-					<div class="btn-editar"> 
+					<div class="btn-editar">
 						<a href="<?php echo URL_BASE ."processo/novo/?f=1&id=".$d->id_denuncia?>">Preliminar</a>
 					</div>	
 				</td>

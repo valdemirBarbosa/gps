@@ -17,6 +17,8 @@ class MensageiroController extends Controller{
         $viewData2 = $msg; 
         $dados["view"] = "mensageiro/erro";
         $this->load("template", $dados, $viewData2);
+        exit;
+        
     }
     
 }

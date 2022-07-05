@@ -14,9 +14,9 @@
             echo $viewData2; ?>
 
                   <!--Botões !-->
-		<div class="btn-inc">
+		<div>
 				<script> //Link para voltar à página anterior
-					document.write('<a href="' + document.referrer + '">Voltar</a>');
+					document.write('<a href="' + document.referrer + '"><div class="btn-msg-erro">Voltar</div></a>');
 				</script>
 		</div>			
 
