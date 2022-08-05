@@ -10,7 +10,9 @@ class Denunciado_Model  extends Model{
     }
 
     public function lista(){
-        $sql = "SELECT * FROM denunciados as d INNER JOIN servidor as s ON s.id_servidor = d.id_servidor";
+        $sql = "SELECT * FROM denunciados as d 
+        INNER JOIN denuncia as den ON d.id_denuncia = den.id_denuncia
+        INNER JOIN servidor as s ON s.id_servidor = d.id_servidor";
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
@@ -20,6 +22,29 @@ class Denunciado_Model  extends Model{
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
 
+    }
+
+    public function getDenunciados($nome, $cpf){
+        $sql = "SELECT * FROM servidor as s INNER JOIN denunciados as d 
+                ON s.id_servidor = d.id_servidor 
+                LEFT JOIN processados as pr 
+                ON d.id_denunciado = pr.id_denunciado
+                LEFT JOIN denuncia as den
+                ON den.id_denuncia = d.id_denuncia 
+                WHERE s.nome_servidor =:nome OR cpf =:cpf ";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue("nome", $nome);
+        $sql->bindValue("cpf", $cpf);
+        $sql->execute();
+        
+    }
+
+    public function VerSeTemDenuncia($id_servidor){
+        $sql = "SELECT * FROM denunciados as dncd INNER JOIN denuncia as d ON dncd.id_denuncia = d.id_denuncia WHERE dncd.id_servidor = $id_servidor";
+        $sql = $this->db->prepare($sql);
+        $sql->execute();
+        return $sql->fetchAll();
+        
     }
 
     public function Inserir($id_servidor, $id_denuncia, $data_inclusao, $user){
@@ -50,6 +75,15 @@ class Denunciado_Model  extends Model{
             $sql->bindValue(":Secretaria", $secretaria);
             $sql->bindValue(":Unidade", $unidade);
             $sql->bindValue(":observacao", $observacao);
+            $sql->execute();
+        }
+
+    public function EncerrarDenunciado($id_denuncia, $id_denunciado, $data_fechamento_no_denunciado){
+        $sql = "UPDATE denunciados SET data_fechamento =:data_fechamento WHERE id_denuncia =:id_denuncia AND id_denunciado =:id_denunciado";
+        $sql = $this->db->prepare($sql);
+            $sql->bindValue(":id_denuncia", $id_denuncia);
+            $sql->bindValue(":id_denunciado", $id_denunciado);
+            $sql->bindValue(":data_fechamento", $data_fechamento_no_denunciado);
             $sql->execute();
         }
 

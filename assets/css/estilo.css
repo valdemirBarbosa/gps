@@ -727,12 +727,19 @@ span{
     width: 600px;
     margin-left: 400px;
     float: left;
-    margin-top: 200px;
+    margin-top: 100px;
     margin-bottom: auto;
+    align-items: center;
+    align-content: center;
     height: 100px;
-    background-color:yellow;
+    background-color:#DBE06C;
     color: red;
     display: block;
+}
+
+.tituloTabela{
+    background-color: #000;
+    color: #DBE06C;
 }
 
 .containerForm{
@@ -815,11 +822,11 @@ span{
 }
 
 .btn-msg-erro{
-    height: 28px;
+    height: auto;
     margin-top: 30px;
-    height: 40px;
     align-items: center;
     color: blue;
+    width: 150px;
     font-size: 22px;
     border-color:royalblue;
     border-style: solid;
@@ -942,7 +949,10 @@ span.spanTitulo{
 
 .paiDenuncia{
     display: grid;
-    grid-template-columns: 55% 45%;
+    margin-top: 20;
+    margin-left: 20;
+    margin-right: 30;
+    grid-template-columns: 45% 55%;
     grid-template-areas: 'filho1Denuncia filho2Denuncia';
 }
 

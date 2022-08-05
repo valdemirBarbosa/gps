@@ -1,7 +1,7 @@
 <?php
 
 define("SERVIDOR", "localhost");
-define("BANCO", "gpspro");
+define("BANCO", "gps");
 define("USUARIO", "root");
 define("SENHA", "");
 

@@ -8,6 +8,7 @@ use app\models\TipoDocumento_Model;
 use app\models\Pesquisa_Model;
 use app\models\Servidor_Model;
 use app\models\Processo_Controller;
+use app\models\Processado_Model;
 
 	if(!isset($_SESSION)){
      	session_start();
@@ -50,7 +51,6 @@ class PesquisaController extends Controller{
 
                $informacao = $parametrosPesquisa[1];
                $_SESSION['informarcao'] = $informacao;
-               
         }
 
                $pesquisa = new Pesquisa_Model(); // Cria instancia do classe Pesquisa Model 
@@ -69,29 +69,6 @@ class PesquisaController extends Controller{
   }
 
 
-/*   public function ConsultaDenunciaLink(){
-          $dados['paginaAtual'] = $_GET['p'];
-          $limit = $_SESSION['limit'];
-          $offset = 0;
-
-          $dadosTabela = new Pesquisa_Model();
-          $totalRegistros = $_SESSION['totalRegistros'];
-          $totalPaginas = $_SESSION['totalPaginas'];
-          $totalP = $_SESSION['totalPaginas'] = $totalPaginas;
-     
-          $offset = ($dados['paginaAtual'] * $limit) - $limit;
-     
-          $dados['dados'] = $pesquisa->PesquisaDenuncia($tabela, $campo, $informacao);
-          $qtdeRegistros = count($dados['dados']);
-          $paginacao = $this->paginar($qtdeRegistros, $paginaAtual);
-          $offset = $paginacao[0];
-          $dados['totalPaginas'] = $paginacao[2];
-               
-          $dados["view"] = $_SESSION['view'];
-          $this->load("template", $dados);
-     
-  }
- */
 //Pesquisa para tabela de denunciante    
 public function ConsultaDenunciante(){
      $limit = LIMITE_LISTA;
@@ -198,11 +175,51 @@ public function ConsultaDenunciante(){
           echo "</pre>";
           exit;
  */
-          
-          $dados["view"] = "servidor/index";
+          $view = $_POST['view']; 
+          $dados["view"] = $view;
           $this->load("template", $dados);
 
      }
+
+     public function ConsultaDenuncia_e_Processo(){
+          $dado = $this->pegarDadosDoUsuario();  
+          $campo = $dado[0];
+          $parametro = $dado[1];
+
+          $_SESSION['campo'] = $campo;
+          $_SESSION['parametro'] = $parametro;
+          $alias = $dado[3];
+          $_SESSION['parametro'] = $parametro;
+
+          $servidor = new Servidor_Model();
+          if($dados['servidor'] = $servidor->AtServ($campo, $parametro)){  // AtServ = Atestado para a tabela servidor
+               $id_servidor = $dados['servidor'][0]["id_servidor"];
+
+               //Verifica se há denuncia para o servidor
+               $denunciados = new Denunciado_Model();
+               if($dados['denunciados'] = $denunciados->verSeTemDenuncia($id_servidor)){
+                    $id_denunciado = $dados['denunciados'][0][0];
+                    $id_denuncia = $dados['denunciados'][0][2];
+
+               //Verifica se há denuncia para o servidor
+               $processados = new Processado_Model();
+               $dados['processados'] = $processados->verSeTemProcesso($id_denuncia, $id_denunciado);
+
+               }
+
+          }else{
+               $msg = "Em fase de teste ".date('Y/m/d');
+               $this->Error($msg);
+          }
+
+               $view = $_POST['view'];
+               $dados["view"] = "denunciado/index";//$view; $view;
+               $this->load("template", $dados);
+     
+          }
+
+
+     
 
 //Pega a opção de campo do select do usuário - campo opção e valor do campos
 public function pegarDadosDoUsuario(){
@@ -475,7 +492,6 @@ public function contarRegistro(){
 
      public function Error($msg){
           $msger = new MensageiroController();
-          $dados = $msg;
           $dados = $msger->Error($msg);
       }
   

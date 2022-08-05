@@ -24,24 +24,56 @@ class Processado_Model extends Model{
     }
 
     //incluir servidor na tabela de processados se ainda não estiver - vindo do processar controller
-    public function IncluirServProcesso(){
-        $id_servidor = $_GET['id'];
-        $id_processo = $_SESSION['id_processo'];
-
-        if($this->ExisteIdProcessado($id_servidor, $id_processo) == false){
-            $sql = "INSERT INTO processados SET id_servidor = :id_servidor, id_processo = :id_processo";
+    public function IncluirServProcesso($id_denuncia, $id_denunciado, $numero_processo, $data_instauracao){
+        if($this->VerSeExisteProcessado($id_denuncia, $id_denunciado) == false){
+            $sql = "INSERT INTO processados SET id_denuncia =:id_denuncia, id_denunciado =:id_denunciado, numero_processo =:numero_processo, data_instauracao =:data_inclusao";
             $sql = $this->db->prepare($sql);
-            $sql->bindValue(":id_servidor", $id_servidor);
-            $sql->bindValue(":id_processo", $id_processo);
+            $sql->bindValue(":id_denuncia", $id_denuncia);
+            $sql->bindValue(":id_denunciado", $id_denunciado);
+            $sql->bindValue(":numero_processo", $numero_processo);
+            $sql->bindValue(":data_inclusao", $data_instauracao);
             $sql->execute();
-            
+            return true; //$sql->fetchAll(\PDO::FETCH_OBJ);
+        }else{
+            return false;
         }
-
-/*         $inc = array($id_servidor, $id_processo);
-        print_r($inc);
-        exit;
- */
     }
+
+// 21/07/2022
+    public function VerSeExisteProcessado($id_denuncia, $id_denunciado){
+        $sql = "SELECT * FROM processados as p
+                      INNER JOIN denunciados as d 
+                      ON p.id_denuncia = d.id_denuncia
+                      INNER JOIN servidor as s
+                      ON d.id_servidor = s.id_servidor
+                      WHERE p.id_denuncia =:id_denuncia AND p.id_denunciado =:id_denunciado";
+
+
+$sql = $this->db->prepare($sql);
+        $sql->bindValue(':id_denuncia', $id_denuncia);
+        $sql->bindValue(':id_denunciado', $id_denunciado);
+        $sql->execute();
+       
+        if($sql->rowCount() > 0){
+            return $sql->fetchAll(\PDO::FETCH_OBJ);
+        }else{  
+            return false;
+        }
+      } 
+  
+      //Pegar todos os dados de - verificar se existe processo (acima) para encaminhar para o controller exibir os dados já incluídos, 
+      //caso exista número de processo e id do denunciado já cadastrado no processo
+      public function retornoJaExiste($id_denuncia, $numero_processo, $id_denunciado){
+        $sql = "SELECT p.numero_processo, d.id_denuncia, s.nome_servidor FROM processo as p 
+                      INNER JOIN denunciados as d ON p.id_denuncia = d.id_denuncia
+                      INNER JOIN servidor as s ON d.id_servidor = s.id_servidor
+                      WHERE p.numero_processo = $numero_processo AND d.id_denunciado = $id_denunciado";
+          $sql = $this->db->query($sql);
+          return $sql->fetchAll();
+
+          
+      } 
+
     //verificar se o servidor já está processado no mesmo processo
     private function ExisteIdProcessado($id_servidor, $id_processo){
         $sql = "SELECT * FROM processados WHERE id_processo=:id_processo AND id_servidor=:id_servidor";
@@ -55,6 +87,14 @@ class Processado_Model extends Model{
         }else{
             return false;
         }
+    }
+    //verificar se o servidor já tem processo para Atestado de ND
+    public function verSeTemProcesso($id_denuncia, $id_denunciado){
+        $sql = "SELECT * FROM processados WHERE id_denuncia = $id_denuncia AND id_denunciado = $id_denunciado";
+        $sql = $this->db->prepare($sql);
+        $sql->execute();
+        return $sql->fetchAll();
+   
     }
 
     public function Delete($id_processado){

@@ -28,6 +28,66 @@ class Servidor_Model  extends Model{
        
     }
 
+    //PARADO AQUI EM 02/08/2022 - INCLUIR UM ROWCOUNT PARA VER SE ENCONTROU CORRESPONDENTE OU NAÃO DE VALOR EXATO
+    public function Atestado($campo, $parametro){
+        $sql = "SELECT * FROM servidor as s
+        LEFT JOIN denunciados as dncd 
+        ON s.id_servidor = dncd.id_servidor
+        LEFT JOIN denuncia as d
+        ON d.id_denuncia = dncd.id_denuncia
+        LEFT JOIN processados as prcd
+        ON prcd.id_denunciado = dncd.id_denunciado
+        LEFT JOIN processo as p
+        ON p.id_denuncia = dncd.id_denuncia
+        WHERE s.$campo LIKE '$parametro%'";
+        $sql = $this->db->prepare($sql);
+        $sql->execute();
+        if($sql->rowCount()>0){
+            return $sql->fetchAll(\PDO::FETCH_OBJ);
+        }else{  
+           return false;
+        }
+    } 
+
+    public function AtServ($campo, $parametro){
+        $sql = "SELECT * FROM servidor WHERE $campo LIKE '$parametro%'";
+        $sql = $this->db->prepare($sql);
+        $sql->execute();
+
+        if($sql->rowCount()>0){
+            return $sql->fetchAll();
+        }else{  
+           return false;
+        }
+    } 
+
+    public function VerSeTemDenuncia($id_servidor){
+        $sql = "SELECT * FROM denunciados as d LEFT JOIN processados as p ON d.id_denunciado = p.id_denunciado WHERE id_servidor =:id_servidor";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":id_servidor", $id_servidor);
+        $sql->execute();
+        if($sql->rowCount()>0){
+            return $sql->fetchAll(\PDO::FETCH_OBJ);
+        }else{  
+           return false;
+        }
+    }
+
+    public function VerSeTemProcesso($id_denuncia, $id_denunciado){
+        $sql = "SELECT * FROM processados as pr INNER JOIN denunciados as d ON pr.id_denuncia = d.id_denuncia WHERE id_denuncia =:id_denuncia AND id_denunciado =:id_denunciado";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":id_denuncia", $id_denuncia);
+        $sql->bindValue(":id_denunciado", $id_denunciado);
+        $sql->execute();
+        if($sql->rowCount()>0){
+            return $sql->fetchAll(\PDO::FETCH_OBJ);
+        }else{  
+           return false;
+        }
+    }
+
+
+
     public function denunciantes($id_denunciante){
         $sql = "SELECT * FROM denunciantes WHERE id_denunciante = $id_denunciante";
         $qry = $this->db->query($sql);

@@ -12,8 +12,6 @@
         <?php 
             //Mensagem vindo da classe MensageiroController método Error. Solicitado pela função verData da classe FaseController
             echo $viewData2; ?>
-
-                  <!--Botões !-->
 		<div>
 				<script> //Link para voltar à página anterior
 					document.write('<a href="' + document.referrer + '"><div class="btn-msg-erro">Voltar</div></a>');

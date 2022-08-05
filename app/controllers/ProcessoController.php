@@ -7,6 +7,7 @@ use app\models\Processo_Model;
 use app\models\Pesquisa_Model;
 use app\models\Processado_Model;
 use app\models\Upload_Model;
+use app\models\Denunciado_Model;
 use app\models\PesquisaControler;
 use app\Controllers\UploadController;
 use app\Controllers\MensageiroController;
@@ -91,12 +92,13 @@ class ProcessoController extends Controller{
 //Função para salvar e direcionar ou para Editar ou para Incluir 
     public function Salvar(){
           $processo = new Processo_Model();
-          $id_processo = isset($_POST['txt_id_processo']) ? addslashes($_POST['txt_id_processo']) : NULL;
+          $id_processo = isset($_POST['txt_id_processo']) ? addslashes($_POST['txt_id_processo']) : 0;
           $_SESSION['id'] = $id_processo; //vai ficar no session a chave id, pois lá na denúncia será id 
           $id_denuncia = addslashes($_POST['txt_id_denuncia']) ? addslashes($_POST['txt_id_denuncia']) : NULL;
           
-          //sessão veio da inclusão do servidor num processo. Pagina: denunciado/Novo/
-          $id_denunciado = $_SESSION['id_denunciado'];           
+          //POST veio da inclusão do servidor num processo. Pagina: denunciado/Novo/  serve para incluir na tabela denunciados
+          $id_denunciado = isset($_POST['id_denunciado']) ? $_POST['id_denunciado'] : 0;  
+              
           $id_fase = isset($_POST['txt_id_fase']) ? addslashes($_POST['txt_id_fase']) : NULL;
           $numero_processo = addslashes($_POST['txt_numero_processo']);
           $data_instauracao = isset($_POST['data_instauracao']) ? $_POST['data_instauracao'] : "";
@@ -107,6 +109,7 @@ class ProcessoController extends Controller{
           $_SESSION['descricao'] = $descricao; //session usada para o upload do arquivo 
           $data_inclusao = isset($_POST['data_inclusao']) ? addslashes($_POST['data_inclusao']) : "";
           $d = $_SESSION['data_inclusao'] = $data_inclusao; //session usada para o upload do arquivo 
+          $data_encerramento = "0000/0000";
           $anexo = "";
           $user = 1;
          
@@ -125,7 +128,7 @@ class ProcessoController extends Controller{
                //INCLUIR OCORRÊNCIA DE ANEXAR ARQUIVO NOS ANDAMENTOS	
                $id_servico = 3;
                $data_ocorrencia = date('Y/m/d');
-               $ocorrencia = "Inclusão de arquivo em anexo, nome do arquivo ".$descricao;
+               $ocorrencia = "Arquivo anexado. Nome: ". $arquivo['name'] ."descrição: ".$descricao;
                $user = 1;
 
                $listaArquivos = new Upload_Model();
@@ -142,27 +145,34 @@ class ProcessoController extends Controller{
 
 //Verifica se será postado o "id" se sim será Edição, senão inclusão
      if($id_processo){
-          $processo->Editar($id_processo, $id_denunciado, $id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $anexo, $user, $descricao);
-
+          $processo->Editar($id_processo, $id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $anexo, $user, $descricao);
      }else{
-          if($processo->Incluir($id_denunciado, $id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $anexo, $user) == false){
-          }else{
-               $ret = $processo->retornoJaExiste($id_denuncia, $numero_processo, $id_denunciado);
-               $msg = "Processo nº.: ". $ret[0][0] ." já está cadastrado para o(a) denunciado(a): ". $ret[0][2];
-               $this->Error($msg);
-          }
-       
+          $processo->Incluir($id_denunciado, $id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $anexo, $user);
      }
-          if($_POST['view']){
+          $this->incluirDenunciadoNoProcesso($id_denuncia, $id_denunciado, $numero_processo, $data_instauracao);
 
-               header("Location:" . URL_BASE . $_POST['view']);
+     }
 
+     public function incluirDenunciadoNoProcesso($id_denuncia, $id_denunciado, $numero_processo, $data_instauracao){
+          $processar = new Processado_Model();
+          if($processado = $processar->IncluirServProcesso($id_denuncia, $id_denunciado, $numero_processo, $data_instauracao)){
+
+               $fecharDenunciado = new Denunciado_Model();
+               // A data de fechamento da denúncia é a mesma da inclusão na tabela de processado
+               $data_fechamento_no_denunciado = $data_instauracao; 
+               $fechar = $fecharDenunciado->EncerrarDenunciado($id_denuncia, $id_denunciado, $data_fechamento_no_denunciado);
+               header("Location:". URL_BASE . "denucia");
           }else{
-               echo "sem post view";
-               exit;
-          }
-   }
+               $processado = $processar->VerSeExisteProcessado($id_denuncia, $id_denunciado, $numero_processo, $data_instauracao);
+               foreach($processado as $p){
+                    $msg = "O(A) denunciado(a): ".$p->nome_servidor."já está incluído no processo";
+                    $this->Error($msg);
+               }
 
+          }
+     }
+
+ 
 //Incluir novo processo de sindicância
      public function Novo(){
           $denuncia = new Processo_Model();

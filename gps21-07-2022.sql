@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 10-Jun-2022 às 23:46
--- Versão do servidor: 10.4.22-MariaDB
--- versão do PHP: 8.0.13
+-- Tempo de geração: 22-Jul-2022 às 19:18
+-- Versão do servidor: 10.4.24-MariaDB
+-- versão do PHP: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -856,10 +856,31 @@ INSERT INTO `denuncia` (`id_denuncia`, `id_denunciante`, `denuncia_fato`, `tipo_
 --
 
 CREATE TABLE `denunciados` (
-  `id_denunciados` int(11) NOT NULL,
-  `nome` varchar(120) NOT NULL,
-  `cpf` int(11) NOT NULL
+  `id_denunciado` int(11) NOT NULL,
+  `id_servidor` int(11) NOT NULL,
+  `id_denuncia` int(11) NOT NULL,
+  `data_inclusao` datetime NOT NULL DEFAULT current_timestamp(),
+  `user` int(11) NOT NULL,
+  `data_fechamento` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `denunciados`
+--
+
+INSERT INTO `denunciados` (`id_denunciado`, `id_servidor`, `id_denuncia`, `data_inclusao`, `user`, `data_fechamento`) VALUES
+(2, 30809, 9, '2022-07-18 00:00:00', 0, 0),
+(3, 35067, 9, '2022-07-19 00:00:00', 0, 0),
+(4, 28385, 10, '2022-07-19 00:00:00', 0, 0),
+(5, 36363, 16, '2022-07-21 00:00:00', 0, 0),
+(6, 36320, 22, '2022-07-21 00:00:00', 0, 0),
+(7, 33470, 22, '2022-07-21 00:00:00', 0, 0),
+(8, 31711, 22, '2022-07-21 00:00:00', 0, 0),
+(9, 30841, 34, '2022-07-22 00:00:00', 0, 0),
+(10, 27903, 151, '2022-07-22 00:00:00', 0, 0),
+(11, 27777, 51, '2022-07-22 00:00:00', 0, 0),
+(12, 32174, 64, '2022-07-22 00:00:00', 0, 0),
+(13, 28433, 442, '2022-07-22 00:00:00', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1139,7 +1160,19 @@ INSERT INTO `ocorrencia` (`id_ocorrencia`, `id_processo`, `id_servico`, `numero_
 (193, 0, 1, '340513/15', 0, '2022-06-08', 'Inclusão de arquivo em anexo, nome do arquivo ', '', 0, 1, '2022-06-08 11:14:47'),
 (194, 0, 1, '633026/2019', 0, '2022-06-08', 'Inclusão de arquivo em anexo, nome do arquivo ', '', 0, 1, '2022-06-08 11:17:11'),
 (195, 0, 1, '582583/19', 0, '2022-06-08', 'Inclusão de arquivo em anexo, nome do arquivo ', '', 0, 1, '2022-06-08 11:18:53'),
-(196, 0, 1, '340513/15', 0, '2022-06-10', 'Inclusão de arquivo em anexo, nome do arquivo ', '', 0, 1, '2022-06-10 16:38:34');
+(196, 0, 1, '340513/15', 0, '2022-06-10', 'Inclusão de arquivo em anexo, nome do arquivo ', '', 0, 1, '2022-06-10 16:38:34'),
+(198, 0, 1, '1916/201', 0, '2022-07-18', 'Inclusão de arquivo em anexo, nome do arquivo ', '', 0, 1, '2022-07-18 17:36:35'),
+(199, 6, 3, '44', 0, '2022-07-19', 'Inclusão de arquivo em anexo, nome do arquivo ', '', 0, 1, '2022-07-19 09:18:48'),
+(200, 0, 1, '287/2012', 0, '2022-07-20', 'Inclusão de arquivo em anexo, nome do arquivo ', '', 0, 1, '2022-07-19 18:05:28'),
+(201, 0, 1, '1916/201', 0, '2022-07-20', 'Inclusão de arquivo em anexo, nome do arquivo ', '', 0, 1, '2022-07-20 17:12:51'),
+(202, 6, 3, '44', 0, '2022-07-20', 'Inclusão de arquivo em anexo, nome do arquivo ', '', 0, 1, '2022-07-20 17:13:51'),
+(203, 6, 3, '44', 0, '2022-07-20', 'Inclusão de arquivo em anexo, nome do arquivo CALD', '', 0, 1, '2022-07-20 17:15:10'),
+(204, 6, 3, '44', 0, '2022-07-20', 'Inclusão de arquivo em anexo, nome do arquivo CALD', '', 0, 1, '2022-07-20 17:17:08'),
+(205, 6, 3, '44', 0, '2022-07-20', 'Inclusão de arquivo em anexo, nome do arquivo ', '', 0, 1, '2022-07-20 17:17:24'),
+(209, 6, 3, '44', 0, '2022-07-20', 'Inclusão de arquivo em anexo print de filtro de pesquisa no email - folpagvg@hotmail.com - 14-03.png', '', 0, 1, '2022-07-20 17:25:52'),
+(210, 6, 3, '44', 0, '2022-07-20', 'Inclusão de arquivo em anexo PRÉVIA DA FOLHA DE JULHO2022 - EDSON JOSE DA SILVA - DESCONTO PENSÃO ALIMENTÍCIA OFÍCIO 243', '', 0, 1, '2022-07-20 17:26:47'),
+(211, 6, 3, '44', 0, '2022-07-20', 'Arquivo anexado. Nome: relação de servidores 12-2020 12-21 E 02-2022 - SAÚDE.xlsx', '', 0, 1, '2022-07-20 17:28:21'),
+(212, 0, 1, '1916/201', 0, '2022-07-20', 'Inclusão de arquivo em anexo, nome do arquivo teste', '', 0, 1, '2022-07-20 17:34:23');
 
 -- --------------------------------------------------------
 
@@ -1180,7 +1213,7 @@ INSERT INTO `portaria` (`id_portaria`, `id_processo`, `id_fase`, `numero_process
 (7, 22, 0, '144', 'Não usado', '909', '2022-05-12', '				', '2022-05-12', 'amm', 60, '2022-07-11', -32, NULL, NULL, 'portaria teste de ocorrência', NULL, NULL),
 (8, 22, 0, '144', 'Não usado', '909', '2022-05-12', '				', '2022-05-12', 'amm', 60, '2022-07-11', -32, NULL, NULL, 'portaria teste de ocorrência', NULL, NULL),
 (9, 22, 0, '144', 'Não usado', '999', '2022-05-12', '				', '2022-05-13', 'amm', 5, '2022-05-18', 22, NULL, NULL, '', NULL, NULL),
-(10, 22, 0, '144', 'Não usado', '999', '2022-05-12', '				', '2022-05-13', 'AMM', 90, '2022-08-11', -62, NULL, NULL, '', NULL, NULL),
+(10, 22, 0, '144', 'Não usado', '999', '2022-05-12', '				', '2022-05-13', 'AMM', 90, '2022-08-11', -27, NULL, NULL, '', NULL, NULL),
 (11, 22, 0, '144', 'Não usado', '9999', '2022-05-12', '				', '2022-05-20', 'amm', 10, '2022-05-30', 10, NULL, NULL, 'INCLUSÃO NA OCORRÊNCIA. VER DATA', NULL, NULL),
 (12, 22, 0, '144', 'Não usado', '1305', '2022-05-13', '				', '2022-05-13', 'AMM', 60, '2022-07-12', -33, NULL, NULL, 'TESTE', NULL, NULL),
 (13, 22, 0, '144', 'Não usado', '1305', '2022-05-13', '				', '2022-05-13', 'AMM', 60, '2022-07-12', -33, NULL, NULL, 'TESTE', NULL, NULL),
@@ -1257,8 +1290,9 @@ INSERT INTO `portaria` (`id_portaria`, `id_processo`, `id_fase`, `numero_process
 
 CREATE TABLE `processados` (
   `id_processado` int(11) NOT NULL,
-  `id_servidor` int(11) NOT NULL,
-  `id_processo` int(11) NOT NULL,
+  `id_denuncia` int(11) NOT NULL,
+  `id_denunciado` int(11) NOT NULL,
+  `numero_processo` int(11) NOT NULL,
   `data_inclusao` datetime NOT NULL DEFAULT current_timestamp(),
   `user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -1267,59 +1301,15 @@ CREATE TABLE `processados` (
 -- Extraindo dados da tabela `processados`
 --
 
-INSERT INTO `processados` (`id_processado`, `id_servidor`, `id_processo`, `data_inclusao`, `user`) VALUES
-(1, 30797, 22, '2022-04-18 18:00:46', 0),
-(2, 35218, 22, '2022-04-20 16:52:32', 0),
-(3, 34539, 22, '2022-04-20 17:01:13', 0),
-(12, 30830, 8, '2022-04-28 17:27:30', 0),
-(14, 31663, 7, '2022-04-29 16:23:52', 0),
-(15, 32297, 8, '2022-05-19 09:08:15', 0),
-(16, 32297, 8, '2022-05-19 09:10:36', 0),
-(17, 33899, 8, '2022-05-19 09:18:14', 0),
-(18, 35644, 8, '2022-05-19 11:23:53', 0),
-(19, 33954, 22, '2022-05-19 11:41:53', 0),
-(20, 32305, 22, '2022-05-19 11:42:05', 0),
-(21, 33197, 22, '2022-05-19 11:42:14', 0),
-(22, 32673, 22, '2022-05-19 12:45:53', 0),
-(23, 32299, 22, '2022-05-19 12:47:31', 0),
-(24, 28802, 8, '2022-05-19 12:49:48', 0),
-(25, 28421, 8, '2022-05-19 12:49:59', 0),
-(26, 33182, 22, '2022-05-19 18:01:01', 0),
-(27, 34095, 22, '2022-05-19 18:01:19', 0),
-(28, 35957, 22, '2022-05-19 18:01:56', 0),
-(29, 35960, 22, '2022-05-19 18:03:35', 0),
-(30, 35959, 22, '2022-05-19 18:09:02', 0),
-(31, 34997, 22, '2022-05-19 18:09:14', 0),
-(32, 34992, 22, '2022-05-19 18:10:02', 0),
-(33, 34994, 22, '2022-05-19 18:11:04', 0),
-(34, 32244, 22, '2022-05-19 18:12:16', 0),
-(35, 30813, 22, '2022-05-19 18:12:47', 0),
-(36, 30004, 22, '2022-05-19 18:13:00', 0),
-(37, 32248, 22, '2022-05-19 18:15:33', 0),
-(38, 32658, 22, '2022-05-23 12:28:44', 0),
-(39, 28060, 22, '2022-05-23 18:07:23', 0),
-(40, 32223, 7, '2022-05-23 18:39:17', 0),
-(41, 35644, 7, '2022-05-23 18:43:40', 0),
-(42, 30897, 21, '2022-05-23 18:46:29', 0),
-(43, 33464, 8, '2022-05-23 18:46:47', 0),
-(44, 31640, 8, '2022-05-23 18:47:16', 0),
-(45, 35380, 8, '2022-05-23 18:50:57', 0),
-(46, 28957, 22, '2022-05-23 18:53:27', 0),
-(47, 29278, 22, '2022-05-23 19:01:00', 0),
-(48, 30832, 22, '2022-05-23 19:02:31', 0),
-(49, 30453, 7, '2022-05-23 19:09:07', 0),
-(50, 32734, 8, '2022-05-23 19:11:48', 0),
-(51, 35591, 7, '2022-05-23 19:16:16', 0),
-(52, 33867, 7, '2022-05-23 19:17:51', 0),
-(53, 28773, 7, '2022-05-23 19:19:57', 0),
-(54, 33560, 22, '2022-05-23 19:20:16', 0),
-(55, 30764, 22, '2022-05-23 19:21:02', 0),
-(56, 29222, 22, '2022-05-23 19:22:53', 0),
-(57, 33410, 7, '2022-05-24 17:34:33', 0),
-(58, 33409, 7, '2022-05-24 17:44:30', 0),
-(59, 28602, 7, '2022-05-24 18:01:36', 0),
-(60, 28665, 7, '2022-05-24 18:01:45', 0),
-(61, 34968, 8, '2022-05-27 12:46:20', 0);
+INSERT INTO `processados` (`id_processado`, `id_denuncia`, `id_denunciado`, `numero_processo`, `data_inclusao`, `user`) VALUES
+(67, 9, 3, 9, '0000-00-00 00:00:00', 0),
+(68, 34, 9, 34, '0000-00-00 00:00:00', 0),
+(69, 22, 8, 22, '0000-00-00 00:00:00', 0),
+(70, 10, 4, 10, '0000-00-00 00:00:00', 0),
+(71, 151, 10, 151, '0000-00-00 00:00:00', 0),
+(72, 51, 11, 51, '0000-00-00 00:00:00', 0),
+(73, 64, 12, 64, '0000-00-00 00:00:00', 0),
+(74, 442, 13, 442, '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -1344,7 +1334,7 @@ CREATE TABLE `processo` (
 --
 
 INSERT INTO `processo` (`id_processo`, `id_denuncia`, `id_fase`, `numero_processo`, `data_instauracao`, `observacao`, `anexo`, `data_encerramento`, `user`) VALUES
-(6, 44, 1, '44', '2021-09-20', '', '', '2021-09-20', 2021),
+(6, 44, 1, '44', '2021-09-20', '', '1', '0000-00-00', 0),
 (7, 21, 3, '702018', '2018-11-28', '', '1', '0000-00-00', 0),
 (8, 3, 3, '57', '2020-09-07', '', '1', '0000-00-00', 0),
 (18, 44, 2, '44', '2021-09-21', '', '', '2021-09-21', 2021),
@@ -1364,7 +1354,17 @@ INSERT INTO `processo` (`id_processo`, `id_denuncia`, `id_fase`, `numero_process
 (34, 313, 1, '2503', '0000-00-00', ' \r\n	', '', NULL, 1),
 (35, 313, 1, '2503', '0000-00-00', ' \r\n	', '', NULL, 1),
 (36, 313, 1, '2503', '0000-00-00', ' \r\n	', '', NULL, 1),
-(37, 44, 2, '1905', '2022-05-19', 'teste', '', NULL, 1);
+(37, 44, 2, '1905', '2022-05-19', 'teste', '', NULL, 1),
+(38, 9, 1, '9', '2022-07-19', 'teste \r\n	', '', NULL, 1),
+(39, 10, 1, '10', '2022-07-19', 'teste \r\n	', '', NULL, 1),
+(40, 16, 3, '16', '2022-07-20', ' \r\n	', '', NULL, 1),
+(41, 16, 3, '202', '2022-02-17', ' \r\n	', '', NULL, 1),
+(42, 22, 1, '22', '2022-01-15', ' \r\n	', '', NULL, 1),
+(43, 34, 1, '34', '2022-07-15', ' \r\n	', '', NULL, 1),
+(44, 151, 1, '151', '2022-07-21', ' \r\n	', '', NULL, 1),
+(45, 51, 1, '51', '2022-07-22', ' \r\n	', '', NULL, 1),
+(46, 64, 1, '64', '2022-07-21', ' \r\n	', '', NULL, 1),
+(47, 442, 1, '442', '2022-07-21', ' \r\n	', '', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -10318,7 +10318,23 @@ INSERT INTO `upload` (`id_upload`, `id_denuncia`, `id_processo`, `id_fase`, `cam
 (211, 313, 0, 0, 'c:/xampp/htdocs/gps/uploads/', 'erro 4.xlsx', '', 'padrão', '2022-06-08 00:00:00', 0),
 (212, 692, 0, 0, 'c:/xampp/htdocs/gps/uploads/', 'remessa 4 - maio2022 - 26-05-2022 - juntada com as remessas 2 a 4.xlsm', '', 'padrão', '2022-06-08 00:00:00', 0),
 (213, 664, 0, 0, 'c:/xampp/htdocs/gps/uploads/', 'correção 2.xlsx', '', 'padrão', '2022-06-08 00:00:00', 0),
-(214, 313, 0, 0, 'c:/xampp/htdocs/gps/uploads/', 'Resumo da Folha da Secretaria de Saúde - maio2022 - Folha Mensal.pdf', '', 'padrão', '2022-06-10 00:00:00', 0);
+(214, 313, 0, 0, 'c:/xampp/htdocs/gps/uploads/', 'Resumo da Folha da Secretaria de Saúde - maio2022 - Folha Mensal.pdf', '', 'padrão', '2022-06-10 00:00:00', 0),
+(215, 0, 6, 1, 'c:/xampp/htdocs/gps/uploads/', 's1000.pdf', '', 'teste', '0000-00-00 00:00:00', 0),
+(216, 9, 0, 0, 'c:/xampp/htdocs/gps/uploads/', 'rescisão de contrato - Elissandra Dino de Souza.pdf', '', 'padrão', '2022-07-18 00:00:00', 0),
+(217, 0, 6, 1, 'c:/xampp/htdocs/gps/uploads/', '5881347.pdf', '', '', '0000-00-00 00:00:00', 0),
+(218, 59, 0, 0, 'c:/xampp/htdocs/gps/uploads/', 'Estatus divergente - Clivia Ferreira - 82126.png', '', 'padrão', '2022-07-20 00:00:00', 0),
+(219, 9, 0, 0, 'c:/xampp/htdocs/gps/uploads/', 'Backup de Saldo - desconto judicial - Michel Mansur - em janeiro2022.xlk', '', 'padrão', '2022-07-20 00:00:00', 0),
+(220, 0, 6, 1, 'c:/xampp/htdocs/gps/uploads/', 'OBEDE FRANCISCO DO PRADO NÃO PERTENCE AO QUADRO.png', '', '', '0000-00-00 00:00:00', 0),
+(221, 0, 6, 1, 'c:/xampp/htdocs/gps/uploads/', 'CALCULO DE PROCESSO 667883-20 - VANIA AUXILIADORA GONÇALVES.pdf', '', 'CALD', '0000-00-00 00:00:00', 0),
+(222, 0, 6, 1, 'c:/xampp/htdocs/gps/uploads/', 'CALCULO DE PROCESSO 667883-20 - VANIA AUXILIADORA GONÇALVES.pdf', '', 'CALD', '0000-00-00 00:00:00', 0),
+(223, 0, 6, 1, 'c:/xampp/htdocs/gps/uploads/', 'Verbas Rescisórias - Beijamir Sarat Pereira.pdf', '', '', '0000-00-00 00:00:00', 0),
+(224, 0, 6, 1, 'c:/xampp/htdocs/gps/uploads/', 'print do resultado da pesquisa no email - folpagvg@hotmail.com - 14-03.png', '', '', '0000-00-00 00:00:00', 0),
+(225, 0, 6, 1, 'c:/xampp/htdocs/gps/uploads/', 'Dados obrigatórios do cadastro de dependentes.png', '', '', '0000-00-00 00:00:00', 0),
+(226, 0, 6, 1, 'c:/xampp/htdocs/gps/uploads/', 'PRÉVIA DA FOLHA DE JULHO2022 - EDSON JOSE DA SILVA - DESCONTO PENSÃO ALIMENTÍCIA OFÍCIO 243-2022- 2ª VARA ESP FAMÍLIA E SUCESSÕES VG.pdf', '', '', '0000-00-00 00:00:00', 0),
+(227, 0, 6, 1, 'c:/xampp/htdocs/gps/uploads/', 'print de filtro de pesquisa no email - folpagvg@hotmail.com - 14-03.png', '', '', '0000-00-00 00:00:00', 0),
+(228, 0, 6, 1, 'c:/xampp/htdocs/gps/uploads/', 'PRÉVIA DA FOLHA DE JULHO2022 - EDSON JOSE DA SILVA - DESCONTO PENSÃO ALIMENTÍCIA OFÍCIO 243-2022- 2ª VARA ESP FAMÍLIA E SUCESSÕES VG.pdf', '', '', '0000-00-00 00:00:00', 0),
+(229, 0, 6, 1, 'c:/xampp/htdocs/gps/uploads/', 'relação de servidores 12-2020 12-21 E 02-2022 - SAÚDE.xlsx', '', '', '0000-00-00 00:00:00', 0),
+(230, 9, 0, 0, 'c:/xampp/htdocs/gps/uploads/', 'qtde de servidores março2022.pdf', '', 'padrão', '2022-07-20 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -10359,7 +10375,7 @@ ALTER TABLE `denuncia`
 -- Índices para tabela `denunciados`
 --
 ALTER TABLE `denunciados`
-  ADD PRIMARY KEY (`id_denunciados`);
+  ADD PRIMARY KEY (`id_denunciado`);
 
 --
 -- Índices para tabela `denunciante`
@@ -10450,6 +10466,12 @@ ALTER TABLE `denuncia`
   MODIFY `id_denuncia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=806;
 
 --
+-- AUTO_INCREMENT de tabela `denunciados`
+--
+ALTER TABLE `denunciados`
+  MODIFY `id_denunciado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
 -- AUTO_INCREMENT de tabela `denunciante`
 --
 ALTER TABLE `denunciante`
@@ -10459,7 +10481,7 @@ ALTER TABLE `denunciante`
 -- AUTO_INCREMENT de tabela `ocorrencia`
 --
 ALTER TABLE `ocorrencia`
-  MODIFY `id_ocorrencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=197;
+  MODIFY `id_ocorrencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=213;
 
 --
 -- AUTO_INCREMENT de tabela `portaria`
@@ -10471,13 +10493,13 @@ ALTER TABLE `portaria`
 -- AUTO_INCREMENT de tabela `processados`
 --
 ALTER TABLE `processados`
-  MODIFY `id_processado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id_processado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT de tabela `processo`
 --
 ALTER TABLE `processo`
-  MODIFY `id_processo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id_processo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT de tabela `servicos`
@@ -10513,7 +10535,7 @@ ALTER TABLE `tipo_portaria`
 -- AUTO_INCREMENT de tabela `upload`
 --
 ALTER TABLE `upload`
-  MODIFY `id_upload` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=215;
+  MODIFY `id_upload` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=231;
 
 --
 -- Restrições para despejos de tabelas

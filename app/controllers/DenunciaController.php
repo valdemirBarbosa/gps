@@ -3,6 +3,7 @@ namespace app\controllers;
 use app\core\Controller;
 use app\models\Denuncia_Model;
 use app\models\Denunciante_Model;
+use app\models\Denunciado_Model;
 use app\models\TipoDocumento_Model;
 use app\models\Upload_Model;
 use app\functions\percorrerPost;
@@ -73,6 +74,9 @@ class DenunciaController extends Controller{
         $tiposDocumentos = new TipoDocumento_Model();
         $dados['tipo_doc'] = $tiposDocumentos->lista();
 
+        $listaDenunciados = new Denunciado_Model();
+        $dados['denunciados'] = $listaDenunciados->getDenunciado($id_denuncia); 
+
         $dados["view"] = "denuncia/Editar";
         $this->load("template", $dados);
    }
@@ -119,9 +123,7 @@ class DenunciaController extends Controller{
            $upload = new UploadAuxController();
            $upload->AuxiliarUpload();
 
-     
-           echo "<script> Document.alert('Denúncia  já existe, não pode mais cadastrar') </script>";
-     }elseif($d->Incluir($denuncia, $id_denunciante, $tipo_documento, $numero_documento, $denunciados, $data_entrada, $observacao, $doc_anexo, $anexo, $user)){
+          }elseif($d->Incluir($denuncia, $id_denunciante, $tipo_documento, $numero_documento, $denunciados, $data_entrada, $observacao, $doc_anexo, $anexo, $user)){
                echo "Incluído com sucesso";
                header("Location:" . URL_BASE . "denuncia/lista");
           }else{

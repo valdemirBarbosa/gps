@@ -4,7 +4,7 @@
 	}
 ?>
 <div class="base-home">
-			<h1 class="titulo"><span class="cor">Novo</span> cadastro</h1>
+			<h1 class="titulo"><span class="cor">Novo</span> cadastro Denunciado</h1>
 		<div>	
 		
 				<table>
@@ -129,34 +129,34 @@
 				<th width="5%" align="center">Matricula</th>
 				<th width="10%" align="left">Vinculo</th>
 				<th width="15%" align="left">Secretaria</th>
-				<th width="15%" align="left">Unidade</th>
+				<th width="15%" align="left">Data encerramento</th>
 				<th width="10%" colspan="5" align="center">Ação</th>
 			  </tr>
 		  </thead>
 
 		  <tbody>
   <?php
-		   foreach($denunciado as $servidor){   
-			 $_SESSION['id_denunciado'] = $servidor->id_denunciado; 
+		   foreach($denunciado as $s){   
+			 $_SESSION['id_denunciado'] = $s->id_denunciado; 
 			?>
 
 			<tr class="cor1">
-				<td align="center"><?php echo $servidor->id_denunciado  ?></td>
-				<td align="center"><?php echo $servidor->id_servidor  ?></td>
-				<td align="center"><?php echo $servidor->nome_servidor  ?></td>
-				<td align="center"><?php echo $servidor->cpf  ?></td>
-				<td><?php echo $servidor->matricula  ?></td>
-				<td><?php echo $servidor->vinculo  ?></td>
-				<td><?php echo $servidor->secretaria  ?></td>
-				<td><?php echo $servidor->unidade  ?></td>	
+				<td align="center"><?php echo $s->id_denunciado  ?></td>
+				<td align="center"><?php echo $s->id_servidor  ?></td>
+				<td align="center"><?php echo $s->nome_servidor  ?></td>
+				<td align="center"><?php echo $s->cpf  ?></td>
+				<td><?php echo $s->matricula  ?></td>
+				<td><?php echo $s->vinculo  ?></td>
+				<td><?php echo $s->secretaria  ?></td>
+				<td><?php echo $s->data_fechamento  ?></td>	
 				<td align="center">
 					<div class="btn-editar">
-						<a href="<?php echo URL_BASE ."servidor/Editar/".$servidor->id_servidor ?>" >Editar</a>
+						<a href="<?php echo URL_BASE ."servidor/Editar/".$s->id_servidor ?>" >Editar</a>
 					</div>
 				</td>
 				<td align="center">
 					<div class="btn-excluir">
-						<a href="<?php echo URL_BASE ."processar/DelProcessado/".$servidor->id_processado ?>" >excluir</a>
+						<a href="<?php echo URL_BASE ."processar/DelProcessado/".$s->id_processado ?>" >excluir</a>
 					</div>
 				</td>
 
@@ -164,19 +164,19 @@
 			<!-- botões de inclusão dos denunciados em uma das fases do processo  -->
 				<td>
 					<div class="btn-editar">
-						<a href="<?php echo URL_BASE ."processo/novo/?f=1&id=".$d->id_denuncia?>">Preliminar</a>
+						<a href="<?php echo URL_BASE ."processo/novo/?f=1&id=".$d->id_denuncia."&id_dncd=".$s->id_denunciado?>">Preliminar</a>
 					</div>	
 				</td>
 
 				<td>
 					<div class="btn-editar"> 
-						<a href="<?php echo URL_BASE ."processo/novo/?f=2&id=".$d->id_denuncia ?>" >Sindicância</a>
+						<a href="<?php echo URL_BASE ."processo/novo/?f=2&id=".$d->id_denuncia."&id_dncd=".$s->id_denunciado ?>" >Sindicância</a>
 					</div>	
 				</td>
 
 				<td>
 					<div class="btn-editar"> 
-						<a href="<?php echo URL_BASE ."processo/novo/?f=3&id=".$d->id_denuncia ?>" >PAD</a>
+						<a href="<?php echo URL_BASE ."processo/novo/?f=3&id=".$d->id_denuncia."&id_dncd=".$s->id_denunciado ?>" >PAD</a>
 					</div>	
 				</td>
 

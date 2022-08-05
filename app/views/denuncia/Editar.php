@@ -55,24 +55,26 @@
 		</div> <!-- fim da classe filho1Denuncia -->
 
 		<!-- ******************************************************************************************      -->
-		<div class="filho2Denuncia">		
+		<div class="">		
 		<h2>Upload de arquivos</h2>
-				<div class="anexoPai">
+				<div class="">
 					<div class="anexoFilho1">
 						<input type="file" name="arquivo">
 						<input type="hidden" name="view" value="<?php echo $view ?>">
 					</div>
 
-					<div class="anexoFilho2">
+					<div class="">
+
 						<label for="descricao">descrição</label>
 						<input type="text" size="50" name="descricao">
-					</div>
-
-					<div class="anexoFilho3">
 						<label for="data_inclusao">data inclusão</label>
 						<input type="text" name="data_inclusao" value="<?php echo date('d-m-Y H:m:s'); ?>">
+						<input size="100px" type="submit" value="Alterar" class="">
+
+
 						<!-- <input type="hidden" name="view" value="<?php //echo "denuncia/Edit/".$denuncia->id_denuncia  ?>"> -->
 					</div>
+					
 				</div>
 
 			<legend>Arquivos anexados</legend>
@@ -103,6 +105,8 @@
 						<a href="<?php echo URL_BASE . 'downloads/?path='.$caminho.'&file='.$arquivo ?>"> baixar </a>
 					
 					</td>
+
+
 				</tr>
 				<?php } }?>
 			</table>
@@ -126,17 +130,13 @@
 					foreach($denunciados as $d){?>
 				<tr>
 					<td><?php echo $d->id_denunciado?> </td>
-					<td><?php echo $a->matricula?> </td>
-					<td><?php echo $a->nome?> </td>
-					<td><?php echo $a->cpf?> </td>
-					<td><?php echo $a->data_inclusao?> </td> 
+					<td><?php echo $d->matricula?> </td>
+					<td><?php echo $d->nome_servidor?> </td>
+					<td><?php echo $d->cpf?> </td>
+					<td><?php echo $d->data_inclusao?> </td> 
 					<td>Editar </td> 
 					<td>Excluir </td> 
 		
-					<td> <!-- RELAÇÃO DE DENUNCIADOS  !-->
-						<a href="<?php echo URL_BASE . 'downloads/?path='.$caminho.'&file='.$arquivo ?>"> baixar </a>
-					
-					</td>
 				</tr>
 				<?php } }?>
 			</table>

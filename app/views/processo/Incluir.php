@@ -47,6 +47,12 @@
 									echo "NA SINDICANCIA";
 									if($fase == 3)
 										echo "NO PROCESSO ADMINISTRATIVO";
+						
+										if(isset($_GET['id_dncd'])){
+											$id_denunciado = addslashes($_GET['id_dncd']);
+											echo "<input type='hidden' name='id_denunciado' value=".$id_denunciado .">";
+											echo "<br/> id do denunciado: ".$id_denunciado; 
+										}
 					}?></div>
 		</div>
 
@@ -75,12 +81,14 @@
 
 	</div>
 
-</form>
+	<br/>
+	<br/>
 	<br/>
 	<br/>
 	<br/>
 		<div class="centralizaBotão">
 			<input type="submit" value="Cadastrar" class="btn">
 		</div>
+		</form>
 
 </fieldset>
