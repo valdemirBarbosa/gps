@@ -182,41 +182,47 @@ public function ConsultaDenunciante(){
      }
 
      public function ConsultaDenuncia_e_Processo(){
-          $dado = $this->pegarDadosDoUsuario();  
-          $campo = $dado[0];
-          $parametro = $dado[1];
+          if(isset($_POST['valorPreenchidoUsuario']) && !empty($_POST['valorPreenchidoUsuario'])){
+               $dado = $this->pegarDadosDoUsuario();  
+               $campo = isset($dado[0]) ? $dado[0] : 0;
+               $parametro = isset($dado[1]) ? $dado[1] : 0;
 
-          $_SESSION['campo'] = $campo;
-          $_SESSION['parametro'] = $parametro;
-          $alias = $dado[3];
-          $_SESSION['parametro'] = $parametro;
-
-          $servidor = new Servidor_Model();
-          if($dados['servidor'] = $servidor->AtServ($campo, $parametro)){  // AtServ = Atestado para a tabela servidor
-               $id_servidor = $dados['servidor'][0]["id_servidor"];
-
-               //Verifica se há denuncia para o servidor
-               $denunciados = new Denunciado_Model();
-               if($dados['denunciados'] = $denunciados->verSeTemDenuncia($id_servidor)){
-                    $id_denunciado = $dados['denunciados'][0][0];
-                    $id_denuncia = $dados['denunciados'][0][2];
-
-               //Verifica se há denuncia para o servidor
-               $processados = new Processado_Model();
-               $dados['processados'] = $processados->verSeTemProcesso($id_denuncia, $id_denunciado);
-
-               }
-
+               $_SESSION['campo'] = $campo;
+               $_SESSION['parametro'] = $parametro;
+               $alias = isset($dado[3]);
+               $_SESSION['parametro'] = $parametro;
           }else{
-               $msg = "Em fase de teste ".date('Y/m/d');
+               $msg = "Não há dados a serem pesquisados. Por favor, preencher o campo de pesquisa";
                $this->Error($msg);
           }
 
-               $view = $_POST['view'];
-               $dados["view"] = "denunciado/index";//$view; $view;
-               $this->load("template", $dados);
-     
-          }
+               $servidor = new Servidor_Model();
+               if($dados['servidor'] = $servidor->AtServ($campo, $parametro)){  // AtServ = Atestado para a tabela servidor
+                    $id_servidor = $dados['servidor'][0]["id_servidor"];
+
+                    //Verifica se há denuncia para o servidor
+                    $denunciados = new Denunciado_Model();
+                    if($dados['denunciados'] = $denunciados->verSeTemDenuncia($id_servidor)){
+                         $id_denunciado = $dados['denunciados'][0][0];
+                         $id_denuncia = $dados['denunciados'][0][2];
+
+                    //Verifica se há denuncia para o servidor
+                    $processados = new Processado_Model();
+                    $dados['processados'] = $processados->verSeTemProcesso($id_denuncia, $id_denunciado);
+
+                    }
+
+               }else{
+                    $msg = "Não há um servidor com esse nome. ".date('Y/m/d');
+                    $this->Error($msg);
+               }
+
+                    $view = isset($_POST['view']) ? $_POST['view'] : "denunciado/index";
+                    $dados["view"] = $view;  // "denunciado/index";
+                    $this->load("template", $dados);
+          
+               }
+
 
 
      

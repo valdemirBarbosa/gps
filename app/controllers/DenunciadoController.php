@@ -35,11 +35,10 @@ class DenunciadoController extends Controller{
    
    public function Excluir($id_denunciado){
      $denunciados = new Denunciado_Model();
-     $dados["denunciado"] = $denunciados->getDenunciado($id_denunciado);
-     $denunciados->Deletar($id_denunciado);
+     $dados['denunciados'] = $denunciados->ExcluirDenunciado($id_denunciado);
+     $dados['view'] = "denuncia/index"; 
      $this->load("template", $dados);
-     header("Location:" . URL_BASE . "cliente");
-}
+ }
  
    public function pesquisaDenuncia($nome, $cpf){
      $consultaDenuncia = new Denunciado_Model();

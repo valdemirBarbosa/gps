@@ -1,5 +1,5 @@
 <div class="base-home">
-	<h1 class="titulo-pagina">Lista de denunciados - falta parametrizar no index porque no model e no controller está ok</h1>
+	<h1 class="titulo-pagina">Lista de denunciados - corrigir a grade do denunciado (cabecalho com os dados) 08/08/2022</h1>
 
 </div>
 <div class="base-lista">
@@ -10,7 +10,7 @@
 			}else{
 				echo 0;
     		} 
-	 ?></b> denunciado(s) cadastrado(s)</span>
+	 ?></b> servidores(as) cadastrados(as)</span>
 
 	<!-- INCLUÍDO EM 29/07/2022                                                                                -->
 	<div class="base-home">
@@ -76,53 +76,59 @@
 				<td><?php echo $serv[4]  ?></td>
 				<td><?php echo $serv[5]  ?></td>
 				<td><?php echo $serv[6]  ?></td>	
-				<td align="center">
-				</td>
 			 </tr>
-		<?php }
+		<?php
 		} ?>
 		</table>
 
 	<!-- registros da tabela de denunciados -->				
-		<table>
+	<div class="recuoTabNivel2">	
+	<table>
 		<thead>	 
-		<tr><td colspan="7"><div class="tituloTabela">Registro de Denúncias</div></td></tr>
-				<th width="5%" align="center"></th>
-				<th width="5%" align="center">Id da denuncia</th>
-				<th width="5%" align="center">Id do denunciado</th>
-				<th width="25%" align="left">data inclusão</th>
-				<th width="10%" align="left">número da documento</th>
-				<th width="15%" align="left">infração</th>
-				<th width="15%" align="left">data fechamento</th>
+		<tr>
+				<th colspan="7"><div class="tituloTabela">Registro de Denúncias</div></th></tr>
+				<th align="center">Nome do servidor</th>
+				<th align="center">Id do denunciado</th>
+				<th align="left">data inclusão</th>
+				<th align="left">número da documento</th>
+				<th align="left">infração</th>
+				<th align="left">data fechamento</th>
 			  </tr>
 		 </thead>
 	
 		<?php if(isset($denunciados)){
 				foreach($denunciados as $den){   
+					$qtde = count($den);
+/* 					echo "<pre>";
+					print_r($den);
+					echo "</pre>";
+					exit;
+ */
 		?>
 	
 		 <tr class="cor1">
-				<td></td>
+				<td align="center"><?php echo $den[19]  ?></td>
 				<td align="center"><?php echo $den[2]  ?></td>
-				<td align="center"><?php echo $den[0] ?></td>
-				<td><?php echo $den[3] ?></td>
-				<td><?php echo $den[10]  ?></td>
-				<td><?php echo $den[8]  ?></td>
-				<td><?php echo $den[5]  ?></td>	
+				<td align="center"><?php echo $den[3]  ?></td>
+				<td align="center"><?php echo $den[10] ?></td>
+				<td><?php echo $den[8] ?></td>
+				<td><?php echo $den[5]  ?></td>
 			 </tr>
 		 <?php }
 		 } ?>
 	</table>
-	
+</div>  <!-- fim da div recuoTabNivel2 -->
+
 	<!-- registros da tabela de processados -->				
+	<div class="recuoTabNivel3">
 	<table>
 	 <thead>	 
 	 <tr><td colspan="7"><div class="tituloTabela">Registro de Processo</div></td></tr>
 		 <tr>
-				<th width="5%" align="center">Id processados</th>
-				<th width="25%" align="left">numero do processo</th>
-				<th width="10%" align="left">data instauração</th>
-				<th width="15%" align="left">data encerramento</th>
+				<th align="center">Id processados</th>
+				<th align="left">numero do processo</th>
+				<th align="left">data instauração</th>
+				<th align="left">data encerramento</th>
 			  </tr>
 	    <?php if(isset($processados)){
 			foreach($processados as $proces){   
@@ -134,13 +140,14 @@
 				<td><?php echo $proces[4]  ?></td>
 				<td><?php echo "00/00/0000"  ?></td>	
 			 </tr>
+			 </tbody>
 		</table>		 
-	  </tbody>
+	</div>   <!-- fim da div recuoTabNivel3 -->
 </div>					
 </div>
 </div>
 <?php } 
-	}?>
+	}}?>
 <!-- 				<div class="btn-editar">
 					<a href="<?php echo URL_BASE ."denunciado/Editar/".$denunciado->id_denunciado ?>" >Editar</a>
 			  	</div>

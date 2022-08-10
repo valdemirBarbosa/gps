@@ -2,6 +2,7 @@
 
 namespace app\models;
 use app\core\Model;
+use JetBrains\PhpStorm\Internal\ReturnTypeContract;
 
 class Denunciado_Model  extends Model{
 
@@ -40,8 +41,13 @@ class Denunciado_Model  extends Model{
     }
 
     public function VerSeTemDenuncia($id_servidor){
-        $sql = "SELECT * FROM denunciados as dncd INNER JOIN denuncia as d ON dncd.id_denuncia = d.id_denuncia WHERE dncd.id_servidor = $id_servidor";
+        $sql = "SELECT * FROM denunciados as dncd
+        INNER JOIN denuncia as d
+        ON dncd.id_denuncia = d.id_denuncia 
+        INNER JOIN servidor as s ON dncd.id_servidor = s.id_servidor 
+        WHERE dncd.id_servidor =:id_servidor";
         $sql = $this->db->prepare($sql);
+        $sql->bindValue(":id_servidor", $id_servidor);
         $sql->execute();
         return $sql->fetchAll();
         
@@ -91,11 +97,27 @@ class Denunciado_Model  extends Model{
         $tabela = "denunciado";
         $sql = "DELETE FROM ". $tabela ." WHERE id_denunciado = :id";
     
-        if($this->existeId($id_denunciado, $tabela)){
+        if($this->existe($id_denunciado, $tabela)){
             $sql = $this->db->prepare($sql);
             $sql->bindValue(":id", $id_denunciado);
             $sql->execute();
             return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function ExcluirDenunciado($id_denunciado){
+        if(isset($id_denunciado) && !empty($id_denunciado)){
+            $sql = "SELECT * FROM denunciados as d INNER JOIN servidor as s ON d.id_servidor = s.id_servidor WHERE id_denunciado = $id_denunciado";
+            $qry = $this->db->query($sql);
+
+            $sql = "DELETE FROM denunciados WHERE id_denunciado = :id";
+            $sql = $this->db->prepare($sql);
+            $sql->bindValue(":id", $id_denunciado);
+            $sql->execute();
+
+            return $qry->fetchAll(\PDO::FETCH_OBJ);
         }else{
             return false;
         }

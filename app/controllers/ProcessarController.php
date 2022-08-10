@@ -239,10 +239,10 @@ public function contarRegistroServidor($id_processo){
 
     public function DelProcessado($id_processado){
         $deletar = new Processado_Model();    
-        $del = $deletar->Delete($id_processado);
+        $deletar->Deletar($id_processado);
         
-        $ret = new ProcessoController();
-        $dados['processo'] = $ret->processar($_SESSION['id_processo']);
+        $ret = new Processado_Model();
+        $dados['processo'] = $ret->deletar($id_processado);
         $dados['view'] = "processo/processarServidor";
 
         $this->load("template", $dados);

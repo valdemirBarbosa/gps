@@ -39,21 +39,7 @@ class DenunciaController extends Controller{
      $dados["view"] = "denuncia/Incluir";
      $this->load("template", $dados);
      }
-    
-/*    public function denunciados(){
-          $denuncias = new Denuncia_Model();
-          $dados["denunciado"] = $denuncias->DenunciadosTodos();
-          $dados["view"] = "denuncia/Indexis";
-          $this->load("template", $dados);
-     }
- */        
-/*     public function adicionarDenunciado(){
-        $denuncia = new Denuncia_Model();
-        $dados["denunciado"] = $denuncia->adicionar($id_denunciado);
-        //$dados["view"] = "denuncia/Editar";
-        //$this->load("template", $dados);
-   } 
- */
+
    public function vincularDenunciadoDenuncia($id_denuncia){
        $denuncias = new Denuncia_Model();
        $dados["denuncia"] = $denuncias->getDenuncia($id_denuncia);

@@ -742,6 +742,14 @@ span{
     color: #DBE06C;
 }
 
+.recuoTabNivel2{
+    margin-left: 50px;
+}
+
+.recuoTabNivel3{
+    margin-left: 100px;
+}
+
 .containerForm{
     width:100%;
     background-color: red;

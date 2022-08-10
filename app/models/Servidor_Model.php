@@ -49,8 +49,8 @@ class Servidor_Model  extends Model{
         }
     } 
 
-    public function AtServ($campo, $parametro){
-        $sql = "SELECT * FROM servidor WHERE $campo LIKE '$parametro%'";
+    public function AtServ($campo, $parametro){ //AtServ = Atestado para a tabela servidor
+        $sql = "SELECT * FROM servidor WHERE $campo LIKE '$parametro%'";  //= $parametro"; 
         $sql = $this->db->prepare($sql);
         $sql->execute();
 
@@ -61,20 +61,12 @@ class Servidor_Model  extends Model{
         }
     } 
 
-    public function VerSeTemDenuncia($id_servidor){
-        $sql = "SELECT * FROM denunciados as d LEFT JOIN processados as p ON d.id_denunciado = p.id_denunciado WHERE id_servidor =:id_servidor";
-        $sql = $this->db->prepare($sql);
-        $sql->bindValue(":id_servidor", $id_servidor);
-        $sql->execute();
-        if($sql->rowCount()>0){
-            return $sql->fetchAll(\PDO::FETCH_OBJ);
-        }else{  
-           return false;
-        }
-    }
-
+ 
     public function VerSeTemProcesso($id_denuncia, $id_denunciado){
-        $sql = "SELECT * FROM processados as pr INNER JOIN denunciados as d ON pr.id_denuncia = d.id_denuncia WHERE id_denuncia =:id_denuncia AND id_denunciado =:id_denunciado";
+        $sql = "SELECT * FROM processados as pr 
+        INNER JOIN denunciados as d 
+        ON pr.id_denuncia = d.id_denuncia 
+        WHERE id_denuncia =:id_denuncia AND id_denunciado =:id_denunciado";
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":id_denuncia", $id_denuncia);
         $sql->bindValue(":id_denunciado", $id_denunciado);

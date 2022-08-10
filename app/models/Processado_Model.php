@@ -97,7 +97,7 @@ $sql = $this->db->prepare($sql);
    
     }
 
-    public function Delete($id_processado){
+    public function Deletar($id_processado){
         $id = $id_processado;
         $processados = 'processados';
 
@@ -113,6 +113,7 @@ $sql = $this->db->prepare($sql);
         $sql = "SELECT * FROM ". $tabela ." WHERE id_processado = :id";
         $sql = $this->db->prepare($sql);
         $sql->bindValue(':id', $id);
+
         $sql->execute();
         
         if($sql->rowCount() > 0){
