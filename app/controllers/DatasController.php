@@ -13,6 +13,16 @@
       $dias = date('d', $calc);
       return $dias;
    }
+
+   public function dataBrasil($data){
+      $dt_entrada = explode("-",$com->data_entrada);
+      $dia = $dt_entrada[2];
+      $mes = $dt_entrada[1];
+      $ano = $dt_entrada[0];
+      return array($dia."/".$mes."/".$ano);
+   ?>
+
+   }
 }
 
 ?>
