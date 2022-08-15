@@ -14,7 +14,7 @@
       return $dias;
    }
 
-   public function dataBrasil($data){
+   public function DataBrasil($data){
       $dt_entrada = explode("-",$com->data_entrada);
       $dia = $dt_entrada[2];
       $mes = $dt_entrada[1];

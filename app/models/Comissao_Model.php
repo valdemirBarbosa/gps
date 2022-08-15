@@ -2,24 +2,40 @@
 namespace app\models;
 use app\core\Model;
 
-class ComissaoSindicancia_Model extends Model{
+class Comissao_Model extends Model{
 
     public function __construct() {
         parent::__construct();
     }
 
     public function lista(){
+        $sql = "SELECT * FROM portaria_comissao_pad";
+        $qry = $this->db->query($sql);
+        return $qry->fetchAll(\PDO::FETCH_OBJ);
+
+    }
+
+    public function _lista(){
         $sql = "SELECT * FROM comissao_membros as cm INNER JOIN portaria_comissao_pad as pcp ON cm.id_portaria = pcp.id_portaria";
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
-      
-    public function Documentos(){
-        $sql = "SELECT * FROM tipo_documento";
-        $qry = $this->db->query($sql);
-        return $qry->fetchAll(\PDO::FETCH_OBJ);
+    public function getDados($id_portaria){  
+        $sql = "SELECT * FROM portaria_comissao_pad WHERE id_portaria =:id";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":id", $id_portaria);
+        $sql->execute();
+        return $sql->fetchAll(\PDO::FETCH_OBJ);
     }
+
+    public function Deletar($id_portaria){
+        $sql = "DELETE FROM portaria_comissao_pad WHERE id_portaria =:id";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":id", $id_portaria);
+        $sql->execute();
+    }
+
 
     public function Denunciante(){
         $sql = "SELECT * FROM denunciante";
@@ -75,12 +91,6 @@ class ComissaoSindicancia_Model extends Model{
         $sql->execute();
     }
 
-    public function Deletar($id_denuncia){
-        $sql = "DELETE FROM denuncia WHERE id_denuncia = :id";
-            $sql = $this->db->prepare($sql);
-            $sql->bindValue(":id", $id_denuncia);
-            $sql->execute();
-    }
 
     private function existeCpf($cpf){
         $cpfConsulta = $cpf;

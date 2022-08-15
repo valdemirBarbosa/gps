@@ -9,12 +9,6 @@
 </div> <!-- FIM base-home -->
 
 
-<?php //paramentros para pesquisa dos formulários de denuncia e processo
- 		$tabela = 'denuncia';
- 		$view = 'denuncia/index';
-//		$retorno = 'denunciaRet';
-?>
-
 <div class="pai">
 	<div class="filho1">
 		<form method="POST" action="<?php echo URL_BASE . 'Comissao/consulta'; ?>" >
@@ -67,19 +61,19 @@
 
 			<td>
 			  <div class="btn-editar"> 
-					<a href="<?php echo URL_BASE ."denuncia/Edit/".$com->id_denuncia ?>" >Implementar Editar</a>
+					<a href="<?php echo URL_BASE ."Comissao/Edit/".$com->id_portaria ?>">Editar</a>
 	  	      </div>	
 			</td>
 			
 			<td>
 				<div class="btn-excluir"> 
-					<a href="<?php echo URL_BASE ."denuncia/Excluir/".$com->id_denuncia ?>" >ImplementarExcluir</a>
+					<a href="<?php echo URL_BASE ."comissao/Excluir/".$com->id_portaria ?>">Excluir</a>
 				</div>
 			</td>
 
 			<td>
   				<div  class="btn-denunciar"> 
- 				<a href="<?php echo URL_BASE ."denunciado/Novo/".$com->id_denuncia ?>" >Implementar Incluir</a>
+ 				<a href="<?php echo URL_BASE ."comissao/Novo/".$com->id_portaria ?>" >Implementar Incluir</a>
 				</div>
 			</td>
 

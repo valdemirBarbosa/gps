@@ -1,19 +1,39 @@
 <?php
 namespace app\controllers;
 use app\core\Controller;
-use app\models\ComissaoSindicancia_Model;
+use app\models\Comissao_Model;
 use app\models\Upload_Model;
 use app\models\Servidor_Model;
 use DateTime;
 
-class ComissaoSindicanciaController extends Controller{
+class ComissaoController extends Controller{
    public function index(){
-        $comissaoSindicancia = new ComissaoSindicancia_Model();
-        $dados["dados"] = $comissaoSindicancia->lista();
-        $dados["view"] = "comissao_sindicancia/Index";
+        $comissao = new Comissao_Model();
+        $dados["dados"] = $comissao->lista();
+        $dados["view"] = "comissao/Index";
         $this->load("template", $dados);
     }
    
+    public function Edit($id_portaria){
+          $comissao = new Comissao_Model();
+          $dados["dados"] = $comissao->getDados($id_portaria);
+          $dados["view"] = "comissao/Editar";
+          $this->load("template", $dados);
+     }
+
+
+     public function Excluir($id_portaria){
+          $comissao = new Comissao_Model();
+          $dados["dados"] = $comissao->getDados($id_portaria);
+          if(count($dados['dados'])>0){
+               $comissao->Deletar($id_portaria);
+          }
+          //$dados["dados"] = $comissao->lista();
+          $dados["view"] = "comissao/Index";
+          $this->load("template", $dados);
+
+       }
+      
 
 //Não alterar mais este método. Já está funcionando corretamente
    public function Pesquisar(){
@@ -43,34 +63,7 @@ class ComissaoSindicanciaController extends Controller{
        $this->load("template", $dados);
    }
 
-   public function Edit($id_denuncia){
-        $denuncias = new Denuncia_Model();
-        $dados["denuncia"] = $denuncias->getEditar($id_denuncia);
-
-        $lista = new Upload_Model();
-        $dados['anexo'] = $lista->upLoadedDenuncia($id_denuncia);
-        
-        $denunciante = new Denunciante_Model();
-        $dados['denunciante'] = $denunciante->lista();
-        
-        $tiposDocumentos = new TipoDocumento_Model();
-        $dados['tipo_doc'] = $tiposDocumentos->lista();
-
-        $listaDenunciados = new Denunciado_Model();
-        $dados['denunciados'] = $listaDenunciados->getDenunciado($id_denuncia); 
-
-        $dados["view"] = "denuncia/Editar";
-        $this->load("template", $dados);
-   }
    
-   public function Excluir($id_denuncia){
-     $denuncias = new Denuncia_Model();
-     $dados["denuncia"] = $denuncias->getDenuncia($id_denuncia);
-     $denuncias->Deletar($id_denuncia);
-     $this->load("template", $dados);
-     header("Location:" . URL_BASE . "denuncia");
-}
- 
    public function Salvar(){
 
      $d = new Denuncia_Model();
