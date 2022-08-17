@@ -2,6 +2,8 @@
     "autoload": {
         "psr-4": {
             "app\\": "app/"}
+    },
+    "require": {
+        "mpdf/mpdf": "^8.1"
     }
 }
-

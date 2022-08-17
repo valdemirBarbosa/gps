@@ -9,18 +9,30 @@ class Certidao_Model extends Model{
     }
 
 
-    public function certidao($campo, $informacao){
+    public function certidao($cpf){
         $sql = "SELECT * FROM servidor as s
-                INNER JOIN  denunciados as d
+                INNER JOIN denunciados as d
                 ON s.id_servidor = d.id_servidor 
-                LEFT JOIN processo as p
+                LEFT JOIN processados as p
                 ON d.id_denunciado = p.id_denunciado
-                WHERE $campo LIKE '%$informacao%'";
+                WHERE s.cpf = :cpf";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":cpf", $cpf);
+        $sql->execute();
 
-        $qry = $this->db->query($sql);
-        return $qry->fetchAll(\PDO::FETCH_OBJ);
+        if($sql->rowCount() > 0 )
+            return $sql->fetchAll(\PDO::FETCH_OBJ);
     }
     
+    public function pegarNome($cpf){
+        $sql = "SELECT cpf, nome_servidor FROM servidor WHERE cpf =:cpf";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":cpf", $cpf);
+        $sql->execute();
+        if($sql->rowCount() > 0 )
+        return $sql->fetchAll(\PDO::FETCH_OBJ);
+    }
+
     public function PesquisaProcessadosContar($tabela, $campo, $informacao, $limit){
         $sql = "SELECT * FROM $tabela WHERE $campo LIKE '%$informacao%' LIMIT $limit";
         $qry = $this->db->query($sql);

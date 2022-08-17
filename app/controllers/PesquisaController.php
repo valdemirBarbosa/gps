@@ -223,10 +223,6 @@ public function ConsultaDenunciante(){
           
                }
 
-
-
-     
-
 //Pega a opção de campo do select do usuário - campo opção e valor do campos
 public function pegarDadosDoUsuario(){
      if(isset($_POST['pesquisa']) && !empty('pesquisa')){

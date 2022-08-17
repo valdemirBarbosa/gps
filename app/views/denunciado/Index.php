@@ -48,6 +48,8 @@
 					<input type="hidden" name="retorno" value="<?php echo $retorno ?>">
 					<input type="hidden" name="tabela" value="<?php echo $tabela ?>">
 					<input type="submit" value="pesquisar">
+					<a href="<?php echo URL_BASE . "Certidao/cnp"?>">Gerar Atestado</a>
+
 		</form>
 	</div>
 </div>
