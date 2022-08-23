@@ -353,6 +353,37 @@ span{
   font-size:1.4em;
   text-transform:uppercase;
 }
+
+.margemCertidao{
+    background-color:#ddd;
+    width: 793px;
+    height: 1122px;
+    border-style: double;
+    border-color:yellow;
+}
+
+.cabecahoCertidao{
+    background-color:#444;
+    text-align: center;
+    height: 100px;
+    border-style: double;
+    border-color:aqua;
+    display:inline;
+    
+}
+
+.CorpoTextoCertida{
+    margin-top: 1000px;
+    margin-left: 30px;
+    margin-right: 20px;
+
+    background-color: coral;
+}
+
+.CorpoTextoCertida{
+    margin-top: 10;
+}
+
 /* 
 .rodape{
     margin-top: 714px;
