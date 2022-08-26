@@ -19,13 +19,7 @@
 </div>
 	<?php 
 		if(isset($dados)){
-			foreach ($dados as $d){
-				print_r($d);
-
-				foreach($dados as $c){
-					echo "<hr><hr>";
-						echo "print:  ".print_r($c[2]);	
-					echo "<hr><hr>";
+			foreach ($dados as $certidao){
 
 ?>
 			<div class='margemCertidao'> 
@@ -39,13 +33,17 @@
 					
 					<br><br><br><br><h2>Atestado</h2>
 		  		</div> <!-- Fim da div cabecalho da certidao -->
+<?php
+				foreach ($certidao as $c){?>
 
 				<br><br><br><br>
 				<div class="CorpoTextoCertida">
-					Atestamos para os devidos fins que o(a) servidor(a) <?php echo $cert->nome_servidor ." , CPF: ".$cert->cpf; 
-					$cert->$certidao; ?> 
+					Atestamos para os devidos fins que o(a) servidor(a) <?php echo $c[1] ." , CPF: ".$c[2] . $c[0]; ?> 
 				</div> <!-- Fim da div corpo do texto certidao -->
-<?php			} }}?>
+<?php			} 
+			}
+		}
+		?>
 
 			</div> 
 

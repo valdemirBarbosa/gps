@@ -17,15 +17,11 @@ class CertidaoController extends Controller{
           $certidao = new Certidao_Model();
 
           if($dados['dados'] = $certidao->certidao($cpf)){
-               echo "if";
-               exit;
-               
-
                foreach($dados as $d){
                     $nome = ($d[0]->nome_servidor);
                     $numeroCpf = ($d[0]->cpf);
                     $certidao = " tem processo em andamento ";
-                $dados['dadosCertidao'] = array($nome, $numeroCpf, $certidao);
+                $dados2['certidao'] = array($certidao, $nome, $cpf);
                }
           }else{
                $dados['dados'] = $certidao->pegarNome($cpf);
@@ -33,9 +29,15 @@ class CertidaoController extends Controller{
                     $nome = ($d[0]->nome_servidor);
                     $numeroCpf = ($d[0]->cpf);
                     $certidao = " tem processo em andamento ";
-                $dados['dadosCertidao'] = array($nome, $numeroCpf, $certidao);
+                $dados2['certidao'] = array($certidao, $nome, $cpf);
+
                }
           }
+               
+               $dados['dados'] = array($dados2);
+               $dados['view'] = "certidao/Index";
+               $this->load("template", $dados);
+
              //  $html = $divMargemIni . $var0 . "<br><br><br>". $var1 . $var2 . $divMargemFim; 
 
      }else{
