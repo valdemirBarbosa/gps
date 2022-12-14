@@ -1,8 +1,8 @@
 <?php
 	if(!isset($_SESSION)){
-	session_start();
+    	session_start();
 	}
-
+    if(isset($_SESSION['id_usuario']) && !empty($_SESSION['id_usuario'])){
 ?>
 <div class="base-home">
 	<h1 class="titulo-pagina">Comissão de Sindicância</h1>
@@ -117,6 +117,7 @@
 
 						endfor;
 					}
+    }
 					
 
 				?>

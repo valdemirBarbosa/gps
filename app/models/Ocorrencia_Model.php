@@ -67,7 +67,6 @@ class Ocorrencia_Model extends Model{
 //Inserir dados na tabela de ocorrência
     public function Incluir($id_processo, $numero_processo, $id_servico, $data_ocorrencia, $ocorrencia, $observacao, $anexo, $user){
         $sql = "INSERT INTO ocorrencia SET id_processo =:id_processo, numero_processo =:numero_processo, id_servico =:id_servico, data_ocorrencia =:data_ocorrencia, ocorrencia =:ocorrencia, observacao =:observacao, anexo =:anexo, user =:user"; 
-        
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":id_processo", $id_processo);
         $sql->bindValue(":numero_processo", $numero_processo);

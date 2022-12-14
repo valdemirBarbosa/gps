@@ -9,34 +9,69 @@ use app\models\Ocorrencia_Model;
 class PortariaController extends Controller{
    public function index(){
         $portarias = new Portaria_Model();
+        $lista = $portarias->lista();
         
-        $this->atualizarPrazo();
-        $portarias = new Portaria_Model();
-        $prazo = isset($_POST['prazo']) ? addslashes($_POST['prazo']) : 5;
-        $dados["portaria"] = $portarias->FiltrarLista($prazo);
+        $prazo = $this->filtrarPrazo();
+
+
+/*         $dados['portaria'] =
         $dados["view"] = "portaria/Index";
         $this->load("template", $dados);
-     }
+ */   }
 
-     public function filtrarPrazo($prazo){
-          
-          
-     }
+   public function filtrarPrazo(){
+//     $this->atualizarPrazo();
+     $prazo = isset($_POST['prazo']) ? addslashes($_POST['prazo']) : 30;
+          $portarias = new Portaria_Model();
 
-     public function atualizarPrazo(){
+          if(isset($_POST['dataInicial'])){
+               $dataInicial = $_POST['dataInicial'];
+          }else{
+               $dataInicial = date("Y-m-d");
+          }
+
+          $dataFinal = $this->somarDataConsulta($dataInicial, $prazo);
+
+          $dados["portaria"] = $portarias->filtrarNaData($dataInicial, $dataFinal);
+          
+          foreach($dados['portaria'] as $d){
+               $id_portaria = $d->id_portaria;
+               $data_publicacao = $d->data_publicacao;
+               $diaEdataPublicacao = array($id_portaria, $data_publicacao);
+          }
+          if(isset($diaEdataPublicacao)){
+               $this->subtrairDataPublicacaoEatual($diaEdataPublicacao);
+          }
+
+          if(isset($_POST['numero'])){
+               $numero = addslashes($_POST['numero']);
+               $dados["portaria"] = $portarias->getNumero($numero);
+                              
+          }
+          
+          $dados["portaria"] = $portarias->filtrarNaData($dataInicial, $dataFinal);
+          $dados["view"] = "portaria/Index";
+          $this->load('template', $dados);
+  }
+
+  // atualizar prazo na consulta
+  public function atualizarPrazo(){
           $portarias = new Portaria_Model();
           $data = $dados["portaria"] = $portarias->lista();
 
           $dias = new CalcularDatas();
           foreach($data as $d){
-            $data = $d->data_final;
+            $dataFinal = $d->data_final;
+               
             $idPortaria = $d->id_portaria;
-            $dia = $dias->calcularDia($data);
+            $dataInicial = isset($_POST['data_inicial']) ? $_POST['data_inicial'] : date("Y/m/d");
+            $dia = $dias->calcularDia($dataFinal, $dataInicial);
+          }
   
             $atulizarDia = new Portaria_Model();
             $diaAtualizado = $atulizarDia->updateDia($idPortaria, $dia);
             return $diaAtualizado;
-          }
+          
      }
   
    public function Novo(){
@@ -68,15 +103,38 @@ class PortariaController extends Controller{
 
  //calcula data para encontrar quantidade de dias para o prazo final 
    public function subtrairData($data_final){
-    $dataAtual = strtotime(date('Y/m/d'));
-    $dataatual = date('d/m/Y', $dataAtual); 
+    $dataAtual = date('Y/m/d');
+    $dataAtual = strtotime($dataAtual);
+    $data_final = $data_final;
     $dataFim = strtotime($data_final);
-    $dataFinal = date('d/m/Y', $dataFim);
-    $data = $dataFim - $dataAtual;
+
+    
+    $data = $dataAtual - $dataFim;
+
     $data = $data/86400;
-     $dias = $data;
+    $dias = $data;
+
      return $dias; 
    }
+
+   public function subtrairDataPublicacaoEatual($diaEdataPublicacao = array()){
+     $portarias = new Portaria_Model();
+     foreach($diaEdataPublicacao as $dias){
+          $portarias = new Portaria_Model();
+          $id_portaria = $diaEdataPublicacao[0];
+
+          $data_publicacao = $diaEdataPublicacao[1];
+          $dataAtual = date('Y/m/d');
+          $dataAtual = strtotime($dataAtual);
+          $data_publicacao = strtotime($data_publicacao);
+          $data = $dataAtual - $data_publicacao;
+          $dias = $data/86400;
+
+          $portarias->updateDia($id_portaria, $dias);
+     }
+
+   }
+
 
    /* será implementado ainda
    public function status($data_final){
@@ -110,6 +168,15 @@ class PortariaController extends Controller{
      $calc = $data1 + $data2; 
      $data = date('Y/m/d', $calc);
      return $data;
+}
+
+public function somarDataConsulta($dataInicial, $prazo){
+     $data1 = strtotime($dataInicial);
+     $prazo1 = $prazo * 86400;
+     $calcData = $data1 + $prazo1;
+     $novaData = date("Y-m-d", $calcData);
+
+     return $novaData;
 }
 
    public function Salvar(){
@@ -151,11 +218,8 @@ class PortariaController extends Controller{
           $tabela = "portaria";
           $filtro = " WHERE id_portaria =:id_portaria";
 
-          $p->InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_processo, $numero_processo, $numero, $tipo, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
-//          $p = array($comando, $tabela, $filtro, $comando,  $id_portaria, $id_processo, $numero_processo, $numero, $tipo,$data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
-/*            print_r($p);
-          exit;
- */
+          $p->InsertEditar($comando, $filtro, $id_portaria, $tabela, $id_processo, $numero_processo, $numero, $tipo, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
+          $p = array($comando, $tabela, $filtro, $comando,  $id_portaria, $id_processo, $numero_processo, $numero, $tipo,$data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
     }else{
          
           $id_portaria = NULL;
@@ -163,8 +227,12 @@ class PortariaController extends Controller{
           $tabela = "portaria";
           $filtro = "";
 
-          $p->InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_processo, $numero_processo,  $numero, $tipo, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
-          
+          $p->InsertEditar($comando, $filtro, $id_portaria, $tabela, $id_processo, $numero_processo, $numero, $tipo, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
+/*           $p = array($comando, $filtro, $id_portaria, $tabela, $id_processo, $numero_processo, $numero, $tipo, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
+          print_r($p);
+          exit;
+ */
+
                //INCLUIR OCORRÊNCIA DE LANÇAMENTO DE PORTARIA NOS ANDAMENTOS	
                $id_servico = 2;
                $data_ocorrencia = date('Y/m/d');

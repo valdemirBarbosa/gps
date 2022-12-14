@@ -9,9 +9,9 @@ class Portaria_Model extends Model{
     }
 
     public function lista(){
-        $sql = "SELECT * FROM portaria ORDER BY data_final DESC";
-        $qry = $this->db->query($sql);
-        return $qry->fetchAll(\PDO::FETCH_OBJ);
+        $sql = "SELECT * FROM portaria";
+        $sql = $this->db->query($sql);
+        return $sql->fetchAll(\PDO::FETCH_OBJ);
     }
     
     public function FiltrarLista($prazo){
@@ -65,15 +65,27 @@ class Portaria_Model extends Model{
 
     }      
 
-    public function updateDia($idPortaria, $dia){
+    public function updateDia($id_portaria, $dia){
             $sql = "UPDATE portaria SET dias_a_vencer =:dia WHERE id_portaria =:id";
             $sql = $this->db->prepare($sql);
-            $sql->bindValue(':id', $idPortaria);
+            $sql->bindValue(':id', $id_portaria);
             $sql->bindValue(':dia', $dia);
             $sql->execute();
             return $sql->fetchAll(\PDO::FETCH_OBJ);
 
     }      
+
+    public function filtrarNaData($dataInicial, $dataFinal){
+            $sql = "SELECT * FROM portaria WHERE data_final BETWEEN :dtInicial AND :dtFinal";
+            $sql = $this->db->prepare($sql);
+            $sql->bindValue(':dtInicial', $dataInicial);
+            $sql->bindValue(':dtFinal', $dataFinal);
+            $sql->execute();
+            return $sql->fetchAll(\PDO::FETCH_OBJ);
+
+    }      
+
+    
 
     //Usado para o formulário de editar e função de excluir da lista
     public function GetId($id_portaria){
@@ -86,30 +98,32 @@ class Portaria_Model extends Model{
     
     
 
-    public function InsertEditar($comando, $tabela, $filtro, $id_portaria, $id_processo, $numero_processo,  $numero, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user){
-
-        $sql = $comando." ".$tabela." SET id_portaria =:id_portaria, id_processo =:id_processo, numero_processo =:numero_processo, numero =:numero, data_elaboracao =:data_elaboracao, conteudo =:conteudo, data_publicacao =:data_publicacao, veiculo =:veiculo, prazo =:prazo, data_final =:data_final, dias_a_vencer =:dias_a_vencer, data_realizada =:data_realizada, prazo_atendido =:prazo_atendido, observacao =:observacao, anexo =:anexo, user =:user
-        ".$filtro;
-    
-        $sql = $this->db->prepare($sql);
-        $sql->bindValue(":id_portaria", $id_portaria); 
-        $sql->bindValue(":id_processo", $id_processo); 
-        $sql->bindValue(":numero_processo", $numero_processo);
-        $sql->bindValue(":numero", $numero);
-        $sql->bindValue(":data_elaboracao", $data_elaboracao);
-        $sql->bindValue(":conteudo", $conteudo);
-        $sql->bindValue(":data_publicacao", $data_publicacao);
-        $sql->bindValue(":veiculo", $veiculo);
-        $sql->bindValue(":prazo", $prazo);
-        $sql->bindValue(":data_final", $data_final);
-        $sql->bindValue(":dias_a_vencer", $dias_a_vencer);
-        $sql->bindValue(":data_realizada", $data_realizada);
-        $sql->bindValue(":prazo_atendido", $prazo_atendido);
-        $sql->bindValue(":observacao", $observacao);
-        $sql->bindValue(":anexo", $anexo);
-        $sql->bindValue(":user", $user);
-        $sql->execute();
-      
+    public function InsertEditar($comando, $filtro, $id_portaria, $tabela, $id_processo, $numero_processo, $numero, $tipo, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user){
+        if($this->ExistePortaria($tabela, $id_processo, $numero_processo, $numero)){
+            $sql = $comando." ".$tabela." SET id_portaria =:id_portaria, id_processo =:id_processo, numero_processo =:numero_processo, numero =:numero, data_elaboracao =:data_elaboracao, conteudo =:conteudo, data_publicacao =:data_publicacao, veiculo =:veiculo, prazo =:prazo, data_final =:data_final, dias_a_vencer =:dias_a_vencer, data_realizada =:data_realizada, prazo_atendido =:prazo_atendido, observacao =:observacao, anexo =:anexo, user =:user
+            ".$filtro;
+            $sql = $this->db->prepare($sql);
+            $sql->bindValue(":id_portaria", $id_portaria); 
+            $sql->bindValue(":id_processo", $id_processo); 
+            $sql->bindValue(":numero_processo", $numero_processo);
+            $sql->bindValue(":numero", $numero);
+            $sql->bindValue(":data_elaboracao", $data_elaboracao);
+            $sql->bindValue(":conteudo", $conteudo);
+            $sql->bindValue(":data_publicacao", $data_publicacao);
+            $sql->bindValue(":veiculo", $veiculo);
+            $sql->bindValue(":prazo", $prazo);
+            $sql->bindValue(":data_final", $data_final);
+            $sql->bindValue(":dias_a_vencer", $dias_a_vencer);
+            $sql->bindValue(":data_realizada", $data_realizada);
+            $sql->bindValue(":prazo_atendido", $prazo_atendido);
+            $sql->bindValue(":observacao", $observacao);
+            $sql->bindValue(":anexo", $anexo);
+            $sql->bindValue(":user", $user);
+            $sql->execute();
+        }else{
+            return $sql = $this->ExistePortaria($tabela, $id_processo, $numero_processo, $numero);
+        }
+     
     }
 
     public function Deletar($id_portaria){
@@ -119,16 +133,19 @@ class Portaria_Model extends Model{
             $sql->execute();
     }
 
-    private function ExisteProcesso($tabela, $numero){
-        $sql = "SELECT * FROM ". $tabela ." WHERE numero = :num";
+    private function ExistePortaria($tabela, $id_processo, $numero_processo, $numero){
+        $sql = "SELECT * FROM ". $tabela ." WHERE numero =:num, id_processo =:id, numero =:numero, numero_processo =:num_proc ";
         $sql = $this->db->prepare($sql);
         $sql->bindValue(':num', $numero);
+        $sql->bindValue(':id', $id_processo);
+        $sql->bindValue(':numero', $numero);
+        $sql->bindValue(':num_proc', $numero_processo);
         $sql->execute();
         
         if($sql->rowCount() > 0){
             return true;
         }else{
-            return false;
+            return $sql->fetchAll(\PDO::FETCH_OBJ);
         }
     }
 }

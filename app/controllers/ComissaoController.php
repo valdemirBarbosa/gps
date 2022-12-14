@@ -8,6 +8,7 @@ use DateTime;
 
 class ComissaoController extends Controller{
    public function index(){
+
         $comissao = new Comissao_Model();
         $dados["dados"] = $comissao->lista();
         $dados["view"] = "comissao/Index";
@@ -36,12 +37,18 @@ class ComissaoController extends Controller{
       
 
 //Não alterar mais este método. Já está funcionando corretamente
-   public function Pesquisar(){
-     $id_denuncia = $_POST["id_denuncia"];
-     $denuncias = new Denuncia_Model();
-     $denunciados = new Denuncia_Model();
-     $dados["denuncia"] = $denuncias->Denuncias($id_denuncia);
-     $dados["denunciado"] = $denunciados->Denunciados($id_denuncia);
+   public function Consulta(){
+     $dados = $_POST['pesquisa'];
+     if($dados == 1){
+         $parametro = 'nome';
+     }
+
+     if($dados == 3){
+         $parametro = 'numero';
+     }
+
+     $comissao = new Comissao_Model();
+     $dados["dados"] = $comissao->Consulta($numero);
      $dados["view"] = "denuncia/Index";
      $this->load("template", $dados);
   }

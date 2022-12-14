@@ -16,10 +16,10 @@
 		<fieldset>
 			<legend>Informações da Portaria</legend>
 				<label>Tipo</label>
-					<input name="txt_tipo" type="text" placeholder="tipo da portaria" required autofocus>
+					<input name="txt_tipo" readonly type="text" placeholder="tipo da portaria">
 
 				<label>Número da Portaria</label>
-					<input name="txt_numero" type="number" placeholder="Insira o  Número da Portaria" required>
+					<input name="txt_numero" type="number" autofocus placeholder="Insira o  Número da Portaria" required>
 				
 				<label>Data de elaboracao</label>
 					<input name="txt_data_elaboracao" type="date" required>
@@ -31,7 +31,7 @@
 					<input name="txt_veículo" type="text" placeholder="veículo da publicação" required>
 									
 				<label>Prazo</label>
-					<input name="txt_prazo" min="1" type="number" placeholder="Prazo para cumprimento em dias" required>
+					<input name="txt_prazo" min="1" type="number" placeholder="qtd dias p/ encerrar" required>
 
 					<br/>
 	

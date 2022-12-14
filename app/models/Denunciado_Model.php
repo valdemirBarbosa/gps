@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models;
 use app\core\Model;
 use JetBrains\PhpStorm\Internal\ReturnTypeContract;
@@ -53,25 +52,23 @@ class Denunciado_Model  extends Model{
         
     }
 
-    public function Inserir($id_servidor, $id_denuncia, $data_inclusao, $user){
-        $sql = "INSERT INTO denunciados SET id_servidor =:id_servidor, id_denuncia =:id_denuncia, data_inclusao =:data_inclusao, user =:user";
-    
+    public function Inserir($id_servidor, $id_denuncia, $data_inclusao, $user, $data_fechamento){
         if($this->existe($id_servidor, $id_denuncia) == false){
+            $sql = "INSERT INTO denunciados SET id_servidor =:id_servidor, id_denuncia =:id_denuncia, data_inclusao =:data_inclusao, user =:user";
             $sql = $this->db->prepare($sql);
             $sql->bindValue(":id_servidor", $id_servidor);
             $sql->bindValue(":id_denuncia", $id_denuncia);
             $sql->bindValue(":data_inclusao", $data_inclusao);
             $sql->bindValue(":user", $user);
             $sql->execute();
-            return true;
          }else{
             return false;
          }
+
     }
 
     public function Editar($id_denunciado, $id_denuncia, $id_servidor, $matricula, $nome_provisorio, $vinculo, $secretaria, $unidade, $observacao){
         $sql = "UPDATE denunciado SET id_denunciado = :id, id_denuncia = :id_denuncia, id_servidor = :id_servidor, matricula = :Matricula, vinculo_d = :Vinculo, secretaria_d = :Secretaria, unidade_d = :Unidade WHERE id_denunciado = :id";
-   
             $sql = $this->db->prepare($sql);
             $sql->bindValue(":id", $id_denunciado);
             $sql->bindValue(":id_denuncia", $id_denuncia);
@@ -83,20 +80,28 @@ class Denunciado_Model  extends Model{
             $sql->bindValue(":observacao", $observacao);
             $sql->execute();
         }
+        
+        public function EncerrarDenunciados($id_denunciado, $data_Final){
+            $sql = "UPDATE denunciado SET data_fechamento = :data_fechamento WHERE id_denunciado = :id";
+            $sql = $this->db->prepare($sql);
+            $sql->bindValue(":id", $id_denunciado);
+            $sql->bindValue(":data_fechamento", $data_Final);
+            $sql->execute();
+        }
 
-    public function EncerrarDenunciado($id_denuncia, $id_denunciado, $data_fechamento_no_denunciado){
-        $sql = "UPDATE denunciados SET data_fechamento =:data_fechamento WHERE id_denuncia =:id_denuncia AND id_denunciado =:id_denunciado";
-        $sql = $this->db->prepare($sql);
+       public function EncerrarDenunciado($id_denuncia, $id_denunciado, $data_fechamento_no_denunciado){
+            $sql = "UPDATE denunciados SET data_fechamento =:data_fechamento WHERE id_denuncia =:id_denuncia AND id_denunciado =:id_denunciado";
+            $sql = $this->db->prepare($sql);
             $sql->bindValue(":id_denuncia", $id_denuncia);
             $sql->bindValue(":id_denunciado", $id_denunciado);
             $sql->bindValue(":data_fechamento", $data_fechamento_no_denunciado);
             $sql->execute();
         }
 
-    public function Deletar($id_denunciado){
-        $tabela = "denunciado";
-        $sql = "DELETE FROM ". $tabela ." WHERE id_denunciado = :id";
-    
+       public function Deletar($id_denunciado){
+            $tabela = "denunciado";
+            $sql = "DELETE FROM ". $tabela ." WHERE id_denunciado = :id";
+
         if($this->existe($id_denunciado, $tabela)){
             $sql = $this->db->prepare($sql);
             $sql->bindValue(":id", $id_denunciado);
@@ -147,7 +152,6 @@ class Denunciado_Model  extends Model{
         $sql->bindValue(':id_servidor', $id_servidor);
         $sql->bindValue(':id_denuncia', $id_denuncia);
         $sql->execute();
-        
         if($sql->rowCount() > 0){
             return true;
         }else{

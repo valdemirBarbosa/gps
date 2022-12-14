@@ -7,44 +7,53 @@
 
 <div class="pai">  
 	<div class="filho1">  
-		<form method="POST" action="<?php echo URL_BASE . 'Certidao/cnp'; ?>" >
+		<form method="GET" action="<?php echo URL_BASE . 'CertidaoNew/cnp'; ?>" >
 				<label>Pesquisa</label>
 					<label>CPF</label>
-						<input autofocus type="number" name="cpf" value="">
+						<input autofocus type="number" name="cpf">
 						<input type="submit" value="Gerar Atestado">
+
 		</form>
 
-</div>
-</div>
-</div>
-	<?php 
-		if(isset($dados)){
-			foreach ($dados as $certidao){
-
-?>
-			<div class='margemCertidao'> 
-				<div class="cabecahoCertidao">
-					<!--<img width='600' height='50' src ='" . URL_BASE . "assets/img/logoMaio2021.jpg'>  -->
-					<img width='700' height='50' src ='<?php echo  URL_BASE . "assets/img/logoMaio2021.jpg" ?>'>";
-
-					<br><br><h3>Secretaria de Administração
-					<br><p>Comissão Permanente de Sindicância e Processos Administrativo Discliplinares
-					</p></h3>
-					
-					<br><br><br><br><h2>Atestado</h2>
-		  		</div> <!-- Fim da div cabecalho da certidao -->
+<!--	****************** HTML ************************   // -->
 <?php
-				foreach ($certidao as $c){?>
 
-				<br><br><br><br>
-				<div class="CorpoTextoCertida">
-					Atestamos para os devidos fins que o(a) servidor(a) <?php echo $c[1] ." , CPF: ".$c[2] . $c[0]; ?> 
-				</div> <!-- Fim da div corpo do texto certidao -->
-<?php			} 
-			}
-		}
-		?>
+		$html1 = "<div class='margemCertidao'> 
+				<div class='cabecahoCertidao'>";
+		$logo = "<img width='792' height='90' src ='". URL_BASE . "assets/img/logoMaio2021.jpg'>";
 
-			</div> 
+		$html2 = "<br><br><h3>Secretaria de Administração
+				<br><p>Comissão Permanente de Sindicância e Processos Administrativo Discliplinares
+				</p></h3>
+								
+				<br><br><br><br><h2>Atestado</h2>
+				</div> <!-- Fim da div cabecalho da certidao -->";
 
+				if(isset($dadosCertidao)){
+					foreach ($dadosCertidao as $c){
+	/* 					print_r($dadosCertidao);
+	//					exit;
+	*/
+						$html3 = "<br>
+								<div class='corpoTextoCertidao'>
+								Atestamos para os devidos fins que o(a) servidor(a) "; 
+										
+						$html4 =  $dadosCertidao[0] . " CPF: " .$dadosCertidao[1] . $dadosCertidao[2];  
+								"</div> <!-- Fim da div corpo do texto certidao -->
+								</div>"; 
+								}
+						$html = $logo . $html1  . $html2 . $html3 . $html4;
+					}
+	 ?>
 
+	<form method="GET" action="<?php echo URL_BASE . 'Certidao/imprimir' ?>" >
+			<input type="submit" value="Imprimir">
+			<input type="hidden" name="html" value="<?php 
+														if(isset($html)){
+															echo $html;
+														}else{
+															exit;
+														}
+														 ?>" > 
+	</form>
+	

@@ -12,41 +12,45 @@ class CertidaoController extends Controller{
   
    //consulta servidor para cnp - certidão negativa ou positiva
   public function cnp(){
-     if(isset($_POST['cpf']) && !empty($_POST['cpf'])){
-          $cpf = addslashes($_POST['cpf']);
+     if(isset($_GET['cpf']) && !empty($_GET['cpf'])){
+          $cpf = addslashes($_GET['cpf']);
           $certidao = new Certidao_Model();
 
-          if($dados['dados'] = $certidao->certidao($cpf)){
-               foreach($dados as $d){
+          if($atesta['dados'] = $certidao->certidao($cpf)){
+               foreach($atesta as $d){
                     $nome = ($d[0]->nome_servidor);
                     $numeroCpf = ($d[0]->cpf);
-                    $certidao = " tem processo em andamento ";
-                $dados2['certidao'] = array($certidao, $nome, $cpf);
-               }
-          }else{
-               $dados['dados'] = $certidao->pegarNome($cpf);
-               foreach($dados as $d){
-                    $nome = ($d[0]->nome_servidor);
-                    $numeroCpf = ($d[0]->cpf);
-                    $certidao = " tem processo em andamento ";
-                $dados2['certidao'] = array($certidao, $nome, $cpf);
+                    $certifica = ", tem processo em andamento para ";
+                    $dados['dadosCertidao'] = array($nome, $numeroCpf, $certifica);
+               } //fim do foreach
+          }else{ // fim do segundo IF o if interno
+               $atesta['dados'] = $certidao->pegarNome($cpf);
+               foreach($atesta as $d){
+                    $nome = isset($d[0]->nome_servidor) ? ($d[0]->nome_servidor) : "";
+                    $numeroCpf = isset($d[0]->cpf) ? ($d[0]->cpf) : 0;
+                    $certifica = " <span class='atestado'>NÃO </span> tem nenhum Processo  ";
+                   $dados['dadosCertidao'] = array($nome, $numeroCpf, $certifica);
+               } // fim do foreach
+          } // fim do else
 
-               }
-          }
-               
-               $dados['dados'] = array($dados2);
-               $dados['view'] = "certidao/Index";
-               $this->load("template", $dados);
+          $dados["view"] = "certidao/index";
+          $this->load("template", $dados);
 
-             //  $html = $divMargemIni . $var0 . "<br><br><br>". $var1 . $var2 . $divMargemFim; 
-
-     }else{
+     }else{ //fim do primeiro IF
           echo "não funcionaou";
-     }
+     } // fim do último else
+} // fim do método cnp
 
-/*               $mpdf = new \Mpdf\Mpdf();
-              $mpdf->WriteHTML($html);
-              $mpdf->Output();
- */  }
-
-}       
+     public function imprimir(){
+          if(isset($_GET['html']) && !empty($_GET['html'])){
+               $html = $_GET['html'];
+               print_r($html);
+               exit;
+               
+               $mpdf = new \Mpdf\Mpdf();
+               $mpdf->WriteHTML($html);
+               $mpdf->Output();
+          }
+     } // fim do méto imprimir
+} // fim do controller
+ 

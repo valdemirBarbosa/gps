@@ -8,16 +8,37 @@
 	  	$view = "denuncia/Index";
 		$_SESSION['view'] = $view;
 	?>
-		<div class="paiDenuncia">
-		<div class="filho1Denuncia">
+		<div class="EditarDenuncia">
 
-				<legend>
-				<br>
+		<br>
+		<fieldset>
+		<legend>Documentação</legend>
+		<table>
+			<tr>
+				<th>numero documento</th>
+				<th>tipo documento</th>
+				<th>data de entrada</th>
+			</tr>
+			<tr>
+			<td><input autofocus type="text" value="<?php echo $denuncia->numero_documento ?>" name="numero"></td>
+				<td>						<select name="id_tipo_doc">
+							<option value="<?php echo $denuncia->id_tipo_documento ?>"> <?php echo $denuncia->tipo_de_documento ?> </option>
+								<?php foreach($tipo_doc as $doc){?>
+							<option> <?php echo $doc->tipo_de_documento ?> </option>
+							<?php }  ?>	
+						</select>
+				</td>
+				<td><input type="date" value="<?php echo $denuncia->data_entrada ?>"></td>
+			</tr>
+		</table>
+		</fieldset>		
+		
+		<fieldset>
 				<label>id:<?php echo $denuncia->id_denuncia ?></label>
 				<input name="txt_id" type="hidden" value="<?php echo $denuncia->id_denuncia ?>">
 
 				<label>Narração dos fatos da denúncia</label>
-				<br/><textarea autofocus rows="1" cols="96" class="denuncia" name="txt_denuncia"><?php echo $denuncia->denuncia_fato ?></textarea>
+				<textarea autofocus rows="1" cols="96" class="denuncia" name="txt_denuncia"><?php echo $denuncia->denuncia_fato ?></textarea>
 				<br><br>
 							
 			<label>Denunciante</label>
@@ -27,7 +48,7 @@
 						<option value="<?php $den->id_denunciante  ?> "> <?php  echo $den->nome_denunciante. " - " .$den->id_denunciante  ?></option>
 					<?php }  ?>	
 			</select>
-			<br/><label>tipo de documento</label>
+			<label>tipo de documento</label>
 						<select name="id_tipo_doc">
 							<option value="<?php echo $denuncia->id_tipo_documento ?>"> <?php echo $denuncia->tipo_de_documento ?> </option>
 								<?php foreach($tipo_doc as $doc){?>
@@ -37,81 +58,23 @@
 
     		<label>Número</label>
 				<input name="txt_numero_documento" type="text" value="<?php echo $denuncia->numero_documento ?>"  >
-						<br>
-					<label for="dataMask">data de entrada</label>
+
+				<label for="dataMask">data de entrada</label>
 						<input id="dataMask" name="txt_data_entrada" value="<?php echo $denuncia->data_entrada?>" type="date" required>
 
 								<br>
 					<label>Denunciados</label>
-					<textarea rows="1" cols="67" name="txt_denunciados"><?php echo $denuncia->denunciados ?></textarea> <br/>
+					<textarea rows="1" cols="67" name="txt_denunciados"><?php echo $denuncia->denunciados ?></textarea> 
 
 					<label>Documentos anexados</label>
 					<textarea rows="1" cols="59" clas="areaDenuncia" name="txt_documentos_anexados"><?php echo $denuncia->documentos_anexados?></textarea> 
 						
-						<br/>
+						<br/><br/>
 						<label id="obs">observação</label> 
-						<textarea rows="1" cols="68" name="txt_observacao"><?php echo $denuncia->observacao?></textarea>
+						<textarea rows="1" cols="100" name="txt_observacao"><?php echo $denuncia->observacao?></textarea>
 
-		</div> <!-- fim da classe filho1Denuncia -->
+		</fieldset>		
 
-		<!-- ******************************************************************************************      -->
-		<div class="">		
-		<h2>Upload de arquivos</h2>
-				<div class="">
-					<div class="anexoFilho1">
-						<input type="file" name="arquivo">
-						<input type="hidden" name="view" value="<?php echo $view ?>">
-					</div>
-
-					<div class="">
-
-						<label for="descricao">descrição</label>
-						<input type="text" size="50" name="descricao">
-						<label for="data_inclusao">data inclusão</label>
-						<input type="text" name="data_inclusao" value="<?php echo date('d-m-Y H:m:s'); ?>">
-						<input size="100px" type="submit" value="Alterar" class="">
-
-
-						<!-- <input type="hidden" name="view" value="<?php //echo "denuncia/Edit/".$denuncia->id_denuncia  ?>"> -->
-					</div>
-					
-				</div>
-
-			<legend>Arquivos anexados</legend>
-			<table>
-				<tr>
-					<th>id</th>
-					<th>id do processo</th>
-					<th>arquivo</th>
-					<th>informações sobre</th>
-					<th>data inclusão</th>
-					<th>acao</th>
-				</tr>
-				
-				<?php if(isset($anexo)){
-					foreach($anexo as $a){?>
-				<tr>
-					<td><?php echo $a->id_upload?> </td>
-					<td><?php echo $a->id_denuncia?> </td>
-					<td><?php echo $a->arquivo?> </td>
-					<td><?php echo $a->descricao?> </td>
-					<td><?php echo $a->data_inclusao?> </td> 
-					<?php
-						$caminho = $a->caminho;
-						$arquivo = $a->arquivo;
-					?>
-		
-					<td> <!-- DOWNLOAD DE ARQUIVOS  !-->
-						<a href="<?php echo URL_BASE . 'downloads/?path='.$caminho.'&file='.$arquivo ?>"> baixar </a>
-					
-					</td>
-
-
-				</tr>
-				<?php } }?>
-			</table>
-			</div> <!-- fim da classe filho2Denuncia -->
-			</div> <!-- fim da classe paiDenuncia -->
 
 <!-- tabela de denunciados !--> 
 <fieldset>
@@ -123,7 +86,6 @@
 					<th>Nome</th>
 					<th>CPF</th>
 					<th>data inclusão</th>
-					<th colspan="2">acao</th>
 				</tr>
 				
 				<?php if(isset($denunciados)){
@@ -134,8 +96,6 @@
 					<td><?php echo $d->nome_servidor?> </td>
 					<td><?php echo $d->cpf?> </td>
 					<td><?php echo $d->data_inclusao?> </td> 
-					<td>Editar </td> 
-					<td>Excluir </td> 
 		
 				</tr>
 				<?php } }?>

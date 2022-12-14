@@ -1,43 +1,194 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form method="POST" enctype="multipart/form-data" action="<?php echo  URL_BASE . "Upload/recebedor" ?>">
-
 		<?php 
-        $view = "upload/index"; 
+        //$view = "denuncia/index"; 
+        $id_denuncia = isset($_GET['id_denuncia']) ? $_GET['id_denuncia'] : 0;
+        $id_fase = isset($_GET['id_fase']) ? $_GET['id_fase'] : 0;
+        $id_processo = isset($_GET['id_processo']) ? $_GET['id_processo'] : 0;
+      //  exit;
+
+
+        if(isset($id_denuncia) && $id_denuncia > 0){
+            
+            echo '<div class="base-home">
+		    <h1 class="titulo-pagina">Denúncia - upload</h1>
+    	    </div>';
     ?>
-       <input type="file" name="arquivo"><br/><br/>
-       <input type="text" name="descricao" required><br/><br/>
-       <input type="submit" name="ENVIAR">
-       <input type="hidden" name="view" value="<?php echo $view ?>">
+
+    <!-- Formulário com os dados da denúncia onde serão anexados os arquivos -->
+		<div class="EditarDenuncia">
+
+		<br>
+		<fieldset>
+		<legend>Dados da denuncia</legend>
+		<table>
+			<tr>
+				<th>numero documento</th>
+				<th>tipo documento</th>
+				<th>data de entrada</th>
+			</tr>
+
+            <tr>
+			<td><input type="text" value="<?php echo $denuncia->numero_documento ?>" name="numero"></td>
+			<td>	<label>tipo documento </label>
+						<input value="<?php echo $denuncia->tipo_de_documento ?>" >
+				</td>
+				<td><input type="date" value="<?php echo $denuncia->data_entrada ?>"></td>
+			</tr>   
+		</table>
+
+        <!-- Formulário para  upload -->
+       <form class="upload" method="POST" enctype="multipart/form-data" action="<?php echo  URL_BASE . "Upload/recebedor" ?>">
+            <fieldset><legend>Upload de arquivo</legend>
+                <input type="file" name="arquivo">
+                <label>Descrição do arquivo</label>
+                <input class="descricao" type="text" autofocus name="descricao" required>
+                <input type="submit" name="Anexar" value="Anexar">
+                <input type="hidden" name="view" value="<?php echo $view ?>">
+                <input type="hidden" name="id_denuncia" value="<?php echo $id_denuncia ?>">
+            </fieldset>
+        <br><br>
+       </form>
+
+<?php
+    if(isset($arquivo)){?>
+       <form method="POST" action="<?php echo  URL_BASE . "Upload/excluir" ?>">
+            <fieldset>
+                <legend>Arquivos anexados</legend>
+                    <table>
+                        <tr>
+                            <th>Id</th>
+                            <th>Arquivo</th>
+                            <th>Descrição</th>
+                            <th>data inclusão</th>
+                            <th colspan="2">Ação</th>
+                        </tr>
+                        <?php
+                            foreach($arquivo as $arq){
+                        ?>
+                            <tr>
+                                <td><?php echo  $arq->id_upload  ?></td>
+                                <td><?php echo  $arq->arquivo  ?></td>
+                                <td><?php echo  $arq->descricao  ?></td>
+                                <td><?php echo  date("d/m/Y", strtotime($arq->data_inclusao)) ?></td>
+
+		                <!-- DOWNLOAD DE ARQUIVOS  !-->
+                        <?php
+                            $caminho = $arq->caminho;
+                            $arquivo = $arq->arquivo;
+                        ?>
+
+                        <td> 
+                            <a href="<?php echo URL_BASE . 'downloads/?path='.$caminho.'&file='.$arquivo ?>"></a> baixar </a>
+<!-- <a href="../../uploads/arquivos/&file='$arquivo'" download="c:/relatorio.pdf"></a> baixar </a> -->
+    					</td>
+                        <td><input type="submit" value="Excluir"></td>
+                            <input type="hidden" name="id_denuncia" value="<?php echo $id_denuncia ?>">
+                            <input type="hidden" name="id_upload" value="<?php echo $arq->id_upload ?>">
+                    </tr>
+                    <?php } ?>
+                </table>
+            </fieldset>
 
 
-
-    </form>
-
-    <div class="upload">
-    <?php
-        if(isset($arq)){
-            foreach($arq as $aq){
-            }
-
-        echo "<br/>Arquivo enviado com sucesso, dados abaixo: <br/>";
-        print_r($aq);
-        echo "<br/>";
-       
-
-
-//A última alteração foi a mudança do colchete do if da linha 20 para a linah 33
-        }
-
+        <?php }
+        
         ?>
-        </div>
+        
+            </fieldset>
 
-</body>
-</html>
+<?php
+
+        }else{
+            echo '<div class="base-home">
+		    <h1 class="titulo-pagina">Processo - upload</h1>
+    	    </div>';
+            
+        echo "<br><br>";
+?>
+ <!-- Formulário com os dados do processo onde serão anexados os arquivos -->
+    <div class="EditarDenuncia">
+
+<br>
+<fieldset>
+<legend>Dados do Processo</legend>
+<table>
+    <tr>
+        <th>numero do proceso</th>
+        <th>fase</th>
+        <th>data de entrada</th>
+    </tr>
+
+    <?php 
+        if(isset($processo)){
+            foreach($processo as $p){}
+        }
+    ?>
+    <tr>
+    <td><input type="text" value="<?php echo $p->numero_processo ?>" name="numero"></td>
+    <td>	<label>fase</label>
+                <input value="<?php echo $p->fase ?>" >
+        </td>
+        <td><input type="date" value="<?php echo $p->data_instauracao ?>"></td>
+    </tr>   
+</table>
+
+<!-- Formulário para  upload -->
+<form class="upload" method="POST" enctype="multipart/form-data" action="<?php echo  URL_BASE . "Upload/recebedor" ?>">
+    <fieldset><legend>Upload de arquivo</legend>
+        <input type="file" name="arquivo">
+        <label>Descrição do arquivo</label>
+        <input class="descricao" type="text" autofocus name="descricao" required>
+        <input type="submit" name="Anexar" value="Anexar">
+        <input type="hidden" name="view" value="<?php echo $view ?>">
+        <input type="hidden" name="id_processo" value="<?php echo $id_processo ?>">
+        <input type="hidden" name="id_fase" value="<?php echo $id_fase ?>">
+    </fieldset>
+<br><br>
+</form>
+
+<?php
+if(isset($arquivo)){?>
+<form method="POST" action="<?php echo  URL_BASE . "Upload/excluir" ?>">
+    <fieldset>
+        <legend>Arquivos anexados</legend>
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Arquivo</th>
+                    <th>Descrição</th>
+                    <th>data inclusão</th>
+                    <th colspan="2">Ação</th>
+                </tr>
+                <?php
+                    foreach($arquivo as $arq){
+                ?>
+                    <tr>
+                        <td><?php echo  $arq->id_upload  ?></td>
+                        <td><?php echo  $arq->arquivo  ?></td>
+                        <td><?php echo  $arq->descricao  ?></td>
+                        <td><?php echo  date("d/m/Y", strtotime($arq->data_inclusao)) ?></td>
+
+                <!-- DOWNLOAD DE ARQUIVOS  !-->
+                <?php
+                    $caminho = $arq->caminho;
+                    $arquivo = $arq->arquivo;
+                ?>
+
+                <td> 
+                    <a href="<?php echo URL_BASE . 'downloads/?path='.$caminho.'&file='.$arquivo ?>"> baixar </a>
+                </td>
+                <td><input type="submit" value="Excluir"></td>
+                    <input type="hidden" name="id_processo" value="<?php echo $id_id_processo ?>">
+                    <input type="hidden" name="id_upload" value="<?php echo $arq->id_upload ?>">
+            </tr>
+            <?php } ?>
+        </table>
+    </fieldset>
+
+
+<?php }
+        }
+    
+
+?>
+
+    </fieldset>

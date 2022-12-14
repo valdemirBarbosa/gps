@@ -8,10 +8,6 @@ use app\models\Denunciado_Model;
 use app\models\PesquisaController;
 use DateTime;
 
-if(session_start() == false){
-     session_start();
-}
-
 class DenunciarController extends Controller{
    public function index(){
     
@@ -42,16 +38,14 @@ class DenunciarController extends Controller{
      }
   }
      //Pesquisa para tabela de processo    
-    public function ConsultaDenunciados(){
+    public function ConsultaDenunciados($numero_documento){
+        echo $numero_documento;
+        exit;
+        
      $id_denuncia = $_GET['id_denuncia'];
-     print_r($id_denuncia);
-     exit;
-     
+
           $listaDenunciados = new Denunciado_Model();
           $dados['denunciado'] = $listaDenunciados->getDenunciado($id_denuncia);
-        
-          print_r($sql);
-          exit;
 
         $parametrosPesquisa = $this->pegarDadosDoUsuario();
         
@@ -161,7 +155,6 @@ public function porParametro(){
 
 //INCLUIR VIA UPDATE NA TABELA DE PROCESSO PELO ID_SERVIDOR
 public function incluir(){
-
           $id_servidor = $_GET['id_servidor'];
           $id_denuncia = $_SESSION['id_denuncia'];
 
@@ -170,7 +163,9 @@ public function incluir(){
           $user = isset($_SESSION['user']) ? $_SESSION['user'] : 0; 
 
           $incluirServidor = new Denunciado_Model();
-          $incluirServidor->Inserir($id_servidor, $id_denuncia, $data_inclusao, $user);
+          $r = array($id_servidor, $id_denuncia, $data_inclusao, $user);
+
+          $incluirServidor->Inserir($id_servidor, $id_denuncia, $data_inclusao, $user, $data_fechamento="0000-00-00");
      
           $listaDenunciados = new Denunciado_Model();
           $dados['denunciado'] = $listaDenunciados->getDenunciado($id_denuncia);

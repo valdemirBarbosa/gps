@@ -13,7 +13,6 @@ class MensageiroController extends Controller{
 }
 
     public function Error($msg){
-        $funcao = "função Error";
         $viewData2 = $msg; 
         $dados["view"] = "mensageiro/erro";
         $this->load("template", $dados, $viewData2);

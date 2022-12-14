@@ -26,14 +26,24 @@ class Processado_Model extends Model{
     //incluir servidor na tabela de processados se ainda não estiver - vindo do processar controller
     public function IncluirServProcesso($id_denuncia, $id_denunciado, $numero_processo, $data_instauracao){
         if($this->VerSeExisteProcessado($id_denuncia, $id_denunciado) == false){
-            $sql = "INSERT INTO processados SET id_denuncia =:id_denuncia, id_denunciado =:id_denunciado, numero_processo =:numero_processo, data_instauracao =:data_inclusao";
+            echo "processado_MODEL incluirServProcesso. Não encontrou na tabela de processados. Pronto pra incluir<br>";
+     //       exit;
+            
+//            $sql = "INSERT INTO processados SET id_denuncia =:id_denuncia, id_denunciado =:id_denunciado, numero_processo =:numero_processo, data_instauracao =:data_inclusao";
+            $sql = "INSERT INTO processados (id_denuncia, id_denunciado, numero_processo, data_instauracao) VALUES (:id_denuncia, :id_denunciado, :numero_processo, :data_inclusao)";
+            echo "Data instauração do parâmentro do IncluirServProcesso - processado_MODEL l 34 ".$data_instauracao."<br>";
+
             $sql = $this->db->prepare($sql);
             $sql->bindValue(":id_denuncia", $id_denuncia);
             $sql->bindValue(":id_denunciado", $id_denunciado);
             $sql->bindValue(":numero_processo", $numero_processo);
             $sql->bindValue(":data_inclusao", $data_instauracao);
+       
+            echo "<br>Parei aqui no Processado_Model. Linha 39<br>";
+            print_r($sql);
+
             $sql->execute();
-            return true; //$sql->fetchAll(\PDO::FETCH_OBJ);
+            return true;
         }else{
             return false;
         }
@@ -41,7 +51,7 @@ class Processado_Model extends Model{
 
 // 21/07/2022
     public function VerSeExisteProcessado($id_denuncia, $id_denunciado){
-        $sql = "SELECT * FROM processados as p
+        $sql = "SELECT p.id_denuncia, p.id_denunciado, p.id_processado, s.nome_servidor, p.numero_processo FROM processados as p
                       INNER JOIN denunciados as d 
                       ON p.id_denuncia = d.id_denuncia
                       INNER JOIN servidor as s
@@ -97,6 +107,19 @@ $sql = $this->db->prepare($sql);
    
     }
 
+    public function ConsultarServidorProcesso($id_servidor){
+        $sql = "SELECT * FROM processados as p 
+        INNER JOIN denunciados as d ON 
+                p.id_denunciado = d.id_denunciado 
+                INNER JOIN servidor as s 
+                ON s.id_servidor = d.id_servidor 
+                WHERE s.id_servidor = $id_servidor";
+        $sql = $this->db->prepare($sql);
+        $sql->execute();
+        return $sql->fetchAll();
+   
+    }
+
     public function Deletar($id_processado){
         $id = $id_processado;
         $processados = 'processados';
@@ -123,5 +146,27 @@ $sql = $this->db->prepare($sql);
         }
     }
 
+    public function EncerrarProcessado($id_processado, $data_Final){
+        if($this->verDtFimProcessado($id_processado)){
+            $sql = "UPDATE processados SET data_encerramento =':dt' WHERE id_processado =:id";
+            $sql = $this->db->prepare($sql);
+            $sql->bindValue(':id', $id_processado);
+            $sql->bindValue(':dt', $data_Final);
+            $sql->execute();
 
+        }
+    }
+
+    public function verDtFimProcessado($id_processado){
+        $sql = "SELECT * FROM processados WHERE id_processado =:id_p AND data_encerramento IS NULL OR data_encerramento = 0";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":id_p", $id_processado);
+        $sql->execute();
+        if($sql->rowCount() > 0){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
 }

@@ -15,7 +15,7 @@ class CalcularDatas{
       $dias = $calc / (60*60*24);
 
       if($dias < 0){
-         $dias * (-1);
+         //$dias * (-1);
       }
       return $dias;
    }

@@ -17,11 +17,11 @@
 	<!-- início da classe css id_denuncia  -->
 		<div class="">  		
 				<?php
-					if(isset($_GET['id'])){?>
+					if(isset($_GET['id_den'])){?>
  						<?php 
-						 	$id = addslashes($_GET['id']);
-							echo "<span class='spanTitulo'>Identificador da denúncia: $id</span>"; ?> 
-						<input name="txt_id_denuncia" type="number" hidden value="<?php echo $id ?>">
+						 	$id_denuncia = addslashes($_GET['id_den']);
+							echo "<span class='spanTitulo'>Identificador da denúncia: $id_denuncia</span>"; ?> 
+						<input name="txt_id_denuncia" type="hidden" value="<?php echo $id_denuncia ?>">
 
 					<?php } ?> 
 						 <input name='view' hidden type='text' value="<?php echo $view ?>" >

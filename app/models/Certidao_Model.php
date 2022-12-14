@@ -13,13 +13,12 @@ class Certidao_Model extends Model{
         $sql = "SELECT * FROM servidor as s
                 INNER JOIN denunciados as d
                 ON s.id_servidor = d.id_servidor 
-                LEFT JOIN processados as p
+                INNER JOIN processados as p
                 ON d.id_denunciado = p.id_denunciado
                 WHERE s.cpf = :cpf";
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":cpf", $cpf);
         $sql->execute();
-
         if($sql->rowCount() > 0 )
             return $sql->fetchAll(\PDO::FETCH_OBJ);
     }

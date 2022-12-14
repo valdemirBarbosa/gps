@@ -8,7 +8,7 @@ class Denuncia_Model extends Model{
         parent::__construct();
     }
 
-    public function lista(){
+     public function lista(){
         $sql = "SELECT * FROM denuncia as d LEFT JOIN denunciante as den ON d.id_denunciante = den.id_denunciante LEFT JOIN tipo_documento as t ON d.tipo_documento = t.id_tipo_documento";
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
@@ -35,7 +35,7 @@ class Denuncia_Model extends Model{
     }      
 
 
-    public function  getEditar($id_denuncia){
+    public function getEditar($id_denuncia){
         $ret = array();
         $sql = "SELECT * FROM denuncia as d 
         INNER JOIN 
@@ -62,6 +62,23 @@ class Denuncia_Model extends Model{
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
+    public function Incluir($id_denunciante, $denuncia, $tipo_documento, $numero_documento, $data_entrada, $denunciados, $observacao, $doc_anexo, $data_digitacao, $user){
+       if($this->ExisteDenuncia($numero_documento, $tipo_documento) == false){
+             $sql = "INSERT INTO denuncia (id_denuncia, id_denunciante, denuncia_fato, tipo_documento, numero_documento, data_entrada, denunciados, observacao, documentos_anexados, data_digitacao, user) 
+             VALUES (NULL, $id_denunciante, '$denuncia', $tipo_documento, '$numero_documento', '$data_entrada', '$denunciados', '$observacao', '$doc_anexo', '$data_digitacao', $user)";
+  
+  
+            $sql = $this->db->prepare($sql);
+                $sql->execute();
+                return true;
+            }else{
+                return false;
+            }
+    
+    }
+
+
+    /*
         public function Incluir($denuncia, $id_denunciante, $tipo_documento, $numero_documento, $denunciados, $data_entrada, $observacao, $doc_anexo, $anexo, $user){
             if($this->ExisteDenuncia($numero_documento, $tipo_documento) == false){
                 try {
@@ -86,6 +103,7 @@ class Denuncia_Model extends Model{
             }
         }
     }
+*/
 
     public function Editar($id_denuncia, $denuncia, $id_denunciante, $tipo_documento, $numero_documento, $denunciados, $data_entrada, $observacao, $doc_anexo){
         $sql = "UPDATE denuncia SET denuncia_fato = :denuncias, id_denunciante = :id_denunciante, tipo_documento =:tipo_documento, numero_documento = :numero_documento, denunciados = :denunciados, data_entrada = :data_entrada, observacao = :observacao, documentos_anexados = :doc WHERE id_denuncia = :id_denuncia";

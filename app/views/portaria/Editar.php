@@ -43,10 +43,7 @@
 					<input name="txt_prazo" type="number" value="<?php echo $port->prazo ?>">
 
 				<br/><br/>
-				<label>Data final</label>
-					<input name="txt_data_final" type="date" value="<?php echo $port->data_final ?>">
-
-				<label>Data realizada</label>
+				<label>Data efetivação</label>
 					<input name="txt_data_realizada" type="date" value="<?php echo $port->data_realizada ?>">
 
 				<label>Prazo atendido</label>

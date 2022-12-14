@@ -14,6 +14,13 @@ class Denunciante_Model  extends Model{
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
+    
+    public function listaAtivos(){    
+        $sql = "SELECT * FROM denunciante WHERE ativo = 1";
+        $qry = $this->db->query($sql);
+        return $qry->fetchAll(\PDO::FETCH_OBJ);
+      
+    }
 
     public function getDenunciante($id_denunciante){
         $ret = array();
@@ -37,19 +44,23 @@ class Denunciante_Model  extends Model{
     }
 
     public function Inserir($nome_denunciante, $observacao){
-        $sql = "INSERT INTO denunciante SET nome_denunciante = :denunciante, observacaoDenunciante = :observacao";
-    
-        if($this->ExisteDenunciante($nome_denunciante)){
-            $sql = $this->db->prepare($sql);
-            $sql->bindValue(":denunciante", $nome_denunciante);
-            $sql->bindValue(":observacao", $observacao);
-            $sql->execute();
-         }
+            if($this->ExisteDenunciante($nome_denunciante)){
+                return false;
+            }else{
+                try{
+                    $sql = "INSERT INTO denunciante (nome_denunciante, observacaoDenunciante) VALUES (:denunciante, :observacao)";
+                    $sql = $this->db->prepare($sql);
+                    $sql->bindValue(":denunciante", $nome_denunciante);
+                    $sql->bindValue(":observacao", $observacao);
+                    $sql->execute();
+                    }catch(Exception $e){
+                        echo "Registro não foi incluído ".$e->getMessage();
+                    }
+            }
     }
 
     public function Editar($id_denunciante, $nome_denunciante, $observacao){
         $sql = "UPDATE denunciante SET id_denunciante =:id_denunciante, nome_denunciante = :nome_denunciante, observacaoDenunciante =:observacao WHERE id_denunciante =:id_denunciante";
-    
             $sql = $this->db->prepare($sql);
             $sql->bindValue(":id_denunciante", $id_denunciante);
             $sql->bindValue(":nome_denunciante", $nome_denunciante);
@@ -60,13 +71,16 @@ class Denunciante_Model  extends Model{
     public function Deletar($id_denunciante){
         $tabela = "denunciante";
         $campo = $id_denunciante;
-        $sql = "DELETE FROM ". $tabela ." WHERE id_denunciante = :id";
-    
         if($this->existeId($tabela , $campo)){
-            $sql = $this->db->prepare($sql);
-            $sql->bindValue(":id", $campo);
-            $sql->execute();
-            return true;
+            try{
+                $sql = "DELETE FROM ". $tabela ." WHERE id_denunciante = :id";
+                $sql = $this->db->prepare($sql);
+                $sql->bindValue(":id", $campo);
+                $sql->execute();
+                return true;
+            }catch(Exception $e){
+                echo "Registro não foi incluído ".$e->getMessage();
+            }        
         }else{
             return false;
         }
@@ -86,12 +100,10 @@ class Denunciante_Model  extends Model{
     }
 
     private function ExisteDenunciante($nome_denunciante){
-        $sql = "SELECT * FROM denunciante WHERE nome_denunciante = :nome";
+        $sql = "SELECT * FROM denunciante WHERE nome_denunciante =:nome";
         $sql = $this->db->prepare($sql);
         $sql->bindValue(':nome', $nome_denunciante);
-       
         $sql->execute();
-        
         if($sql->rowCount() > 0){
             return true;
         }else{

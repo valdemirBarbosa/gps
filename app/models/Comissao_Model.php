@@ -15,8 +15,11 @@ class Comissao_Model extends Model{
 
     }
 
-    public function _lista(){
-        $sql = "SELECT * FROM comissao_membros as cm INNER JOIN portaria_comissao_pad as pcp ON cm.id_portaria = pcp.id_portaria";
+    public function Consultar($numero){
+        $sql = "SELECT * FROM comissao_membros as cm 
+                INNER JOIN portaria_comissao_pad as p 
+                ON cm.id_portaria = p.id_portaria 
+                WHERE numero_portaria = $numero";
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }

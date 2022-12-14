@@ -10,10 +10,6 @@ use app\controllers\ProcessoController;
 
 use app\models\PesquisaController;
 
-if(session_start() == false){
-     session_start();
-}
-
 class ProcessarController extends Controller{
    public function index(){
         /* $denuncias = new Denuncia_Model();

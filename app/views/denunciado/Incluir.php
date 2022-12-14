@@ -4,7 +4,7 @@
 	}
 ?>
 <div class="base-home">
-			<h1 class="titulo"><span class="cor">Novo</span> cadastro Denunciado</h1>
+			<h1 class="titulo"><span class="cor">Novo  - cadastro de Denunciado</span></h1>
 		<div>	
 		
 				<table>
@@ -138,7 +138,6 @@
   <?php
 		   foreach($denunciado as $s){   
 			 $_SESSION['id_denunciado'] = $s->id_denunciado; 
-			 
 			?>
 
 			<tr class="cor1">
@@ -149,7 +148,9 @@
 				<td><?php echo $s->matricula  ?></td>
 				<td><?php echo $s->vinculo  ?></td>
 				<td><?php echo $s->secretaria  ?></td>
-				<td><?php echo $s->data_fechamento  ?></td>	
+				<td><?php $dtFecha = !empty($s->data_fechamento) ? $s->data_fechamento : "00/00/0000";
+				          echo $dtFecha ?></td>
+				
 				<td align="center">
 					<div class="btn-editar">
 						<a href="<?php echo URL_BASE ."servidor/Editar/".$s->id_servidor ?>" >Editar</a>
@@ -166,19 +167,19 @@
 			<!-- botões de inclusão dos denunciados em uma das fases do processo  -->
 				<td>
 					<div class="btn-editar">
-						<a href="<?php echo URL_BASE ."processo/novo/?f=1&id=".$d->id_denuncia."&id_dncd=".$s->id_denunciado?>">Preliminar</a>
+						<a href="<?php echo URL_BASE ."processo/novo/?f=1&id_den=".$d->id_denuncia."&id_dncd=".$s->id_denunciado?>">Preliminar</a>
 					</div>	
 				</td>
 
 				<td>
 					<div class="btn-editar"> 
-						<a href="<?php echo URL_BASE ."processo/novo/?f=2&id=".$d->id_denuncia."&id_dncd=".$s->id_denunciado ?>" >Sindicância</a>
+						<a href="<?php echo URL_BASE ."processo/novo/?f=2&id_den=".$d->id_denuncia."&id_dncd=".$s->id_denunciado ?>" >Sindicância</a>
 					</div>	
 				</td>
 
 				<td>
 					<div class="btn-editar"> 
-						<a href="<?php echo URL_BASE ."processo/novo/?f=3&id=".$d->id_denuncia."&id_dncd=".$s->id_denunciado ?>" >PAD</a>
+						<a href="<?php echo URL_BASE ."processo/novo/?f=3&id_den=".$d->id_denuncia."&id_dncd=".$s->id_denunciado ?>" >PAD</a>
 					</div>	
 				</td>
 

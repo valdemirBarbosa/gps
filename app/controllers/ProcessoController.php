@@ -10,12 +10,9 @@ use app\models\Upload_Model;
 use app\models\Denunciado_Model;
 use app\models\PesquisaControler;
 use app\Controllers\UploadController;
-use app\Controllers\MensageiroController;
+use app\Controllers\ErrorController;
 use app\models\Ocorrencia_Model;
 
-if(!isset($_SESSION)){
-     session_start();
-}
 
 class ProcessoController extends Controller{
     
@@ -23,59 +20,49 @@ class ProcessoController extends Controller{
         $processo = new Processo_Model();
         $dados["processo"] = $processo->lista();
         $dados["view"] = "processo/Index";
-        
         $this->load("template", $dados);
    }
 
    public function pp(){ //Seleciona de Processo tudo que for Processo Preliminar
-        $processo = new Processo_Model();
         $parametro = 1;
-        $_SESSION['tipoFase'] = $parametro;
-
-     /*    $_SESSION['tabela'] = $parametro;
-        $_SESSION['fase'] = $parametro;
-        $dados["fase"] = $parametro;
- */     $dados["processo"] = $processo->ProcessoFase($parametro);
-        $dados["view"] = "processo/Index";
-                  
-        $this->load("template", $dados);
+        $this->consultaProcessoIndex($parametro);
    }
-
-   public function sin(){ //Seleciona de Processo tudo que for Sindicância
-        $processo = new Processo_Model();
+   
+   public function sin(){ //Seleciona de Processo tudo que for Processo Preliminar
         $parametro = 2;
-        $_SESSION['tipoFase'] = $parametro;
-   /*      $_SESSION['tabela'] = $parametro;
-        $_SESSION['fase'] = $parametro;
-        $dados["fase"] = $parametro;
- */     $dados["processo"] = $processo->ProcessoFase($parametro);
-        $dados["view"] = "processo/Index";
+        $this->consultaProcessoIndex($parametro);
+   }
+   
+   public function pad(){ //Seleciona de Processo tudo que for Processo Preliminar
+        $parametro = 3;
+        $this->consultaProcessoIndex($parametro);
+   }
 
+   
+   public function consultaProcessoIndex($parametro){ //Seleciona de Processo tudo que for Sindicância
+        $processo = new Processo_Model();
+        $data_encerramento = "0000-00-00";
+        $dados["processo"] = $processo->ProcessoFaseMenu($parametro, $data_encerramento);
+        $dados["view"] = "processo/Index";
         $this->load("template", $dados);
    }
 
-   public function pad(){ //Seleciona de Processo tudo que for PAD - PROCESSO ADMINISTRATIVO
+   public function pads(){ //Seleciona de Processo tudo que for PAD - PROCESSO ADMINISTRATIVO
         $processo = new Processo_Model();
         $parametro = 3;
         $_SESSION['tipoFase'] = $parametro;
 
-    /*     $_SESSION['tabela'] = $parametro;
+        $_SESSION['tabela'] = $parametro;
         $_SESSION['fase'] = $parametro;
         $dados["fase"] = $parametro;
- */     $dados["processo"] = $processo->ProcessoFase($parametro);
+        $data_encerramento = "IS NULL";
+        
+        $dados["processo"] = $processo->ProcessoFase($parametro, $data_encerramento);
         $dados["view"] = "processo/Index";
-
         $this->load("template", $dados);
    }
   
-   //Função para acessar o view estudo de CSS Flex Box
-   public function estudo(){
-        $processo = new Processo_Model();
-        $dados["view"] = "estudo/home";
-        $this->load("template", $dados);
-   }
-
-   public function RetProcessar(){
+     public function RetProcessar(){
         $processo = new Processo_Model();
         $dados["view"] = "processo/ProcessarServidor";
         $this->load("template", $dados);
@@ -92,80 +79,68 @@ class ProcessoController extends Controller{
 //Função para salvar e direcionar ou para Editar ou para Incluir 
     public function Salvar(){
           $processo = new Processo_Model();
-          $id_processo = isset($_POST['txt_id_processo']) ? addslashes($_POST['txt_id_processo']) : 0;
-          $_SESSION['id'] = $id_processo; //vai ficar no session a chave id, pois lá na denúncia será id 
+          $id_processo = isset($_POST['txt_id_processo']) ? addslashes($_POST['txt_id_processo']) : NULL;
+          //$_SESSION['id'] = $id_processo; //vai ficar no session a chave id, pois lá na denúncia será id 
           $id_denuncia = addslashes($_POST['txt_id_denuncia']) ? addslashes($_POST['txt_id_denuncia']) : NULL;
-          
+
+      //  echo "id processo - salvar " . $id_processo;
+      //  exit;
+ 
           //POST veio da inclusão do servidor num processo. Pagina: denunciado/Novo/  serve para incluir na tabela denunciados
           $id_denunciado = isset($_POST['id_denunciado']) ? $_POST['id_denunciado'] : 0;  
               
           $id_fase = isset($_POST['txt_id_fase']) ? addslashes($_POST['txt_id_fase']) : NULL;
           $numero_processo = addslashes($_POST['txt_numero_processo']);
           $data_instauracao = isset($_POST['data_instauracao']) ? $_POST['data_instauracao'] : "";
+          $data_encerramento = "";
           $observacao = isset($_POST['txt_observacao']) ? addslashes($_POST['txt_observacao']) : "";
 
-          //dados para upload de arquivo
-          $descricao = isset($_POST['descricao']) ? addslashes($_POST['descricao']) : "";
-          $_SESSION['descricao'] = $descricao; //session usada para o upload do arquivo 
-          $data_inclusao = isset($_POST['data_inclusao']) ? addslashes($_POST['data_inclusao']) : "";
-          $d = $_SESSION['data_inclusao'] = $data_inclusao; //session usada para o upload do arquivo 
-          $data_encerramento = "0000/0000";
-          $anexo = "";
           $user = 1;
-         
-          //upload - anexar arquivo
-          if($arquivo = isset($_FILES['arquivo'])){
-               if(isset($arquivo['tmp_name']) && empty($arquivo['tmp_name']) == false){
-                       $arquivo = $_FILES['arquivo'];
-               }
-          
-          if($arquivo = $_FILES['arquivo']){
-               $_SESSION['id'] = $id_processo;
-               $_SESSION['id_faseUpload'] = $id_fase;
-               $upload = new UploadController();
-               $upload->recebedor(); 
-
-               //INCLUIR OCORRÊNCIA DE ANEXAR ARQUIVO NOS ANDAMENTOS	
-               $id_servico = 3;
-               $data_ocorrencia = date('Y/m/d');
-               $ocorrencia = "Arquivo anexado. Nome: ". $arquivo['name'] ."descrição: ".$descricao;
-               $user = 1;
-
-               $listaArquivos = new Upload_Model();
-               $dados["anexo"] = $listaArquivos->upLoaded($id_denuncia, $id_processo);
-          
-               $incluirNaOcorrencia = new Ocorrencia_Model();
-               $incluirNaOcorrencia->Incluir($id_processo, $numero_processo, $id_servico, $data_ocorrencia, $ocorrencia, $observacao, $anexo, $user);
-
-          }else{
-             echo "Problema para guardar arquivo ";
-             exit;
-          }
-     }      
-
+    
 //Verifica se será postado o "id" se sim será Edição, senão inclusão
      if($id_processo){
-          $processo->Editar($id_processo, $id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $anexo, $user, $descricao);
-     }else{
-          $processo->Incluir($id_denunciado, $id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $anexo, $user);
+          $processo->Editar($id_processo, $id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $data_encerramento, $user, $descricao);
+    //    echo "entrou pra editar processo<br> ";
+    //    exit;
      }
+     
+     if($id_processo == NULL){
+        //echo "entrou pra incluir processo e processadosl 156 <br> ";
+        //exit;     
+          $processo->Incluir($id_denuncia, $id_denunciado, $id_fase, $numero_processo, $data_instauracao, $data_encerramento, $observacao, $user);
           $this->incluirDenunciadoNoProcesso($id_denuncia, $id_denunciado, $numero_processo, $data_instauracao);
-
+     }else{
+          $this->incluirDenunciadoNoProcesso($id_denuncia, $id_denunciado, $numero_processo, $data_instauracao);
+        echo "entrou pra incluir somente processado, pois já existe processo cadastrado <br> ";
+        exit;
      }
+    }
 
+     // Após incluir os dados na tabela de processo vem pra este método incluir o denunciado na tabela de processados
      public function incluirDenunciadoNoProcesso($id_denuncia, $id_denunciado, $numero_processo, $data_instauracao){
           $processar = new Processado_Model();
-          if($processado = $processar->IncluirServProcesso($id_denuncia, $id_denunciado, $numero_processo, $data_instauracao)){
+          
+//      echo "entrou mo método (incluirDenunciadoNoProcesso) antes do if<br> ";
+ //       exit;
 
-               $fecharDenunciado = new Denunciado_Model();
+          if($processar->IncluirServProcesso($id_denuncia, $id_denunciado, $numero_processo, $data_instauracao)){
+            echo "<br>entrou mo método (incluirDenunciadoNoProcesso) ProcessoController, l175, depois do if. Ou seja, foi para o model incluir <br> ";
+
+
                // A data de fechamento da denúncia é a mesma da inclusão na tabela de processado
-               $data_fechamento_no_denunciado = $data_instauracao; 
-               $fechar = $fecharDenunciado->EncerrarDenunciado($id_denuncia, $id_denunciado, $data_fechamento_no_denunciado);
-               header("Location:". URL_BASE . "denucia");
+               $fecharDenunciado = new Denunciado_Model();
+               
+              echo "Vai fechar denunciado<br> ";
+
+
+               $data_fechamento_no_denunciado = $data_instauracao;
+               $fecharDenunciado->EncerrarDenunciado($id_denuncia, $id_denunciado, $data_fechamento_no_denunciado);
+               echo "Deve ter fechdo o denunciado<br>";
+               header("Location:". URL_BASE . "processo/index");
           }else{
                $processado = $processar->VerSeExisteProcessado($id_denuncia, $id_denunciado, $numero_processo, $data_instauracao);
-               foreach($processado as $p){
-                    $msg = "O(A) denunciado(a): ".$p->nome_servidor."já está incluído no processo";
+                foreach($processado as $p){
+                    $msg = "O(A) denunciado(a): ".$p->nome_servidor." - id da denuncia ".$p->id_denuncia." id do denunciado ".$p->id_denunciado." já está incluído no processo número ".$p->numero_processo;
                     $this->Error($msg);
                }
 
@@ -281,7 +256,6 @@ class ProcessoController extends Controller{
 
           $pesquisa = new Pesquisa_Model(); // Cria instancia do classe Pesquisa Model 
           $dados['paginacao'] = $pesquisa->PesquisaProcessadosContar($tabela, $campo, $informacao, $limit); // Pesquisa simples, mas com dados solicitados pelo usuario
-          $dados["view"] = "processo/processarServidor";
           $qtdeRegistros = count($dados['paginacao']); // Recebe a contagem de registros pela consulta acima
           $paginacao = $this->paginar($qtdeRegistros, $paginaAtual); //vai pra função pagina com já com algumas informações
           $offset = ($paginaAtual * $limit) - $limit;

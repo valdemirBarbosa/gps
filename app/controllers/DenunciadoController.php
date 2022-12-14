@@ -9,9 +9,8 @@ class DenunciadoController extends Controller{
     
    public function index(){
         $denunciados = new Denunciado_Model();
-        //$dados["denunciados"] = $denunciados->lista();
-        
-        $dados["view"] = "denunciado/index";
+        $dados["denunciados"] = $denunciados->lista();
+        $dados["view"] = "denunciado/Index";
         $this->load("template", $dados);
    } 
 
@@ -21,7 +20,6 @@ class DenunciadoController extends Controller{
 
      $denunciados = new Denunciado_Model();
      $dados['denunciado'] = $denunciados->getDenunciado($id_denuncia);
-
         $dados["view"] = "denunciado/Incluir";
         $this->load("template", $dados);
    }
@@ -36,7 +34,7 @@ class DenunciadoController extends Controller{
    public function Excluir($id_denunciado){
      $denunciados = new Denunciado_Model();
      $dados['denunciados'] = $denunciados->ExcluirDenunciado($id_denunciado);
-     $dados['view'] = "denuncia/index"; 
+     $dados['view'] = "denuncia/Index"; 
      $this->load("template", $dados);
  }
  

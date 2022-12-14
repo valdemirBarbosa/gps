@@ -16,15 +16,21 @@
 	<tr>
 	<td>
 		<label for="denuncianteLst" class="denunciante">Denunciante</label>
-			<select name="lst_id_denunciante" id="denuncianteLst" class="denuncianteLst">
+			<select autocomplete name="lst_id_denunciante" id="denuncianteLst" class="denuncianteLst">
 				<option>Selecione o denunciante</option>
 
-				<?php foreach($denunciante as $d){ ?>
+				<?php foreach($denunciante as $d){
+				 ?>
+				 
 				<option value="<?php echo $d->id_denunciante ?>" >
 					<?php echo $d->nome_denunciante  ?> 
 					
 				</option>
-				<?php } ?>	
+					
+
+				<?php }
+				
+				?>	
 			</select>
 	</td>
 	<td>	
@@ -53,12 +59,13 @@
 </table>		
 </fieldset>
 
-
+<!--
 	<fieldset>
 		<label>denunciados</label>
  		<textarea rows="2" cols="130" class="" name="txt_denunciados" dirname="explanation.dir">
 		</textarea>
  	</fieldset>
+-->
 
 	<fieldset>
 		<label>documentos anexados ao processo</label>
