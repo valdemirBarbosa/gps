@@ -15,7 +15,7 @@ class CertidaoNew_Model extends Model{
         $sql->bindValue(":cpf", $cpf);
         $sql->execute();
         if($sql->rowCount() > 0 ){
-            return true;
+            return $sql->fetchAll(\PDO::FETCH_OBJ);
         }else{
             return false;
         }
@@ -45,7 +45,7 @@ class CertidaoNew_Model extends Model{
         $sql = "SELECT s.cpf, s.nome_servidor, d.id_denunciado FROM denunciados as d
                 INNER JOIN servidor as s
                 ON d.id_servidor = s.id_servidor 
-                WHERE s.cpf =:cpf AND d.data_fechamento != '0000-00-00 00:00:00'";
+                WHERE s.cpf =:cpf AND d.data_fechamento = '0000-00-00 00:00:00'";
                 $sql = $this->db->prepare($sql);
                 $sql->bindValue(":cpf", $cpf);
 
