@@ -1,3 +1,8 @@
+function ola(){
+    var ola = "ola mundo!";
+    console.alert("Ola mundo!");
+}
+
 function formataData()
 {     var val = document.getElementById("dataMask");
    	var pass = val.value;

@@ -20,39 +20,33 @@
 				<th>data de entrada</th>
 			</tr>
 			<tr>
-			<td><input autofocus type="text" value="<?php echo $denuncia->numero_documento ?>" name="numero"></td>
-				<td>						<select name="id_tipo_doc">
-							<option value="<?php echo $denuncia->id_tipo_documento ?>"> <?php echo $denuncia->tipo_de_documento ?> </option>
-								<?php foreach($tipo_doc as $doc){?>
-							<option> <?php echo $doc->tipo_de_documento ?> </option>
-							<?php }  ?>	
-						</select>
-				</td>
-				<td><input type="date" value="<?php echo $denuncia->data_entrada ?>"></td>
+			<td><input readonly type="text" value="<?php echo $denuncia->numero_documento ?>" name="numero"></td>
+				<td> <?php echo $denuncia->tipo_de_documento ?> </td>
+				<td><input readonly type="date" value="<?php echo $denuncia->data_entrada ?>"></td>
 			</tr>
 		</table>
 		</fieldset>		
 		
 		<fieldset>
 				<label>id:<?php echo $denuncia->id_denuncia ?></label>
-				<input name="txt_id" type="hidden" value="<?php echo $denuncia->id_denuncia ?>">
+				<input readonly name="txt_id" type="hidden" value="<?php echo $denuncia->id_denuncia ?>">
 
 				<label>Narração dos fatos da denúncia</label>
 				<textarea autofocus rows="1" cols="96" class="denuncia" name="txt_denuncia"><?php echo $denuncia->denuncia_fato ?></textarea>
 				<br><br>
 							
 			<label>Denunciante</label>
-			<select name="lst_id_denunciante" class="optionDenunciante">
-					<option value="<?php echo $denuncia->id_denunciante ?>"> <?php echo $denuncia->nome_denunciante. " - " .$denuncia->id_denunciante  ?></option>
+			<select name="id_denunciante">
+					<option value="<?php echo $denuncia->id_denunciante ?>"><?php echo $denuncia->nome_denunciante ?><option>
 					<?php foreach($denunciante as $den){?>
-						<option value="<?php $den->id_denunciante  ?> "> <?php  echo $den->nome_denunciante. " - " .$den->id_denunciante  ?></option>
+						<option value="<?php echo $den->id_denunciante ?>"> <?php  echo $den->nome_denunciante  ?></option>
 					<?php }  ?>	
 			</select>
 			<label>tipo de documento</label>
 						<select name="id_tipo_doc">
 							<option value="<?php echo $denuncia->id_tipo_documento ?>"> <?php echo $denuncia->tipo_de_documento ?> </option>
 								<?php foreach($tipo_doc as $doc){?>
-							<option> <?php echo $doc->tipo_de_documento ?> </option>
+							<option value="<?php echo $doc->id_tipo_documento?>"> <?php echo $doc->tipo_de_documento ?> </option>
 							<?php }  ?>	
 						</select>
 

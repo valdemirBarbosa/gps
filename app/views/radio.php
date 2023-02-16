@@ -1,5 +1,5 @@
 <div class="radio">
-			<input checked type="radio" name="operador" value="1">
+			<input checked type="radio" name="operador" value="1" checked>
 			<label>Exatamente igual</label>	
 
 			<input type="radio" name="operador" value="2">

@@ -2,23 +2,15 @@
 	margin:0;
 	padding:0;
 	box-sizing:border-box;
-      justify-content:left;
+    justify-content:left;
 	-webkit-box-sizing:border-box;
 	-moz-box-sizing:border-box;
 	-o-box-sizing:border-box;
 	-ms-box-sizing:border-box;
 	vertical-align:middle;
     font-family:monospace;
+    font-size: 12px;
 }
-
-html{height:100%; width: 100%; background:#ddd url(../img/fundo.png) fixed no-repeat center; background-size:100%;}
-h1, h2, h3, h4, h5{margin:0; padding:0; text-transform:uppercase;/ font-weight:inherit;}
-p{line-height:1.2em; font-size:1em; letter-spacing:0; color:#263238;}
-a {text-decoration:none; color:#444;}
-input,textarea, select {background:#EEEEEE}  /*text-transform: uppercase;} */
-input[type=image]{border:0;}
-input[type=date], select{padding:1px}
-ul, li{list-style:none;}
 
 @font-face {
     font-family: 'rbold';
@@ -46,11 +38,20 @@ ul, li{list-style:none;}
 	font-style:normal;
 }
 
+h1, h2, h3, h4, h5{margin:0; padding:0; text-transform:uppercase; font-weight:inherit;}
+p{line-height:1.2em; font-size:1em; letter-spacing:0; color:#263238;}
+a {text-decoration:none; color:#444;}
+input,textarea, select {background:#EEEEEE;  text-transform: uppercase; } 
+ul, li{list-style:none;}
+
+/* Acesso, login, senha, usuário, usuario */
 .linkAcesso1{
-    background-color:#DBE06C;
-    color:blue;
-    font-style: italic;
+    background-color:#8dbeda; 
     margin-right: 40%;
+    font-style: italic;
+    text-align: center;
+    font-size: 13px;
+    color: yellow;
 }
 
 .primeiroAcesso{
@@ -72,6 +73,7 @@ ul, li{list-style:none;}
     padding-top: 4%;
     border-style: solid;
     border-color: green;
+    border-radius: 10px;
     width: 35%;
     height: 40%;
     background-image: url('../img/gps-pad.jpg');	
@@ -81,6 +83,47 @@ ul, li{list-style:none;}
     background-color:whitesmoke;
 }
 
+html{ /* Area  do arquivo template */
+    height:90%; 
+    width: 95%;
+    margin-left: 2%;
+    margin-right: 2%;
+    background-color:beige;
+    background-image: url('../img/gps-pad.jpg');	
+
+}
+
+.areaPrincipal{/* Area  do arquivo template */
+    background-color:#ddd;
+    height: 100%;
+    margin-top: 1%;
+    margin-bottom: 0%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.menu{ /* Area  do arquivo template */
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 0px;
+    background-color: black;
+}
+
+.menu li a{ /* Area  do arquivo template */
+    color: #fff;
+    display:flex;
+    font-size: 14px;
+    margin-left: 20px;
+}
+
+.menu li a:hover{ /* Area  do arquivo template */
+    background-color:blue;
+    color: wheat;
+    padding: 2px 5px 3px 5px;
+    border-radius: 10px;
+    }
+
+/* home 
 .mensagemExisteUsuario{
     background-color:#DBE06C;
     color:red;
@@ -89,13 +132,60 @@ ul, li{list-style:none;}
     margin-right: 40%;
 }
 
-.base-home{
+
+*/
+
+
+/*
+.paiPortaria{
+   margin-top: 50px;
+    margin-left: 350px;
+    margin-right: 200px;
+}
+*/
+
+
+/*.filho1 input[type=text]{
+    width: 300px;
+}
+*/
+
+.areaTrabalho{
+    background-color:rebeccapurple;
+    height: 85%;
+    width: 100%;
+    color: white;
+    font-size: 16px;
+ }
+
+.superior{
+    background-color:aqua;
+    font-size: 12px;
+    height: 15%;
+    width: 96%;
+    color:black;
+    margin-right: 2%;
+    margin-left: 2%;
+}
+
+.superiorAndamento{
+    background-color:#ddd;
+    font-size: 12px;
+    height: 30%;
+    width: 95%;
+    color:black;
+    margin-top: 1%;
+    margin-right: 2%;
+    margin-left: 2%;
+    padding-left: 1%;
+}
+
+.base-home{ /* Area  dos arquivos views */
     background-color:darkslategray;
     width: 100%;
     height: 7%;
     margin-top: 0%;
     padding-top: 0.7%;
- 
 }
 
 .titulo-pagina{
@@ -106,1119 +196,79 @@ ul, li{list-style:none;}
     margin-top: 0px;
 }
 
-.container{
-    background-color: whitesmoke;
-    display: grid;
-    grid-template-columns: 1fr; /* Divide a DIV em duas colunas: A primeira com três frações do espaço total da tela e a segunda coluna com uma fração */
-    grid-template-rows: 10vh 40vh 10vh; /* Especifica a altura das 3 linhas: 1ª coluna com 20 Visão de Heigth; a segunda 70 VH e a termeira 20 VH  */
-    grid-template-areas: "header header" /* Pode ser qualquer nome porque será relacionado com teg que eu quero. especificado aqui linha 1 nas duas colunas */
-                         "main" /* Especificado aqui linha 2 na coluna 1 main e na coluna 2 o aside */
-                         "footer" /* Especificado aqui linha 3 nas duas colunas o footer */
+.col1{
+    font-size: 20px;
+    background-color:brown;
+    width: 45%;
+    height: 60%;
+    margin-top: 1%;
+    margin-left: 2%;
+    margin-bottom: 0%;
+    float: left;
+    color: white;
 }
 
-.pai{
-    display: grid;
-    grid-template-columns: auto auto;
-    grid-template-rows: 8vh;
-    grid-template-areas: 'filho1 filho2';
+.col2{
+    font-size: 20px;
+    width: 30%;
+    height: 60%;
+    margin-top: 1%;
+    margin-bottom: 0%;
+    background-color:azure;
+    float: left;
+    color:black;
 }
 
-.paiPortaria{
-   margin-top: 50px;
-    margin-left: 350px;
-    margin-right: 200px;
+.inferior{
+    background-color:beige;
+    height: 68%;
+    width: 98%;
+    margin-left: 2%;
 }
 
-.filho1{
-    grid-area: filho1;
-}
-
-.filho1 input[type=text]{
-    width: 300px;
-}
-
-.filho2{
-    display: grid;
-    grid-area: filho2;
-    margin-left: 1%;
-    width: 200px;
-    height: 60px;
-
-}
-
-header{
-    /*grid-column-start: 1;  Coluna da grid começa na linha divisória da coluna 1 */
-    /*grid-column-end: 3;   Coluna da grid termina na linha divisória da coluna  3*/
-    grid-area: header;
-    width: 100%;
-    height: 10%;
-    margin-bottom: 0.3%;
-    background-color:black;
-    box-shadow: 0px 5px 20px yellow;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap; 
-}
-
- main{
-    background-color:whitesmoke;
-    grid-area: main;
-    height: 90%;
-}
-
-footer{
-    background-color:darkslategray;
-    grid-area: footer;
-    text-align: center;
-    font-family: sans-serif;
-    font-weight: bold;
-    color: thistle;
-    position: relative;
-    float: inline-end;
-
-}
-
-h1{
-    color: #ffff;
-    text-align: center;
-    margin-top: 20px;
-}
-
-.radio{
-    margin-top: 5px;
-    padding-top: 20px;
-    background-color: #263238;
-    padding-left: 320px;
-    padding-bottom: 20px;
-    height: 60px;
-}
-
-.logo{
-    width: 40px;
-    height: 30px;
-    margin-top: 0px;
-    border-radius: 10%;
-    background-color:cornsilk;
-}
-
-.menu{
-    display: flex;
-    flex-wrap: wrap;
-    font-size: 18px;
-    margin-left: 0px;
-    background-color: black;
-}
-
-.menu li a{
-    color: #fff;
-    display:flex ;
-    margin-left: 20px;
-}
-
-.menu li a:hover{
-    background-color:blue;
-    color: wheat;
-    padding: 2px 5px 3px 5px;
-    border-radius: 10px;
-    }
-
-.div-titulo{
-    background-color:royalblue;
-    width: 100%;
-    height: 7%;
-    margin-top: 0%;
-    padding-top: 0.5%;
-}
-
-li{
-    line-height: 30px;
-    text-align:left;
-}
-
-.menu li a{
-  padding-left: 0px;
-  color:#ddd;
-  display: flex;
-  flex: 1;
-
-}
-
-
-.menu li a:hover{
-    background-color:royalblue;
-    font-size: 16px;
-}
-
-.over{
+.textOver{
     width: 200px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: clip;
 }
 
-.over:hover{
+.textOver:hover{
     white-space: normal;
 }
 
-.overDenunciante{
+.textOverDenunciante{
     width: 100px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
-/* form{
-    background-color:lightsteelblue;
-    width: 70%;
-    position: absolute;
-    top:20%;
-    left: 70px;
-    margin-bottom: 20px;
+table{
+    width: 90%;
 }
- */
-/* form.pesquisa{
-    background-color: silver;
-    width: 10px;
-    height: 10px;
+
+.tableResponsividade{
+    overflow-x: auto;
+ }
+
+th, td{
+    text-transform: uppercase;
+    border-style:groove; 
+}
+
+    tr:nth-child(even){background-color:#ddd}
+    tr:hover {background-color:lightblue; color:mediumblue;}
+    th{background-color:darkslategray; color: whitesmoke;}
+
+
+footer{
+    background-color:dimgrey;
+    color:white;
+    font-family: sans-serif;
+    position:static;
+    z-index: 1;
+    margin-top:0%;
     margin-left: 2%;
-    top:17%;
-    left: 15%;
+    width: 96%;
 }
- */
-
- form.form2{
-    background-color:blanchedalmond;
-    width: 70%;
-    height: auto;
-    margin-left: 6%;
-    top:350px;
-    left: 15%;
-}
-
-textarea{
-    padding: 1.5%;
-}
-
-label, input{
-    border-radius: 0%;
-    background-color:lightcyan;
-    margin: 5px;
-    padding: 5px;
-    font-weight: bold;
- /*   text-transform: capitalize; */
-}
-
-#txt_id{
-    width: 60px;
-    text-align: center;
-}
-
-/*   penso que não serve a nenhum elemento */
-.base-lista21{
-    margin-top: 10px;
-    width: 100%;
-    text-align: center;
-    background-color:lavender;
-}
-
-.textCabecalhoPortaria{
-    text-align: justify;
-}
-
-.registroPortaria{
-    text-align: center;
-}
-
-.base-lista{
-    width: 80%;
-    margin-top: 8%;
-    margin-left: 17%;
-    background-color:gainsboro;
-    text-align: center;
-}
-
-
-input[type="number"]{
-    width: auto;
-    text-align: center;
-    background-color:beige;
-
-}
-
-input.pesquisa{
-    width: 500px;
-    text-align: center;
-    padding: 2px;
-}
-
-input[type="text"]{
-    text-align: left;
-    color: blue;
-    background-color:beige;
-
-}
-
-#cpf{
-    width: 120px;
-}
-
-#matricula{
-    width: 100px;
-    text-align: center;
-}
-
-
-fieldset{
-    border-color:black;
-    margin-left: 3%;
-    margin-top: 1%;
-    width: 90%;
-}
-
-legend{
-    color:black;
-    font-size: 16px;
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bold;
-}
-
-
-#vinculo{
-    width: 180px;
-}
-
-#secretaria{
-    width: 333px;
-    float: left;
-} 
-
-.unidade{
-    float: left;
-}
-
-#unidade{
-    width: 790px;
-}
-
-.centraliza{
-    margin-left: 100px;
-}
-
-.obs{
-    float: auto;
-    width: 200px;
-    margin-top: 60px;
-}
-
-span{
-    font-size: 30px;
-    background-color:#DBE06C;
-    border-radius: 50%;
-    color: green;
-}
-
-.titulo{
-  display:block;
-  padding:0px;
-  color:blanchedalmond;
-  font-weight:inherit;
-  font-size:1.4em;
-  text-transform:uppercase;
-}
-
-.tema.cor{
-  color:floralwhite;
-  position:relative;
-  top:-3px;
-  font-weight:inherit;
-  font-size:1.4em;
-  text-transform:uppercase;
-}
-
-.margemCertidao{
-    background-color:#ddd;
-    width: 793px;
-    height: 1122px;
-    border-style: double;
-    border-color:yellow;
-}
-
-.cabecahoCertidao{
-    background-color:#444;
-    text-align: center;
-    height: 100px;
-    border-style: double;
-    border-color:aqua;
-    display:inline;
-    
-}
-
-.corpoTextoCertidao{
-    margin-top: 10px;
-    margin-left: 300px;
-    margin-right: 20px;
-    text-indent: 200px;
-    background-color:red;
-}
-
-table {
-  border-collapse: collapse;
-  width: 95%;
-  margin-left: 30px;
-  margin-right: 10px;
-  margin-bottom: 2%; 
-    }
-
-    table.processados{
-          width: 80%;
-          margin-left: 30px;
-          margin-right: 10px;
-          margin-bottom: 2%;
-    }
-
-    table .tabDenunciante{
-          width: 200px;
-    
-    }
-    
-    table.paginacao{
-        border-collapse:separate;
-        width: 95%;
-        margin-left: 30px;
-        margin-right: 10px;
-        vertical-align:auto;
-        background-color: cadetblue;
-    }
-
-    table.tabServidor{
-        border-collapse:separate;
-        width: 80%;
-        background-color: cadetblue;
-
-    }
-
-    th, td{
-      text-align: left;
-      padding: 2px;
-    }
-    
-    
-      tr:nth-child(even){background-color:#ddd}
-      tr:hover {background-color:lightblue; color:mediumblue;}
-      th{background-color:darkslategray; color: whitesmoke;}
-
-table.portaria.orange{
-    background-color: yellow;
-    color: red;
-}
-
-.btn{
-    width: 80px;
-    height: 30px;
-    margin-left: 10px;
-    margin-top: 5px;
-    border-radius: 4px;
-    border-color:darkslategray;
-    border-style:groove;
-    text-align: center;
-    box-shadow: 3px 6px #888888;
-    text-transform: uppercase;
-    float: left;
-}
-
-.finalizar{
-    width: 150px;
-    height: 25px;
-    margin-left: 10px;
-    margin-top: 3px;
-    border-radius: 3px;
-    border-color:yellow;
-    border-style:groove;
-    text-align: center;
-    box-shadow: 3px 4px #888888;
-    text-transform: uppercase;
-}
-
-.finalizar:hover{
-    background-color:chartreuse;
-    color:red;
-    font-weight: 200;
-}
-
-.btn_limpar{
-    border-radius: 4px;
-    border-color:darkslategray;
-    border-style: solid;
-    text-align: center;
-    text-transform: uppercase;
-}
-
-.btn:hover{
-    width: 90px;
-    height: 40px;
-    background-color:royalblue;
-    color: white;
-    border-radius: 8px;
-    border-color:white;
-    border-style: solid;
-    text-align: center;
-}
-
-.btn-inc{
-    width: 100px;
-    height: 28px;
-    margin-top: 5%;
-    color: black;
-    border-color:royalblue;
-    border-style: solid;
-    padding-top: 3%;
-    text-align: center;
-    font-weight: bold;
-    box-shadow: 3px 6px #888888;
-}
-
-.btn-voltar{
-    margin-top: 70px;
-    width: 170px;
-    height: 40px;
-    float: left;
-    color: black;
-    border-radius: 10px;
-    border-color:royalblue;
-    border-style: solid;
-    padding-top: 8px;
-    text-align: center;
-    box-shadow: 3px 6px #888888;
-    text-transform: uppercase;
-}
-
-.btn-inc:hover{
-    color:white;
-    width: 100px;
-    height: 30px;
-    background-color:royalblue;
-    border-color:white;
-    font-size: 18px;
-}
-
-.btn-excluir{
-    width: 80px;
-    height: 30px;
-    color:blue;
-    border-radius: 5px;
-    border-style: solid;
-    padding-top: 2px;
-    text-align: center;
-    text-transform: uppercase;
-    box-shadow: 3px 6px #888888;
-}
-
-.btn-excluir:hover{
-    width: 80px;
-    height: 30px;
-    background-color:greenyellow;
-    border-color:red;
-    color:white;
-    font-size: 15px;
-}
-
-.DenunciadoServidorFormulario{
-    position:relative;
-    
-}
-
-.btn-editar{
-    width: auto;
-    height: 30px;
-    color:blue;
-    border-radius: 5px;
-    border-style: solid;
-    padding-top: 2px;
-    text-align: center;
-    text-transform: uppercase;
-}
-
-.btn-editar:hover{
-    width: auto;
-    height: 33px;
-    background-color:lightslategray;
-    border-color:darkgreen;
-    color:white;
-    font-size: 18px;
-}
-
-.btn-denunciar{
-    width: 190px;
-    background-color:white;
-    height: 30px;
-    border-color: blue;
-    color:crimson;
-    border-radius: 5px;
-    border-style: solid;
-    padding-top: 2px;
-    text-align: center;
-}
-
-.txt-obs{
-  display:block;
-  float: left;
-  padding:10px;
-  border-radius:09px;
-  -webkit-border-radius:9px;
-  -moz-border-radius:9px;
-  -moz-border-radius:9px;
-  -o-border-radius:9px;
-  color:black;
-  background:cornsilk;
-  font-size:.9em;
-}
-
-.img{
-    width: 30%;
-    height: 10%;
-    margin-top: 15%; 
-    margin-left: 35%;
-    }
-
-.denuncia{
-    margin-top: 4px;
-}
-
-.msg{
-    margin-top: 100px;
-    margin-left: 200px;
-    width: 80%;
-    background-color: yellowgreen;
-    position: absolute;
-    font-size: 30px;
-    color: red;
-}
-
-.data{
-    background-color:silver;
-    width: 50%;
-} 
-
-.txt_numero_processo{
-    width: 10%;
-}
-
-.id_denuncia{
-    width: 100%;
-}
-
-.id_pp_denuncia{
-    width: 750px;
-}
-
-.num_processo{
-    margin-left: 2px;
-    position: absolute;
-    margin-top: 10px;
-}
-
-.tabela-processo{
-    margin-top: 5%;
-}
-
-.faseLbl{
-    position: absolute;
-}
-
-.faselst{
-    position: relative;
-    margin-left: 47px;
-}
-
-.btnAnexo{
-    margin-top: 112px;
-    width: 360px;
-    height: 30px;
-}
-
-.lblAnexo{
-    margin-top: 112px;
-    width: 60px;
-    height: 30px;
-}
-
-.txtArea{
-    margin-left: 3px;
-    position: absolute;
-}
-
-.denuncianteTab{
-    width: 90%;
-} 
-
-.btnsDenuncia{
-    height: 70px;
-}
-
-.btnDenuncia{
-    width: 80px;
-    height: 30px;
-    color:blue;
-    border-radius: 5px;
-    border-style: solid;
-    padding-top: 2px;
-    text-align: center;
-    text-transform: uppercase;
-    box-shadow: 3px 6px #888888;
-}
-
-.btn_limpar_denuncia{
-    width: 80px;
-    height: 30px;
-    color:blue;
-    border-radius: 5px;
-    border-style: solid;
-    padding-top: 2px;
-    text-align: center;
-    text-transform: uppercase;
-}
-
-.dtEncerramento{
-    margin-top: 130px;
-    width: 400px;
-    height: 30px;
-}
-
-.tabela_ocorrencia{
-    margin-left: 20px;
-    margin-right: 15px;
-    margin-top: 20px;
-    border-color: white; 
-}
-
-
-.fase{
-    width: 20%; 
-}
-
-.tela{
-    position: absolute;
-    z-index: 10;
-    width: 100px;
-    height: 40px;
-    margin-left: 200px;
-    background-color: red;
-}
-
-.txt_ocorrencia{
-    width: 690px;
-}
-
-.txt_observacao{
-    width: 780px;
-}
-
-.btn-portaria{
-    width: 80px;
-    height: 30px;
-    color:blue;
-    border-radius: 5px;
-    border-style: solid;
-    padding-top: 2px;
-    text-align: center;
-    text-transform: uppercase;
-    box-shadow: 3px 6px #888888;
-}
-
-.btn-portaria:hover{
-    height: 35px;
-    background-color:khaki;
-    color:lightgreen;
-}
-
-.btn-ocorrencia{
-    width: 85px;
-    height: 30px;
-    color:blue;
-    border-radius: 5px;
-    border-style: solid;
-    padding-top: 2px;
-    text-align: center;
-    text-transform: uppercase;
-    box-shadow: 3px 6px #888888;
-}
-
-.btn-ocorrencia:hover{
-    height: 35px;
-    background-color:whitesmoke;
-    color:yellow;
-}
-
-.obs-portaria{
-    float: auto;
-    width: 200px;
-    margin-top: 60px;
-}
-
-.upload{
-    box-shadow: 3px 10px #888888;
-}
-
-.descricao{
-    width: 500px;
-}
-
-.erros{
-    width: 600px;
-    margin-left: 400px;
-    float: left;
-    margin-top: 100px;
-    margin-bottom: auto;
-    align-items: center;
-    align-content: center;
-    height: 100px;
-    background-color:#DBE06C;
-    color: red;
-    display: block;
-}
-
-.tituloTabela{
-    background-color: #000;
-    color: #DBE06C;
-}
-
-.recuoTabNivel2{
-    margin-left: 50px;
-}
-
-.recuoTabNivel3{
-    margin-left: 15%;
-}
-
-.containerForm{
-    width:100%;
-    background-color: red;
-    margin-top: 80px;
-    margin-left: 250px;
-}
-
-.containerPesqusa{
-    margin-top: 15%; 
-}
-
-.text{
-    color:white;
-    background-color: red;
-}
-
-.processarServidor{
-    display: block;
-    height: auto;
-    width: auto;
-    margin-top: 300px;
-    margin-bottom: auto;
-    margin-left: 250px;
-    background-color:hotpink;
-}
-
-.processarServidorTabela{
-    display: block;
-    height: auto;
-    width: auto;
-    margin-top: 100px;
-    background-color:darkgoldenrod;
-}
-
-.div1{
-    width: 100%;
-    height: 30%;
-    background-color:azure;
-    position: absolute;
-    z-index: 3;
-}
-
-.div2{
-    width: 100%;
-    margin-top: 12%;
-    height: 10%;
-    background-color:azure;
-    position: relative;
-    z-index: 10;
-}     
-
-.div2.processarServidorFormulario{
-    margin-left: 0px;
-}
-
-.div3{
-    width: 100%;
-    margin-left: 10px;
-    background-color: darkgrey;
-}
-
- .div4{
-    margin-top: 10%;
-    background-color: whitesmoke;
-    width: 100%;
-}
-
-.principal{
-    margin-top: 50px;
-}
-
-.txtProcessoNovo{/* serve para o formuulário de inclusão de processo que indica que tipo de processo está sendo incluido */
-    font-family: 'Courier New', Courier, monospace;
-    color:blue;
-    background-color: #DBE06C;
-    margin-left: 30px;
-    width: 400px;
-}
-
-.btn-msg-erro{
-    height: auto;
-    margin-top: 30px;
-    align-items: center;
-    color: blue;
-    width: 150px;
-    font-size: 22px;
-    border-color:royalblue;
-    border-style: solid;
-    text-align: center;
-    font-weight: bold;
-    box-shadow: 3px 6px #888888;
-
-}
-
-.txtNomeProcessado{/* serve para o formuulário de inclusão de processo com o nome do denunciado que  está sendo processado */
-    font-family: 'Courier New', Courier, monospace;
-    color:white;
-    margin-left: 30px;
-    background-color:black;
-    width: 800px;
-}
-
-.consulta{
-    background-color:beige;
-}
-
-
-.fim{
-    height: 50px;
-    width: auto;
-}
-
-.frmConsulta{
-    background-color:lightgrey;
-}
-
-.pesquisa{
-    grid-area: pesquisa;
-}
-
-.incluir{
-    grid-area: incluir;
-    background-color:yellow;
-    text-align: center;
-    align-content: center;
-}
-
-.excluir{
-    grid-area: excluir;
-    background-color:green;
-    text-align: center;
-    align-content: center;
-}
-
-
-.frmConsulta input[type=text]{
-    width: 300px;
-}
-
-.frmConsulta input[type=submit]{
-    width: 150px;
-}
-
-.labelPesquisa{
-    float: left;
-}
-
-.paginacao{
-    background-color:rgb(193, 224, 224);
-    text-align: center;
-}
-
-.paginaAnterior{
-    float: left;
-}
-
-.proximaPagina{
-    float: right;
-}
-
-.paginacao:hover{
-    background-color:#DBE06C;
-}
-
-.prazo{
-    background-color: red;
-    color: white;
-    font-size: 14px;
-}
-
-.denunciados{
-    background-color: darkslategray;
-    color: white;
-    font-size: 14px;
-}
-
-.cabecalhoForm{
-    display: grid;
-    font-family: 'Courier New', Courier, monospace;
-    color:blue;
-    margin-left: 30px;
-    grid-template-columns: 1fr 4fr;
-    grid-template-areas: "id_denuncia fase";
-}
-
-span.spanTitulo{
- background-color:chartreuse;
- border-radius: 10%;
- width: 400px;
- font-size: 20px;
- display: inline-block;   
-
-}
-
-.id_denuncia{
-    display: grid;
-    grid-area: id_denuncia;
-    height: 20px;
-}
-
-.fase{
-    display: grid;
-    grid-area: fase;
-}
-
-.comissaoForm{
-    width: 40%;
-    margin-left: 30%;
-    margin-top: 10%;
-}
-
-.div{ /* dividir a tabela no meio dando espaço */
-    height: 50px;
-}
-.paiDenuncia{
-    display: grid;
-    margin-top: 20;
-    margin-left: 20;
-    margin-right: 30;
-    grid-template-columns: 45% 55%;
-    grid-template-areas: 'filho1Denuncia filho2Denuncia';
-}
-
-.filho1Denuncia{
-    display: grid;
-    grid-area: filho1Denuncia;
-
-}
-
-.filho2Denuncia{
-   display: grid;
-   grid-area: filho2Denuncia;
-}
-
-
-.anexoPai{
-    display: grid;
-    grid-template-columns: 30% 40% 30%;
-    grid-template-areas: 'filho1 filho2 filho3';
-    background-color:white;
-}
-
-.anexoFilho1{
-    display: grid;
-    grid-area: filho1;
-    background-color: white;
-    margin-bottom: 5px;
-
-}
-
-.anexoFilho2{
-    display: grid;
-    grid-area: filho2;
-    background-color: white;
-    margin-bottom: 5px;
-}
-
-.anexoFilho3{
-    display: grid;
-    grid-area: filho3;
-    background-color: white;
-    margin-bottom: 5px;
-}
-
-.optionDenunciante{
-    width: 445px;
-}
-
-textarea{
-    padding: 1%;
-}
-
-.BarraDerolagem{
-    width: 600px;
-    height: 80px;
-    margin-top: 10px;
-    margin-left: 100px;
-    background-color:bisque;
-    overflow:scroll;
-}
-
-
-.centralizaBotao{ /* Centraliza botão (a princípio usado no formulário inclusão de processo */
-    background-color:red;
-    margin-left: 570px;;
-}
-
-@media only screen and (max-width: 800px){
-    .menu{
-        position:absolute;
-        margin-left: 0;
-        color:tomato;
-        width: 90%;
-        background-color:cadetblue;
-        font-size: 15px;
-    }
-
-    .logo{
-        width: 22px;
-        height: 22px;
-        border-radius: 5%;
-        background-color:cyan;
-        }
-               
-        .base-home{
-            background-color:royalblue;
-            width: 100%;
-            height: 9%;
-            margin-top: 0%;
-        }
-    }
-
-        
-    @media only screen and (max-height: 500px){
-            footer{
-                grid-area: footer;
-                display: grid;
-                grid-row-end: auto;
-                font-family: sans-serif;
-                color:white;
-                position: absolute;
-                background-color:black;
-            }
-        
-            table tr td{
-                display:block;
-                background-color: #101010;
-                color: green;
-           }
-        }
-    
-     

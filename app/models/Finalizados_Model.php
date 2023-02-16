@@ -9,16 +9,31 @@ class Finalizados_Model extends Model{
     }
 
     public function lista(){
-        $sql = "SELECT * FROM finalizados as f 
+        $sql = "SELECT DISTINCT f.id_finalizado, d.numero_documento, prcd.numero_processo, s.nome_servidor, s.cpf, f.data_julgamento, f.penalidade, f.comentario  FROM finalizados as f 
                 INNER JOIN processados as prcd
                 ON f.id_processado = prcd.id_processado
                 INNER JOIN denunciados as dncd
                 ON dncd.id_denuncia = prcd.id_denuncia
                 INNER JOIN servidor as s
                 ON s.id_servidor = dncd.id_servidor
-                INNER JOIN denuncia as d
-                ON d.id_denuncia = dncd.id_denuncia";
-                
+                INNER JOIN denuncia as d 
+                ON dncd.id_denuncia = d.id_denuncia ORDER BY f.id_finalizado";
+        $qry = $this->db->query($sql);
+        return $qry->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+    public function ConsultaPorParamentro($campo, $valorRecebidoDoUsuario, $tabela, $alias, $chave, $condicao){
+        $sql = "SELECT * FROM finalizados as fin 
+                INNER JOIN processados as prcd
+                ON fin.id_processado = prcd.id_processado
+                INNER JOIN denunciados as dncd
+                ON dncd.id_denuncia = prcd.id_denuncia
+                INNER JOIN servidor as s
+                ON s.id_servidor = dncd.id_servidor
+                INNER JOIN denuncia as d 
+                ON dncd.id_denuncia = d.id_denuncia WHERE $condicao
+                ORDER BY fin.id_finalizado";
+
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }

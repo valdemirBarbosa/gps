@@ -13,8 +13,9 @@ class Certidao_Model extends Model{
         $sql = "SELECT * FROM servidor as s
                 INNER JOIN denunciados as d
                 ON s.id_servidor = d.id_servidor 
-                INNER JOIN processados as p
+                LEFT JOIN processados as p
                 ON d.id_denunciado = p.id_denunciado
+                AND d.data_fechamento == '0000-00-00 00:00:00'
                 WHERE s.cpf = :cpf";
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":cpf", $cpf);
@@ -137,11 +138,6 @@ class Certidao_Model extends Model{
     public function getNumeroProcessoLimitTwoTable($tabela, $tabela1, $campo, $parametro, $tipoFase, $offset, $limit){
 
         $sql = "SELECT * FROM $tabela as t LEFT JOIN $tabela1 as t1 ON t.id_fase = t1.id_fase WHERE  t.id_fase =  '$tipoFase' AND  t.$campo LIKE '%$parametro%' LIMIT $offset, $limit";
-
-/*         $arr = array($tabela, $tabela1, $campo, $parametro, $tipoFase, $offset, $limit);
-        print_r($sql);
-        exit;
- */                
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }

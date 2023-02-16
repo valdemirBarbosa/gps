@@ -65,16 +65,16 @@ class Ocorrencia_Model extends Model{
     }
  
 //Inserir dados na tabela de ocorrência
-    public function Incluir($id_processo, $numero_processo, $id_servico, $data_ocorrencia, $ocorrencia, $observacao, $anexo, $user){
-        $sql = "INSERT INTO ocorrencia SET id_processo =:id_processo, numero_processo =:numero_processo, id_servico =:id_servico, data_ocorrencia =:data_ocorrencia, ocorrencia =:ocorrencia, observacao =:observacao, anexo =:anexo, user =:user"; 
+    public function Incluir($id_processo, $numero_processo, $id_servico, $data_ocorrencia, $ocorrencia, $anexo, $observacao, $user){
+        $sql = "INSERT INTO ocorrencia SET id_processo =:id_processo, numero_processo =:numero_processo, id_servico =:id_servico, data_ocorrencia =:data_ocorrencia, ocorrencia =:ocorrencia, anexo=:anexo, observacao=:observacao, user =:user"; 
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":id_processo", $id_processo);
         $sql->bindValue(":numero_processo", $numero_processo);
         $sql->bindValue(":id_servico", $id_servico);
         $sql->bindValue(":data_ocorrencia", $data_ocorrencia);
         $sql->bindValue(":ocorrencia", $ocorrencia);
-        $sql->bindValue(":observacao", $observacao);
         $sql->bindValue(":anexo", $anexo);
+        $sql->bindValue(":observacao", $observacao);
         $sql->bindValue(":user", $user);
         $sql->execute();
 }
@@ -82,7 +82,6 @@ class Ocorrencia_Model extends Model{
 //Editar, alterar dados na tabela de ocorrência
     public function Editar($id_ocorrencia, $id_processo, $numero_processo, $data_ocorrencia, $ocorrencia, $observacao, $anexo, $user){
         $sql = "UPDATE ocorrencia SET id_ocorrencia =:id_ocorrencia, id_processo =:id_processo, numero_processo =:numero_processo, data_ocorrencia =:data_ocorrencia, ocorrencia =:ocorrencia, observacao =:observacao, anexo =:anexo, user =:user WHERE id_ocorrencia =:id_ocorrencia"; 
-
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":id_ocorrencia", $id_ocorrencia);
         $sql->bindValue(":id_processo", $id_processo);
@@ -93,23 +92,12 @@ class Ocorrencia_Model extends Model{
         $sql->bindValue(":anexo", $anexo);
         $sql->bindValue(":user", $user);
         $sql->execute();
-
-
-
     }
 
     public function Deletar($id){
             $sql = "DELETE FROM ocorrencia WHERE id_ocorrencia = :id";
             $sql = $this->db->prepare($sql);
             $sql->bindValue(":id", $id);
-            $sql->execute();
-    }
-
-    public function Anexar($id_ocorrencia, $infArquivo){
-            $sql = "UPDATE ocorrencia SET anexo = :anexo WHERE id_ocorrencia = :id"; 
-            $sql = $this->db->prepare($sql);
-            $sql->bindValue(":id", $id_ocorrencia);
-            $sql->bindValue(":anexo", $infArquivo);
             $sql->execute();
     }
 

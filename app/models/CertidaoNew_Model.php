@@ -10,7 +10,7 @@ class CertidaoNew_Model extends Model{
 
     //consulta tabela do servidores pelo CPF
     public function ConsultarServidor($cpf){
-        $sql = "SELECT cpf, nome_servidor FROM servidor WHERE cpf =:cpf";
+        $sql = "SELECT * FROM servidor WHERE cpf =:cpf";
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":cpf", $cpf);
         $sql->execute();
@@ -28,12 +28,10 @@ class CertidaoNew_Model extends Model{
                 ON p.id_denunciado = d.id_denunciado
                 INNER JOIN servidor as s
                 ON d.id_servidor = s.id_servidor 
-                WHERE s.cpf =:cpf AND p.data_encerramento = '0000-00-00'";
+                WHERE s.cpf =:cpf AND p.data_fechamento = '0000-00-00 00:00:00";
                 $sql = $this->db->prepare($sql);
                 $sql->bindValue(":cpf", $cpf);
-                $sql->execute();
-
-                if($sql->rowCount() > 0 ){
+                if($sql->execute()){
                     return $sql->fetchAll(\PDO::FETCH_OBJ);
                 }else{
                     return false;
@@ -42,19 +40,34 @@ class CertidaoNew_Model extends Model{
 
         //consulta tabela de denunciados pelo CPF
     public function consultarDenunciado($cpf){
-        $sql = "SELECT s.cpf, s.nome_servidor, d.id_denunciado FROM denunciados as d
+/*        $sql = "SELECT * FROM denunciados as d
                 INNER JOIN servidor as s
                 ON d.id_servidor = s.id_servidor 
-                WHERE s.cpf =:cpf AND d.data_fechamento = '0000-00-00 00:00:00'";
+                WHERE s.cpf =:cpf AND d.data_fechamento = '0000-00-00 00:00:00";
                 $sql = $this->db->prepare($sql);
                 $sql->bindValue(":cpf", $cpf);
-
                 if($sql->execute()){
                     return $sql->fetchAll(\PDO::FETCH_OBJ);
                 }else{
                     return false;
                 }
+                */
+                
+        $sql = "SELECT * FROM denunciados as d
+                INNER JOIN servidor as s
+                ON d.id_servidor = s.id_servidor 
+                WHERE s.cpf =:cpf AND d.data_fechamento = 0";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":cpf", $cpf);
+        $sql->execute();
+        if($sql->rowCount() > 0){
+            return $sql->fetchAll(\PDO::FETCH_OBJ);
+        }else{
+            return false;
         }
+                
+    }
+  
 
     public function certidao($cpf){
         $sql = "SELECT * FROM servidor as s
@@ -62,7 +75,7 @@ class CertidaoNew_Model extends Model{
                 ON s.id_servidor = d.id_servidor 
                 INNER JOIN processados as p
                 ON d.id_denunciado = p.id_denunciado
-                WHERE s.cpf = :cpf";
+                WHERE s.cpf =:cpf";
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":cpf", $cpf);
         $sql->execute();

@@ -20,8 +20,9 @@ class DenunciadoController extends Controller{
 
      $denunciados = new Denunciado_Model();
      $dados['denunciado'] = $denunciados->getDenunciado($id_denuncia);
-        $dados["view"] = "denunciado/Incluir";
-        $this->load("template", $dados);
+
+     $dados["view"] = "denunciado/Incluir";
+     $this->load("template", $dados);
    }
  
    public function Editar($id_denunciado){
@@ -33,9 +34,15 @@ class DenunciadoController extends Controller{
    
    public function Excluir($id_denunciado){
      $denunciados = new Denunciado_Model();
-     $dados['denunciados'] = $denunciados->ExcluirDenunciado($id_denunciado);
-     $dados['view'] = "denuncia/Index"; 
-     $this->load("template", $dados);
+
+      $listaDenunciados = new Denunciado_Model();
+      $dados['denuncia'] = $listaDenunciados->getDenunciado($id_denunciado);
+      $dados['denunciados'] = $denunciados->ExcluirDenunciado($id_denunciado);
+
+      $denuncias = new Denuncia_Model();
+      $dados['denuncia'] = $denuncias->getDenunciaPegarDenunciado($id_denunciado);
+      $dados["view"] = "denunciado/Incluir";
+      $this->load("template", $dados);
  }
  
    public function pesquisaDenuncia($nome, $cpf){

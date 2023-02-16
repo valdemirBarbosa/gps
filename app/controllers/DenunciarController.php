@@ -160,7 +160,7 @@ public function incluir(){
 
           $data_inclusao = new DateTime();
           $data_inclusao = date('Y/m/d');
-          $user = isset($_SESSION['user']) ? $_SESSION['user'] : 0; 
+          $user = isset($_SESSION['id_usuario']) ? $_SESSION['id_usuario'] : 0; 
 
           $incluirServidor = new Denunciado_Model();
           $r = array($id_servidor, $id_denuncia, $data_inclusao, $user);
@@ -170,11 +170,9 @@ public function incluir(){
           $listaDenunciados = new Denunciado_Model();
           $dados['denunciado'] = $listaDenunciados->getDenunciado($id_denuncia);
 
-
           $denuncias = new Denuncia_Model();
           $dados['denuncia'] = $denuncias->getDenuncia($id_denuncia);
 
-          
           $dados["view"] = "denunciado/Incluir";
           $this->load("template", $dados);
   }

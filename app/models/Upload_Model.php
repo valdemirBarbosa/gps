@@ -44,12 +44,13 @@ class Upload_Model extends Model{
     }
 
     public function upLoaded($id_processo){
-        $sql = "SELECT * FROM upload as u 
+        $sql = "SELECT * FROM upload as up 
                 INNER JOIN processo as p 
-                ON u.id_processo = p.id_processo 
-                WHERE p.id_processo = $id_processo";
+                ON up.id_processo = p.id_processo 
+                WHERE up.id_processo = $id_processo";
 
                 $sql = $this->db->query($sql);
+
                 return $sql->fetchAll(\PDO::FETCH_OBJ);
     } 
     
@@ -58,7 +59,6 @@ class Upload_Model extends Model{
                 INNER JOIN denuncia as d 
                 ON u.id_denuncia = d.id_denuncia 
                 WHERE u.id_denuncia = $id_denuncia";
-               
                 $sql = $this->db->query($sql);
                 return $sql->fetchAll(\PDO::FETCH_OBJ);
     } 

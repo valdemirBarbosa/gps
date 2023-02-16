@@ -3,17 +3,19 @@
 
 </div>
 <div class="certidao">
+
+<div class="paiCertidao">  
 <img width="60%" height="10%" src="<?php echo URL_BASE ."assets\img\logoMaio2021.JPG" ?>" width="400" height="200">	
 
-<div class="pai">  
 	<div class="filho1">  
 		<form method="GET" action="<?php echo URL_BASE . 'CertidaoNew/cnp'; ?>" >
-				<label>Pesquisa</label>
-					<label>CPF</label>
-						<input autofocus type="number" name="cpf">
+				<label>Informe o CPF</label><br/>
+						<input required autofocus type="number" name="cpf">
 						<input type="submit" value="Gerar Atestado">
+						<input class="sucess" form="imprimir" type="submit" value="Imprimir">
 
 		</form>
+		</div> <!-- fim da div filho1 certidao -->
 
 <!--	****************** HTML ************************   // -->
 <?php
@@ -30,30 +32,29 @@
 				</div> <!-- Fim da div cabecalho da certidao -->";
 
 				if(isset($dadosCertidao)){
-					foreach ($dadosCertidao as $c){
-	/* 					print_r($dadosCertidao);
-	//					exit;
-	*/
 						$html3 = "<br>
 								<div class='corpoTextoCertidao'>
-								Atestamos para os devidos fins que o(a) servidor(a) "; 
+								ATESTAMOS PARA OS DEVIDOS FINS QUE O(A) SERVIDOR(A) ";
 										
-						$html4 =  $dadosCertidao[0] . " CPF: " .$dadosCertidao[1] . $dadosCertidao[2];  
+						$html4 =  $dadosCertidao;  
 								"</div> <!-- Fim da div corpo do texto certidao -->
-								</div>"; 
-								}
+								</div> <!-- Fim da div margem certidao -->"; 
+
 						$html = $logo . $html1  . $html2 . $html3 . $html4;
 					}
+                    
+                    if(isset($html4)){				
+        			    echo "<hr/>";
+    					    echo "<div class='resultadoCertidao'>".$html4."</div>";
+    				    echo "<hr/>";
+                    }
+    
 	 ?>
-
-	<form method="GET" action="<?php echo URL_BASE . 'Certidao/imprimir' ?>" >
-			<input type="submit" value="Imprimir">
-			<input type="hidden" name="html" value="<?php 
-														if(isset($html)){
-															echo $html;
-														}else{
-															exit;
-														}
-														 ?>" > 
+<div class="paiCertidao">  
+	<form name="imprimir" id="imprimir" method="POST" action="<?php echo URL_BASE . 'Certidao/imprimir' ?>" >
+			<input type="hidden" name="html" value="<?php echo $html ?>" > 
 	</form>
-	
+</div> <!-- Fim da div paiCertidao 2 -->
+
+	</div> <!-- Fim da div paiCertidao-->
+	</div> <!-- Fim da div certidao -->

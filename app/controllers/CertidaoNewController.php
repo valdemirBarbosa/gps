@@ -15,83 +15,63 @@ class CertidaoNewController extends Controller{
    public function cnp(){
     if(isset($_GET['cpf']) && !empty($_GET['cpf'])){
          $cpf = addslashes($_GET['cpf']);
-            $retorno = $this->ProcurarDados($cpf);
+            //traz os dados da função Procurar Dados
+            $retorno = $this->ProcurarDados($cpf); 
 
-            print_r($retorno);
-            exit;
-
-            $this->RetornoDados($retorno);
-    }else{
-        echo "<hr> SEM GET"; 
-        echo "CPF: ";
-        //exit;
-     }
+            //Função que encaminha a mensagem retornada para o html do view da certidão
+            $this->Retorno($retorno); 
     }
+   }
 
-    private function ProcurarDados($cpf){    
-        //1 - consulta cadastro do servidor. || SE TIVER CPF CADASTRADO PASSO 2: VERIFICA SE HÁ PROCESSO EM ABERTO, 
-        //SENÃO PASSO 3: VERIFICA SE HÁ DENUNCIA EM ABERTO, SENÃO TIVER TAMBÉM A DENÚNCIA 
-        if($dados['servidor'] = $this->consultarServidor($cpf)){
+        private function ProcurarDados($cpf){    
+            //1 - Consulta tabela de servidores por CPF pra verificar se já fez ou faz parte do quadro
+            $servidor = new CertidaoNew_Model($cpf);
+            if($dados['servidor'] = $servidor->consultarServidor($cpf)){
+               foreach($dados['servidor'] as $s){
+                   $servidor = $dados['servidor'];
+                    return $this->procurarProcesso($servidor);      
+               }
+            }else{
+                return $dados['dadosCertidao'] = "O CPF ".$cpf ."NÃO PERTENCE OU PERTENCEU AO QUADRO DE SERVIDORES";
+            }
+        }
+
+        public function procurarProcesso($servidor){
+            $servidor = $servidor;
+            foreach($servidor as $s){
+                $cpf = $s->cpf;
+    
                 //2 - consulta a tabela de processados
                 $processados = new CertidaoNew_Model($cpf);
-                if($dados['processado'] = $processados->consultarProcessados($cpf)){
-                    foreach($dados['processado'] as $p){}
-                    $msg = "O(A} SERVIDOR(A): { $p->nome_servidor } CPF/MF Nº.: { $p->cpf }  TEM PROCESSO ADMINISTRATIVO EM ANDAMENTO";
-                    return $msg;
-                
-                }else{
+                if($dados['processado'] = $processados->consultarProcessados($cpf) == true){
+                    foreach($dados['processado'] as $d){
+                        $dados['mensagem'] = "O(A} SERVIDOR(A)  ". $d->nome_servidor . "CPF: Nº ". $d->cpf ." TEM PROCESSO ADMINISTRATIVO EM ANDAMENTO";
+                    }
+                 }else{
                     $denunciados = new CertidaoNew_Model($cpf);
                     if($dados['denunciados'] = $denunciados->consultarDenunciado($cpf)){
                         foreach($dados['denunciados'] as $d){}
-                            $msg = "O(A} SERVIDOR(A):  $d->nome_servidor, CPF: Nº $d->cpf, TEM DENUNCIA EM ANDAMENTO";
-                            return $msg;
-           }else{
-                foreach($dados['servidor'] as $s){}
-                    $msg = "NÃO HÁ PROCESSO EM ABERTO EM DESFAVOR DE: ". $s->nome_servidor .", CPF: Nº ".$s->cpf;
-                    return $msg;
-           }
-        }
-           
-
-        }else{//else do if 3
-            $msg = "O CPF ". $cpf . " NÃO PERTENCE OU PERTENCEU AO QUADRO DE SERVIDORES DESTA MUNICIPALIDADE";
-            return $msg;
+                            $dados['mensagem'] = "O(A} SERVIDOR(A)  ". $d->nome_servidor . "CPF: Nº ". $d->cpf ." TEM DENÚNCIA EM ABERTO ";
+                    }else{
+                            $dados['mensagem'] = "O(A} SERVIDOR(A) ". $s->nome_servidor ." CPF: Nº.: ". $s->cpf ." NÃO TEM NENHUM PROCESSO EM ANDAMENTO NO MEMENTO";                    }
+                    }
+                }
+                      return $dados['mensagem'];
         }
 
-    }
-
-    //Consulta tabela de servidores por CPF pra verificar se já fez ou faz parte do quadro
-     private function ConsultarServidor($cpf){
-        $servidor = new CertidaoNew_Model($cpf);
-        if($daddos['servidor'] = $servidor->consultarServidor($cpf)){
-            return true;
-        }else{
-            return false;
-        }
-     }
-
-    
-     public function RetornoDados($retorno){
-        if(isset($retorno)){
-               foreach($retorno as $d){
-                    $nome = ($d[0]->nome_servidor);
-                    $numeroCpf = ($d[0]->cpf);
-                    $certifica = ", tem processo em andamento para ";
-                    $dados['dadosCertidao'] = array($nome, $numeroCpf, $certifica);
-               } //fim do foreach
-            } //fim do if isset
-
-          $dados["view"] = "certidao/index";
-          $this->load("template", $dados);
-
+     public function Retorno($retorno){
+     //Função que encaminha a mensagem retornada para o html do view da certidão
+            $certifica = $retorno;
+            $dados['dadosCertidao'] = $retorno;
+            $dados["view"] = "certidao/index";
+            $this->load("template", $dados);
     }// fim do método retorno
     
     public function imprimir(){
+    //Pega os dados (textos e imagem) da variável html e imprime 
           if(isset($_GET['html']) && !empty($_GET['html'])){
                $html = $_GET['html'];
-               print_r($html);
-               //exit;
-               
+
                $mpdf = new \Mpdf\Mpdf();
                $mpdf->WriteHTML($html);
                $mpdf->Output();

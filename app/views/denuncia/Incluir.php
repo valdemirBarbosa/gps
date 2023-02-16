@@ -16,7 +16,7 @@
 	<tr>
 	<td>
 		<label for="denuncianteLst" class="denunciante">Denunciante</label>
-			<select autocomplete name="lst_id_denunciante" id="denuncianteLst" class="denuncianteLst">
+			<select autocomplete name="id_denunciante" id="denuncianteLst" class="denuncianteLst">
 				<option>Selecione o denunciante</option>
 
 				<?php foreach($denunciante as $d){
@@ -47,7 +47,7 @@
 	<tr>
 		<td>
 			<label>número do documento</label>
-			<input name="txt_numero_documento" type="text" placeholder="número do documento">
+			<input id="dataMask" name="txt_numero_documento" type="text" placeholder="número do documento">
 		</td>
 		<td>
 

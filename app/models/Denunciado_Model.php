@@ -21,7 +21,13 @@ class Denunciado_Model  extends Model{
         $sql = "SELECT * FROM denunciados as d INNER JOIN servidor as s ON d.id_servidor = s.id_servidor WHERE d.id_denuncia = $id_denuncia";
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
+    }
 
+    //selecionar todos os denunciados por Id - serve FecharDenunciaProcessoController
+    public function getDenunciadoId($id_denuncia){
+        $sql = "SELECT * FROM denunciados as d INNER JOIN denunciados as dncd ON d.id_denuncia = dncd.id_denuncia WHERE dncd.id_denuncia = $id_denuncia";
+        $qry = $this->db->query($sql);
+        return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
 
     public function getDenunciados($nome, $cpf){
@@ -121,7 +127,6 @@ class Denunciado_Model  extends Model{
             $sql = $this->db->prepare($sql);
             $sql->bindValue(":id", $id_denunciado);
             $sql->execute();
-
             return $qry->fetchAll(\PDO::FETCH_OBJ);
         }else{
             return false;

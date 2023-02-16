@@ -1,13 +1,15 @@
 		<?php 
         //$view = "denuncia/index"; 
-        $id_denuncia = isset($_GET['id_denuncia']) ? $_GET['id_denuncia'] : 0;
-        $id_fase = isset($_GET['id_fase']) ? $_GET['id_fase'] : 0;
-        $id_processo = isset($_GET['id_processo']) ? $_GET['id_processo'] : 0;
-      //  exit;
-
+        
+        $id_denuncia = isset($id_da_denuncia) ? $id_da_denuncia : 0;
+        if(isset($processo)){
+            foreach($processo as $p){
+                @$id_processo = $p->id_processo;
+                @$id_fase = $p->id_fase;
+            }
+        }
 
         if(isset($id_denuncia) && $id_denuncia > 0){
-            
             echo '<div class="base-home">
 		    <h1 class="titulo-pagina">Denúncia - upload</h1>
     	    </div>';
@@ -46,11 +48,11 @@
                 <input type="hidden" name="id_denuncia" value="<?php echo $id_denuncia ?>">
             </fieldset>
         <br><br>
-       </form>
+   </form>
 
 <?php
     if(isset($arquivo)){?>
-       <form method="POST" action="<?php echo  URL_BASE . "Upload/excluir" ?>">
+       <form method="POST" enctype="multipart/form-data" action="<?php echo  URL_BASE . "Upload/excluir" ?>">
             <fieldset>
                 <legend>Arquivos anexados</legend>
                     <table>
@@ -74,12 +76,16 @@
                         <?php
                             $caminho = $arq->caminho;
                             $arquivo = $arq->arquivo;
+                            
                         ?>
 
                         <td> 
-                            <a href="<?php echo URL_BASE . 'downloads/?path='.$caminho.'&file='.$arquivo ?>"></a> baixar </a>
-<!-- <a href="../../uploads/arquivos/&file='$arquivo'" download="c:/relatorio.pdf"></a> baixar </a> -->
-    					</td>
+<!--                            <a href="<?php echo $caminho . $arquivo ?>" download>baixar </a> 
+                            <a href="<?php echo URL_BASE . 'downloads/?path='.$caminho.'&file='.$arquivo ?>"> download> baixar </a>
+-->
+                            <a href="<?php echo URL_BASE . 'downloads/?path='.$caminho.'&file='.$arquivo ?>" download="<?php echo $arquivo ?>">Baixar </a>
+
+</td>
                         <td><input type="submit" value="Excluir"></td>
                             <input type="hidden" name="id_denuncia" value="<?php echo $id_denuncia ?>">
                             <input type="hidden" name="id_upload" value="<?php echo $arq->id_upload ?>">
@@ -106,6 +112,8 @@
 ?>
  <!-- Formulário com os dados do processo onde serão anexados os arquivos -->
     <div class="EditarDenuncia">
+<!-- Formulário para  upload -->
+<form class="upload" method="POST" enctype="multipart/form-data" action="<?php echo  URL_BASE . "Upload/recebedor" ?>">
 
 <br>
 <fieldset>
@@ -123,7 +131,7 @@
         }
     ?>
     <tr>
-    <td><input type="text" value="<?php echo $p->numero_processo ?>" name="numero"></td>
+    <td><input type="text" value="<?php echo $p->numero_processo ?>" name="numero_processo"></td>
     <td>	<label>fase</label>
                 <input value="<?php echo $p->fase ?>" >
         </td>
@@ -131,8 +139,6 @@
     </tr>   
 </table>
 
-<!-- Formulário para  upload -->
-<form class="upload" method="POST" enctype="multipart/form-data" action="<?php echo  URL_BASE . "Upload/recebedor" ?>">
     <fieldset><legend>Upload de arquivo</legend>
         <input type="file" name="arquivo">
         <label>Descrição do arquivo</label>
@@ -174,7 +180,7 @@ if(isset($arquivo)){?>
                 ?>
 
                 <td> 
-                    <a href="<?php echo URL_BASE . 'downloads/?path='.$caminho.'&file='.$arquivo ?>"> baixar </a>
+                            <a href="<?php echo URL_BASE . 'downloads/?path='.$caminho.'&file='.$arquivo ?>" download>Baixar </a>
                 </td>
                 <td><input type="submit" value="Excluir"></td>
                     <input type="hidden" name="id_processo" value="<?php echo $id_id_processo ?>">

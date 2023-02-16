@@ -96,29 +96,30 @@ class Portaria_Model extends Model{
         return $sql->fetchAll(\PDO::FETCH_OBJ);
     }
     
-    
-
-    public function InsertEditar($comando, $filtro, $id_portaria, $tabela, $id_processo, $numero_processo, $numero, $tipo, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user){
-        if($this->ExistePortaria($tabela, $id_processo, $numero_processo, $numero)){
-            $sql = $comando." ".$tabela." SET id_portaria =:id_portaria, id_processo =:id_processo, numero_processo =:numero_processo, numero =:numero, data_elaboracao =:data_elaboracao, conteudo =:conteudo, data_publicacao =:data_publicacao, veiculo =:veiculo, prazo =:prazo, data_final =:data_final, dias_a_vencer =:dias_a_vencer, data_realizada =:data_realizada, prazo_atendido =:prazo_atendido, observacao =:observacao, anexo =:anexo, user =:user
-            ".$filtro;
-            $sql = $this->db->prepare($sql);
-            $sql->bindValue(":id_portaria", $id_portaria); 
-            $sql->bindValue(":id_processo", $id_processo); 
-            $sql->bindValue(":numero_processo", $numero_processo);
-            $sql->bindValue(":numero", $numero);
-            $sql->bindValue(":data_elaboracao", $data_elaboracao);
-            $sql->bindValue(":conteudo", $conteudo);
-            $sql->bindValue(":data_publicacao", $data_publicacao);
-            $sql->bindValue(":veiculo", $veiculo);
-            $sql->bindValue(":prazo", $prazo);
-            $sql->bindValue(":data_final", $data_final);
-            $sql->bindValue(":dias_a_vencer", $dias_a_vencer);
-            $sql->bindValue(":data_realizada", $data_realizada);
-            $sql->bindValue(":prazo_atendido", $prazo_atendido);
-            $sql->bindValue(":observacao", $observacao);
-            $sql->bindValue(":anexo", $anexo);
-            $sql->bindValue(":user", $user);
+        public function InsertEdit($comando, $filtro, $id_portaria, $tabela, $id_processo, $numero_processo, $numero, $tipo, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user){
+            if($this->ExistePortaria($tabela, $id_processo, $numero_processo, $numero) == false){
+                $sql = $comando." ".$tabela." SET id_portaria =:id_portaria, id_processo =:id_processo, numero_processo =:numero_processo, numero =:numero, data_elaboracao =:data_elaboracao, conteudo =:conteudo, data_publicacao =:data_publicacao, veiculo =:veiculo, prazo =:prazo, data_final =:data_final, dias_a_vencer =:dias_a_vencer, data_realizada =:data_realizada, prazo_atendido =:prazo_atendido, observacao =:observacao, anexo =:anexo, user =:user
+                ".$filtro;
+                $sql = $this->db->prepare($sql);
+                $sql->bindValue(":id_portaria", $id_portaria); 
+                $sql->bindValue(":id_processo", $id_processo); 
+                $sql->bindValue(":numero_processo", $numero_processo);
+                $sql->bindValue(":numero", $numero);
+                $sql->bindValue(":data_elaboracao", $data_elaboracao);
+                $sql->bindValue(":conteudo", $conteudo);
+                $sql->bindValue(":data_publicacao", $data_publicacao);
+                $sql->bindValue(":veiculo", $veiculo);
+                $sql->bindValue(":prazo", $prazo);
+                $sql->bindValue(":data_final", $data_final);
+                $sql->bindValue(":dias_a_vencer", $dias_a_vencer);
+                $sql->bindValue(":data_realizada", $data_realizada);
+                $sql->bindValue(":prazo_atendido", $prazo_atendido);
+                $sql->bindValue(":observacao", $observacao);
+                $sql->bindValue(":anexo", $anexo);
+                $sql->bindValue(":user", $user);
+    //            print_r($sql);
+     //           exit;
+            
             $sql->execute();
         }else{
             return $sql = $this->ExistePortaria($tabela, $id_processo, $numero_processo, $numero);

@@ -5,42 +5,24 @@
 ?>
 <div class="base-home">
 	<h1 class="titulo-pagina">Processos finalizados</h1>
-</div
+</div>
 
-<?php //paramentros para pesquisa dos formulários de denuncia e processo
- 		$tabela = 'denuncia';
- 		$view = 'denuncia/index';
-//		$retorno = 'denunciaRet';
-?>
+<form method="GET" action="<?php echo URL_BASE . 'Finalizados/Consulta'; ?>" >
 
-<div class="pai">
-	<div class="filho1">
-		<form method="POST" action="<?php echo URL_BASE . 'Pesquisa/finalizados'; ?>" >
-		<input type="hidden" name="view" value="<?php echo $view ?>">
-		<input type="hidden" name="retorno" value="<?php echo $retorno ?>">
-		<input type="hidden" name="tabela" value='<?php echo $tabela ?>'>
+<?php include "app/views/radio.php"; ?>
 
 		<label>Pesquisa</label> 
 			<select name="pesquisa">
 				<option value="1">Número do documento</option>
-				<!-- <option value="2">Número do Processo</option> !-->
+				<option value="2">Número do Processo</option>
 				<option value="3">Nome</option>
-				<option hidden value="4">CPF</option> <!-- Ocultado pois na tabela denuncia não há cpf -->
-				<option type="number" value="6">Id da denúncia</option>
+				<option value="4">CPF</option> <!-- Ocultado pois na tabela denuncia não há cpf -->
+			<!--	<option type="number" value="6">Id da denúncia</option> -->
 			</select>
 
-			<input type="text" autofocus name="valorPreenchidoUsuario"> 
+			<input requird type="text" autofocus name="valorPreenchidoUsuario"> 
 			<input type="submit" value="pesquisar">
-		</div>
-
-<!-- 		<div class="filho2">
-			<a href="<?php //echo URL_BASE . "finalizados/Novo" ?>" class="btn-inc">Finalizar </a>
-		</div>
- -->	</form>
-	</div> <!-- FIM DA DIV pai -->
-
-
-<div class="base-lista">
+</form>
 		<table border="1" cellspacing="0" cellpadding="0">
 		  <thead>
 			<tr>
@@ -109,4 +91,3 @@
 					
 
 				?>
-	</div>

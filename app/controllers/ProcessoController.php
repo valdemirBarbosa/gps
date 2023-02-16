@@ -47,6 +47,12 @@ class ProcessoController extends Controller{
         $this->load("template", $dados);
    }
 
+    public function PegarProcessadoPorProcesso($numero_processo){
+        $processo = new Processo_Model();
+        $dados = $processo->PegarProcessado($numero_processo);
+        return $dados;
+    }
+
    public function pads(){ //Seleciona de Processo tudo que for PAD - PROCESSO ADMINISTRATIVO
         $processo = new Processo_Model();
         $parametro = 3;
@@ -94,36 +100,37 @@ class ProcessoController extends Controller{
           $data_instauracao = isset($_POST['data_instauracao']) ? $_POST['data_instauracao'] : "";
           $data_encerramento = "";
           $observacao = isset($_POST['txt_observacao']) ? addslashes($_POST['txt_observacao']) : "";
-
-          $user = 1;
+          $data_fechamento = "000-00-00"; //data de fechamento (no banco: data_fechamento) na tabela de processados
+          $data_digitacao = ""; 
+          $user = $_SESSION['id_usuario'];
     
 //Verifica se será postado o "id" se sim será Edição, senão inclusão
      if($id_processo){
           $processo->Editar($id_processo, $id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $data_encerramento, $user, $descricao);
-    //    echo "entrou pra editar processo<br> ";
-    //    exit;
+//        echo "entrou pra incluir processo e processadosl 156 <br> ";
+//        $ar = array($id_denuncia, $id_denunciado, $id_fase, $numero_processo, $data_instauracao, $data_encerramento, $observacao, $user);
+//        print_r($ar);
      }
      
      if($id_processo == NULL){
         //echo "entrou pra incluir processo e processadosl 156 <br> ";
         //exit;     
           $processo->Incluir($id_denuncia, $id_denunciado, $id_fase, $numero_processo, $data_instauracao, $data_encerramento, $observacao, $user);
-          $this->incluirDenunciadoNoProcesso($id_denuncia, $id_denunciado, $numero_processo, $data_instauracao);
+          $this->incluirDenunciadoNoProcesso($id_denuncia, $id_denunciado, $numero_processo, $data_instauracao, $data_fechamento, $data_digitacao, $user);
      }else{
-          $this->incluirDenunciadoNoProcesso($id_denuncia, $id_denunciado, $numero_processo, $data_instauracao);
+          $this->incluirDenunciadoNoProcesso($id_denuncia, $id_denunciado, $numero_processo, $data_instauracao, $data_fechamento, $data_digitacao, $user);
         echo "entrou pra incluir somente processado, pois já existe processo cadastrado <br> ";
-        exit;
      }
     }
 
      // Após incluir os dados na tabela de processo vem pra este método incluir o denunciado na tabela de processados
-     public function incluirDenunciadoNoProcesso($id_denuncia, $id_denunciado, $numero_processo, $data_instauracao){
+     public function incluirDenunciadoNoProcesso($id_denuncia, $id_denunciado, $numero_processo, $data_instauracao, $data_fechamento, $data_digitacao, $user){
           $processar = new Processado_Model();
           
 //      echo "entrou mo método (incluirDenunciadoNoProcesso) antes do if<br> ";
  //       exit;
 
-          if($processar->IncluirServProcesso($id_denuncia, $id_denunciado, $numero_processo, $data_instauracao)){
+          if($processar->IncluirServProcesso($id_denuncia, $id_denunciado, $numero_processo, $data_instauracao, $data_fechamento, $data_digitacao, $user)){
             echo "<br>entrou mo método (incluirDenunciadoNoProcesso) ProcessoController, l175, depois do if. Ou seja, foi para o model incluir <br> ";
 
 
@@ -138,8 +145,8 @@ class ProcessoController extends Controller{
                echo "Deve ter fechdo o denunciado<br>";
                header("Location:". URL_BASE . "processo/index");
           }else{
-               $processado = $processar->VerSeExisteProcessado($id_denuncia, $id_denunciado, $numero_processo, $data_instauracao);
-                foreach($processado as $p){
+               $processado['data'] = $processar->VerSeExisteProcessado($id_denuncia, $id_denunciado, $numero_processo, $data_instauracao);
+                foreach($processado['data'] as $p){
                     $msg = "O(A) denunciado(a): ".$p->nome_servidor." - id da denuncia ".$p->id_denuncia." id do denunciado ".$p->id_denunciado." já está incluído no processo número ".$p->numero_processo;
                     $this->Error($msg);
                }

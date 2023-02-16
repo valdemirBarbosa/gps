@@ -4,11 +4,15 @@
 	}
 ?>
 
-<div class="base-home">
-	<h1 class="titulo-pagina">Andamento do Processo</h1>
-</div>
+<div class="areaTrabalho"> 
+	<div class="base-home"> 
+		<h1 class="titulo-pagina">Andamento do Processo</h1>
+	</div>
 
-<div class="frmConsulta">  
+	<div class="superiorAndamento">
+<!--	<div class="col1"> OCULTADO PORQUE QUANDO MINIMIZA FICA MELHOR SEM A DIV A VISUZALIZAÇÃO -->
+			<?php include "app/views/radio.php";
+ ?>
 <form method="GET" action="<?php echo URL_BASE . 'Andamento/porProcesso/'; ?>" >
 
 <label>Pesquisa por número do processo</label>
@@ -21,10 +25,10 @@
 				foreach($processo as $pd){ 
 				}} ?>
 
-	<table>
-	<form action="<?php  echo URL_BASE ."Processo/Salvar" ?>" method="POST">
+<table>
+<form action="<?php  echo URL_BASE ."Processo/Salvar" ?>" method="POST">
 
-<?php
+	<?php
 		if(isset($processo)){
 			foreach($processo as $pd){ 
 		}
@@ -50,19 +54,20 @@
 					}else{
 						echo 0;
 					} ?>" >
+		</fieldset>		
 
-				<label>fase</label>
+		<br/>
+	<fieldset>
+		<legend>informações do processo</legend>
+
+		<label>fase</label>
 				<input name="txt_id_fase" value="<?php if(!empty($pd->fase)){
 					echo $pd->fase;
 				 }else{
 					 echo "";
 				 } ?>" >
 
-		</fieldset>		
-
-	<fieldset>
-		<legend>informações do processo</legend>
-			<label>Número do Processo</label>
+		<label>Número do Processo</label>
 			<input class="txt_numero_processo" name="txt_numero_processo" type="number" placeholder="Insira o número do processo" value="<?php if(!empty($pd->numero_processo)){echo $pd->numero_processo;} ?>">
 			
 				<?php 
@@ -77,7 +82,16 @@
 	</table>
 </form>
 
-	<table border="2">
+<!--	</div>  Fim da coluna1 -->
+
+<!--		<div class="col2"> -->
+
+<!--		</div> -->
+	</div> <!--	fim da div superiorAndamento  -->
+
+ 	<div class="inferior">
+		<div class="tableResponsividade">
+		<table>
 		  <thead>
 			<tr>
 				<th align="center" width="5%">Id</th>
@@ -97,17 +111,13 @@
 				<td><?php echo date('d/m/Y', strtotime($oco->data_ocorrencia)) ?> </td> 
 				<td><?php echo $oco->ocorrencia ?> </td>
 				<td align="center"><?php echo $oco->anexo ?> </td>
-		  </div>		
+
 				<td>
-					<div class="btn-editar"> 
-						<a href="<?php echo URL_BASE ."Ocorrencia/Edit/".$oco->id_ocorrencia ?>">Editar</a>
-	  				</div>
+					<a class="btn btn info" href="<?php echo URL_BASE ."Ocorrencia/Edit/".$oco->id_ocorrencia ?>">Editar</a>
 				</td>
 
 				<td>
-					<div class="btn-excluir"> 
-						<a href="<?php echo URL_BASE ."Ocorrencia/Excluir/".$oco->id_ocorrencia ?>" >Excluir</a>
-					</div>
+					<a class="btn danger" href="<?php echo URL_BASE ."Ocorrencia/Excluir/".$oco->id_ocorrencia ?>" >Excluir</a>
 				</td>
 	  		</tr>
 				<?php }
@@ -133,5 +143,13 @@
 
    </table>
 </div>
-</body>
-</html>
+							
+				</div> <!-- FIM DA DIV base-lista !-->
+        	</div>
+
+	</div>
+
+ </div> <!- fim da div areaTrabalho 
+
+
+

@@ -38,9 +38,10 @@
 
 	<fieldset>				
 					<input type="hidden" name="acao" value="Editar">
-					<input type="submit" value="Incluir" class="btn">
+					<input type="submit" value="Salvar" class="btn">
 					<input type="reset" name="Reset" id="button" value="Limpar" class="btn">
-					<input name="Voltar" onclick="history.back()" type="submit" value="Voltar" class="btn">
+		<!--			<input name="Voltar" onclick="history.back()" type="submit" value="Voltar" class="btn">
+        -->
 		</fieldset>
     <div class="fim">
 	</div>

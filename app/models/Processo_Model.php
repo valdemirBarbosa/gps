@@ -10,7 +10,7 @@ class Processo_Model extends Model{
     }
 
     public function lista(){
-        $sql = "SELECT * FROM processo as p 
+$sql = "SELECT * FROM processo as p 
         INNER JOIN fase as f 
         ON p.id_fase = f.id_fase 
         INNER JOIN denuncia as d
@@ -22,7 +22,8 @@ class Processo_Model extends Model{
         INNER JOIN processados as prcd
         ON prcd.id_denunciado = dncd.id_denunciado
         GROUP BY d.numero_documento
-        ORDER BY p.numero_processo"; 
+        ORDER BY p.numero_processo";
+
         $qry = $this->db->query($sql);
         return $qry->fetchAll(\PDO::FETCH_OBJ);
     }
@@ -49,41 +50,38 @@ class Processo_Model extends Model{
 
     //lista os processo filtrados pelos menus de uma das fases (1-pp, 2-sindicancia, 3-processo)
     public function ProcessoFase($parametro){ //Seleciona da tabela processo todos os registro cuja fase seja igual ao parâmetro
-        $sql = "SELECT * FROM processo as p 
+        $sql = "SELECT DISTINCT p.id_processo, p.numero_processo, p.data_instauracao, p.observacao, f.fase, d.id_denuncia, d.numero_documento FROM processo as p 
         INNER JOIN fase as f 
         ON p.id_fase = f.id_fase 
         INNER JOIN denuncia as d
-        ON d.id_denuncia = p.id_denuncia
+        ON d.id_denuncia = p.id_denuncia 
         WHERE p.id_fase = $parametro";
 
         if($qry = $this->db->query($sql)){
             return $qry->fetchAll(\PDO::FETCH_OBJ);
             }else{
-                return false;
+                false;
             }
     }
 
     //lista os processo filtrados pelos menus de uma das fases (1-pp, 2-sindicancia, 3-processo)
     public function ProcessoFaseMenu($parametro, $data_encerramento){ //Seleciona da tabela processo todos os registro cuja fase seja igual ao parâmetro
-        $sql = "SELECT * FROM processo as p 
-        INNER JOIN fase as f 
-        ON p.id_fase = f.id_fase 
+        $sql = "SELECT DISTINCT p.id_processo, p.numero_processo, f.id_fase, p.data_instauracao, p.observacao, f.fase, d.id_denuncia, d.numero_documento FROM processo as p 
         INNER JOIN denuncia as d
         ON d.id_denuncia = p.id_denuncia
         INNER JOIN processados as prcd
-        ON d.id_denuncia = prcd.id_denuncia
+        ON p.id_denuncia = prcd.id_denuncia
+        INNER JOIN fase as f
+        ON p.id_fase = f.id_fase
         INNER JOIN denunciados as dncd
-        ON prcd.id_denuncia = dncd.id_denuncia
+        ON dncd.id_denunciado = prcd.id_denunciado
         INNER JOIN servidor as s
-        ON dncd.id_servidor = s.id_servidor
-        WHERE p.id_fase = $parametro AND p.data_encerramento = $data_encerramento";
-//        print_r($sql);
-//        exit;
-        
+        ON dncd.id_servidor = s.id_servidor 
+        WHERE p.id_fase = $parametro AND p.data_encerramento = $data_encerramento GROUP BY p.numero_processo";
         if($qry = $this->db->query($sql)){
             return $qry->fetchAll(\PDO::FETCH_OBJ);
             }else{
-                return false;
+                false;
             }
     }
 
@@ -121,7 +119,8 @@ class Processo_Model extends Model{
 
     // Consultar o processo por nome do processado
     public function porServidor($condicao){
-        $sql = "SELECT * FROM processo as p 
+        $sql = "SELECT DISTINCT p.id_processo, d.id_denuncia, d.numero_documento, p.id_fase, f.fase, p.numero_processo, p.data_instauracao, p.data_encerramento, p.observacao, 
+               prcd.id_processado, s.id_servidor, s.cpf, s.nome_servidor, prcd.data_fechamento FROM processo as p 
         INNER JOIN fase as f 
         ON p.id_fase = f.id_fase 
         INNER JOIN denuncia as d
@@ -130,23 +129,23 @@ class Processo_Model extends Model{
         ON d.id_denuncia = dncd.id_denuncia
         INNER JOIN servidor as s
         ON s.id_servidor = dncd.id_servidor
-        WHERE s.$condicao";
+        INNER JOIN processados as prcd
+        ON prcd.id_denuncia = dncd.id_denuncia
+        WHERE s.$condicao 
+        GROUP BY p.numero_processo ORDER BY p.id_processo";
+        
         if($sql = $this->db->query($sql)){
             return $sql->fetchAll(\PDO::FETCH_OBJ);
-        }else{
-            false;
         }
     }
 
     // Consultar o processo por número da denúncia
     public function porDenuncia($condicao){
-        $sql = "SELECT * FROM processo as p 
-        INNER JOIN fase as f 
-        ON p.id_fase = f.id_fase 
-        INNER JOIN denuncia as d
-        ON p.id_denuncia = d.id_denuncia
-        WHERE d.$condicao";
-        
+        $sql = "SELECT DISTINCT p.id_processo, d.id_denuncia, d.numero_documento, p.id_fase, f.fase, p.numero_processo, p.data_instauracao, p.data_encerramento, p.observacao FROM processo as p 
+                INNER JOIN fase as f
+                ON p.id_fase = f.id_fase
+                INNER JOIN denuncia as d 
+                ON d.id_denuncia = p.id_denuncia WHERE d.$condicao";
         if($sql = $this->db->query($sql)){
             return $sql->fetchAll(\PDO::FETCH_OBJ);
         }else{
@@ -156,7 +155,8 @@ class Processo_Model extends Model{
 
     // Consultar o processo por número do processo
     public function porProcesso($condicao){
-        $sql = "SELECT * FROM processo as p 
+        $sql = "SELECT DISTINCT p.id_processo, d.id_denuncia, d.numero_documento, p.id_fase, f.fase, p.numero_processo, p.data_instauracao, p.data_encerramento, p.observacao, 
+               prcd.id_processado, s.id_servidor, s.cpf, s.nome_servidor, prcd.data_fechamento FROM processo as p 
         INNER JOIN denuncia as d
         ON d.id_denuncia = p.id_denuncia
         INNER JOIN processados as prcd
@@ -167,12 +167,26 @@ class Processo_Model extends Model{
         ON dncd.id_denunciado = prcd.id_denunciado
         INNER JOIN servidor as s
         ON dncd.id_servidor = s.id_servidor
-        WHERE p.$condicao";
+        WHERE p.$condicao GROUP BY p.numero_processo";
+
+        if($sql = $this->db->query($sql)){
+            return $sql->fetchAll(\PDO::FETCH_OBJ);
+        }
+    }
+  
+    // retornar os processados vinculados ao processo pelo número do processo
+    public function PegarProcessado($numero_processo){
+        $sql = "SELECT s.id_servidor, s.cpf, s.nome_servidor, p.data_fechamento FROM processados as p 
+        INNER JOIN denunciados as d
+        ON d.id_denunciado = p.id_denunciado
+        INNER JOIN servidor as s
+        ON d.id_servidor = s.id_servidor
+        WHERE p.numero_processo = $numero_processo";
 
         if($sql = $this->db->query($sql)){
             return $sql->fetchAll(\PDO::FETCH_OBJ);
         }else{
-            return false;
+            false;
         }
     }
 
@@ -212,8 +226,6 @@ class Processo_Model extends Model{
             $sql->bindValue(":dt_encerra", $data_encerramento);
             $sql->bindValue(":user", $user);
             $sql->execute();
-            //print_r($sql);
-            //exit;
             return $sql->fetchAll(\PDO::FETCH_OBJ);
         }else{
             return false;
@@ -231,14 +243,8 @@ class Processo_Model extends Model{
         $sql->execute();
      
         if($sql->rowCount()>0){
-//          echo "verificou-se que há cadastro <br> ";
-  //        exit;
-     
             return true;
         }else{
-        //  echo "verificou-se que NÃO há cadastro <br> ";
-          //exit;
-
             return false; 
         } 
     }
@@ -258,7 +264,6 @@ class Processo_Model extends Model{
 //Editar, alterar dados na tabela de sindicância
     public function Editar($id_processo, $id_denuncia, $id_fase, $numero_processo, $data_instauracao, $observacao, $data_encerramento, $anexo, $user){
         $sql = "UPDATE processo SET id_denuncia = :id_denuncia, id_fase = :id_fase, numero_processo = :numero_processo, data_instauracao = :data_instauracao, observacao = :observacao, data_encerramento =:data_encerramento, anexo = :anexo, user = :user WHERE id_processo = :id"; 
-
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":id", $id_processo);
         $sql->bindValue(":id_denuncia", $id_denuncia);

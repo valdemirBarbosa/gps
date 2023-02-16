@@ -56,7 +56,7 @@ class DenunciaController extends Controller{
             $dados['anexo'] = $lista->upLoadedDenuncia($id_denuncia);
             
             $denunciante = new Denunciante_Model();
-            $dados['denunciante'] = $denunciante->lista();
+            $dados['denunciante'] = $denunciante->listaAtivos();
             
             $tiposDocumentos = new TipoDocumento_Model();
             $dados['tipo_doc'] = $tiposDocumentos->lista();
@@ -70,21 +70,21 @@ class DenunciaController extends Controller{
        
        public function Excluir($id_denuncia){
          $denuncias = new Denuncia_Model();
-         $dados["denuncia"] = $denuncias->getDenuncia($id_denuncia);
          $denuncias->Deletar($id_denuncia);
          $this->load("template", $dados);
          header("Location:" . URL_BASE . "denuncia");
-    }
+       }
      
        public function Salvar(){
          $d = new Denuncia_Model();
          $id_denuncia = isset($_POST['txt_id']) ? strip_tags(filter_input(INPUT_POST, "txt_id")) : NULL;
          $_SESSION['id_denuncia'] = $id_denuncia;
          $denuncia = isset($_POST['txt_denuncia']) ? strip_tags(filter_input(INPUT_POST, "txt_denuncia")) : " ";
-         $id_denunciante = $_POST['lst_id_denunciante'];
+         $id_denunciante = $_POST['id_denunciante'];
+
          $tipo_documento = $_POST['id_tipo_doc'];
          $numero_documento = $_POST['txt_numero_documento'];
-         $denunciados = $_POST['txt_denunciados'];
+         $denunciados = isset($_POST['txt_denunciados']) ? strip_tags(filter_input(INPUT_POST, "txt_denunciados")) : " ";
          $data_entrada = isset($_POST['txt_data_entrada']) ? strip_tags(filter_input(INPUT_POST, "txt_data_entrada")) : " ";
     
          //tratamento da data de anexação para o banco de dados
@@ -96,16 +96,16 @@ class DenunciaController extends Controller{
     
          $observacao = $_POST['txt_observacao'];
          $doc_anexo = $_POST["txt_documentos_anexados"];
-         $user = 1;
-    
+         $user = $_SESSION['id_usuario'];
+
          if($id_denuncia != NULL){
-               $d->Editar($id_denuncia, $denuncia, $id_denunciante, $tipo_documento, $numero_documento, $denunciados, $data_entrada, $observacao, $doc_anexo);
-              }
-    
-              if($id_denuncia == NULL){
-                  if($d->Incluir($id_denunciante, $denuncia, $tipo_documento, $numero_documento, $data_entrada, $denunciados, $observacao, $doc_anexo, $data_digitacao, $user)){
-                   header("Location:" . URL_BASE . "denuncia/lista");
-              }else{
+            $d->Editar($id_denuncia, $denuncia, $id_denunciante, $tipo_documento, $numero_documento, $denunciados, $data_entrada, $observacao, $doc_anexo, $user);
+          }
+
+          if($id_denuncia == NULL){
+              if($d->Incluir($id_denunciante, $denuncia, $tipo_documento, $numero_documento, $data_entrada, $denunciados, $observacao, $doc_anexo, $anexo, $data_digitacao, $user)){
+                header("Location:" . URL_BASE . "denuncia/lista");
+          }else{
                    $msg = "Já existe o mesmo tipo de documento ({$tipo_documento}) e com o mesmo número {($numero_documento)}";
                    $this->Error($msg);
               }

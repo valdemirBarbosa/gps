@@ -10,10 +10,10 @@ if(!isset($_SESSION['id_usuario'])){
 ?>
 
         <div class="base-home">
-    	<h1 class="titulo-pagina">Lista de denunciados e processados</h1>
-    
+        	<h1 class="titulo-pagina">Lista de denunciados e processados</h1>
         </div>
-        <div class="base-lista">
+  
+        <div class="base/-lista">
         	<span class="qtde">Há <b><?php if(isset($servidor)){
         		   		echo count($servidor);
     			}else{
@@ -22,6 +22,8 @@ if(!isset($_SESSION['id_usuario'])){
     	 ?></b> servidores(as) cadastrados(as)</span>
     
     	<!-- INCLUÍDO EM 29/07/2022                                                                                -->
+    	</div> <!-- fim da base-lista -->
+    	
     	<div class="base-home">
     	<h1 class="titulo-pagina"> Consulta servidor 
     		<?php  
@@ -41,16 +43,12 @@ if(!isset($_SESSION['id_usuario'])){
     		$_SESSION['view'] = $view; 
     		$_SESSION['tabela'] = $tabela; 
     ?>
-    <div class="pai">  
+    <div class="pai">    
     	<div class="filho1">  
     		<form method="POST" action="<?php echo URL_BASE . 'Pesquisa/cdp'; ?>" >
     				<label>Pesquisa</label>
     					<select name="pesquisa" class="select">
-    <!--
-    		Implementar primneiro pra liberar		
-    		<option value="1">Número documento da denúncia</option>
-    		<option value="2">NÚMERO DO PROCESSO</option>
-     -->						<option value="3">Nome</option>
+    						<option value="3">Nome</option>
     						<option value="4">CPF</option>
     					</select>
     				
@@ -61,9 +59,8 @@ if(!isset($_SESSION['id_usuario'])){
     					<input type="submit" value="pesquisar">
     
     		</form>
-    	</div>
+    	</div>  
     </div>
-    <!--                                                                                                      -->
     
     	<div class="tabela">	
     		<table width="100%" border="1" cellspacing="0" cellpadding="0">
@@ -92,7 +89,7 @@ if(!isset($_SESSION['id_usuario'])){
     		<?php
     		} ?>
     		</table>
-    
+  </div>  
     	<!-- registros da tabela de denunciados -->				
     	<div class="recuoTabNivel2">	
     	<table>
@@ -173,20 +170,21 @@ if(!isset($_SESSION['id_usuario'])){
     		</form>
     
     	</div>   <!-- fim da div recuoTabNivel3 -->
-    </div>					
     </div>
     </div>
     <?php } 
     	}
     	}?>
-    <!-- 				<div class="btn-editar">
+    
+    <!--
+        <div class="btn-editar">
     					<a href="<?php echo URL_BASE ."denunciado/Editar/".$denunciado->id_denunciado ?>" >Editar</a>
     			  	</div>
     				</td>
     				<td align="center">
     					<div class="btn-excluir">
     					<a href="<?php echo URL_BASE ."denunciado/Excluir/".$denunciado->id_denunciado ?>" >excluir</a>
-    			  	</div>	
-     -->
+    		  	</div>	
+    -->
 </body>
 </html>

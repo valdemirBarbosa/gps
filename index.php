@@ -14,8 +14,8 @@ if(isset($_SESSION['id_usuario']) && !empty($_SESSION['id_usuario'])){
         $horaDeAcesso = time();
         $_SESSION['horaDeAcesso'] = $horaDeAcesso;
         $email = addslashes($_POST['credencial']);
-        $senha = addslashes($_POST['chave']);
-
+        $chave = md5(addslashes($_POST['chave']));
+        $senha = $chave;
 
         try{
             $db = new PDO("mysql:dbname=".BANCO.";host=".SERVIDOR,USUARIO,SENHA, array(\PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
@@ -23,8 +23,12 @@ if(isset($_SESSION['id_usuario']) && !empty($_SESSION['id_usuario'])){
                 if($sql->rowCount() > 0){
                  $dado = $sql->fetch();
                  $id_usuario = $dado[0];
+                 $nome = strtolower($dado[1]);
+
                  $_SESSION['id_usuario'] = $id_usuario;
-                header("Location: index.php");
+                 $_SESSION['nome'] = $nome;
+                 
+                 header("Location: index.php");
             }else{
                 header("Location: index.php");
                 die();

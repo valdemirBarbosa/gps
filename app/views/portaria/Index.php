@@ -6,7 +6,8 @@
 </div>
 <script type="text/javascript" src="<?php URL_BASE . "/assets/js/funcoes.js" ?>"> </script>
 
-<div class="base-lista">
+<!-- <div class="base-lista">
+-->
 
 <form name="prazoVencimento" method="POST" action="<?php echo URL_BASE . 'portaria/filtrarPrazo' ?>">
 	<div class="textCabecalhoPortaria">

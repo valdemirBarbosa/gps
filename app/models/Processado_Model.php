@@ -24,24 +24,19 @@ class Processado_Model extends Model{
     }
 
     //incluir servidor na tabela de processados se ainda não estiver - vindo do processar controller
-    public function IncluirServProcesso($id_denuncia, $id_denunciado, $numero_processo, $data_instauracao){
+    public function IncluirServProcesso($id_denuncia, $id_denunciado, $numero_processo, $data_instauracao, $data_fechamento, $data_digitacao, $user){
         if($this->VerSeExisteProcessado($id_denuncia, $id_denunciado) == false){
-            echo "processado_MODEL incluirServProcesso. Não encontrou na tabela de processados. Pronto pra incluir<br>";
-     //       exit;
-            
-//            $sql = "INSERT INTO processados SET id_denuncia =:id_denuncia, id_denunciado =:id_denunciado, numero_processo =:numero_processo, data_instauracao =:data_inclusao";
-            $sql = "INSERT INTO processados (id_denuncia, id_denunciado, numero_processo, data_instauracao) VALUES (:id_denuncia, :id_denunciado, :numero_processo, :data_inclusao)";
-            echo "Data instauração do parâmentro do IncluirServProcesso - processado_MODEL l 34 ".$data_instauracao."<br>";
-
+//          $sql = "INSERT INTO processados SET id_denuncia =:id_denuncia, id_denunciado =:id_denunciado, numero_processo =:numero_processo, data_instauracao =:data_inclusao";
+            $sql = "INSERT INTO processados (id_denuncia, id_denunciado, numero_processo, data_instauracao, data_fechamento, data_digitacao, user) VALUES (:id_denuncia, :id_denunciado, :numero_processo, :data_inclusao, :data_fechamento, :data_digitacao, :user)";
             $sql = $this->db->prepare($sql);
             $sql->bindValue(":id_denuncia", $id_denuncia);
             $sql->bindValue(":id_denunciado", $id_denunciado);
             $sql->bindValue(":numero_processo", $numero_processo);
             $sql->bindValue(":data_inclusao", $data_instauracao);
-       
-            echo "<br>Parei aqui no Processado_Model. Linha 39<br>";
-            print_r($sql);
-
+            $sql->bindValue(":data_inclusao", $data_instauracao);
+            $sql->bindValue(":data_fechamento", $data_fechamento);
+            $sql->bindValue(":data_digitacao", $data_digitacao);
+            $sql->bindValue(":user", $user);
             $sql->execute();
             return true;
         }else{
@@ -57,9 +52,7 @@ class Processado_Model extends Model{
                       INNER JOIN servidor as s
                       ON d.id_servidor = s.id_servidor
                       WHERE p.id_denuncia =:id_denuncia AND p.id_denunciado =:id_denunciado";
-
-
-$sql = $this->db->prepare($sql);
+        $sql = $this->db->prepare($sql);
         $sql->bindValue(':id_denuncia', $id_denuncia);
         $sql->bindValue(':id_denunciado', $id_denunciado);
         $sql->execute();
@@ -67,21 +60,19 @@ $sql = $this->db->prepare($sql);
         if($sql->rowCount() > 0){
             return $sql->fetchAll(\PDO::FETCH_OBJ);
         }else{  
-            return false;
+            return $this->retornoJaExiste($id_denuncia, $id_denunciado);
         }
       } 
   
       //Pegar todos os dados de - verificar se existe processo (acima) para encaminhar para o controller exibir os dados já incluídos, 
       //caso exista número de processo e id do denunciado já cadastrado no processo
-      public function retornoJaExiste($id_denuncia, $numero_processo, $id_denunciado){
+      public function retornoJaExiste($id_denuncia, $id_denunciado){
         $sql = "SELECT p.numero_processo, d.id_denuncia, s.nome_servidor FROM processo as p 
                       INNER JOIN denunciados as d ON p.id_denuncia = d.id_denuncia
                       INNER JOIN servidor as s ON d.id_servidor = s.id_servidor
                       WHERE p.numero_processo = $numero_processo AND d.id_denunciado = $id_denunciado";
-          $sql = $this->db->query($sql);
-          return $sql->fetchAll();
-
-          
+                      $sql = $this->db->query($sql);
+                      return $sql->fetchAll(\PDO::FETCH_OBJ);
       } 
 
     //verificar se o servidor já está processado no mesmo processo

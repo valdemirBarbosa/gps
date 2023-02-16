@@ -12,8 +12,8 @@ class CertidaoController extends Controller{
   
    //consulta servidor para cnp - certidão negativa ou positiva
   public function cnp(){
-     if(isset($_GET['cpf']) && !empty($_GET['cpf'])){
-          $cpf = addslashes($_GET['cpf']);
+     if(isset($_POST['cpf']) && !empty($_POST['cpf'])){
+          $cpf = addslashes($_POST['cpf']);
           $certidao = new Certidao_Model();
 
           if($atesta['dados'] = $certidao->certidao($cpf)){
@@ -42,8 +42,8 @@ class CertidaoController extends Controller{
 } // fim do método cnp
 
      public function imprimir(){
-          if(isset($_GET['html']) && !empty($_GET['html'])){
-               $html = $_GET['html'];
+          if(isset($_POST['html']) && !empty($_POST['html'])){
+               $html = $_POST['html'];
                print_r($html);
                exit;
                

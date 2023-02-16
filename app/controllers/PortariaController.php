@@ -208,30 +208,28 @@ public function somarDataConsulta($dataInicial, $prazo){
      $prazo_atendido = isset($_POST['txt_prazo_atendido']) ? strip_tags(filter_input(INPUT_POST, "txt_prazo_atendido")) : NULL;
      $observacao = isset($_POST['txt_observacao']) ? strip_tags(filter_input(INPUT_POST, "txt_observacao")) : NULL;
      $anexo = isset($_POST['txt_anexo']) ? strip_tags(filter_input(INPUT_POST, "txt_anexo")) : NULL;
-     $user = 777;
+     $user = $_SESSION['id_usuario'];
      $tipo = "Não usado";
-     
+
+     //Instanciar classe da portaria. Serve para editar e incluir
      $p = new Portaria_Model();
+
      
      if($id_portaria){
           $comando = "UPDATE";
           $tabela = "portaria";
           $filtro = " WHERE id_portaria =:id_portaria";
-
-          $p->InsertEditar($comando, $filtro, $id_portaria, $tabela, $id_processo, $numero_processo, $numero, $tipo, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
-          $p = array($comando, $tabela, $filtro, $comando,  $id_portaria, $id_processo, $numero_processo, $numero, $tipo,$data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
+    
+          $p->InsertEdit($comando, $filtro, $id_portaria, $tabela, $id_processo, $numero_processo, $numero, $tipo, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
+     //     $p = array($comando, $tabela, $filtro, $comando,  $id_portaria, $id_processo, $numero_processo, $numero, $tipo,$data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
     }else{
-         
           $id_portaria = NULL;
           $comando = "INSERT INTO";
           $tabela = "portaria";
           $filtro = "";
-
-          $p->InsertEditar($comando, $filtro, $id_portaria, $tabela, $id_processo, $numero_processo, $numero, $tipo, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
-/*           $p = array($comando, $filtro, $id_portaria, $tabela, $id_processo, $numero_processo, $numero, $tipo, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
-          print_r($p);
-          exit;
- */
+      
+          $p->InsertEdit($comando, $filtro, $id_portaria, $tabela, $id_processo, $numero_processo, $numero, $tipo, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $anexo, $observacao, $user);
+          $p = array($comando, $filtro, $id_portaria, $tabela, $id_processo, $numero_processo, $numero, $tipo, $data_elaboracao, $conteudo, $data_publicacao, $veiculo, $prazo, $data_final, $dias_a_vencer, $data_realizada, $prazo_atendido, $observacao, $anexo, $user);
 
                //INCLUIR OCORRÊNCIA DE LANÇAMENTO DE PORTARIA NOS ANDAMENTOS	
                $id_servico = 2;

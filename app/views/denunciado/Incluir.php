@@ -77,7 +77,7 @@
 </div> <!-- fim da div home -->
 
 <div class="div3">
-	<form method="POST" action="<?php echo URL_BASE . 'Denunciados/incluir' ?>" >
+	<form method="POST" action="<?php echo URL_BASE . '@Denunciados/incluir@' ?>" >
 				<table class="tabServidor">
 				<?php
 					if(isset($servidor)){ ?>
